@@ -5,7 +5,7 @@ function HomePage() {
   return (
     <div>
       <div style={{ padding: '20px', textAlign: 'center' }}>
-        <h1>Welcome to UNSW Badminton Clu2b</h1>
+        <h1>Welcome to UNSW Badminton Clubbbbb</h1>
         <h3>Welcome to UNSW Badminton Cl222</h3>
         <h1>Welcome to UNSW Badminton Club</h1>
       </div>
