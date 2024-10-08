@@ -3,7 +3,7 @@ import Typewriter from 'typewriter-effect';
 
 function HomePage() {
   const imageSrc = "/unsw-5.jpg"; 
-  const aboutImageSrc = "/unsw-4.jpg"; 
+  const aboutImageSrc = "/unsw-1.jpg";
 
   return (
     <div>
@@ -45,20 +45,19 @@ function HomePage() {
       </div>
       <div style={{
           display: 'flex',
-          justifyContent: 'space-between',
-          padding: '50px 20px',
+          padding: '50px 0',  // Top and bottom padding only
           backgroundColor: 'white',
           color: 'black'
         }}>
-        <div style={{ width: '50%', padding: '0 20px' }}>
+        <div style={{ flex: 1, padding: '0 20px' }}>
           <h2>About UNSW Badminton Club</h2>
           <p>Here at the UNSW Badminton Club, we pride ourselves on fostering a community of sportsmanship and competition. Founded in [Year], our club has grown to become one of the university's premier sports organizations, offering both competitive and recreational play opportunities for students of all skill levels.</p>
         </div>
-        <div style={{ width: '50%' }}>
+        <div style={{ width: '55rem', height: '30rem' }}> 
           <img
             src={aboutImageSrc}
             alt="About UNSW Badminton Club"
-            style={{ width: '', height: '100%', objectFit: 'cover', }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}  // Cover to maintain aspect ratio
           />
         </div>
       </div>
