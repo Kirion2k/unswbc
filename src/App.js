@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -10,7 +10,7 @@ import SessionsPage from './pages/SessionsPage';
 import MembershipResourcesPage from './pages/MembershipResourcesPage';
 import PhotoGalleryPage from './pages/PhotoGalleryPage';
 import MeetTheTeamPage from './pages/MeetTheTeamPage';
-import ViewQueue from './components/ViewQueue'; 
+import ViewQueue from './components/ViewQueue';
 import ContactPage from './pages/ContactPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';

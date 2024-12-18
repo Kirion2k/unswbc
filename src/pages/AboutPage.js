@@ -1,11 +1,9 @@
 import React from 'react';
 import { Typography, Box, Container, Divider, Grid } from '@mui/material';
 import { motion } from 'framer-motion';
-import Carousel from 'react-material-ui-carousel';
 
 function AboutPage() {
   const imageSrc = "/unsw-4.jpg";
-  const galleryImages = ["/unsw-1.jpg", "/unsw-5.jpg", "/unsw-3.jpg", "/unsw-2.jpg"];
 
   return (
     <Box>
