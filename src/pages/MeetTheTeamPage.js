@@ -32,7 +32,7 @@ function MeetTheTeamPage() {
         transition={{ duration: 1 }}
       >
         <motion.img
-          src="/unsw-4.jpg"
+          src="/unsw-6.jpg"
           alt="Meet the Team"
           style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.35 }}
           initial={{ opacity: 0 }}

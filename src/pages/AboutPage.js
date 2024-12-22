@@ -104,7 +104,8 @@ function AboutPage() {
                     height: '300px', // Consistent height
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'space-between',
+                    justifyContent: 'center', // Center content vertically
+                    alignItems: 'center', // Center content horizontally
                     textAlign: 'center',
                   }}
                 >
@@ -145,8 +146,8 @@ function AboutPage() {
             bgcolor: '#1c3c6f',
             color: 'white',
             borderRadius: 2,
-            mt: 8,
-            mb: 8
+            mt: 0, // Top margin set to zero
+            mb: 8, // Bottom margin maintained
           }}
         >
           <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 2 }}>

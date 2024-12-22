@@ -26,19 +26,19 @@ function HomePage() {
       img: "/unsw-13.jpg",
       title: "Club Info",
       description: "Learn more about our club's history, mission, and membership options.",
-      link: "/club-info"
+      link: "/sessions"
     },
     {
       img: "/unsw-9.jpg",
-      title: "Events",
-      description: "Check out upcoming tournaments and social gatherings.",
-      link: "/events"
+      title: "FAQs",
+      description: "Find answers to frequently asked questions about our club.",
+      link: "/faqs"
     },
     {
       img: unsw15, // Reference the file directly in the public folder
       title: "Social Media",
       description: "Follow us on social media for the latest updates and community posts.",
-      link: "/contacts"
+      link: "/contact"
     }
   ];
 
