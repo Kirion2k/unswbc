@@ -73,11 +73,13 @@ function SessionsPage() {
             title: 'Location',
             content: ['UNSW Fitness and Aquatic Center, Level 1 (Upstairs)'],
           }, {
-            title: 'Sessions',
+            title: 'Payment Details',
             content: [
-              'Tuesdays 6:00 PM - 10:00 PM',
-              'Saturdays 1:00 PM - 6:00 PM',
-              '(Our sessions still run during the term break)',
+              'Name: UNSW Badminton Club',
+              'BSB: 062-303',
+              'Account: 10885979',
+              '*Please reference your full nane in the payment*',
+              'We accept Cash or Bank Transfer on arrival at our sessions.',
             ],
           }, {
             title: 'Courts',
@@ -117,34 +119,32 @@ function SessionsPage() {
           ))}
         </Grid>
 
-        {/* Pricing Section */}
+        {/* Sessions Section */}
         <Typography
           variant="h4"
           sx={{ textAlign: 'center', fontWeight: 'bold', mt: 6, mb: 4, color: '#1c3c6f' }}
         >
-          Pricing
+          Sessions
         </Typography>
 
         <Grid container spacing={4} sx={{ alignItems: 'stretch' }}>
           {[{
-            title: 'Session Fees',
+            title: 'Tuesdays 6-10pm',
+            content: [
+              'Members: $10',
+              'Vistors: $15',
+            ],
+          }, {
+            title: 'Saturdays 1-4pm or 4-7pm',
             content: [
               'Members: $8',
-              'Non-members: $13',
+              'Vistors: $13',
             ],
           }, {
-            title: 'Membership Fees',
+            title: 'Saturdays 1-7pm',
             content: [
-              'UNSW Students: $75',
-              'UNSW Alumni/Staff: $90',
-              'Community: $110',
-            ],
-          }, {
-            title: 'Payment Details',
-            content: [
-              'BSB: 062-303',
-              'Account: 10885979',
-              'We accept Cash or Bank Transfer on arrival at our sessions.',
+              'Members: $15',
+              'Vistors: $25',
             ],
           }].map((section, index) => (
             <Grid item xs={12} md={4} key={index} sx={{ display: 'flex' }}>
@@ -177,7 +177,79 @@ function SessionsPage() {
             </Grid>
           ))}
         </Grid>
+
+        {/* Memberships Section */}
+        <Typography
+          variant="h4"
+          sx={{ textAlign: 'center', fontWeight: 'bold', mt: 6, mb: 4, color: '#1c3c6f' }}
+        >
+          Memberships
+        </Typography>
+        <Typography
+          sx={{ textAlign: 'center', fontWeight: 'bold', mt: 6, mb: 4, color: '#555' }}
+        >
+          Note: Memberships resets every following year on 1st Feb
+        </Typography>
+
+
+        <Grid container spacing={4} sx={{ alignItems: 'stretch' }}>
+          {[{
+            title: 'Term 1',
+            content: [
+              'From 1st Feb',
+              'UNSW Students: $75',
+              'UNSW Staff/Alumni: $90',
+              'General Public: $110'
+            ],
+          }, {
+            title: 'Term 2',
+            content: [
+              'From 1st Jun',
+              'UNSW Students: $60',
+              'UNSW Staff/Alumni: $75',
+              'General Public: $90'
+            ],
+          }, {
+            title: 'Term 3',
+            content: [
+              'From 1st Sep',
+              'UNSW Students: $45',
+              'UNSW Staff/Alumni: $60',
+              'General Public: $75'
+            ],
+          }].map((section, index) => (
+            <Grid item xs={12} md={4} key={index} sx={{ display: 'flex' }}>
+              <Box
+                component={motion.div}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: index * 0.2 }}
+                sx={{
+                  bgcolor: 'white',
+                  color: '#555',
+                  p: 4,
+                  borderRadius: 2,
+                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                  flexGrow: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                }}
+              >
+                <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, textAlign: 'center' }}>
+                  {section.title}
+                </Typography>
+                <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
+                  {section.content.map((line, i) => (
+                    <span key={i} style={{ display: 'block', marginBottom: '8px' }}>{line}</span>
+                  ))}
+                </Typography>
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
       </Container>
+
     </Box>
   );
 }

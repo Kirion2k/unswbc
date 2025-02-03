@@ -1,17 +1,64 @@
-import React from 'react';
-import { Typography, Box, Container, Grid, TextField, Button, Link } from '@mui/material';
+import React, { useState } from 'react';
+import { Typography, Box, Container, Grid, TextField, Button } from '@mui/material';
 import { motion } from 'framer-motion';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import EmailIcon from '@mui/icons-material/Email';
-import LinkIcon from '@mui/icons-material/Link';
 
 function ContactPage() {
-  const imageSrc = "/unsw-19.jpg"; // Replace with your desired background image
+  const imageSrc = "/unsw-19.jpg"; // Background Image
+
+  // State for form submission
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+    access_key: 'd66a945f-4370-4c2f-9c68-11ee13236047',
+  });
+
+  const [responseMessage, setResponseMessage] = useState(null);
+
+  // Handle Input Changes
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle Form Submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setResponseMessage(null);
+
+    const formDataToSend = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      formDataToSend.append(key, value);
+    });
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataToSend,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setResponseMessage("Message sent successfully!");
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          message: '',
+          access_key: 'YOUR_WEB3FORMS_ACCESS_KEY',
+        });
+      } else {
+        setResponseMessage("Error sending message. Please try again.");
+      }
+    } catch (error) {
+      setResponseMessage("Error sending message. Please check your connection.");
+    }
+  };
 
   return (
     <Box sx={{ width: '100%', overflow: 'hidden', bgcolor: '#f8f9fa' }}>
-      {/* Background image section */}
+      {/* Hero Section */}
       <Box
         component={motion.div}
         initial={{ opacity: 0, scale: 0.9 }}
@@ -56,7 +103,7 @@ function ContactPage() {
         </Box>
       </Box>
 
-      {/* Contact form section */}
+      {/* Contact Form */}
       <Container sx={{ py: 6 }}>
         <Box
           sx={{
@@ -66,129 +113,82 @@ function ContactPage() {
             padding: 4,
           }}
         >
-          <Typography
-            variant="h4"
-            sx={{ textAlign: 'center', fontWeight: 'bold', mb: 4, color: '#1c3c6f' }}
-          >
+          <Typography variant="h4" sx={{ textAlign: 'center', fontWeight: 'bold', mb: 4, color: '#1c3c6f' }}>
             Get in Touch
           </Typography>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-              <TextField
-                label="Name"
-                variant="outlined"
-                fullWidth
-                sx={{ mb: 3 }}
-              />
-              <TextField
-                label="Email"
-                variant="outlined"
-                fullWidth
-                sx={{ mb: 3 }}
-              />
-              <TextField
-                label="Phone"
-                variant="outlined"
-                fullWidth
-                sx={{ mb: 3 }}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                label="Message"
-                variant="outlined"
-                fullWidth
-                multiline
-                rows={6}
-                sx={{ mb: 3 }}
-              />
-            </Grid>
-          </Grid>
-          <Box sx={{ textAlign: 'center', mt: 4 }}>
-            <Button
-              variant="contained"
-              sx={{
-                bgcolor: '#1c3c6f',
-                color: 'white',
-                '&:hover': { bgcolor: '#123456' },
-                px: 4,
-                py: 1,
-              }}
-            >
-              Submit
-            </Button>
-          </Box>
-        </Box>
-      </Container>
 
-      {/* Social Media Links */}
-      <Container sx={{ py: 6 }}>
-        <Typography
-          variant="h4"
-          sx={{ textAlign: 'center', fontWeight: 'bold', mb: 4, color: '#1c3c6f' }}
-        >
-          Connect with Us
-        </Typography>
-        <Grid container spacing={3} justifyContent="center">
-          <Grid item xs={12} sm={6} md={3} sx={{ textAlign: 'center' }}>
-            <Link
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                color: '#1c3c6f',
-                textDecoration: 'none',
-                '&:hover': { color: '#123456' },
-              }}
-            >
-              <InstagramIcon sx={{ fontSize: 40, mb: 1 }} />
-              <Typography>Instagram</Typography>
-            </Link>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3} sx={{ textAlign: 'center' }}>
-            <Link
-              href="https://www.facebook.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                color: '#1c3c6f',
-                textDecoration: 'none',
-                '&:hover': { color: '#123456' },
-              }}
-            >
-              <FacebookIcon sx={{ fontSize: 40, mb: 1 }} />
-              <Typography>Facebook</Typography>
-            </Link>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3} sx={{ textAlign: 'center' }}>
-            <Link
-              href="mailto:unswbadminton@example.com"
-              sx={{
-                color: '#1c3c6f',
-                textDecoration: 'none',
-                '&:hover': { color: '#123456' },
-              }}
-            >
-              <EmailIcon sx={{ fontSize: 40, mb: 1 }} />
-              <Typography>Email</Typography>
-            </Link>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3} sx={{ textAlign: 'center' }}>
-            <Link
-              href="https://linktr.ee/"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                color: '#1c3c6f',
-                textDecoration: 'none',
-                '&:hover': { color: '#123456' },
-              }}
-            >
-              <LinkIcon sx={{ fontSize: 40, mb: 1 }} />
-              <Typography>Linktree</Typography>
-            </Link>
-          </Grid>
-        </Grid>
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label="Name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  variant="outlined"
+                  fullWidth
+                  required
+                  sx={{ mb: 3 }}
+                />
+                <TextField
+                  label="Email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  variant="outlined"
+                  fullWidth
+                  required
+                  sx={{ mb: 3 }}
+                />
+                <TextField
+                  label="Phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  variant="outlined"
+                  fullWidth
+                  sx={{ mb: 3 }}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label="Message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  variant="outlined"
+                  fullWidth
+                  multiline
+                  rows={6}
+                  required
+                  sx={{ mb: 3 }}
+                />
+              </Grid>
+            </Grid>
+
+            <Box sx={{ textAlign: 'center', mt: 4 }}>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  bgcolor: '#1c3c6f',
+                  color: 'white',
+                  '&:hover': { bgcolor: '#123456' },
+                  px: 4,
+                  py: 1,
+                }}
+              >
+                Submit
+              </Button>
+            </Box>
+          </form>
+
+          {responseMessage && (
+            <Typography sx={{ textAlign: 'center', mt: 3, color: responseMessage.includes('successfully') ? 'green' : 'red' }}>
+              {responseMessage}
+            </Typography>
+          )}
+        </Box>
       </Container>
     </Box>
   );
