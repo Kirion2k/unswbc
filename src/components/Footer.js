@@ -33,7 +33,7 @@ function Footer() {
 
       {/* Footer Text */}
       <Typography variant="body2">
-        © 2024 UNSW Badminton Club. All Rights Reserved.
+        © 2025 UNSW Badminton Club. All Rights Reserved.
       </Typography>
     </footer>
   );
