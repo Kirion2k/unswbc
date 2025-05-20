@@ -12,7 +12,14 @@ function PhotoGalleryPage() {
     '/unsw-13.jpg',
     '/unsw-7.jpg',
     '/unsw-8.jpg',
-    '/unsw-11.jpg'
+    '/unsw-11.jpg',
+    '/unsw-20.jpg',
+    '/unsw-21.jpg',
+    '/unsw-22.jpg',
+    '/unsw-23.jpg',
+    '/unsw-24.jpg',
+    '/unsw-25.jpg',
+    '/unsw-26.jpg',
   ];
 
   return (
