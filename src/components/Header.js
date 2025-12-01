@@ -81,7 +81,7 @@ function Header() {
         <Box
           sx={{
             display: { xs: 'none', sm: 'flex' },
-            gap: 2, // Spacing between the navigation buttons
+            gap: 2,
           }}
         >
           <Button component={Link} to="/" sx={{ color: 'white' }}>
@@ -90,9 +90,9 @@ function Header() {
           <Button component={Link} to="/about" sx={{ color: 'white' }}>
             About
           </Button>
-          <Button component={Link} to="/meet-the-team" sx={{ color: 'white' }}>
+          {/* <Button component={Link} to="/meet-the-team" sx={{ color: 'white' }}>
             Meet the Team
-          </Button>
+          </Button> */}
           <Button component={Link} to="/photo-gallery" sx={{ color: 'white' }}>
             Photo Gallery
           </Button>

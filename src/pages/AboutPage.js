@@ -3,7 +3,7 @@ import { Typography, Box, Container, Divider, Grid } from '@mui/material';
 import { motion } from 'framer-motion';
 
 function AboutPage() {
-  const imageSrc = "/unsw-4.jpg";
+  const imageSrc = "/unsw-14.jpg";
 
   return (
     <Box>
