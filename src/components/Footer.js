@@ -22,7 +22,7 @@ function Footer() {
           <Facebook fontSize="large" />
         </IconButton>
         <IconButton
-          href="https://www.instagram.com/unswbadmintonclub"
+          href="https://www.instagram.com/unswbadminton"
           target="_blank"
           rel="noopener noreferrer"
           sx={{ color: 'white', margin: '0 10px' }}
@@ -33,7 +33,7 @@ function Footer() {
 
       {/* Footer Text */}
       <Typography variant="body2">
-        © 2025 UNSW Badminton Club. All Rights Reserved.
+        © 2026 UNSW Badminton Club. All Rights Reserved.
       </Typography>
     </footer>
   );
