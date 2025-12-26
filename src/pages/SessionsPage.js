@@ -5,14 +5,14 @@ import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
 
 function SessionsPage() {
-  const imageSrc = "/unsw-11.jpg";
+  const imageSrc = "/unsw-58.jpg";
 
   return (
     <Box sx={{ bgcolor: '#f8f9fa' }}>
       <PageHero
         imageSrc={imageSrc}
         imageAlt="UNSW Badminton Club"
-        imagePosition="center 20%"
+        imagePosition="center 30%"
         title="Club"
         highlight="Sessions"
         subtitle="Everything you need: how to join, where to go, and what sessions cost."

@@ -68,3 +68,60 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Live Instagram “News” feed (Netlify)
+
+This site supports a live Instagram feed via Netlify Functions + Instagram Basic Display API.
+
+### 1) Create an Instagram Basic Display app (Meta)
+
+- Go to Meta for Developers and create an app.
+- Add the **Instagram Basic Display** product.
+- Add an **Instagram Test User** (or your account as a tester) and accept the invite in Instagram.
+
+### 2) Configure redirect URI
+
+In the Instagram Basic Display settings, set **Valid OAuth Redirect URIs** to:
+
+- `https://<YOUR-SITE>.netlify.app/.netlify/functions/instagram-auth-callback`
+
+If you use a custom domain, use that domain instead.
+
+### 3) Set Netlify environment variables
+
+In Netlify: **Site settings → Environment variables**, add:
+
+- `INSTAGRAM_APP_ID` = your Meta app’s Instagram App ID
+- `INSTAGRAM_APP_SECRET` = your Meta app secret
+- `INSTAGRAM_REDIRECT_URI` = the exact redirect URI from step (2)
+- `INSTAGRAM_ACCESS_TOKEN` = (leave empty for now; you’ll fill it in after step 4)
+
+### 4) Generate the long-lived token (one-time)
+
+After deploying, open:
+
+- `https://<YOUR-SITE>.netlify.app/.netlify/functions/instagram-auth-start`
+
+Log in to Instagram, approve, then you’ll be redirected to a JSON response containing `token`.
+
+Copy that `token` value into Netlify env var:
+
+- `INSTAGRAM_ACCESS_TOKEN` = `<token>`
+
+Then redeploy.
+
+### 5) Enable the feed on the frontend
+
+Set a Netlify build env var for the React app:
+
+- `REACT_APP_INSTAGRAM_FEED_URL` = `/.netlify/functions/instagram-feed`
+
+Redeploy again.
+
+### 6) Test
+
+Open:
+
+- `https://<YOUR-SITE>.netlify.app/.netlify/functions/instagram-feed`
+
+You should see JSON `{ posts: [...] }`.

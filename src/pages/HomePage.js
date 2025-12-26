@@ -7,6 +7,11 @@ import { styled, keyframes } from '@mui/system';
 import unsw15 from '../assets/images/unsw-16.jpg';
 import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
+import InstagramNewsFeed from '../components/InstagramNewsFeed';
+import unswLogo from '../unsw-logo.png';
+import arcLogo from '../arc-logo.jpg';
+import badmintonAuLogo from '../badminton-au.png';
+import badmintonNswLogo from '../nsw-badminton.png';
 
 
 
@@ -50,9 +55,68 @@ function HomePage() {
     { img: unsw15, title: 'Get in touch', description: 'Questions? Message us or follow our socials.', link: '/contact' },
   ];
 
+  // Instagram-style feed cards (use real post links if you have them)
+  const instagramPosts = [
+    {
+      id: 'news-1',
+      title: 'Club update',
+      caption: 'Stay up to date with sessions, events, and announcements on our Instagram.',
+      date: 'UNSWBC',
+      image: '/unsw-13.jpg',
+      url: 'https://www.instagram.com/unswbadminton/',
+    },
+    {
+      id: 'news-2',
+      title: 'Sessions',
+      caption: 'Check the Sessions page for times, pricing, and location details.',
+      date: 'UNSWBC',
+      image: '/unsw-11.jpg',
+      url: 'https://www.instagram.com/unswbadminton/',
+    },
+    {
+      id: 'news-3',
+      title: 'Community',
+      caption: 'Badminton is better together — come for the games, stay for the people.',
+      date: 'UNSWBC',
+      image: '/unsw-3.jpg',
+      url: 'https://www.instagram.com/unswbadminton/',
+    },
+    {
+      id: 'news-4',
+      title: 'Events',
+      caption: 'We run socials, tournaments, and special events throughout the year.',
+      date: 'UNSWBC',
+      image: '/unsw-21.JPG',
+      url: 'https://www.instagram.com/unswbadminton/',
+    },
+    {
+      id: 'news-5',
+      title: 'Training',
+      caption: 'From beginner fundamentals to advanced tactics — keep improving every session.',
+      date: 'UNSWBC',
+      image: '/unsw-2.jpg',
+      url: 'https://www.instagram.com/unswbadminton/',
+    },
+    {
+      id: 'news-6',
+      title: 'Photos',
+      caption: 'Check out memories from sessions and comps in our Photo Gallery.',
+      date: 'UNSWBC',
+      image: '/unsw-4.jpg',
+      url: 'https://www.instagram.com/unswbadminton/',
+    },
+  ];
+
+  const partners = [
+    { name: 'UNSW', logo: unswLogo },
+    { name: 'ARC Sport', logo: arcLogo },
+    { name: 'Badminton Australia', logo: badmintonAuLogo },
+    { name: 'Badminton NSW', logo: badmintonNswLogo },
+  ];
+
   return (
     <Box sx={{ bgcolor: '#f8f9fa' }}>
-      <PageHero imageSrc={heroImage} imageAlt="UNSW Badminton Club" imagePosition="center 18%">
+      <PageHero imageSrc={heroImage} imageAlt="UNSW Badminton Club" imagePosition="center 10%">
         <Box sx={{ maxWidth: 980 }}>
           <AnimatedTypography
             variant="h2"
@@ -60,7 +124,7 @@ function HomePage() {
             initial={{ y: 18, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.9 }}
-            sx={{
+          sx={{
               textAlign: 'left',
               color: 'white',
               fontSize: { xs: '2.6rem', sm: '3.4rem', md: '4.3rem' },
@@ -105,16 +169,16 @@ function HomePage() {
               variant="outlined"
               component={RouterLink}
               to="/meet-the-team"
-              sx={{
+                sx={{
                 borderColor: 'rgba(255,255,255,0.6)',
-                color: 'white',
+                  color: 'white',
                 '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.08)' },
               }}
             >
               Meet the team
             </Button>
           </Stack>
-        </Box>
+              </Box>
       </PageHero>
 
       <Container sx={{ py: { xs: 7, md: 10 } }}>
@@ -128,14 +192,14 @@ function HomePage() {
                   <CardContent sx={{ p: 3 }}>
                     <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: '#1c3c6f' }}>
                       {s.title}
-                    </Typography>
+                </Typography>
                     <Typography sx={{ color: 'text.secondary', lineHeight: 1.75 }}>
                       {s.body}
-                    </Typography>
+                </Typography>
                   </CardContent>
                 </Card>
-              </motion.div>
-            </Grid>
+            </motion.div>
+          </Grid>
           ))}
         </Grid>
       </Container>
@@ -160,6 +224,56 @@ function HomePage() {
                   </CardActionArea>
                 </Card>
               </motion.div>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+
+      {/* News */}
+      <Container sx={{ pb: { xs: 8, md: 12 } }}>
+        <SectionHeading overline="Updates" title="News" sx={{ mb: 5 }} />
+        <Typography sx={{ textAlign: 'center', color: 'text.secondary', maxWidth: 820, mx: 'auto', mb: 4, lineHeight: 1.8 }}>
+          An Instagram-style feed of recent club updates. Hover to preview, click to open the post details.
+        </Typography>
+        <InstagramNewsFeed
+          posts={instagramPosts}
+          feedUrl={process.env.REACT_APP_INSTAGRAM_FEED_URL}
+          profileUrl="https://www.instagram.com/unswbadminton/"
+        />
+      </Container>
+
+      {/* Our Partners */}
+      <Container sx={{ pb: { xs: 8, md: 12 } }}>
+        <SectionHeading overline="Our partners" title="Affiliated with" sx={{ mb: 5 }} />
+        <Typography sx={{ textAlign: 'center', color: 'text.secondary', maxWidth: 900, mx: 'auto', mb: 4, lineHeight: 1.8 }}>
+          UNSW Badminton Club is proud to be affiliated with ARC Sport and UNSW, and connected with the wider badminton community
+          through Badminton Australia and Badminton NSW.
+        </Typography>
+
+        <Grid container spacing={3} justifyContent="center" alignItems="stretch">
+          {partners.map((p) => (
+            <Grid item xs={12} sm={6} md={3} key={p.name}>
+              <Card
+                sx={{
+                  height: '100%',
+                  bgcolor: 'background.paper',
+                }}
+              >
+                <CardContent sx={{ p: 3, display: 'grid', placeItems: 'center', gap: 1.5 }}>
+                  <Box
+                    component="img"
+                    src={p.logo}
+                    alt={p.name}
+                    sx={{
+                      height: 56,
+                      width: 'auto',
+                      maxWidth: '100%',
+                      filter: 'drop-shadow(0 10px 24px rgba(2,6,23,0.14))',
+                    }}
+                  />
+                  <Typography sx={{ fontWeight: 900, color: '#1c3c6f' }}>{p.name}</Typography>
+                </CardContent>
+              </Card>
             </Grid>
           ))}
         </Grid>

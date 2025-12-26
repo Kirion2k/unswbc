@@ -6,7 +6,7 @@ import SectionHeading from '../components/SectionHeading';
 import { Link as RouterLink } from 'react-router-dom';
 
 function ContactPage() {
-  const imageSrc = "/unsw-19.jpg"; // Background Image
+  const imageSrc = "/unsw-59.jpg"; // Background Image
   const accessKey = process.env.REACT_APP_WEB3FORMS_ACCESS_KEY || 'd66a945f-4370-4c2f-9c68-11ee13236047';
 
   // State for form submission

@@ -5,7 +5,7 @@ import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
 
 function FAQsPage() {
-  const imageSrc = "/unsw-10.jpg";
+  const imageSrc = "/unsw-64.jpg";
 
   const faqs = [
     {
@@ -65,7 +65,7 @@ function FAQsPage() {
       <PageHero
         imageSrc={imageSrc}
         imageAlt="UNSW Badminton Club"
-        imagePosition="center 25%"
+        imagePosition="center 0%"
         title="FAQs"
         subtitle="Everything you need to know before your first session — from what to bring to how the queue works."
       />

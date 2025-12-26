@@ -27,7 +27,7 @@ export default function PageHero({
         src={imageSrc}
         alt={imageAlt}
         initial={{ opacity: 0, scale: 1.02 }}
-        animate={{ opacity: 0.48, scale: 1 }}
+        animate={{ opacity: 0.56, scale: 1 }}
         transition={{ duration: 1.4 }}
         style={{
           width: '100%',
@@ -45,7 +45,7 @@ export default function PageHero({
           position: 'absolute',
           inset: 0,
           background:
-            'radial-gradient(1200px 600px at 50% 30%, rgba(28,60,111,0.20), rgba(0,0,0,0.42)), linear-gradient(to bottom, rgba(0,0,0,0.42), rgba(0,0,0,0.62))',
+            'radial-gradient(1200px 600px at 50% 30%, rgba(28,60,111,0.14), rgba(0,0,0,0.34)), linear-gradient(to bottom, rgba(0,0,0,0.34), rgba(0,0,0,0.56))',
         }}
       />
 

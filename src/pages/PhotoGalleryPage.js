@@ -5,29 +5,39 @@ import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
 
 function PhotoGalleryPage() {
+  // Use smoothed thumbnails for the grid (reduces visible grain), while still keeping
+  // the original image paths for accessibility and future lightbox use.
   const galleryImages = [
     '/unsw-1.jpg',
     '/unsw-2.jpg',
     '/unsw-3.jpg',
     '/unsw-4.jpg',
     '/unsw-5.jpg',
-    '/unsw-13.jpg',
+    '/unsw-6.jpg',
     '/unsw-7.jpg',
     '/unsw-8.jpg',
+    '/unsw-9.jpg',
+    '/unsw-10.jpg',
     '/unsw-11.jpg',
-    '/unsw-20.jpg',
-    '/unsw-21.jpg',
-    '/unsw-22.jpg',
-    '/unsw-23.jpg',
-    '/unsw-24.jpg',
-    '/unsw-25.jpg',
-    '/unsw-26.jpg',
-  ];
+    '/unsw-12.jpg',
+    '/unsw-13.jpg',
+    '/unsw-14.JPG',
+    '/unsw-17.jpg',
+    '/unsw-18.JPG',
+    '/unsw-19.jpg',
+    ...Array.from({ length: 62 }, (_, i) => `/unsw-${20 + i}.JPG`),
+  ].map((full) => {
+    const base = full.replace(/^\//, '').replace(/\.[^.]+$/, '');
+    return {
+      full,
+      thumb: `/thumbs/${base}.jpg`,
+    };
+  });
 
   return (
     <Box>
       <PageHero
-        imageSrc="/unsw-4.jpg"
+        imageSrc="/unsw-81.JPG"
         imageAlt="Photo Gallery"
         title="Photo"
         highlight="Gallery"
@@ -38,7 +48,7 @@ function PhotoGalleryPage() {
       <Container sx={{ py: { xs: 7, md: 10 } }}>
         <SectionHeading overline="Gallery" title="Our memories" sx={{ mb: 5 }} />
         <Grid container spacing={3}>
-          {galleryImages.map((src, index) => (
+          {galleryImages.map((img, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
@@ -57,8 +67,9 @@ function PhotoGalleryPage() {
                     <Box sx={{ position: 'relative' }}>
                       <CardMedia
                         component="img"
-                        image={src}
+                        image={img.thumb}
                         alt={`Gallery ${index + 1}`}
+                        loading="lazy"
                         sx={{
                           height: 320,
                           objectFit: 'cover',

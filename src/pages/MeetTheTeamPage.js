@@ -26,7 +26,7 @@ function MeetTheTeamPage() {
   return (
     <Box sx={{ bgcolor: '#f8f9fa' }}>
       <PageHero
-        imageSrc="/unsw-6.jpg"
+        imageSrc="/unsw-20.jpg"
         imageAlt="Meet the Team"
         title="Meet the"
         highlight="Team"

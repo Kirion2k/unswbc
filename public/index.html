@@ -19,7 +19,12 @@
         <div class="initial-loader__orbit">
           <div class="initial-loader__shuttle-wrap">
             <div class="initial-loader__shuttle" aria-hidden="true">
-              <img class="initial-loader__shuttle-img" src="%PUBLIC_URL%/logo-white.png" alt="" />
+              <img
+                class="initial-loader__shuttle-img"
+                src="/logo-white.png"
+                alt=""
+                onerror="this.onerror=null;this.src='/unswbc-shuttle.svg';"
+              />
             </div>
           </div>
         </div>
@@ -64,6 +69,7 @@
         width: 220px;
         height: 220px;
         position: relative;
+        overflow: visible;
       }
       .initial-loader__orbit {
         position: absolute;
@@ -85,6 +91,7 @@
         top: 0;
         /* Anchor the orbit point to the shuttle TIP (bottom-center) */
         transform: translate(-50%, -100%);
+        z-index: 4;
         filter:
           drop-shadow(0 10px 22px rgba(2, 6, 23, 0.55))
           drop-shadow(0 0 18px rgba(255, 255, 255, 0.25));
@@ -94,6 +101,8 @@
         width: 96px;
         height: 96px;
         display: block;
+        object-fit: contain;
+        image-rendering: auto;
         /* Tip leads: pivot from the tip so it "flies" cleanly along the path */
         transform-origin: 50% 100%;
         animation: shuttle-wobble 700ms ease-in-out infinite;
