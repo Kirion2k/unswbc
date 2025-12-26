@@ -35,9 +35,9 @@ function MeetTheTeamPage() {
       />
 
       {/* Executives Section */}
-      <Container sx={{ py: { xs: 7, md: 10 } }}>
+      <Container sx={{ py: { xs: 6, md: 10 } }}>
         <SectionHeading overline="Leadership" title="Executives" sx={{ mb: 5 }} />
-        <Grid container spacing={4} justifyContent="center">
+        <Grid container spacing={{ xs: 2, md: 4 }} justifyContent="center">
           {executives.map((exec, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <motion.div
@@ -78,9 +78,9 @@ function MeetTheTeamPage() {
       </Container>
 
       {/* Committee Section */}
-      <Container sx={{ pb: { xs: 8, md: 12 } }}>
+      <Container sx={{ pb: { xs: 7, md: 12 } }}>
         <SectionHeading overline="Team" title="Committee" sx={{ mb: 5 }} />
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, md: 3 }}>
           {committee.map((role, index) => (
             <Grid item xs={12} sm={6} md={4} key={role}>
               <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: index * 0.04 }}>

@@ -120,6 +120,9 @@ export default function FouitaInstagramFeed({
             height: 'auto',
             // Ensure the widget uses the available width cleanly
             '& *': { boxSizing: 'border-box' },
+            // Mobile: prevent any internal fixed widths from forcing horizontal scrolling
+            '& .ft-sff': { width: '100% !important', maxWidth: '100% !important' },
+            '& img': { maxWidth: '100% !important' },
           }}
         />
       )}

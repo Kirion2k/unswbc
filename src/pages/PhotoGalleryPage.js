@@ -45,9 +45,9 @@ function PhotoGalleryPage() {
       />
 
       {/* Gallery Section */}
-      <Container sx={{ py: { xs: 7, md: 10 } }}>
+      <Container sx={{ py: { xs: 6, md: 10 } }}>
         <SectionHeading overline="Gallery" title="Our memories" sx={{ mb: 5 }} />
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, md: 3 }}>
           {galleryImages.map((img, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <motion.div
@@ -71,7 +71,7 @@ function PhotoGalleryPage() {
                         alt={`Gallery ${index + 1}`}
                         loading="lazy"
                         sx={{
-                          height: 320,
+                          height: { xs: 220, sm: 260, md: 320 },
                           objectFit: 'cover',
                           transition: 'transform 240ms ease',
                         }}

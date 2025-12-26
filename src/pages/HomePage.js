@@ -129,14 +129,14 @@ function HomePage() {
               </Box>
       </PageHero>
 
-      <Container sx={{ py: { xs: 7, md: 10 } }}>
+      <Container sx={{ py: { xs: 6, md: 10 } }}>
         <SectionHeading overline="Welcome" title="A club built for every level" sx={{ mb: 5 }} />
-        <Grid container spacing={3} alignItems="stretch">
+        <Grid container spacing={{ xs: 2, md: 3 }} alignItems="stretch">
           {featureSections.map((s, index) => (
             <Grid item xs={12} md={4} key={s.title}>
               <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: index * 0.05 }}>
                 <Card sx={{ height: '100%', overflow: 'hidden' }}>
-                  <CardMedia component="img" image={s.image} alt={s.title} sx={{ height: 220, objectFit: 'cover' }} />
+                  <CardMedia component="img" image={s.image} alt={s.title} sx={{ height: { xs: 180, md: 220 }, objectFit: 'cover' }} />
                   <CardContent sx={{ p: 3 }}>
                     <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: '#1c3c6f' }}>
                       {s.title}
@@ -152,15 +152,15 @@ function HomePage() {
         </Grid>
       </Container>
 
-      <Container sx={{ pb: { xs: 8, md: 12 } }}>
+      <Container sx={{ pb: { xs: 7, md: 12 } }}>
         <SectionHeading overline="Explore" title="Explore the club" sx={{ mb: 5 }} />
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, md: 3 }}>
           {cards.map((card, index) => (
             <Grid item xs={12} sm={6} md={4} key={card.title}>
               <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: index * 0.05 }}>
                 <Card sx={{ height: '100%', overflow: 'hidden' }}>
                   <CardActionArea component={RouterLink} to={card.link} sx={{ height: '100%' }}>
-                    <CardMedia component="img" image={card.img} alt={card.title} sx={{ height: 220, objectFit: 'cover' }} />
+                    <CardMedia component="img" image={card.img} alt={card.title} sx={{ height: { xs: 180, md: 220 }, objectFit: 'cover' }} />
                     <CardContent sx={{ p: 3 }}>
                       <Typography variant="h6" sx={{ fontWeight: 900, mb: 1 }}>
                         {card.title}
@@ -178,7 +178,7 @@ function HomePage() {
       </Container>
 
       {/* News */}
-      <Container sx={{ pb: { xs: 8, md: 12 } }}>
+      <Container sx={{ pb: { xs: 7, md: 12 } }}>
         <SectionHeading overline="Updates" title="News" sx={{ mb: 5 }} />
         <Typography sx={{ textAlign: 'center', color: 'text.secondary', maxWidth: 820, mx: 'auto', mb: 4, lineHeight: 1.8 }}>
           Live updates from our Instagram — tap posts to view details, captions, and more.
@@ -196,14 +196,14 @@ function HomePage() {
       </Container>
 
       {/* Our Partners */}
-      <Container sx={{ pb: { xs: 8, md: 12 } }}>
+      <Container sx={{ pb: { xs: 7, md: 12 } }}>
         <SectionHeading overline="Our partners" title="Affiliated with" sx={{ mb: 5 }} />
         <Typography sx={{ textAlign: 'center', color: 'text.secondary', maxWidth: 900, mx: 'auto', mb: 4, lineHeight: 1.8 }}>
           UNSW Badminton Club is proud to be affiliated with ARC Sport and UNSW, and connected with the wider badminton community
           through Badminton Australia and Badminton NSW.
         </Typography>
 
-        <Grid container spacing={3} justifyContent="center" alignItems="stretch">
+        <Grid container spacing={{ xs: 2, md: 3 }} justifyContent="center" alignItems="stretch">
           {partners.map((p) => (
             <Grid item xs={12} sm={6} md={3} key={p.name}>
               <Card

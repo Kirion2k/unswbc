@@ -11,6 +11,7 @@ import {
   Box,
   Button,
   Container,
+  Divider,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from './logo full/logo-full-white.png';
@@ -39,17 +40,36 @@ function Header() {
 
   const drawer = (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: { xs: 280, sm: 320 } }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
+      <Box sx={{ px: 2, py: 2, display: 'flex', alignItems: 'center', gap: 1.5 }}>
+        <img src={logo} alt="UNSWBC Logo" style={{ height: 36 }} />
+      </Box>
+      <Divider />
       <List>
-        {navLinks.map((item) => (
-          <ListItemButton key={item.to} component={Link} to={item.to}>
-            <ListItemText primary={item.label} />
-          </ListItemButton>
-        ))}
+        {navLinks.map((item) => {
+          const isActive = item.to === '/'
+            ? location.pathname === '/'
+            : location.pathname.startsWith(item.to);
+
+          return (
+            <ListItemButton
+              key={item.to}
+              component={Link}
+              to={item.to}
+              sx={{
+                py: 1.25,
+                '& .MuiListItemText-primary': { fontWeight: 800 },
+                bgcolor: isActive ? 'rgba(28,60,111,0.14)' : 'transparent',
+              }}
+            >
+              <ListItemText primary={item.label} />
+            </ListItemButton>
+          );
+        })}
       </List>
     </Box>
   );
@@ -57,7 +77,7 @@ function Header() {
   return (
     <AppBar position="fixed" elevation={0}>
       <Container>
-        <Toolbar sx={{ px: { xs: 0 }, minHeight: { xs: 64, md: 72 } }}>
+        <Toolbar sx={{ px: { xs: 0 }, minHeight: { xs: 60, md: 72 } }}>
           {/* Hamburger Menu for Small Screens */}
           <IconButton
             color="inherit"

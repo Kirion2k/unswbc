@@ -17,7 +17,7 @@ export default function PageHero({
       sx={{
         position: 'relative',
         width: '100%',
-        minHeight: { xs: '72vh', md: '88vh' },
+        minHeight: { xs: '62vh', sm: '68vh', md: '88vh' },
         bgcolor: 'black',
         overflow: 'hidden',
       }}
@@ -53,11 +53,11 @@ export default function PageHero({
         sx={{
           position: 'relative',
           zIndex: 1,
-          minHeight: { xs: '72vh', md: '88vh' },
+          minHeight: { xs: '62vh', sm: '68vh', md: '88vh' },
           display: 'flex',
           alignItems: 'center',
-          pt: { xs: 10, md: 12 }, // account for fixed header
-          pb: { xs: 8, md: 10 },
+          pt: { xs: 9, sm: 10, md: 12 }, // account for fixed header
+          pb: { xs: 6, sm: 7, md: 10 },
         }}
       >
         <Box sx={{ maxWidth: 820, textAlign: { xs: 'left', md: 'left' } }}>
@@ -71,7 +71,7 @@ export default function PageHero({
                 variant="h2"
                 sx={{
                   color: 'white',
-                  fontSize: { xs: '2.6rem', sm: '3.2rem', md: '4rem' },
+                  fontSize: { xs: '2.15rem', sm: '2.7rem', md: '4rem' },
                   lineHeight: 1.05,
                 }}
               >
@@ -87,7 +87,7 @@ export default function PageHero({
                   sx={{
                     mt: 2,
                     color: 'rgba(255,255,255,0.86)',
-                    fontSize: { xs: '1rem', sm: '1.1rem', md: '1.2rem' },
+                    fontSize: { xs: '0.98rem', sm: '1.05rem', md: '1.2rem' },
                     lineHeight: 1.6,
                     maxWidth: 700,
                   }}

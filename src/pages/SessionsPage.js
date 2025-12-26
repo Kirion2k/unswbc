@@ -19,10 +19,10 @@ function SessionsPage() {
       />
 
       {/* Content Sections */}
-      <Container sx={{ py: { xs: 7, md: 10 } }}>
+      <Container sx={{ py: { xs: 6, md: 10 } }}>
         <SectionHeading overline="Info" title="Important information" sx={{ mb: 5 }} />
 
-        <Grid container spacing={4} sx={{ alignItems: 'stretch' }}>
+        <Grid container spacing={{ xs: 2, md: 4 }} sx={{ alignItems: 'stretch' }}>
           {[{
             title: 'Registration',
             content: [
@@ -58,7 +58,7 @@ function SessionsPage() {
                 sx={{ flexGrow: 1, display: 'flex' }}
               >
                 <Card sx={{ flexGrow: 1, bgcolor: index % 2 === 0 ? '#1c3c6f' : 'white', color: index % 2 === 0 ? 'white' : 'inherit' }}>
-                  <CardContent sx={{ p: 4 }}>
+                  <CardContent sx={{ p: { xs: 3, md: 4 } }}>
                     <Typography variant="h6" sx={{ fontWeight: 900, mb: 1.5, textAlign: 'center' }}>
                       {section.title}
                     </Typography>
@@ -75,7 +75,7 @@ function SessionsPage() {
         </Grid>
 
         {/* Sessions Section */}
-        <SectionHeading overline="Times" title="Sessions" sx={{ mt: 9, mb: 5 }} />
+        <SectionHeading overline="Times" title="Sessions" sx={{ mt: { xs: 7, md: 9 }, mb: 5 }} />
 
         <Grid container spacing={4} sx={{ alignItems: 'stretch' }}>
           {[{

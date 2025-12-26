@@ -18,7 +18,7 @@ function AboutPage() {
         imagePosition="center 25%"
       />
 
-      <Container sx={{ py: { xs: 7, md: 10 } }}>
+      <Container sx={{ py: { xs: 6, md: 10 } }}>
         <SectionHeading overline="UNSWBC" title="Welcome to the club" sx={{ mb: 5 }} />
 
         <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
@@ -46,7 +46,7 @@ function AboutPage() {
 
         <Divider sx={{ my: 5 }} />
 
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, md: 3 }}>
           {[
             {
               title: 'Our Vision',
@@ -70,7 +70,7 @@ function AboutPage() {
             <Grid item xs={12} md={4} key={item.title}>
               <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: index * 0.05 }}>
                 <Card sx={{ height: '100%' }}>
-                  <CardMedia component="img" image={item.image} alt={item.title} sx={{ height: 180, objectFit: 'cover' }} />
+                  <CardMedia component="img" image={item.image} alt={item.title} sx={{ height: { xs: 160, md: 180 }, objectFit: 'cover' }} />
                   <CardContent sx={{ p: 3 }}>
                     <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: '#1c3c6f' }}>
                       {item.title}
@@ -86,7 +86,7 @@ function AboutPage() {
         </Grid>
       </Container>
 
-      <Container sx={{ pb: { xs: 8, md: 12 } }}>
+      <Container sx={{ pb: { xs: 7, md: 12 } }}>
         <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
           <Card sx={{ bgcolor: '#1c3c6f', color: 'white' }}>
             <CardContent sx={{ p: { xs: 3.5, md: 5 } }}>
