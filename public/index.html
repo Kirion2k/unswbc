@@ -8,8 +8,166 @@
     <meta name="author" content="UNSW Badminton Club" />
     <meta name="keywords" content="Badminton, UNSW, Sports, Club, UNSWBC, Training" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <!-- Initial loader (shows before React bundles finish loading) -->
+    <div id="initial-loader" aria-label="Loading" data-min-ms="1800">
+      <div class="initial-loader__stage" aria-hidden="true">
+        <div class="initial-loader__orbit">
+          <div class="initial-loader__shuttle-wrap">
+            <div class="initial-loader__shuttle" aria-hidden="true">
+              <img class="initial-loader__shuttle-img" src="%PUBLIC_URL%/logo-white.png" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="initial-loader__ring"></div>
+        <div class="initial-loader__sparkle initial-loader__sparkle--a"></div>
+        <div class="initial-loader__sparkle initial-loader__sparkle--b"></div>
+      </div>
+      <div class="initial-loader__text">
+        <div class="initial-loader__title">UNSW Badminton Club</div>
+        <div class="initial-loader__subtitle">Loading…</div>
+      </div>
+    </div>
+
     <div id="root"></div>
+
+    <script>
+      // Used to ensure the loader stays visible for at least a minimum duration.
+      window.__INITIAL_LOADER_START__ = (window.performance && performance.now) ? performance.now() : Date.now();
+    </script>
+
+    <style>
+      /* Minimal inline CSS so loader looks good before app CSS loads */
+      #initial-loader {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        gap: 16px;
+        background:
+          radial-gradient(900px 520px at 50% 35%, rgba(28, 60, 111, 0.55), rgba(2, 6, 23, 0.92)),
+          linear-gradient(to bottom, #0b1220, #020617);
+        color: rgba(255, 255, 255, 0.92);
+        z-index: 9999;
+        transition: opacity 320ms ease, transform 320ms ease;
+      }
+      #initial-loader.initial-loader--hide {
+        opacity: 0;
+        transform: scale(1.02);
+        pointer-events: none;
+      }
+      .initial-loader__stage {
+        width: 220px;
+        height: 220px;
+        position: relative;
+      }
+      .initial-loader__orbit {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        animation: orbit-circle 3600ms linear infinite;
+      }
+      .initial-loader__shuttle-wrap {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 0;
+        height: 0;
+        transform: translate(-50%, -50%) translateX(86px);
+      }
+      .initial-loader__shuttle {
+        position: absolute;
+        left: 0;
+        top: 0;
+        /* Anchor the orbit point to the shuttle TIP (bottom-center) */
+        transform: translate(-50%, -100%);
+        filter:
+          drop-shadow(0 10px 22px rgba(2, 6, 23, 0.55))
+          drop-shadow(0 0 18px rgba(255, 255, 255, 0.25));
+        will-change: transform;
+      }
+      .initial-loader__shuttle-img {
+        width: 96px;
+        height: 96px;
+        display: block;
+        /* Tip leads: pivot from the tip so it "flies" cleanly along the path */
+        transform-origin: 50% 100%;
+        animation: shuttle-wobble 700ms ease-in-out infinite;
+      }
+      .initial-loader__ring {
+        position: absolute;
+        inset: 32px;
+        z-index: 1;
+        border-radius: 999px;
+        border: 2px dashed rgba(255, 255, 255, 0.22);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+        animation: ring-spin 2200ms linear infinite;
+      }
+      .initial-loader__sparkle {
+        position: absolute;
+        z-index: 3;
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.55);
+        filter: blur(0.2px);
+        opacity: 0.9;
+      }
+      .initial-loader__sparkle--a {
+        left: 22px;
+        top: 58px;
+        animation: sparkle-pop 900ms ease-in-out infinite;
+      }
+      .initial-loader__sparkle--b {
+        right: 28px;
+        bottom: 52px;
+        animation: sparkle-pop 900ms ease-in-out infinite 180ms;
+      }
+      .initial-loader__text {
+        text-align: center;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+      .initial-loader__title {
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        font-size: 18px;
+      }
+      .initial-loader__subtitle {
+        margin-top: 6px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 14px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      /* Smooth circle motion, slow like "flying" */
+      @keyframes orbit-circle {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      /* Gentle wobble so it feels like a shuttle in the air (cute + not jittery) */
+      @keyframes shuttle-wobble {
+        0%, 100% { transform: rotate(-6deg); }
+        50% { transform: rotate(6deg); }
+      }
+      @keyframes ring-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      @keyframes sparkle-pop {
+        0%, 100% { transform: scale(0.65); opacity: 0.55; }
+        50% { transform: scale(1.15); opacity: 0.95; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .initial-loader__orbit,
+        .initial-loader__shuttle,
+        .initial-loader__ring,
+        .initial-loader__sparkle { animation: none; }
+      }
+    </style>
   </body>
 </html>

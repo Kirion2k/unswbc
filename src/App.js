@@ -13,7 +13,6 @@ import MeetTheTeamPage from './pages/MeetTheTeamPage';
 import ViewQueue from './components/ViewQueue';
 import ContactPage from './pages/ContactPage';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {

@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
   IconButton,
   Drawer,
   List,
-  ListItem,
+  ListItemButton,
   ListItemText,
   Box,
   Button,
+  Container,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from './logo full/logo-full-white.png';
 
 function Header() {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const location = useLocation();
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -23,6 +25,17 @@ function Header() {
     }
     setDrawerOpen(open);
   };
+
+  const navLinks = [
+    { label: 'Home', to: '/' },
+    { label: 'About', to: '/about' },
+    { label: 'Meet the Team', to: '/meet-the-team' },
+    { label: 'Photo Gallery', to: '/photo-gallery' },
+    { label: 'Sessions', to: '/sessions' },
+    { label: 'FAQs', to: '/faqs' },
+    { label: 'View Queue', to: '/view-queue' },
+    { label: 'Contact', to: '/contact' },
+  ];
 
   const drawer = (
     <Box
@@ -32,84 +45,66 @@ function Header() {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {['Home', 'About', 'Meet the Team', 'Photo Gallery', 'Sessions', 'FAQs', 'View Queue', 'Contact'].map((text) => (
-          <ListItem button key={text} component={Link} to={`/${text.toLowerCase().replace(/\s/g, '-')}`}>
-            <ListItemText primary={text} />
-          </ListItem>
+        {navLinks.map((item) => (
+          <ListItemButton key={item.to} component={Link} to={item.to}>
+            <ListItemText primary={item.label} />
+          </ListItemButton>
         ))}
       </List>
     </Box>
   );
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: 'rgba(0, 0, 0, 0.85)', boxShadow: 'none' }}>
-      <Toolbar
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: 4, // Adds spacing between the logo and navigation buttons
-        }}
-      >
-        {/* Hamburger Menu for Small Screens */}
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={toggleDrawer(true)}
-          sx={{ display: { sm: 'none' }, position: 'absolute', left: 16 }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer(false)}>
-          {drawer}
-        </Drawer>
+    <AppBar position="fixed" elevation={0}>
+      <Container>
+        <Toolbar sx={{ px: { xs: 0 }, minHeight: { xs: 64, md: 72 } }}>
+          {/* Hamburger Menu for Small Screens */}
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={toggleDrawer(true)}
+            sx={{ display: { md: 'none' }, mr: 1 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer(false)}>
+            {drawer}
+          </Drawer>
 
-        {/* Logo */}
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <Link to="/">
-            <img src={logo} alt="UNSWBC Logo" style={{ height: '50px', marginRight: 8 }} />
-          </Link>
-        </Box>
+          {/* Logo */}
+          <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+            <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+              <img src={logo} alt="UNSWBC Logo" style={{ height: 44 }} />
+            </Link>
+          </Box>
 
-        {/* Navbar Links */}
-        <Box
-          sx={{
-            display: { xs: 'none', sm: 'flex' },
-            gap: 2,
-          }}
-        >
-          <Button component={Link} to="/" sx={{ color: 'white' }}>
-            Home
-          </Button>
-          <Button component={Link} to="/about" sx={{ color: 'white' }}>
-            About
-          </Button>
-          {/* <Button component={Link} to="/meet-the-team" sx={{ color: 'white' }}>
-            Meet the Team
-          </Button> */}
-          <Button component={Link} to="/photo-gallery" sx={{ color: 'white' }}>
-            Photo Gallery
-          </Button>
-          <Button component={Link} to="/sessions" sx={{ color: 'white' }}>
-            Sessions
-          </Button>
-          <Button component={Link} to="/faqs" sx={{ color: 'white' }}>
-            FAQs
-          </Button>
-          <Button component={Link} to="/view-queue" sx={{ color: 'white' }}>
-            View Queue
-          </Button>
-          <Button component={Link} to="/contact" sx={{ color: 'white' }}>
-            Contact
-          </Button>
-        </Box>
-      </Toolbar>
+          {/* Navbar Links */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
+            {navLinks.map((item) => {
+              const isActive = item.to === '/'
+                ? location.pathname === '/'
+                : location.pathname.startsWith(item.to);
+
+              return (
+                <Button
+                  key={item.to}
+                  component={Link}
+                  to={item.to}
+                  sx={{
+                    color: 'white',
+                    opacity: isActive ? 1 : 0.9,
+                    bgcolor: isActive ? 'rgba(255,255,255,0.12)' : 'transparent',
+                    '&:hover': { bgcolor: 'rgba(255,255,255,0.12)' },
+                  }}
+                >
+                  {item.label}
+                </Button>
+              );
+            })}
+          </Box>
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 }

@@ -1,110 +1,76 @@
 import React from 'react';
-import { Typography, Box, Container, Grid } from '@mui/material';
+import { Avatar, Box, Card, CardContent, Container, Grid, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
+import PageHero from '../components/PageHero';
+import SectionHeading from '../components/SectionHeading';
 
 function MeetTheTeamPage() {
   const executives = [
-    { name: 'John Doe', position: 'President', img: '/team/president.jpg' },
-    { name: 'Jane Smith', position: 'Vice President', img: '/team/vice-president.jpg' },
-    { name: 'Alice Brown', position: 'Secretary', img: '/team/secretary.jpg' },
-    { name: 'Bob Green', position: 'Treasurer', img: '/team/treasurer.jpg' },
-    { name: 'Charlie White', position: 'ARC Delegate', img: '/team/arc-delegate.jpg' },
-    { name: 'Emily Black', position: 'Grievance Officer', img: '/team/grievance-officer.jpg' },
+    { name: 'President', position: 'Leadership & strategy' },
+    { name: 'Vice President', position: 'Operations & support' },
+    { name: 'Secretary', position: 'Admin & communications' },
+    { name: 'Treasurer', position: 'Finances & budgeting' },
+    { name: 'ARC Delegate', position: 'University liaison' },
+    { name: 'Grievance Officer', position: 'Member wellbeing' },
   ];
 
   const committee = [
-    '/team/committee-1.jpg',
-    '/team/committee-2.jpg',
-    '/team/committee-3.jpg',
-    '/team/committee-4.jpg',
-    '/team/committee-5.jpg',
-    '/team/committee-6.jpg',
+    'Events & socials',
+    'Competition & tournaments',
+    'Marketing & content',
+    'Training support',
+    'Session operations',
+    'Sponsorships & partnerships',
   ];
 
   return (
-    <Box>
-      {/* Hero Section */}
-      <Box
-        sx={{ position: 'relative', width: '100%', height: '100vh', bgcolor: 'black' }}
-        component={motion.div}
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <motion.img
-          src="/unsw-6.jpg"
-          alt="Meet the Team"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.35 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.35 }}
-          transition={{ duration: 1.5 }}
-        />
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            textAlign: 'center',
-            color: 'white',
-          }}
-        >
-          <motion.div
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <Typography variant="h2" sx={{ fontSize: '4em', fontWeight: 'bold' }}>
-              Meet the <span style={{ color: '#1c3c6f' }}>Team</span>
-            </Typography>
-          </motion.div>
-        </Box>
-      </Box>
+    <Box sx={{ bgcolor: '#f8f9fa' }}>
+      <PageHero
+        imageSrc="/unsw-6.jpg"
+        imageAlt="Meet the Team"
+        title="Meet the"
+        highlight="Team"
+        subtitle="A volunteer committee keeping sessions running smoothly and the club thriving."
+        imagePosition="center 30%"
+      />
 
       {/* Executives Section */}
-      <Container sx={{ py: 8 }}>
-        <Typography
-          variant="h4"
-          sx={{
-            fontWeight: 'bold',
-            textAlign: 'center',
-            mb: 4,
-            textTransform: 'uppercase',
-            color: '#1c3c6f',
-          }}
-        >
-          Executives
-        </Typography>
+      <Container sx={{ py: { xs: 7, md: 10 } }}>
+        <SectionHeading overline="Leadership" title="Executives" sx={{ mb: 5 }} />
         <Grid container spacing={4} justifyContent="center">
           {executives.map((exec, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                transition={{ duration: 0.7, delay: index * 0.05 }}
               >
-                <Box
-                  sx={{
-                    textAlign: 'center',
-                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                    borderRadius: 2,
-                    overflow: 'hidden',
-                  }}
-                >
-                  <img
-                    src={exec.img}
-                    alt={exec.name}
-                    style={{ width: '100%', height: '300px', objectFit: 'cover' }}
-                  />
-                  <Box sx={{ p: 2, bgcolor: '#f8f9fa' }}>
-                    <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
+                <Card sx={{ height: '100%' }}>
+                  <CardContent sx={{ p: 3 }}>
+                    <Avatar
+                      sx={{
+                        width: 56,
+                        height: 56,
+                        bgcolor: 'rgba(28,60,111,0.12)',
+                        color: '#1c3c6f',
+                        fontWeight: 900,
+                        mb: 2,
+                      }}
+                    >
+                      {exec.name
+                        .split(' ')
+                        .slice(0, 2)
+                        .map((w) => w[0])
+                        .join('')}
+                    </Avatar>
+                    <Typography variant="h6" sx={{ fontWeight: 900, mb: 0.5 }}>
                       {exec.name}
                     </Typography>
-                    <Typography variant="body2" sx={{ color: '#555' }}>
+                    <Typography sx={{ color: 'text.secondary', lineHeight: 1.7 }}>
                       {exec.position}
                     </Typography>
-                  </Box>
-                </Box>
+                  </CardContent>
+                </Card>
               </motion.div>
             </Grid>
           ))}
@@ -112,41 +78,22 @@ function MeetTheTeamPage() {
       </Container>
 
       {/* Committee Section */}
-      <Container sx={{ py: 8 }}>
-        <Typography
-          variant="h4"
-          sx={{
-            fontWeight: 'bold',
-            textAlign: 'center',
-            mb: 4,
-            textTransform: 'uppercase',
-            color: '#1c3c6f',
-          }}
-        >
-          Committee Team
-        </Typography>
-        <Grid container spacing={4} justifyContent="center">
-          {committee.map((img, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-              >
-                <Box
-                  sx={{
-                    textAlign: 'center',
-                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                    borderRadius: 2,
-                    overflow: 'hidden',
-                  }}
-                >
-                  <img
-                    src={img}
-                    alt={`Committee ${index + 1}`}
-                    style={{ width: '100%', height: '300px', objectFit: 'cover' }}
-                  />
-                </Box>
+      <Container sx={{ pb: { xs: 8, md: 12 } }}>
+        <SectionHeading overline="Team" title="Committee" sx={{ mb: 5 }} />
+        <Grid container spacing={3}>
+          {committee.map((role, index) => (
+            <Grid item xs={12} sm={6} md={4} key={role}>
+              <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: index * 0.04 }}>
+                <Card sx={{ height: '100%' }}>
+                  <CardContent sx={{ p: 3 }}>
+                    <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: '#1c3c6f' }}>
+                      {role}
+                    </Typography>
+                    <Typography sx={{ color: 'text.secondary', lineHeight: 1.75 }}>
+                      The behind-the-scenes work that makes sessions, events, and competitions run smoothly.
+                    </Typography>
+                  </CardContent>
+                </Card>
               </motion.div>
             </Grid>
           ))}

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Typography, Box, Container, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import { motion } from 'framer-motion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import PageHero from '../components/PageHero';
+import SectionHeading from '../components/SectionHeading';
 
 function FAQsPage() {
   const imageSrc = "/unsw-10.jpg";
@@ -61,67 +62,26 @@ function FAQsPage() {
 
   return (
     <Box sx={{ bgcolor: '#f8f9fa' }}>
-      {/* Hero Section */}
-      <Box
-        component={motion.div}
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
-        sx={{ position: 'relative', width: '100%', height: '100vh', bgcolor: 'black' }}
-      >
-        <motion.img
-          src={imageSrc}
-          alt="UNSW Badminton Club"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center 25%',
-            opacity: 0.35,
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.35 }}
-          transition={{ duration: 2 }}
-        />
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            textAlign: 'center',
-            color: 'white',
-          }}
-        >
-          <motion.div
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <Typography variant="h2" sx={{ fontSize: '4rem', fontWeight: 'bold' }}>
-              <span>FAQs</span>
-            </Typography>
-          </motion.div>
-        </Box>
-      </Box>
+      <PageHero
+        imageSrc={imageSrc}
+        imageAlt="UNSW Badminton Club"
+        imagePosition="center 25%"
+        title="FAQs"
+        subtitle="Everything you need to know before your first session — from what to bring to how the queue works."
+      />
 
       {/* FAQ Section */}
-      <Container sx={{ py: 8 }}>
-        <Typography
-          variant="h4"
-          sx={{ textAlign: 'center', fontWeight: 'bold', mb: 4, color: '#1c3c6f' }}
-        >
-          Frequently Asked Questions
-        </Typography>
+      <Container sx={{ py: { xs: 7, md: 10 } }}>
+        <SectionHeading overline="Support" title="Frequently asked questions" sx={{ mb: 5 }} />
         {faqs.map((faq, index) => (
-          <Accordion key={index} sx={{ mb: 2, boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+          <Accordion key={index} sx={{ mb: 2 }}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-${index}-content`} id={`faq-${index}-header`}>
-              <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#1c3c6f' }}>
+              <Typography variant="h6" sx={{ fontWeight: 800, color: '#1c3c6f' }}>
                 {faq.question}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography variant="body1" sx={{ color: '#555' }}>
+              <Typography variant="body1" sx={{ color: 'text.secondary', lineHeight: 1.75 }}>
                 {faq.answer}
               </Typography>
             </AccordionDetails>

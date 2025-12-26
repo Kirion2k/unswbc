@@ -1,65 +1,26 @@
 import React from 'react';
-import { Typography, Box, Container, Grid } from '@mui/material';
+import { Box, Card, CardContent, Container, Grid, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
+import PageHero from '../components/PageHero';
+import SectionHeading from '../components/SectionHeading';
 
 function SessionsPage() {
   const imageSrc = "/unsw-11.jpg";
 
   return (
     <Box sx={{ bgcolor: '#f8f9fa' }}>
-      {/* Hero Section */}
-      <Box
-        component={motion.div}
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
-        sx={{ position: 'relative', width: '100%', height: '100vh', bgcolor: 'black' }}
-      >
-        <motion.img
-          src={imageSrc}
-          alt="UNSW Badminton Club"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectPosition: 'center 20%',
-            objectFit: 'cover',
-            opacity: 0.35,
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.35 }}
-          transition={{ duration: 2 }}
-        />
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            textAlign: 'center',
-            color: 'white',
-          }}
-        >
-          <motion.div
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <Typography variant="h2" sx={{ fontSize: '4rem', fontWeight: 'bold' }}>
-              <span>Club</span>{' '}
-              <span style={{ color: '#1c3c6f' }}>Sessions</span>
-            </Typography>
-          </motion.div>
-        </Box>
-      </Box>
+      <PageHero
+        imageSrc={imageSrc}
+        imageAlt="UNSW Badminton Club"
+        imagePosition="center 20%"
+        title="Club"
+        highlight="Sessions"
+        subtitle="Everything you need: how to join, where to go, and what sessions cost."
+      />
 
       {/* Content Sections */}
-      <Container sx={{ py: 8, maxWidth: 'lg', mx: 'auto' }}>
-        <Typography
-          variant="h4"
-          sx={{ textAlign: 'center', fontWeight: 'bold', mb: 4, color: '#1c3c6f' }}
-        >
-          Important Information
-        </Typography>
+      <Container sx={{ py: { xs: 7, md: 10 } }}>
+        <SectionHeading overline="Info" title="Important information" sx={{ mb: 5 }} />
 
         <Grid container spacing={4} sx={{ alignItems: 'stretch' }}>
           {[{
@@ -94,57 +55,46 @@ function SessionsPage() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: index * 0.2 }}
-                sx={{
-                  bgcolor: index % 2 === 0 ? '#1c3c6f' : '#f8f9fa',
-                  color: index % 2 === 0 ? 'white' : '#555',
-                  p: 4,
-                  borderRadius: 2,
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                  flexGrow: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                }}
+                sx={{ flexGrow: 1, display: 'flex' }}
               >
-                <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, textAlign: 'center' }}>
-                  {section.title}
-                </Typography>
-                <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
-                  {section.content.map((line, i) => (
-                    <span key={i} style={{ display: 'block', marginBottom: '8px' }}>{line}</span>
-                  ))}
-                </Typography>
+                <Card sx={{ flexGrow: 1, bgcolor: index % 2 === 0 ? '#1c3c6f' : 'white', color: index % 2 === 0 ? 'white' : 'inherit' }}>
+                  <CardContent sx={{ p: 4 }}>
+                    <Typography variant="h6" sx={{ fontWeight: 900, mb: 1.5, textAlign: 'center' }}>
+                      {section.title}
+                    </Typography>
+                    <Typography sx={{ lineHeight: 1.8, color: index % 2 === 0 ? 'rgba(255,255,255,0.88)' : 'text.secondary' }}>
+                      {section.content.map((line, i) => (
+                        <span key={i} style={{ display: 'block', marginBottom: '8px' }}>{line}</span>
+                      ))}
+                    </Typography>
+                  </CardContent>
+                </Card>
               </Box>
             </Grid>
           ))}
         </Grid>
 
         {/* Sessions Section */}
-        <Typography
-          variant="h4"
-          sx={{ textAlign: 'center', fontWeight: 'bold', mt: 6, mb: 4, color: '#1c3c6f' }}
-        >
-          Sessions
-        </Typography>
+        <SectionHeading overline="Times" title="Sessions" sx={{ mt: 9, mb: 5 }} />
 
         <Grid container spacing={4} sx={{ alignItems: 'stretch' }}>
           {[{
             title: 'Tuesdays 6-10pm',
             content: [
               'Members: $10',
-              'Vistors: $15',
+              'Visitors: $15',
             ],
           }, {
             title: 'Saturdays 1-4pm or 4-7pm',
             content: [
               'Members: $8',
-              'Vistors: $13',
+              'Visitors: $13',
             ],
           }, {
             title: 'Saturdays 1-7pm',
             content: [
               'Members: $15',
-              'Vistors: $25',
+              'Visitors: $25',
             ],
           }].map((section, index) => (
             <Grid item xs={12} md={4} key={index} sx={{ display: 'flex' }}>
@@ -153,42 +103,29 @@ function SessionsPage() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: index * 0.2 }}
-                sx={{
-                  bgcolor: '#1c3c6f',
-                  color: 'white',
-                  p: 4,
-                  borderRadius: 2,
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                  flexGrow: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                }}
+                sx={{ flexGrow: 1, display: 'flex' }}
               >
-                <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, textAlign: 'center' }}>
-                  {section.title}
-                </Typography>
-                <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
-                  {section.content.map((line, i) => (
-                    <span key={i} style={{ display: 'block', marginBottom: '8px' }}>{line}</span>
-                  ))}
-                </Typography>
+                <Card sx={{ flexGrow: 1, bgcolor: '#1c3c6f', color: 'white' }}>
+                  <CardContent sx={{ p: 4, textAlign: 'center' }}>
+                    <Typography variant="h6" sx={{ fontWeight: 900, mb: 1.5 }}>
+                      {section.title}
+                    </Typography>
+                    <Typography sx={{ lineHeight: 1.9, color: 'rgba(255,255,255,0.9)' }}>
+                      {section.content.map((line, i) => (
+                        <span key={i} style={{ display: 'block', marginBottom: '6px' }}>{line}</span>
+                      ))}
+                    </Typography>
+                  </CardContent>
+                </Card>
               </Box>
             </Grid>
           ))}
         </Grid>
 
         {/* Memberships Section */}
-        <Typography
-          variant="h4"
-          sx={{ textAlign: 'center', fontWeight: 'bold', mt: 6, mb: 4, color: '#1c3c6f' }}
-        >
-          Memberships
-        </Typography>
-        <Typography
-          sx={{ textAlign: 'center', fontWeight: 'bold', mt: 6, mb: 4, color: '#555' }}
-        >
-          Note: Memberships resets every following year on 1st Feb
+        <SectionHeading overline="Pricing" title="Memberships" sx={{ mt: 9, mb: 3 }} />
+        <Typography sx={{ textAlign: 'center', fontWeight: 700, mb: 5, color: 'text.secondary' }}>
+          Note: memberships reset each year on 1 Feb.
         </Typography>
 
 
@@ -224,26 +161,20 @@ function SessionsPage() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: index * 0.2 }}
-                sx={{
-                  bgcolor: 'white',
-                  color: '#555',
-                  p: 4,
-                  borderRadius: 2,
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                  flexGrow: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                }}
+                sx={{ flexGrow: 1, display: 'flex' }}
               >
-                <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, textAlign: 'center' }}>
-                  {section.title}
-                </Typography>
-                <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
-                  {section.content.map((line, i) => (
-                    <span key={i} style={{ display: 'block', marginBottom: '8px' }}>{line}</span>
-                  ))}
-                </Typography>
+                <Card sx={{ flexGrow: 1 }}>
+                  <CardContent sx={{ p: 4, textAlign: 'center' }}>
+                    <Typography variant="h6" sx={{ fontWeight: 900, mb: 1.5, color: '#1c3c6f' }}>
+                      {section.title}
+                    </Typography>
+                    <Typography sx={{ lineHeight: 1.9, color: 'text.secondary' }}>
+                      {section.content.map((line, i) => (
+                        <span key={i} style={{ display: 'block', marginBottom: '6px' }}>{line}</span>
+                      ))}
+                    </Typography>
+                  </CardContent>
+                </Card>
               </Box>
             </Grid>
           ))}
