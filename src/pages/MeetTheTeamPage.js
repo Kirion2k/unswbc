@@ -6,12 +6,12 @@ import SectionHeading from '../components/SectionHeading';
 
 function MeetTheTeamPage() {
   const executives = [
-    { name: 'President', position: 'Leadership & strategy' },
-    { name: 'Vice President', position: 'Operations & support' },
-    { name: 'Secretary', position: 'Admin & communications' },
-    { name: 'Treasurer', position: 'Finances & budgeting' },
-    { name: 'ARC Delegate', position: 'University liaison' },
-    { name: 'Grievance Officer', position: 'Member wellbeing' },
+    { name: 'Aaron Zhang', position: 'President' },
+    { name: 'Daniel Hu', position: 'Vice President' },
+    { name: 'Harry Shi', position: 'Secretary' },
+    { name: 'Amanda Zhang', position: 'Treasurer' },
+    { name: 'Charles Ni', position: 'Arc Delegate' },
+    { name: 'Ray Zhang', position: 'Grievance Officer' },
   ];
 
   const committee = [
