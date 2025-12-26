@@ -7,7 +7,7 @@ import { styled, keyframes } from '@mui/system';
 import unsw15 from '../assets/images/unsw-16.jpg';
 import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
-import InstagramNewsFeed from '../components/InstagramNewsFeed';
+import FouitaInstagramFeed from '../components/FouitaInstagramFeed';
 import unswLogo from '../unsw-logo.png';
 import arcLogo from '../arc-logo.jpg';
 import badmintonAuLogo from '../badminton-au.png';
@@ -53,58 +53,6 @@ function HomePage() {
     { img: '/unsw-13.jpg', title: 'Session info', description: 'Times, location, pricing, and how sessions run.', link: '/sessions' },
     { img: '/unsw-9.jpg', title: 'FAQs', description: 'Quick answers before your first session.', link: '/faqs' },
     { img: unsw15, title: 'Get in touch', description: 'Questions? Message us or follow our socials.', link: '/contact' },
-  ];
-
-  // Instagram-style feed cards (use real post links if you have them)
-  const instagramPosts = [
-    {
-      id: 'news-1',
-      title: 'Club update',
-      caption: 'Stay up to date with sessions, events, and announcements on our Instagram.',
-      date: 'UNSWBC',
-      image: '/unsw-13.jpg',
-      url: 'https://www.instagram.com/unswbadminton/',
-    },
-    {
-      id: 'news-2',
-      title: 'Sessions',
-      caption: 'Check the Sessions page for times, pricing, and location details.',
-      date: 'UNSWBC',
-      image: '/unsw-11.jpg',
-      url: 'https://www.instagram.com/unswbadminton/',
-    },
-    {
-      id: 'news-3',
-      title: 'Community',
-      caption: 'Badminton is better together — come for the games, stay for the people.',
-      date: 'UNSWBC',
-      image: '/unsw-3.jpg',
-      url: 'https://www.instagram.com/unswbadminton/',
-    },
-    {
-      id: 'news-4',
-      title: 'Events',
-      caption: 'We run socials, tournaments, and special events throughout the year.',
-      date: 'UNSWBC',
-      image: '/unsw-21.JPG',
-      url: 'https://www.instagram.com/unswbadminton/',
-    },
-    {
-      id: 'news-5',
-      title: 'Training',
-      caption: 'From beginner fundamentals to advanced tactics — keep improving every session.',
-      date: 'UNSWBC',
-      image: '/unsw-2.jpg',
-      url: 'https://www.instagram.com/unswbadminton/',
-    },
-    {
-      id: 'news-6',
-      title: 'Photos',
-      caption: 'Check out memories from sessions and comps in our Photo Gallery.',
-      date: 'UNSWBC',
-      image: '/unsw-4.jpg',
-      url: 'https://www.instagram.com/unswbadminton/',
-    },
   ];
 
   const partners = [
@@ -233,12 +181,17 @@ function HomePage() {
       <Container sx={{ pb: { xs: 8, md: 12 } }}>
         <SectionHeading overline="Updates" title="News" sx={{ mb: 5 }} />
         <Typography sx={{ textAlign: 'center', color: 'text.secondary', maxWidth: 820, mx: 'auto', mb: 4, lineHeight: 1.8 }}>
-          An Instagram-style feed of recent club updates. Hover to preview, click to open the post details.
+          Live updates from our Instagram — tap posts to view details, captions, and more.
         </Typography>
-        <InstagramNewsFeed
-          posts={instagramPosts}
-          feedUrl={process.env.REACT_APP_INSTAGRAM_FEED_URL}
-          profileUrl="https://www.instagram.com/unswbadminton/"
+        <FouitaInstagramFeed
+          username="unswbadminton"
+          ukey="0f72bdcd-65b2-4fc2-ac12-23f8b7548067"
+          layout="masonry"
+          header={true}
+          cols={4}
+          cardHeight={300}
+          gap={1}
+          height={1000}
         />
       </Container>
 
