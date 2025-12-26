@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box, Skeleton, useMediaQuery } from '@mui/material';
+import { Box, Button, Skeleton, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 const MODULE_URL = 'https://cdn.fouita.com/public/instagram-feed.js?11';
@@ -18,6 +18,7 @@ export default function FouitaInstagramFeed({
   const mountRef = useRef(null);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(null);
+  const [reloadToken, setReloadToken] = useState(0);
   const theme = useTheme();
   const mdUp = useMediaQuery(theme.breakpoints.up('md'));
   // Responsive sanity: keep columns reasonable on small screens
@@ -26,20 +27,23 @@ export default function FouitaInstagramFeed({
   useEffect(() => {
     let cancelled = false;
     let instance = null;
+    let observer = null;
+    let timeoutId = null;
 
     async function init() {
       try {
         setError(null);
         setReady(false);
 
-        // Dynamic import of the widget module (works in modern browsers).
-        const mod = await import(/* webpackIgnore: true */ MODULE_URL);
-        const App = mod?.default || mod?.App || mod;
-        if (!App) throw new Error('Widget module did not export an App');
         if (!mountRef.current) return;
 
         // Clear any previous content
         mountRef.current.innerHTML = '';
+
+        // Dynamic import of the widget module (works in modern browsers).
+        const mod = await import(/* webpackIgnore: true */ MODULE_URL);
+        const App = mod?.default || mod?.App || mod;
+        if (!App) throw new Error('Widget module did not export an App');
 
         instance = new App({
           target: mountRef.current,
@@ -64,7 +68,37 @@ export default function FouitaInstagramFeed({
           },
         });
 
-        if (!cancelled) setReady(true);
+        // The constructor can succeed even when the widget later fails to render
+        // so we wait until it actually adds content to the mount node
+        observer = new MutationObserver(() => {
+          if (!mountRef.current) return
+          const hasContent = mountRef.current.childNodes.length > 0
+          if (!hasContent) return
+
+          if (!cancelled) setReady(true)
+          try {
+            observer?.disconnect()
+          } catch {
+            // no op
+          }
+          if (timeoutId) clearTimeout(timeoutId)
+        });
+
+        observer.observe(mountRef.current, { childList: true, subtree: true });
+
+        // If we never see any content, show a helpful error instead of a blank box
+        timeoutId = setTimeout(() => {
+          if (cancelled) return
+          const hasContent = mountRef.current?.childNodes?.length > 0
+          if (hasContent) {
+            setReady(true)
+            return
+          }
+
+          setError(
+            'The Instagram feed did not load. This is usually caused by a browser blocker, or the widget key not being allowed for this site domain.'
+          )
+        }, 7000);
       } catch (e) {
         if (!cancelled) setError(e?.message || 'Failed to load Instagram feed');
       }
@@ -76,10 +110,16 @@ export default function FouitaInstagramFeed({
       try {
         instance?.$destroy?.();
       } catch {
-        // no-op
+        // no op
       }
+      try {
+        observer?.disconnect()
+      } catch {
+        // no op
+      }
+      if (timeoutId) clearTimeout(timeoutId)
     };
-  }, [cardHeight, cols, gap, header, height, layout, resolvedCols, ukey, username]);
+  }, [cardHeight, cols, gap, header, height, layout, resolvedCols, reloadToken, ukey, username]);
 
   return (
     <Box
@@ -108,7 +148,24 @@ export default function FouitaInstagramFeed({
           <Box sx={{ color: 'text.secondary', lineHeight: 1.8 }}>
             {error}
             <br />
-            If you’re using an ad-blocker or strict privacy mode, it may block the widget CDN.
+            If you are using an ad blocker or strict privacy mode, it may block the widget CDN.
+          </Box>
+          <Box sx={{ mt: 2, display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setReloadToken((t) => t + 1)}
+            >
+              Retry
+            </Button>
+            <Button
+              variant="outlined"
+              href={`https://www.instagram.com/${username}/`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open Instagram
+            </Button>
           </Box>
         </Box>
       ) : (
