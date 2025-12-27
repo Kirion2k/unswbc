@@ -9,7 +9,8 @@ function hasRenderableContent(root) {
 
   // Some widgets insert placeholder nodes first
   // We only treat it as loaded once there is something that takes up space
-  const elements = root.querySelectorAll('iframe, img, video, svg, canvas, section, article, ul, ol, div')
+  // Fouita feed should eventually render actual media elements
+  const elements = root.querySelectorAll('iframe, img, video, svg, canvas')
   for (const el of elements) {
     const rect = el.getBoundingClientRect()
     if (rect.width > 40 && rect.height > 40) return true
@@ -152,7 +153,7 @@ export default function FouitaInstagramFeed({
         boxShadow: '0 10px 30px rgba(2, 6, 23, 0.08)',
       }}
     >
-      {!ready ? (
+      {!ready && !error ? (
         <Box sx={{ position: 'absolute', inset: 0, p: 2, zIndex: 1 }}>
           <Skeleton variant="rectangular" height="100%" sx={{ borderRadius: 2 }} />
         </Box>
