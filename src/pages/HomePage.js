@@ -7,7 +7,6 @@ import { styled, keyframes } from '@mui/system';
 import unsw15 from '../assets/images/unsw-16.jpg';
 import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
-import FouitaInstagramFeed from '../components/FouitaInstagramFeed';
 import unswLogo from '../unsw-logo.png';
 import arcLogo from '../arc-logo.jpg';
 import badmintonAuLogo from '../badminton-au.png';
@@ -175,24 +174,6 @@ function HomePage() {
             </Grid>
           ))}
         </Grid>
-      </Container>
-
-      {/* News */}
-      <Container sx={{ pb: { xs: 7, md: 12 } }}>
-        <SectionHeading overline="Updates" title="News" sx={{ mb: 5 }} />
-        <Typography sx={{ textAlign: 'center', color: 'text.secondary', maxWidth: 820, mx: 'auto', mb: 4, lineHeight: 1.8 }}>
-          Live updates from our Instagram — tap posts to view details, captions, and more.
-        </Typography>
-        <FouitaInstagramFeed
-          username="unswbadminton"
-          ukey="0f72bdcd-65b2-4fc2-ac12-23f8b7548067"
-          layout="masonry"
-          header={false}
-          cols={4}
-          cardHeight={300}
-          gap={1}
-          height={1000}
-        />
       </Container>
 
       {/* Our Partners */}
