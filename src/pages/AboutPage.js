@@ -26,7 +26,7 @@ function AboutPage() {
           <Card>
             <CardContent sx={{ p: { xs: 3.5, md: 5 } }}>
               <Typography variant="h5" sx={{ fontWeight: 900, mb: 1.5 }}>
-                A community-first badminton club
+                A badminton club built on community
               </Typography>
               <Typography sx={{ color: 'text.secondary', lineHeight: 1.85, fontSize: { xs: '1rem', md: '1.1rem' } }}>
                 UNSW Badminton Club is a welcoming space for anyone who loves badminton, whether you are picking up a racket
@@ -243,7 +243,7 @@ function AboutPage() {
                           }}
                         >
                           <Typography sx={{ fontWeight: 900, fontSize: '1.65rem', lineHeight: 1.1 }}>
-                            2024 and 2025
+                            2024 / 2025
                           </Typography>
                           <Typography sx={{ mt: 0.5, color: 'rgba(255,255,255,0.85)' }}>
                             UniSport Nationals titles

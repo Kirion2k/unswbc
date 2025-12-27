@@ -14,7 +14,7 @@ function Footer() {
               <img src={logo} alt="UNSWBC Logo" style={{ height: 44 }} />
             </Box>
             <Typography sx={{ mt: 2, color: 'rgba(255,255,255,0.85)', maxWidth: 420 }}>
-              A welcoming badminton community at UNSW — social play, training, and competition.
+              A welcoming badminton community at UNSW, social play, training, and competition.
             </Typography>
             <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
               <IconButton

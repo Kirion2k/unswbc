@@ -90,7 +90,7 @@ function MeetTheTeamPage() {
                       {role}
                     </Typography>
                     <Typography sx={{ color: 'text.secondary', lineHeight: 1.75 }}>
-                      The behind-the-scenes work that makes sessions, events, and competitions run smoothly.
+                      The behind the scenes work that makes sessions, events, and competitions run smoothly.
                     </Typography>
                   </CardContent>
                 </Card>

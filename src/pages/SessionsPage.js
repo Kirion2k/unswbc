@@ -268,43 +268,56 @@ function SessionsPage() {
                                 border: isNavy ? '1px solid rgba(255,255,255,0.10)' : '1px solid rgba(28,60,111,0.08)',
                               }}
                             >
-                              <Stack spacing={1}>
-                                <Stack direction="row" spacing={1} alignItems="baseline" justifyContent="space-between">
-                                  <Typography variant="body2" sx={{ fontWeight: 900, color: isNavy ? 'white' : '#1c3c6f' }}>
-                                    Name
-                                  </Typography>
-                                  <Typography
-                                    variant="body2"
-                                    sx={{ color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary', lineHeight: 1.7 }}
-                                  >
-                                    UNSW Badminton Club
-                                  </Typography>
-                                </Stack>
+                              <Box
+                                sx={{
+                                  display: 'grid',
+                                  gridTemplateColumns: { xs: '96px 1fr', sm: '120px 1fr' },
+                                  columnGap: { xs: 2, sm: 3 },
+                                  rowGap: 1.25,
+                                  alignItems: 'baseline',
+                                }}
+                              >
+                                <Typography variant="body2" sx={{ fontWeight: 900, color: isNavy ? 'white' : '#1c3c6f' }}>
+                                  Name
+                                </Typography>
+                                <Typography
+                                  variant="body2"
+                                  sx={{
+                                    color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary',
+                                    lineHeight: 1.7,
+                                  }}
+                                >
+                                  UNSW Badminton Club
+                                </Typography>
 
-                                <Stack direction="row" spacing={1} alignItems="baseline" justifyContent="space-between">
-                                  <Typography variant="body2" sx={{ fontWeight: 900, color: isNavy ? 'white' : '#1c3c6f' }}>
-                                    BSB
-                                  </Typography>
-                                  <Typography
-                                    variant="body2"
-                                    sx={{ color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary', lineHeight: 1.7 }}
-                                  >
-                                    062 303
-                                  </Typography>
-                                </Stack>
+                                <Typography variant="body2" sx={{ fontWeight: 900, color: isNavy ? 'white' : '#1c3c6f' }}>
+                                  BSB
+                                </Typography>
+                                <Typography
+                                  variant="body2"
+                                  sx={{
+                                    color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary',
+                                    lineHeight: 1.7,
+                                    letterSpacing: '0.04em',
+                                  }}
+                                >
+                                  062 303
+                                </Typography>
 
-                                <Stack direction="row" spacing={1} alignItems="baseline" justifyContent="space-between">
-                                  <Typography variant="body2" sx={{ fontWeight: 900, color: isNavy ? 'white' : '#1c3c6f' }}>
-                                    Account
-                                  </Typography>
-                                  <Typography
-                                    variant="body2"
-                                    sx={{ color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary', lineHeight: 1.7 }}
-                                  >
-                                    10885979
-                                  </Typography>
-                                </Stack>
-                              </Stack>
+                                <Typography variant="body2" sx={{ fontWeight: 900, color: isNavy ? 'white' : '#1c3c6f' }}>
+                                  Account
+                                </Typography>
+                                <Typography
+                                  variant="body2"
+                                  sx={{
+                                    color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary',
+                                    lineHeight: 1.7,
+                                    letterSpacing: '0.04em',
+                                  }}
+                                >
+                                  10885979
+                                </Typography>
+                              </Box>
                             </Box>
 
                             <Typography

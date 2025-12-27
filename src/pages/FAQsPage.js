@@ -41,7 +41,7 @@ function FAQsPage() {
     {
       question: "How long can I expect to wait?",
       answer:
-        "Our sessions can get very crowded as it is a highly popular sport at UNSW. This means you can expect wait times between games of upto 30-40 minutes."
+        "Our sessions can get crowded, especially early in term. This means you can sometimes wait between games for up to 30 to 40 minutes."
     },
     {
       question: "Are there any events outside of regular sessions?",
@@ -56,7 +56,7 @@ function FAQsPage() {
     {
       question: "I see the club has shirts! How can I get one?",
       answer:
-        "The club announces club shirts each year for players to purchase. Orders for shirts generally get released mid-year and can be found on our Instagram or FaceBook."
+        "We release club shirts each year. Orders usually open mid year and we post the form on Instagram and Facebook."
     },
   ];
 
@@ -67,7 +67,7 @@ function FAQsPage() {
         imageAlt="UNSW Badminton Club"
         imagePosition="center 0%"
         title="FAQs"
-        subtitle="Everything you need to know before your first session — from what to bring to how the queue works."
+        subtitle="Everything you need to know before your first session, what to bring, how the queue works, and what to expect."
       />
 
       {/* FAQ Section */}

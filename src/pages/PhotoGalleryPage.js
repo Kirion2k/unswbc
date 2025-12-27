@@ -41,7 +41,7 @@ function PhotoGalleryPage() {
         imageAlt="Photo Gallery"
         title="Photo"
         highlight="Gallery"
-        subtitle="Moments from sessions, events, and competitions — the community on and off court."
+        subtitle="Moments from sessions, events, and competitions. The community on and off court."
       />
 
       {/* Gallery Section */}
