@@ -187,7 +187,7 @@ function HomePage() {
           username="unswbadminton"
           ukey="0f72bdcd-65b2-4fc2-ac12-23f8b7548067"
           layout="masonry"
-          header={true}
+          header={false}
           cols={4}
           cardHeight={300}
           gap={1}

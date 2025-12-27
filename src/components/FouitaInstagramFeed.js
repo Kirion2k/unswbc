@@ -4,6 +4,20 @@ import { useTheme } from '@mui/material/styles';
 
 const MODULE_URL = 'https://cdn.fouita.com/public/instagram-feed.js?11';
 
+function hasRenderableContent(root) {
+  if (!root) return false
+
+  // Some widgets insert placeholder nodes first
+  // We only treat it as loaded once there is something that takes up space
+  const elements = root.querySelectorAll('iframe, img, video, svg, canvas, section, article, ul, ol, div')
+  for (const el of elements) {
+    const rect = el.getBoundingClientRect()
+    if (rect.width > 40 && rect.height > 40) return true
+  }
+
+  return false
+}
+
 export default function FouitaInstagramFeed({
   username = 'unswbadminton',
   ukey = '0f72bdcd-65b2-4fc2-ac12-23f8b7548067',
@@ -72,8 +86,8 @@ export default function FouitaInstagramFeed({
         // so we wait until it actually adds content to the mount node
         observer = new MutationObserver(() => {
           if (!mountRef.current) return
-          const hasContent = mountRef.current.childNodes.length > 0
-          if (!hasContent) return
+          const canSeeContent = hasRenderableContent(mountRef.current)
+          if (!canSeeContent) return
 
           if (!cancelled) setReady(true)
           try {
@@ -89,12 +103,13 @@ export default function FouitaInstagramFeed({
         // If we never see any content, show a helpful error instead of a blank box
         timeoutId = setTimeout(() => {
           if (cancelled) return
-          const hasContent = mountRef.current?.childNodes?.length > 0
-          if (hasContent) {
+          const canSeeContent = hasRenderableContent(mountRef.current)
+          if (canSeeContent) {
             setReady(true)
             return
           }
 
+          setReady(false)
           setError(
             'The Instagram feed did not load. This is usually caused by a browser blocker, or the widget key not being allowed for this site domain.'
           )
