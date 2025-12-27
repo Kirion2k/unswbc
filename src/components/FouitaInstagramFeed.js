@@ -110,8 +110,9 @@ export default function FouitaInstagramFeed({
           }
 
           setReady(false)
+          const currentDomain = typeof window !== 'undefined' ? window.location.hostname : 'unknown'
           setError(
-            'The Instagram feed did not load. This is usually caused by a browser blocker, or the widget key not being allowed for this site domain.'
+            `The Instagram feed did not load on this domain: ${currentDomain}. If it works on localhost but not your live site, the widget key is usually not allowed for the live domain, or a browser blocker is blocking the widget CDN.`
           )
         }, 7000);
       } catch (e) {
