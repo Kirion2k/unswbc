@@ -69,10 +69,10 @@ function Footer() {
               Location
             </Typography>
             <Typography sx={{ color: 'rgba(255,255,255,0.85)' }}>
-              UNSW Fitness & Aquatic Centre (Sports Hall)
-            </Typography>
+              Fitness and Aquatic Centre (B5), Gate 2, High St, UNSW Sydney, Kensington NSW 2033, Australia
             <Typography sx={{ color: 'rgba(255,255,255,0.85)', mt: 1 }}>
-              Sydney, NSW
+              
+            </Typography>
             </Typography>
           </Grid>
         </Grid>

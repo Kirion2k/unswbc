@@ -5,7 +5,7 @@ import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
 
 function FAQsPage() {
-  const imageSrc = "/unsw-64.jpg";
+  const imageSrc = "/unsw-8.jpg";
 
   const faqs = [
     {
