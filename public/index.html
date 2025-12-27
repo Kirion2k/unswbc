@@ -16,21 +16,13 @@
     <!-- Initial loader (shows before React bundles finish loading) -->
     <div id="initial-loader" aria-label="Loading" data-min-ms="1800">
       <div class="initial-loader__stage" aria-hidden="true">
-        <div class="initial-loader__orbit">
-          <div class="initial-loader__shuttle-wrap">
-            <div class="initial-loader__shuttle" aria-hidden="true">
-              <img
-                class="initial-loader__shuttle-img"
-                src="/logo-white.png"
-                alt=""
-                onerror="this.onerror=null;this.src='/unswbc-shuttle.svg';"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="initial-loader__ring"></div>
-        <div class="initial-loader__sparkle initial-loader__sparkle--a"></div>
-        <div class="initial-loader__sparkle initial-loader__sparkle--b"></div>
+        <div class="initial-loader__halo" aria-hidden="true"></div>
+        <img
+          class="initial-loader__logo"
+          src="/logo-white.png"
+          alt=""
+          onerror="this.onerror=null;this.src='/unswbc-shuttle.svg';"
+        />
       </div>
       <div class="initial-loader__text">
         <div class="initial-loader__title">UNSW Badminton Club</div>
@@ -70,71 +62,38 @@
         height: 220px;
         position: relative;
         overflow: visible;
+        display: grid;
+        place-items: center;
       }
-      .initial-loader__orbit {
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-        animation: orbit-circle 3600ms linear infinite;
-      }
-      .initial-loader__shuttle-wrap {
+      .initial-loader__halo {
         position: absolute;
         left: 50%;
         top: 50%;
-        width: 0;
-        height: 0;
-        transform: translate(-50%, -50%) translateX(86px);
+        width: 168px;
+        height: 168px;
+        transform: translate(-50%, -50%);
+        border-radius: 999px;
+        background:
+          radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0) 62%),
+          radial-gradient(circle at 50% 60%, rgba(28, 60, 111, 0.55), rgba(28, 60, 111, 0) 68%);
+        filter: blur(10px);
+        opacity: 0.7;
+        animation: halo-pulse 1600ms ease-in-out infinite;
+        z-index: 1;
+        pointer-events: none;
       }
-      .initial-loader__shuttle {
-        position: absolute;
-        left: 0;
-        top: 0;
-        /* Anchor the orbit point to the shuttle TIP (bottom-center) */
-        transform: translate(-50%, -100%);
-        z-index: 4;
-        filter:
-          drop-shadow(0 10px 22px rgba(2, 6, 23, 0.55))
-          drop-shadow(0 0 18px rgba(255, 255, 255, 0.25));
-        will-change: transform;
-      }
-      .initial-loader__shuttle-img {
-        width: 96px;
-        height: 96px;
+      .initial-loader__logo {
+        width: 108px;
+        height: 108px;
         display: block;
         object-fit: contain;
         image-rendering: auto;
-        /* Tip leads: pivot from the tip so it "flies" cleanly along the path */
-        transform-origin: 50% 100%;
-        animation: shuttle-wobble 700ms ease-in-out infinite;
-      }
-      .initial-loader__ring {
-        position: absolute;
-        inset: 32px;
-        z-index: 1;
-        border-radius: 999px;
-        border: 2px dashed rgba(255, 255, 255, 0.22);
-        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-        animation: ring-spin 2200ms linear infinite;
-      }
-      .initial-loader__sparkle {
-        position: absolute;
-        z-index: 3;
-        width: 10px;
-        height: 10px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.55);
-        filter: blur(0.2px);
-        opacity: 0.9;
-      }
-      .initial-loader__sparkle--a {
-        left: 22px;
-        top: 58px;
-        animation: sparkle-pop 900ms ease-in-out infinite;
-      }
-      .initial-loader__sparkle--b {
-        right: 28px;
-        bottom: 52px;
-        animation: sparkle-pop 900ms ease-in-out infinite 180ms;
+        filter:
+          drop-shadow(0 14px 28px rgba(2, 6, 23, 0.55))
+          drop-shadow(0 0 18px rgba(255, 255, 255, 0.18));
+        animation: logo-pulse 1400ms ease-in-out infinite;
+        will-change: opacity, transform;
+        z-index: 2;
       }
       .initial-loader__text {
         text-align: center;
@@ -153,29 +112,17 @@
         letter-spacing: 0.06em;
         text-transform: uppercase;
       }
-      /* Smooth circle motion, slow like "flying" */
-      @keyframes orbit-circle {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+      @keyframes logo-pulse {
+        0%, 100% { opacity: 0.50; transform: translateY(4px) scale(0.97); filter: drop-shadow(0 14px 28px rgba(2, 6, 23, 0.55)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.12)); }
+        50% { opacity: 1; transform: translateY(-2px) scale(1.03); filter: drop-shadow(0 18px 34px rgba(2, 6, 23, 0.62)) drop-shadow(0 0 22px rgba(255, 255, 255, 0.22)); }
       }
-      /* Gentle wobble so it feels like a shuttle in the air (cute + not jittery) */
-      @keyframes shuttle-wobble {
-        0%, 100% { transform: rotate(-6deg); }
-        50% { transform: rotate(6deg); }
-      }
-      @keyframes ring-spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-      }
-      @keyframes sparkle-pop {
-        0%, 100% { transform: scale(0.65); opacity: 0.55; }
-        50% { transform: scale(1.15); opacity: 0.95; }
+      @keyframes halo-pulse {
+        0%, 100% { opacity: 0.45; transform: translate(-50%, -50%) scale(0.92); }
+        50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.05); }
       }
       @media (prefers-reduced-motion: reduce) {
-        .initial-loader__orbit,
-        .initial-loader__shuttle,
-        .initial-loader__ring,
-        .initial-loader__sparkle { animation: none; }
+        .initial-loader__logo { animation: none; opacity: 1; transform: none; }
+        .initial-loader__halo { animation: none; opacity: 0.75; transform: translate(-50%, -50%); }
       }
     </style>
   </body>
