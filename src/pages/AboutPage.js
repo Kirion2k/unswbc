@@ -260,7 +260,7 @@ function AboutPage() {
                           }}
                         >
                           <Typography sx={{ fontWeight: 900, fontSize: '1.65rem', lineHeight: 1.1 }}>
-                            150 plus
+                            150+
                           </Typography>
                           <Typography sx={{ mt: 0.5, color: 'rgba(255,255,255,0.85)' }}>
                             active members
