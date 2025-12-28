@@ -603,7 +603,7 @@ function SessionsPage() {
         <Card sx={{ overflow: 'hidden' }}>
           <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
             <Grid container spacing={{ xs: 2, md: 2 }}>
-              <Grid item xs={12}>
+              <Grid item xs={12} sx={{ display: { xs: 'none', md: 'block' } }}>
                 <Grid container spacing={1} sx={{ px: { xs: 0, md: 1 } }}>
                   <Grid item xs={12} md={3}>
                     <Typography sx={{ fontWeight: 900, color: '#1c3c6f' }}>
@@ -631,7 +631,75 @@ function SessionsPage() {
               {membershipTerms.map((t, index) => (
                 <Grid item xs={12} key={t.term}>
                   {index !== 0 ? <Divider sx={{ my: 2 }} /> : null}
-                  <Grid container spacing={1} alignItems="center" sx={{ px: { xs: 0, md: 1 } }}>
+                  <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+                    <Typography sx={{ fontWeight: 900 }}>
+                      {t.term}
+                    </Typography>
+                    <Typography sx={{ color: 'text.secondary', mt: 0.25 }}>
+                      {t.from}
+                    </Typography>
+
+                    <Stack spacing={1.25} sx={{ mt: 2 }}>
+                      <Box
+                        sx={{
+                          p: 1.75,
+                          borderRadius: 3,
+                          bgcolor: 'rgba(28,60,111,0.06)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          gap: 2,
+                        }}
+                      >
+                        <Typography variant="body2" sx={{ fontWeight: 900, color: '#1c3c6f' }}>
+                          Students
+                        </Typography>
+                        <Typography sx={{ fontWeight: 900, color: '#0b1220' }}>
+                          {t.student}
+                        </Typography>
+                      </Box>
+
+                      <Box
+                        sx={{
+                          p: 1.75,
+                          borderRadius: 3,
+                          bgcolor: 'rgba(28,60,111,0.06)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          gap: 2,
+                        }}
+                      >
+                        <Typography variant="body2" sx={{ fontWeight: 900, color: '#1c3c6f' }}>
+                          Staff and alumni
+                        </Typography>
+                        <Typography sx={{ fontWeight: 900, color: '#0b1220' }}>
+                          {t.staff}
+                        </Typography>
+                      </Box>
+
+                      <Box
+                        sx={{
+                          p: 1.75,
+                          borderRadius: 3,
+                          bgcolor: 'rgba(28,60,111,0.06)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          gap: 2,
+                        }}
+                      >
+                        <Typography variant="body2" sx={{ fontWeight: 900, color: '#1c3c6f' }}>
+                          General public
+                        </Typography>
+                        <Typography sx={{ fontWeight: 900, color: '#0b1220' }}>
+                          {t.public}
+                        </Typography>
+                      </Box>
+                    </Stack>
+                  </Box>
+
+                  <Grid container spacing={1} alignItems="center" sx={{ px: { xs: 0, md: 1 }, display: { xs: 'none', md: 'flex' } }}>
                     <Grid item xs={12} md={3}>
                       <Typography sx={{ fontWeight: 900 }}>
                         {t.term}

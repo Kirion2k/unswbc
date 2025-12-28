@@ -1,8 +1,9 @@
-import React from 'react';
-import { Avatar, Box, Card, CardContent, Container, Grid, Typography } from '@mui/material';
-import { motion } from 'framer-motion';
-import PageHero from '../components/PageHero';
-import SectionHeading from '../components/SectionHeading';
+import React from 'react'
+import { Avatar, Box, Button, Card, CardContent, Container, Grid, Typography } from '@mui/material'
+import { motion } from 'framer-motion'
+import { Link as RouterLink } from 'react-router-dom'
+import PageHero from '../components/PageHero'
+import SectionHeading from '../components/SectionHeading'
 
 function MeetTheTeamPage() {
   const executives = [
@@ -12,7 +13,7 @@ function MeetTheTeamPage() {
     { name: 'Amanda Zhang', position: 'Treasurer' },
     { name: 'Charles Ni', position: 'Arc Delegate' },
     { name: 'Ray Zhang', position: 'Grievance Officer' },
-  ];
+  ]
 
   const committee = [
     'Events & socials',
@@ -21,7 +22,7 @@ function MeetTheTeamPage() {
     'Training support',
     'Session operations',
     'Sponsorships & partnerships',
-  ];
+  ]
 
   return (
     <Box sx={{ bgcolor: '#f8f9fa' }}>
@@ -98,9 +99,43 @@ function MeetTheTeamPage() {
             </Grid>
           ))}
         </Grid>
+
+        <Box sx={{ mt: { xs: 6, md: 8 } }}>
+          <SectionHeading overline="Contact" title="Reach out to us" sx={{ mb: 4 }} />
+          <Card sx={{ overflow: 'hidden', bgcolor: '#1c3c6f', color: 'white' }}>
+            <CardContent sx={{ p: { xs: 3, md: 4 } }}>
+              <Grid container spacing={{ xs: 2, md: 3 }} alignItems="center">
+                <Grid item xs={12} md={8}>
+                  <Typography variant="h5" sx={{ fontWeight: 900 }}>
+                    Got questions for the team?
+                  </Typography>
+                  <Typography sx={{ mt: 1, color: 'rgba(255,255,255,0.88)', lineHeight: 1.85 }}>
+                    Contact us here and we'll get back to you soon.
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Button
+                    component={RouterLink}
+                    to="/contact"
+                    variant="contained"
+                    fullWidth
+                    sx={{
+                      bgcolor: 'white',
+                      color: '#1c3c6f',
+                      fontWeight: 900,
+                      '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' },
+                    }}
+                  >
+                    Go to contact
+                  </Button>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Box>
       </Container>
     </Box>
-  );
+  )
 }
 
-export default MeetTheTeamPage;
+export default MeetTheTeamPage
