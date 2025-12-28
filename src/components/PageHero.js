@@ -1,6 +1,6 @@
-import React from 'react';
-import { Box, Container, Typography } from '@mui/material';
-import { motion } from 'framer-motion';
+import React from 'react'
+import { Box, Container, Typography } from '@mui/material'
+import { motion } from 'framer-motion'
 
 export default function PageHero({
   imageSrc,
@@ -26,6 +26,9 @@ export default function PageHero({
         component={motion.img}
         src={imageSrc}
         alt={imageAlt}
+        loading="eager"
+        decoding="async"
+        fetchPriority="high"
         initial={{ opacity: 0, scale: 1.02 }}
         animate={{ opacity: 0.56, scale: 1 }}
         transition={{ duration: 1.4 }}
@@ -100,7 +103,7 @@ export default function PageHero({
         </Box>
       </Container>
     </Box>
-  );
+  )
 }
 
 

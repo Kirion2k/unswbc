@@ -11,6 +11,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Preload key images so they start downloading while the initial loader is visible -->
+    <link rel="preload" as="image" href="%PUBLIC_URL%/logo-white.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-64.jpg" fetchpriority="high" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-14.jpg" fetchpriority="low" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-20.jpg" fetchpriority="low" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-81.JPG" fetchpriority="low" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-58.jpg" fetchpriority="low" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-8.jpg" fetchpriority="low" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-12.jpg" fetchpriority="low" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-59.jpg" fetchpriority="low" />
   </head>
   <body>
     <!-- Initial loader (shows before React bundles finish loading) -->
