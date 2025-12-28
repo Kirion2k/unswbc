@@ -21,80 +21,6 @@ import SportsTennisOutlined from '@mui/icons-material/SportsTennisOutlined'
 import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
 
-function LocationGuideFigure() {
-  // Simple diagram so new people know which desk to go to
-  // It is intentionally not a real floor plan, just a friendly guide
-  return (
-    <Box
-      component="svg"
-      viewBox="0 0 560 320"
-      role="img"
-      aria-label="Guide showing the level 2 badminton desk"
-      sx={{
-        width: '100%',
-        height: 'auto',
-        display: 'block',
-      }}
-    >
-      <defs>
-        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="rgba(28,60,111,0.10)" />
-          <stop offset="100%" stopColor="rgba(28,60,111,0.04)" />
-        </linearGradient>
-      </defs>
-
-      <rect x="16" y="16" width="528" height="288" rx="18" fill="url(#bg)" stroke="rgba(28,60,111,0.18)" />
-
-      <rect x="54" y="74" width="210" height="176" rx="16" fill="white" stroke="rgba(28,60,111,0.18)" />
-      <text x="74" y="110" fill="#1c3c6f" fontSize="18" fontWeight="800">
-        Stadium entry
-      </text>
-      <rect x="78" y="128" width="164" height="44" rx="12" fill="rgba(28,60,111,0.08)" />
-      <text x="96" y="156" fill="#1c3c6f" fontSize="14" fontWeight="700">
-        Customer service
-      </text>
-      <text x="76" y="196" fill="rgba(28,60,111,0.70)" fontSize="13">
-        This is not our desk
-      </text>
-
-      <rect x="308" y="58" width="198" height="208" rx="16" fill="white" stroke="rgba(28,60,111,0.18)" />
-      <text x="328" y="92" fill="#1c3c6f" fontSize="18" fontWeight="800">
-        Level 2
-      </text>
-      <text x="328" y="114" fill="rgba(28,60,111,0.70)" fontSize="13">
-        Inside Fitness and Aquatic Centre
-      </text>
-      <rect x="332" y="136" width="150" height="48" rx="12" fill="rgba(28,60,111,0.12)" />
-      <text x="348" y="166" fill="#1c3c6f" fontSize="14" fontWeight="800">
-        Badminton desk
-      </text>
-      <rect x="332" y="196" width="150" height="48" rx="12" fill="rgba(28,60,111,0.06)" />
-      <text x="360" y="226" fill="rgba(28,60,111,0.85)" fontSize="13" fontWeight="700">
-        Check in here
-      </text>
-
-      <path
-        d="M264 160 C 290 160, 292 160, 308 160"
-        fill="none"
-        stroke="#1c3c6f"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-      <path d="M300 150 L308 160 L300 170" fill="none" stroke="#1c3c6f" strokeWidth="3" strokeLinecap="round" />
-      <text x="270" y="144" fill="#1c3c6f" fontSize="13" fontWeight="700">
-        Go upstairs
-      </text>
-
-      <circle cx="108" cy="256" r="6" fill="rgba(28,60,111,0.38)" />
-      <circle cx="136" cy="256" r="6" fill="rgba(28,60,111,0.38)" />
-      <circle cx="164" cy="256" r="6" fill="rgba(28,60,111,0.38)" />
-      <text x="188" y="260" fill="rgba(28,60,111,0.70)" fontSize="13">
-        Quick tip: ask staff for badminton desk on level 2
-      </text>
-    </Box>
-  )
-}
-
 function SessionsPage() {
   const imageSrc = "/unsw-58.jpg"
 
@@ -234,8 +160,15 @@ function SessionsPage() {
         <Grid container spacing={{ xs: 2, md: 3 }} alignItems="stretch">
           <Grid item xs={12} md={7}>
             <Card sx={{ height: '100%' }}>
-              <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                <Stack spacing={1.75}>
+              <CardContent
+                sx={{
+                  p: { xs: 3, md: 4 },
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <Stack spacing={2} sx={{ flexGrow: 1, justifyContent: 'space-between' }}>
                   <Box>
                     <Typography variant="h6" sx={{ fontWeight: 900, mb: 0.75 }}>
                       Go straight to the badminton desk on level 2
@@ -243,64 +176,66 @@ function SessionsPage() {
                     <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
                       If you are new, this is the easiest way to find us. The stadium customer service counter is a different desk.
                     </Typography>
+
+                    <Stack spacing={1.25} sx={{ mt: 2 }}>
+                      <Stack direction="row" spacing={1.25} alignItems="flex-start">
+                        <Chip label="1" size="small" sx={{ fontWeight: 900, bgcolor: 'rgba(28,60,111,0.12)', color: '#1c3c6f' }} />
+                        <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
+                          Enter UNSW Fitness and Aquatic Centre
+                        </Typography>
+                      </Stack>
+                      <Stack direction="row" spacing={1.25} alignItems="flex-start">
+                        <Chip label="2" size="small" sx={{ fontWeight: 900, bgcolor: 'rgba(28,60,111,0.12)', color: '#1c3c6f' }} />
+                        <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
+                          Take the stairs to level 2
+                        </Typography>
+                      </Stack>
+                      <Stack direction="row" spacing={1.25} alignItems="flex-start">
+                        <Chip label="3" size="small" sx={{ fontWeight: 900, bgcolor: 'rgba(28,60,111,0.12)', color: '#1c3c6f' }} />
+                        <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
+                          Look for the badminton desk and check in! :)
+                        </Typography>
+                      </Stack>
+                    </Stack>
                   </Box>
 
-                  <Stack spacing={1.25}>
-                    <Stack direction="row" spacing={1.25} alignItems="flex-start">
-                      <Chip label="1" size="small" sx={{ fontWeight: 900, bgcolor: 'rgba(28,60,111,0.12)', color: '#1c3c6f' }} />
-                      <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
-                        Enter UNSW Fitness and Aquatic Centre
-                      </Typography>
+                  <Box>
+                    <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ pt: 0.5 }}>
+                      <Button
+                        variant="contained"
+                        href={mapsOpenLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{ fontWeight: 900 }}
+                      >
+                        Open in Google Maps
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        onClick={() => setShowFirstTimeMore((v) => !v)}
+                        sx={{ fontWeight: 900 }}
+                      >
+                        {showFirstTimeMore ? 'Hide details' : 'Click to learn more'}
+                      </Button>
                     </Stack>
-                    <Stack direction="row" spacing={1.25} alignItems="flex-start">
-                      <Chip label="2" size="small" sx={{ fontWeight: 900, bgcolor: 'rgba(28,60,111,0.12)', color: '#1c3c6f' }} />
-                      <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
-                        Take the stairs to level 2
-                      </Typography>
-                    </Stack>
-                    <Stack direction="row" spacing={1.25} alignItems="flex-start">
-                      <Chip label="3" size="small" sx={{ fontWeight: 900, bgcolor: 'rgba(28,60,111,0.12)', color: '#1c3c6f' }} />
-                      <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
-                        Look for the badminton desk and check in! :)
-                      </Typography>
-                    </Stack>
-                  </Stack>
 
-                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ pt: 0.5 }}>
-                    <Button
-                      variant="contained"
-                      href={mapsOpenLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      sx={{ fontWeight: 900 }}
-                    >
-                      Open in Google Maps
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      onClick={() => setShowFirstTimeMore((v) => !v)}
-                      sx={{ fontWeight: 900 }}
-                    >
-                      {showFirstTimeMore ? 'Hide details' : 'Click to learn more'}
-                    </Button>
-                  </Stack>
-
-                  <Collapse in={showFirstTimeMore} timeout={250}>
-                    <Box
-                      sx={{
-                        mt: 1.5,
-                        p: 2,
-                        borderRadius: 3,
-                        bgcolor: 'rgba(28,60,111,0.06)',
-                        border: '1px solid rgba(28,60,111,0.10)',
-                      }}
-                    >
-                      <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
-                        If you arrive at the gym customer service desk, you are close but not checked in yet. Walk into the Fitness and Aquatic Centre and go up to level 2.
-                        If you are unsure, ask the staff at the counter for the badminton desk on level 2.
-                      </Typography>
-                    </Box>
-                  </Collapse>
+                    <Collapse in={showFirstTimeMore} timeout={250}>
+                      <Box
+                        sx={{
+                          mt: 1.5,
+                          p: 2,
+                          borderRadius: 3,
+                          bgcolor: 'rgba(28,60,111,0.06)',
+                          border: '1px solid rgba(28,60,111,0.10)',
+                        }}
+                      >
+                        <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
+                          If you arrive at the gym customer service desk, you are close but not checked in yet. Walk into the Fitness and Aquatic Centre and go up to level 2.
+                          If you are unsure, ask the staff at the counter for the badminton desk on level 2.
+                        </Typography>
+                      </Box>
+                    </Collapse>
+                  </Box>
                 </Stack>
               </CardContent>
             </Card>
@@ -308,63 +243,45 @@ function SessionsPage() {
 
           <Grid item xs={12} md={5}>
             <Card sx={{ height: '100%' }}>
-              <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                <Typography variant="h6" sx={{ fontWeight: 900, mb: 1 }}>
-                  Quick visual guide
+              <CardContent
+                sx={{
+                  p: { xs: 3, md: 4 },
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <Typography variant="h6" sx={{ fontWeight: 900, mb: 0.75 }}>
+                  Map and address
                 </Typography>
-                <Typography sx={{ color: 'text.secondary', lineHeight: 1.85, mb: 2 }}>
-                  Use this as a simple reference when you arrive.
+                <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
+                  {venueAddress}
                 </Typography>
-                <Box sx={{ borderRadius: 3, overflow: 'hidden' }}>
-                  <LocationGuideFigure />
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
 
-        <Grid container spacing={{ xs: 2, md: 3 }} sx={{ mt: { xs: 2, md: 3 } }} alignItems="stretch">
-          <Grid item xs={12}>
-            <Card>
-              <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                <Stack
-                  direction={{ xs: 'column', md: 'row' }}
-                  spacing={{ xs: 2.5, md: 3 }}
-                  alignItems={{ xs: 'stretch', md: 'center' }}
+                <Box
+                  sx={{
+                    mt: 2,
+                    width: '100%',
+                    borderRadius: 3,
+                    overflow: 'hidden',
+                    border: '1px solid rgba(28,60,111,0.12)',
+                    bgcolor: 'rgba(28,60,111,0.04)',
+                    flexGrow: 1,
+                    minHeight: { xs: 260, md: 360 },
+                  }}
                 >
-                  <Box sx={{ flexGrow: 1 }}>
-                    <Typography variant="h6" sx={{ fontWeight: 900, mb: 0.75 }}>
-                      Map and address
-                    </Typography>
-                    <Typography sx={{ color: 'text.secondary', lineHeight: 1.85, mb: 2 }}>
-                      {venueAddress}
-                    </Typography>
-                  </Box>
-
                   <Box
+                    component="iframe"
+                    title="UNSW Badminton Club location map"
+                    src={mapsEmbedSrc}
+                    loading="lazy"
                     sx={{
                       width: '100%',
-                      maxWidth: { md: 560 },
-                      borderRadius: 3,
-                      overflow: 'hidden',
-                      border: '1px solid rgba(28,60,111,0.12)',
-                      bgcolor: 'rgba(28,60,111,0.04)',
-                      aspectRatio: { xs: '4 / 3', md: '16 / 9' },
+                      height: '100%',
+                      border: 0,
                     }}
-                  >
-                    <Box
-                      component="iframe"
-                      title="UNSW Badminton Club location map"
-                      src={mapsEmbedSrc}
-                      loading="lazy"
-                      sx={{
-                        width: '100%',
-                        height: '100%',
-                        border: 0,
-                      }}
-                    />
-                  </Box>
-                </Stack>
+                  />
+                </Box>
               </CardContent>
             </Card>
           </Grid>
