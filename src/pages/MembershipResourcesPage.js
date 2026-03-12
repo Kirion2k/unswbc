@@ -1,8 +1,10 @@
 import React from 'react';
-import { Box, Card, CardContent, Container, Grid, Link, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Box, CardContent, Container, Grid, Link, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
+import ScrollReveal from '../components/ScrollReveal';
+import TiltCard from '../components/TiltCard';
 
 function MembershipResourcesPage() {
   const resources = [
@@ -12,7 +14,7 @@ function MembershipResourcesPage() {
         'Badminton racket (or hire one from UNSW FAC)',
         'Non-marking court shoes',
         'Water bottle + towel',
-        'A good attitude — you’ll meet heaps of people',
+        'A good attitude — you\'ll meet heaps of people',
       ],
     },
     {
@@ -46,51 +48,57 @@ function MembershipResourcesPage() {
       />
 
       <Container sx={{ py: { xs: 7, md: 10 } }}>
-        <SectionHeading overline="Guide" title="Make your first session easy" sx={{ mb: 5 }} />
+        <ScrollReveal>
+          <SectionHeading overline="Guide" title="Make your first session easy" sx={{ mb: 5 }} />
+        </ScrollReveal>
 
         <Grid container spacing={3}>
-          {resources.map((r) => (
+          {resources.map((r, index) => (
             <Grid item xs={12} md={4} key={r.title}>
-              <Card sx={{ height: '100%' }}>
-                <CardContent sx={{ p: 3 }}>
-                  <Typography variant="h6" sx={{ fontWeight: 900, mb: 1.5, color: '#1c3c6f' }}>
-                    {r.title}
-                  </Typography>
-                  <List dense disablePadding>
-                    {r.items.map((t) => (
-                      <ListItem key={t} disableGutters sx={{ py: 0.5 }}>
-                        <ListItemText
-                          primary={t}
-                          primaryTypographyProps={{ sx: { color: 'text.secondary', lineHeight: 1.7 } }}
-                        />
-                      </ListItem>
-                    ))}
-                  </List>
-                </CardContent>
-              </Card>
+              <ScrollReveal delay={index * 0.08}>
+                <TiltCard>
+                  <CardContent sx={{ p: 3 }}>
+                    <Typography variant="h6" sx={{ fontWeight: 900, mb: 1.5, color: '#1c3c6f' }}>
+                      {r.title}
+                    </Typography>
+                    <List dense disablePadding>
+                      {r.items.map((t) => (
+                        <ListItem key={t} disableGutters sx={{ py: 0.5 }}>
+                          <ListItemText
+                            primary={t}
+                            primaryTypographyProps={{ sx: { color: 'text.secondary', lineHeight: 1.7 } }}
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </CardContent>
+                </TiltCard>
+              </ScrollReveal>
             </Grid>
           ))}
         </Grid>
       </Container>
 
       <Container sx={{ pb: { xs: 8, md: 12 } }}>
-        <Card sx={{ overflow: 'hidden' }}>
-          <CardContent sx={{ p: { xs: 3.5, md: 5 } }}>
-            <Typography variant="h5" sx={{ fontWeight: 900, mb: 1 }}>
-              Helpful links
-            </Typography>
-            <Typography sx={{ color: 'text.secondary', lineHeight: 1.8 }}>
-              - View Queue: <Link component={RouterLink} to="/view-queue" underline="hover">/view-queue</Link>
-              <br />
-              - FAQs: <Link component={RouterLink} to="/faqs" underline="hover">/faqs</Link>
-              <br />
-              - Contact: <Link component={RouterLink} to="/contact" underline="hover">/contact</Link>
-            </Typography>
-          </CardContent>
-        </Card>
+        <ScrollReveal>
+          <TiltCard>
+            <CardContent sx={{ p: { xs: 3.5, md: 5 } }}>
+              <Typography variant="h5" sx={{ fontWeight: 900, mb: 1 }}>
+                Helpful links
+              </Typography>
+              <Typography sx={{ color: 'text.secondary', lineHeight: 1.8 }}>
+                - View Queue: <Link component={RouterLink} to="/view-queue" underline="hover">/view-queue</Link>
+                <br />
+                - FAQs: <Link component={RouterLink} to="/faqs" underline="hover">/faqs</Link>
+                <br />
+                - Contact: <Link component={RouterLink} to="/contact" underline="hover">/contact</Link>
+              </Typography>
+            </CardContent>
+          </TiltCard>
+        </ScrollReveal>
       </Container>
     </Box>
   );
 }
 
-export default MembershipResourcesPage; // Correct default export
+export default MembershipResourcesPage;

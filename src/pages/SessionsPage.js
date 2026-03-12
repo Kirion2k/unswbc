@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import {
   Box,
-  Button,
   Card,
   CardContent,
   Chip,
@@ -13,13 +12,15 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
-import { motion } from 'framer-motion'
 import PlaceOutlined from '@mui/icons-material/PlaceOutlined'
 import PaymentsOutlined from '@mui/icons-material/PaymentsOutlined'
 import HowToRegOutlined from '@mui/icons-material/HowToRegOutlined'
 import SportsTennisOutlined from '@mui/icons-material/SportsTennisOutlined'
 import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
+import ScrollReveal, { StaggerContainer, StaggerItem } from '../components/ScrollReveal'
+import TiltCard from '../components/TiltCard'
+import MagneticButton from '../components/MagneticButton'
 
 function SessionsPage() {
   const imageSrc = "/unsw-58.jpg"
@@ -30,16 +31,6 @@ function SessionsPage() {
   const mapsOpenLink = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`
 
   const [showFirstTimeMore, setShowFirstTimeMore] = useState(false)
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 14 },
-    show: { opacity: 1, y: 0 },
-  }
-
-  const stagger = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.08 } },
-  }
 
   const quickSteps = [
     {
@@ -290,75 +281,61 @@ function SessionsPage() {
         <Divider sx={{ my: { xs: 5, md: 6 } }} />
 
         <SectionHeading overline="Start here" title="Your first session in 3 steps" sx={{ mb: 4 }} />
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          component={motion.div}
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {quickSteps.map((step, index) => (
-            <Grid item xs={12} md={4} key={step.title}>
-              <Box component={motion.div} variants={fadeUp} sx={{ height: '100%' }}>
-                <Card sx={{ height: '100%' }}>
-                  <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                    <Box
-                      sx={{
-                        height: 38,
-                        width: 38,
-                        borderRadius: 999,
-                        bgcolor: 'rgba(28,60,111,0.12)',
-                        color: '#1c3c6f',
-                        display: 'grid',
-                        placeItems: 'center',
-                        fontWeight: 900,
-                        mb: 2,
-                      }}
-                    >
-                      {index + 1}
-                    </Box>
-                    <Typography variant="h6" sx={{ fontWeight: 900, mb: 1 }}>
-                      {step.title}
-                    </Typography>
-                    <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
-                      {step.body}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
+        <StaggerContainer>
+          <Grid container spacing={{ xs: 2, md: 3 }}>
+            {quickSteps.map((step, index) => (
+              <Grid item xs={12} md={4} key={step.title}>
+                <StaggerItem style={{ height: '100%' }}>
+                  <TiltCard>
+                    <CardContent sx={{ p: { xs: 3, md: 4 } }}>
+                      <Box
+                        sx={{
+                          height: 38,
+                          width: 38,
+                          borderRadius: 999,
+                          bgcolor: 'rgba(28,60,111,0.12)',
+                          color: '#1c3c6f',
+                          display: 'grid',
+                          placeItems: 'center',
+                          fontWeight: 900,
+                          mb: 2,
+                        }}
+                      >
+                        {index + 1}
+                      </Box>
+                      <Typography variant="h6" sx={{ fontWeight: 900, mb: 1 }}>
+                        {step.title}
+                      </Typography>
+                      <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
+                        {step.body}
+                      </Typography>
+                    </CardContent>
+                  </TiltCard>
+                </StaggerItem>
+              </Grid>
+            ))}
+          </Grid>
+        </StaggerContainer>
 
         <Divider sx={{ my: { xs: 5, md: 6 } }} />
 
         <SectionHeading overline="Info" title="Important information" sx={{ mb: 4 }} />
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          component={motion.div}
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          sx={{ alignItems: 'stretch' }}
-        >
-          {infoCards.map((section, index) => {
-            const isNavy = section.accent === 'navy'
-            const isPayment = section.title === 'Payment'
+        <StaggerContainer>
+          <Grid container spacing={{ xs: 2, md: 3 }} sx={{ alignItems: 'stretch' }}>
+            {infoCards.map((section, index) => {
+              const isNavy = section.accent === 'navy'
+              const isPayment = section.title === 'Payment'
 
-            return (
-              <Grid item xs={12} md={6} key={section.title} sx={{ display: 'flex' }}>
-                <Box component={motion.div} variants={fadeUp} sx={{ flexGrow: 1, display: 'flex' }}>
-                  <Card
-                    sx={{
-                      flexGrow: 1,
-                      bgcolor: isNavy ? '#1c3c6f' : 'white',
-                      color: isNavy ? 'white' : 'inherit',
-                    }}
-                  >
+              return (
+                <Grid item xs={12} md={6} key={section.title} sx={{ display: 'flex' }}>
+                  <StaggerItem style={{ flexGrow: 1, display: 'flex' }}>
+                    <TiltCard
+                      sx={{
+                        flexGrow: 1,
+                        bgcolor: isNavy ? '#1c3c6f' : 'white',
+                        color: isNavy ? 'white' : 'inherit',
+                      }}
+                    >
                     <CardContent
                       sx={{
                         p: { xs: 3, md: 4 },
@@ -483,30 +460,23 @@ function SessionsPage() {
                         )}
                       </Box>
                     </CardContent>
-                  </Card>
-                </Box>
-              </Grid>
-            )
-          })}
-        </Grid>
+                    </TiltCard>
+                  </StaggerItem>
+                </Grid>
+              )
+            })}
+          </Grid>
+        </StaggerContainer>
 
         <Divider sx={{ my: { xs: 5, md: 6 } }} />
 
         <SectionHeading overline="Times" title="Sessions" sx={{ mb: 4 }} />
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          component={motion.div}
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          sx={{ alignItems: 'stretch' }}
-        >
-          {sessionCards.map((s) => (
-            <Grid item xs={12} md={4} key={`${s.title} ${s.time}`} sx={{ display: 'flex' }}>
-              <Box component={motion.div} variants={fadeUp} sx={{ flexGrow: 1, display: 'flex' }}>
-                <Card sx={{ flexGrow: 1, overflow: 'hidden' }}>
+        <StaggerContainer>
+          <Grid container spacing={{ xs: 2, md: 3 }} sx={{ alignItems: 'stretch' }}>
+            {sessionCards.map((s) => (
+              <Grid item xs={12} md={4} key={`${s.title} ${s.time}`} sx={{ display: 'flex' }}>
+                <StaggerItem style={{ flexGrow: 1, display: 'flex' }}>
+                  <TiltCard sx={{ flexGrow: 1, overflow: 'hidden' }}>
                   <CardContent
                     sx={{
                       p: { xs: 3, md: 4 },
@@ -587,11 +557,12 @@ function SessionsPage() {
                       {s.note}
                     </Typography>
                   </CardContent>
-                </Card>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
+                  </TiltCard>
+                </StaggerItem>
+              </Grid>
+            ))}
+          </Grid>
+        </StaggerContainer>
 
         <Divider sx={{ my: { xs: 5, md: 6 } }} />
 
@@ -749,7 +720,7 @@ function SessionsPage() {
                   </Typography>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                  <Button
+                  <MagneticButton
                     component={RouterLink}
                     to="/view-queue"
                     variant="contained"
@@ -763,7 +734,7 @@ function SessionsPage() {
                     }}
                   >
                     View queue
-                  </Button>
+                  </MagneticButton>
                 </Grid>
               </Grid>
             </CardContent>

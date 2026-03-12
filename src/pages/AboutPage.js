@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Box, Button, Card, CardContent, CardMedia, Container, Divider, Grid, Typography } from '@mui/material';
-import { motion } from 'framer-motion';
+import { Box, Card, CardContent, CardMedia, Container, Divider, Grid, Typography } from '@mui/material';
 import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
+import ScrollReveal from '../components/ScrollReveal';
+import TiltCard from '../components/TiltCard';
+import MagneticButton from '../components/MagneticButton';
 
 function AboutPage() {
   const imageSrc = "/unsw-14.jpg";
@@ -22,7 +24,7 @@ function AboutPage() {
       <Container sx={{ py: { xs: 6, md: 10 } }}>
         <SectionHeading overline="UNSWBC" title="Welcome to the club" sx={{ mb: 5 }} />
 
-        <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+        <ScrollReveal>
           <Card>
             <CardContent sx={{ p: { xs: 3.5, md: 5 } }}>
               <Typography variant="h5" sx={{ fontWeight: 900, mb: 1.5 }}>
@@ -47,7 +49,7 @@ function AboutPage() {
           </Typography>
             </CardContent>
           </Card>
-        </motion.div>
+        </ScrollReveal>
 
         <Divider sx={{ my: 5 }} />
 
@@ -79,8 +81,8 @@ function AboutPage() {
             },
           ].map((item, index) => (
             <Grid item xs={12} key={item.title}>
-              <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: index * 0.05 }}>
-                <Card sx={{ overflow: 'hidden' }}>
+              <ScrollReveal delay={index * 0.05}>
+                <TiltCard sx={{ overflow: 'hidden' }}>
                   <Grid container>
                     <Grid item xs={12} md={5}>
                       <CardMedia
@@ -122,8 +124,8 @@ function AboutPage() {
                       </CardContent>
                     </Grid>
                   </Grid>
-                </Card>
-              </motion.div>
+                </TiltCard>
+              </ScrollReveal>
             </Grid>
           ))}
         </Grid>
@@ -166,7 +168,7 @@ function AboutPage() {
             />
           </Box>
 
-          <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+          <ScrollReveal>
             <Card sx={{ overflow: 'hidden', borderRadius: 4 }}>
               <Box
                 sx={{
@@ -297,7 +299,7 @@ function AboutPage() {
                 </Box>
               </Box>
             </Card>
-          </motion.div>
+          </ScrollReveal>
         </Box>
 
         <SectionHeading overline="Experience" title="What to expect" sx={{ mb: 4 }} />
@@ -315,8 +317,8 @@ function AboutPage() {
             },
           ].map((item, index) => (
             <Grid item xs={12} md={6} key={item.title}>
-              <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: index * 0.05 }}>
-                <Card sx={{ height: '100%' }}>
+              <ScrollReveal delay={index * 0.05}>
+                <TiltCard sx={{ height: '100%' }}>
                   <CardContent sx={{ p: { xs: 3, md: 4 } }}>
                     <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: '#1c3c6f' }}>
                     {item.title}
@@ -325,15 +327,15 @@ function AboutPage() {
                       {item.body}
                   </Typography>
                   </CardContent>
-                </Card>
-              </motion.div>
+                </TiltCard>
+              </ScrollReveal>
             </Grid>
           ))}
         </Grid>
       </Container>
 
       <Container sx={{ pb: { xs: 7, md: 12 } }}>
-        <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+        <ScrollReveal>
           <Card sx={{ bgcolor: '#1c3c6f', color: 'white' }}>
             <CardContent sx={{ p: { xs: 3.5, md: 5 } }}>
               <Typography variant="h5" sx={{ fontWeight: 900, mb: 1 }}>
@@ -348,13 +350,13 @@ function AboutPage() {
               </Typography>
 
               <Box sx={{ mt: 3 }}>
-                <Button
+                <MagneticButton
                   component={RouterLink}
                   to="/sessions"
                   variant="contained"
                   size="large"
                   fullWidth
-          sx={{
+                  sx={{
                     py: 1.6,
                     fontWeight: 900,
                     bgcolor: 'white',
@@ -363,11 +365,11 @@ function AboutPage() {
                   }}
                 >
                   Join us today
-                </Button>
+                </MagneticButton>
               </Box>
             </CardContent>
           </Card>
-        </motion.div>
+        </ScrollReveal>
         </Container>
     </Box>
   );

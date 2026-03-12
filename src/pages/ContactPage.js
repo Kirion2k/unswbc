@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Box, Button, Card, CardContent, Container, Grid, IconButton, Link, TextField, Typography } from '@mui/material';
+import { Box, Card, CardContent, Container, Grid, IconButton, Link, TextField, Typography } from '@mui/material';
 import { Facebook, Instagram } from '@mui/icons-material';
 import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
 import { Link as RouterLink } from 'react-router-dom';
+import ScrollReveal from '../components/ScrollReveal';
+import MagneticButton from '../components/MagneticButton';
 
 function ContactPage() {
   const imageSrc = "/unsw-59.jpg"; // Background Image
@@ -77,8 +79,9 @@ function ContactPage() {
 
         <Grid container spacing={3} alignItems="stretch">
           <Grid item xs={12} md={7}>
-            <Card sx={{ height: '100%' }}>
-              <CardContent sx={{ p: { xs: 3, md: 4 } }}>
+            <ScrollReveal>
+              <Card sx={{ height: '100%' }}>
+                <CardContent sx={{ p: { xs: 3, md: 4 } }}>
                 <form onSubmit={handleSubmit}>
                   <Grid container spacing={2.5}>
                     <Grid item xs={12} sm={6}>
@@ -129,9 +132,9 @@ function ContactPage() {
                   </Grid>
 
                   <Box sx={{ display: 'flex', justifyContent: 'flex-start', mt: 3 }}>
-                    <Button type="submit" variant="contained" color="primary">
+                    <MagneticButton type="submit" variant="contained" color="primary">
                       Send message
-                    </Button>
+                    </MagneticButton>
                   </Box>
                 </form>
 
@@ -146,13 +149,15 @@ function ContactPage() {
                     {responseMessage}
                   </Typography>
                 )}
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </ScrollReveal>
           </Grid>
 
           <Grid item xs={12} md={5}>
-            <Card sx={{ height: '100%' }}>
-              <CardContent sx={{ p: { xs: 3, md: 4 } }}>
+            <ScrollReveal delay={0.1}>
+              <Card sx={{ height: '100%' }}>
+                <CardContent sx={{ p: { xs: 3, md: 4 } }}>
                 <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: '#1c3c6f' }}>
                   Follow our updates
                 </Typography>
@@ -191,8 +196,9 @@ function ContactPage() {
                     <Link component={RouterLink} to="/view-queue" underline="hover">View Queue</Link>
                   </Typography>
                 </Box>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </ScrollReveal>
           </Grid>
         </Grid>
       </Container>

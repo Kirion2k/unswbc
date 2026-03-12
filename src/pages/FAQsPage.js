@@ -3,6 +3,7 @@ import { Typography, Box, Container, Accordion, AccordionSummary, AccordionDetai
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
+import ScrollReveal from '../components/ScrollReveal';
 
 function FAQsPage() {
   const imageSrc = "/unsw-8.jpg";
@@ -74,18 +75,20 @@ function FAQsPage() {
       <Container sx={{ py: { xs: 7, md: 10 } }}>
         <SectionHeading overline="Support" title="Frequently asked questions" sx={{ mb: 5 }} />
         {faqs.map((faq, index) => (
-          <Accordion key={index} sx={{ mb: 2 }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-${index}-content`} id={`faq-${index}-header`}>
-              <Typography variant="h6" sx={{ fontWeight: 800, color: '#1c3c6f' }}>
-                {faq.question}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography variant="body1" sx={{ color: 'text.secondary', lineHeight: 1.75 }}>
-                {faq.answer}
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
+          <ScrollReveal key={index} delay={Math.min(index * 0.05, 0.4)}>
+            <Accordion sx={{ mb: 2 }}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-${index}-content`} id={`faq-${index}-header`}>
+                <Typography variant="h6" sx={{ fontWeight: 800, color: '#1c3c6f' }}>
+                  {faq.question}
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography variant="body1" sx={{ color: 'text.secondary', lineHeight: 1.75 }}>
+                  {faq.answer}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          </ScrollReveal>
         ))}
       </Container>
     </Box>
