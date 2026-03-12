@@ -1,30 +1,40 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Container, Grid, Stack, Typography } from '@mui/material';
-import { motion } from 'framer-motion';
-import Typewriter from 'typewriter-effect';
-import { styled, keyframes } from '@mui/system';
-import PageHero from '../components/PageHero';
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Container,
+  Grid,
+  Typography,
+} from '@mui/material';
+import { motion, useReducedMotion } from 'framer-motion';
+import { keyframes } from '@mui/system';
 import SectionHeading from '../components/SectionHeading';
+import ScrollReveal, { StaggerContainer, StaggerItem } from '../components/ScrollReveal';
+import AnimatedCounter from '../components/AnimatedCounter';
+import TiltCard from '../components/TiltCard';
+import MagneticButton from '../components/MagneticButton';
+import LetterAnimation from '../components/LetterAnimation';
+import FloatingParticles from '../components/FloatingParticles';
+import LogoMarquee from '../components/LogoMarquee';
+import ParallaxImage from '../components/ParallaxImage';
 import unswLogo from '../unsw-logo.png';
 import arcLogo from '../arc-logo.jpg';
 import badmintonAuLogo from '../badminton-au.png';
 import badmintonNswLogo from '../nsw-badminton.png';
 
-
-
-const fadeIn = keyframes`
-  from { opacity: 0; transform: scale(0.85); }
-  to { opacity: 1; transform: scale(1); }
+const gradientShift = keyframes`
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 `;
 
-const AnimatedTypography = styled(Typography)(({ theme }) => ({
-  animation: `${fadeIn} 1s ease-out forwards`,
-  textAlign: 'center'
-}));
-
 function HomePage() {
-  const heroImage = "/unsw-64.jpg";
+  const prefersReducedMotion = useReducedMotion();
+  const heroImage = '/unsw-64.jpg';
 
   const featureSections = [
     {
@@ -56,95 +66,231 @@ function HomePage() {
     { img: '/unsw-49.jpg', title: 'Get in touch', description: 'Questions? Message us or follow our socials.', link: '/contact' },
   ];
 
+  const stats = [
+    { value: 150, suffix: '+', label: 'Active Members' },
+    { value: 2, suffix: '×', label: 'National Champions' },
+    { value: 4, suffix: '', label: 'Weekly Sessions' },
+    { label: 'Est. 2018', static: true },
+  ];
+
   const partners = [
-    { name: 'UNSW', logo: unswLogo },
-    { name: 'ARC Sport', logo: arcLogo },
-    { name: 'Badminton Australia', logo: badmintonAuLogo },
-    { name: 'Badminton NSW', logo: badmintonNswLogo },
+    { src: unswLogo, alt: 'UNSW' },
+    { src: arcLogo, alt: 'ARC Sport' },
+    { src: badmintonAuLogo, alt: 'Badminton Australia' },
+    { src: badmintonNswLogo, alt: 'Badminton NSW' },
   ];
 
   return (
     <Box sx={{ bgcolor: '#f8f9fa' }}>
-      <PageHero imageSrc={heroImage} imageAlt="UNSW Badminton Club" imagePosition="center 0%">
-        <Box sx={{ maxWidth: 980 }}>
-          <AnimatedTypography
-            variant="h2"
-            component={motion.h1}
-            initial={{ y: 18, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.9 }}
+      {/* ─── Hero ─── */}
+      <Box
+        component="section"
+        sx={{
+          position: 'relative',
+          width: '100%',
+          minHeight: '100vh',
+          bgcolor: '#0a1628',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <Box
+          component={motion.img}
+          src={heroImage}
+          alt="UNSW Badminton Club"
+          loading="eager"
+          fetchPriority="high"
+          initial={prefersReducedMotion ? { opacity: 0.35 } : { opacity: 0, scale: 1.08 }}
+          animate={{ opacity: 0.35, scale: 1 }}
+          transition={{ duration: 2 }}
           sx={{
-              textAlign: 'left',
-              color: 'white',
-              fontSize: { xs: '2.6rem', sm: '3.4rem', md: '4.3rem' },
-              lineHeight: 1.02,
-            }}
-          >
-            UNSW <Box component="span" sx={{ color: '#1c3c6f' }}>Badminton</Box> Club
-          </AnimatedTypography>
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center 0%',
+          }}
+        />
 
-          <Typography
-            component={motion.div}
-            initial={{ y: 18, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.9, delay: 0.1 }}
-            sx={{ mt: 2, color: 'rgba(255,255,255,0.88)', fontWeight: 700, fontSize: { xs: '1.05rem', md: '1.25rem' } }}
-          >
-            <Typewriter
-              options={{
-                strings: ['Precision in motion.', 'Social play + training.', 'A club that feels like home.'],
-                autoStart: true,
-                loop: true,
-                delay: 55,
-                deleteSpeed: 30,
-                cursor: '|',
-              }}
-            />
-          </Typography>
+        {/* Gradient overlay */}
+        <Box
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(135deg, rgba(10,22,40,0.9) 0%, rgba(28,60,111,0.4) 50%, rgba(10,22,40,0.85) 100%)',
+            backgroundSize: '200% 200%',
+            animation: prefersReducedMotion ? 'none' : `${gradientShift} 15s ease infinite`,
+          }}
+        />
 
-          <Stack
-            direction={{ xs: 'column', sm: 'row' }}
-            spacing={1.5}
-            sx={{ mt: 4 }}
-            component={motion.div}
-            initial={{ y: 18, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.9, delay: 0.2 }}
-          >
-            <Button variant="contained" color="primary" component={RouterLink} to="/sessions">
-              View sessions
-            </Button>
-            <Button
-              variant="outlined"
-              component={RouterLink}
-              to="/about"
+        <FloatingParticles count={12} />
+
+        <Container sx={{ position: 'relative', zIndex: 1, py: { xs: 14, md: 0 } }}>
+          <Box sx={{ maxWidth: 800 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <Typography
                 sx={{
-                borderColor: 'rgba(255,255,255,0.6)',
-                  color: 'white',
-                '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.08)' },
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.25em',
+                  fontSize: '0.75rem',
+                  color: 'rgba(255,255,255,0.45)',
+                  fontWeight: 700,
+                  mb: 2,
+                }}
+              >
+                UNSW Badminton Club
+              </Typography>
+            </motion.div>
+
+            <Typography
+              component="h1"
+              sx={{
+                fontSize: { xs: 'clamp(2.5rem, 8vw, 4.5rem)', md: 'clamp(3.5rem, 5vw, 5rem)' },
+                fontWeight: 900,
+                lineHeight: 1.02,
+                letterSpacing: '-0.03em',
+                color: 'white',
               }}
             >
-              About us
-            </Button>
-          </Stack>
+              <LetterAnimation text="WHERE" delay={0.3} staggerDelay={0.04} />
+              <br />
+              <LetterAnimation text="CHAMPIONS" delay={0.5} staggerDelay={0.03} />
+              <br />
+              <Box
+                component="span"
+                sx={{
+                  WebkitTextStroke: '2px rgba(255,255,255,0.7)',
+                  color: 'transparent',
+                }}
+              >
+                <LetterAnimation text="ARE MADE" delay={0.8} staggerDelay={0.04} />
               </Box>
-      </PageHero>
+            </Typography>
 
+            <Typography
+              component={motion.p}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              sx={{
+                mt: 3,
+                color: 'rgba(255,255,255,0.6)',
+                fontSize: { xs: '1rem', md: '1.15rem' },
+                maxWidth: 480,
+                lineHeight: 1.7,
+              }}
+            >
+              2&times; UniSport National Champions. 150+ members. Sydney&apos;s most competitive university badminton community.
+            </Typography>
+
+            <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.4 }}
+              sx={{ mt: 4, display: 'flex', gap: 2, flexWrap: 'wrap' }}
+            >
+              <MagneticButton
+                variant="contained"
+                component={RouterLink}
+                to="/sessions"
+                sx={{
+                  bgcolor: '#1c3c6f',
+                  color: 'white',
+                  fontWeight: 800,
+                  px: 4,
+                  py: 1.5,
+                  fontSize: '1rem',
+                  '&:hover': { bgcolor: '#123456' },
+                }}
+              >
+                Join the Club &rarr;
+              </MagneticButton>
+              <MagneticButton
+                variant="outlined"
+                component={RouterLink}
+                to="/sessions"
+                sx={{
+                  borderColor: 'rgba(255,255,255,0.25)',
+                  color: 'white',
+                  fontWeight: 700,
+                  px: 4,
+                  py: 1.5,
+                  fontSize: '1rem',
+                  '&:hover': { borderColor: 'rgba(255,255,255,0.5)', bgcolor: 'rgba(255,255,255,0.05)' },
+                }}
+              >
+                View Sessions
+              </MagneticButton>
+            </Box>
+          </Box>
+        </Container>
+      </Box>
+
+      {/* ─── Stats Counter Bar ─── */}
+      <Box sx={{ bgcolor: '#1c3c6f', py: { xs: 5, md: 6 } }}>
+        <Container>
+          <StaggerContainer staggerDelay={0.12}>
+            <Grid container spacing={3} justifyContent="center" textAlign="center">
+              {stats.map((stat, i) => (
+                <Grid item xs={6} md={3} key={i}>
+                  <StaggerItem>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: '2.2rem', md: '2.8rem' },
+                        fontWeight: 900,
+                        color: 'white',
+                        lineHeight: 1.1,
+                      }}
+                    >
+                      {stat.static ? (
+                        stat.label
+                      ) : (
+                        <AnimatedCounter target={stat.value} suffix={stat.suffix} duration={2.5} />
+                      )}
+                    </Typography>
+                    {!stat.static && (
+                      <Typography
+                        sx={{
+                          mt: 0.5,
+                          fontSize: '0.7rem',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.15em',
+                          color: 'rgba(255,255,255,0.6)',
+                          fontWeight: 700,
+                        }}
+                      >
+                        {stat.label}
+                      </Typography>
+                    )}
+                  </StaggerItem>
+                </Grid>
+              ))}
+            </Grid>
+          </StaggerContainer>
+        </Container>
+      </Box>
+
+      {/* ─── Feature Sections ─── */}
       <Container sx={{ py: { xs: 6, md: 10 } }}>
-        <SectionHeading overline="Welcome" title="A club built for every level" sx={{ mb: 5 }} />
+        <ScrollReveal>
+          <SectionHeading overline="Welcome" title="A club built for every level" sx={{ mb: 5 }} />
+        </ScrollReveal>
         <Grid container spacing={{ xs: 2, md: 3 }}>
           {featureSections.map((s, index) => {
-            const imageFirst = index % 2 === 0
-            const overline = index === 0 ? 'Community' : index === 1 ? 'Training' : 'Events'
+            const imageFirst = index % 2 === 0;
+            const overline = index === 0 ? 'Community' : index === 1 ? 'Training' : 'Events';
 
             return (
               <Grid item xs={12} key={s.title}>
-                <motion.div
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: index * 0.05 }}
-                >
-                  <Card sx={{ overflow: 'hidden' }}>
+                <ScrollReveal delay={index * 0.1}>
+                  <TiltCard>
                     <Grid container alignItems="stretch">
                       <Grid
                         item
@@ -168,7 +314,6 @@ function HomePage() {
                           }}
                         />
                       </Grid>
-
                       <Grid
                         item
                         xs={12}
@@ -201,12 +346,7 @@ function HomePage() {
                             </Typography>
                             <Typography
                               variant="h5"
-                              sx={{
-                                fontWeight: 900,
-                                mt: 0.5,
-                                color: '#0b1220',
-                                lineHeight: 1.2,
-                              }}
+                              sx={{ fontWeight: 900, mt: 0.5, color: '#0b1220', lineHeight: 1.2 }}
                             >
                               {s.title}
                             </Typography>
@@ -220,7 +360,7 @@ function HomePage() {
                             >
                               {s.body}
                             </Typography>
-                            {s.body2 ? (
+                            {s.body2 && (
                               <Typography
                                 sx={{
                                   mt: 1,
@@ -231,87 +371,322 @@ function HomePage() {
                               >
                                 {s.body2}
                               </Typography>
-                            ) : null}
+                            )}
                           </Box>
                         </CardContent>
                       </Grid>
                     </Grid>
-                  </Card>
-                </motion.div>
+                  </TiltCard>
+                </ScrollReveal>
               </Grid>
-            )
+            );
           })}
         </Grid>
       </Container>
 
-      <Container sx={{ pb: { xs: 7, md: 12 } }}>
-        <SectionHeading overline="Explore" title="Explore the club" sx={{ mb: 5 }} />
-        <Grid container spacing={{ xs: 2, md: 3 }}>
-          {cards.map((card, index) => (
-            <Grid item xs={12} sm={6} md={4} key={card.title}>
-              <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: index * 0.05 }}>
-                <Card sx={{ height: '100%', overflow: 'hidden' }}>
-                  <CardActionArea component={RouterLink} to={card.link} sx={{ height: '100%' }}>
-                    <CardMedia component="img" image={card.img} alt={card.title} sx={{ height: { xs: 180, md: 220 }, objectFit: 'cover' }} />
-                    <CardContent
-                      sx={{
-                        p: 3,
-                        minHeight: { xs: 132, md: 140 },
-                        display: 'flex',
-                        flexDirection: 'column',
-                      }}
-                    >
-                      <Typography variant="h6" sx={{ fontWeight: 900, mb: 1 }}>
-                        {card.title}
-                      </Typography>
-                      <Typography sx={{ color: 'text.secondary', lineHeight: 1.75, flexGrow: 1 }}>
-                        {card.description}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </motion.div>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-
-      {/* Our Partners */}
-      <Container sx={{ pb: { xs: 7, md: 12 } }}>
-        <SectionHeading overline="Our partners" title="Affiliated with" sx={{ mb: 5 }} />
-        <Typography sx={{ textAlign: 'center', color: 'text.secondary', maxWidth: 900, mx: 'auto', mb: 4, lineHeight: 1.8 }}>
-          UNSW Badminton Club is proud to be affiliated with ARC Sport and UNSW, and connected with the wider badminton community
-          through Badminton Australia and Badminton NSW.
-        </Typography>
-
-        <Grid container spacing={{ xs: 2, md: 3 }} justifyContent="center" alignItems="stretch">
-          {partners.map((p) => (
-            <Grid item xs={12} sm={6} md={3} key={p.name}>
-              <Card
+      {/* ─── About Preview ─── */}
+      <Container sx={{ pb: { xs: 6, md: 10 } }}>
+        <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
+          <Grid item xs={12} md={6}>
+            <ScrollReveal direction="left">
+              <Typography
+                variant="overline"
+                sx={{ color: '#1c3c6f', letterSpacing: '0.14em', fontWeight: 900 }}
+              >
+                About Us
+              </Typography>
+              <Typography
+                variant="h3"
                 sx={{
-                  height: '100%',
-                  bgcolor: 'background.paper',
+                  fontWeight: 900,
+                  mt: 1,
+                  fontSize: { xs: '1.8rem', md: '2.4rem' },
+                  lineHeight: 1.15,
                 }}
               >
-                <CardContent sx={{ p: 3, display: 'grid', placeItems: 'center', gap: 1.5 }}>
-                  <Box
-                    component="img"
-                    src={p.logo}
-                    alt={p.name}
-                    sx={{
-                      height: 56,
-                      width: 'auto',
-                      maxWidth: '100%',
-                      filter: 'drop-shadow(0 10px 24px rgba(2,6,23,0.14))',
-                    }}
-                  />
-                  <Typography sx={{ fontWeight: 900, color: '#1c3c6f' }}>{p.name}</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+                More than a club — a community
+              </Typography>
+              <Typography sx={{ mt: 2, color: 'text.secondary', lineHeight: 1.85, fontSize: '1.05rem' }}>
+                From social games to national competitions, UNSW Badminton Club brings together players of
+                every level in a welcoming, high-energy environment.
+              </Typography>
+              <Box sx={{ mt: 3 }}>
+                <MagneticButton
+                  variant="outlined"
+                  component={RouterLink}
+                  to="/about"
+                  sx={{ fontWeight: 800 }}
+                >
+                  Learn More &rarr;
+                </MagneticButton>
+              </Box>
+            </ScrollReveal>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <ScrollReveal direction="right">
+              <Box sx={{ borderRadius: 4, overflow: 'hidden', height: { xs: 280, md: 380 } }}>
+                <ParallaxImage
+                  src="/unsw-14.JPG"
+                  alt="UNSW Badminton Club community"
+                  style={{ width: '100%', height: '100%' }}
+                />
+              </Box>
+            </ScrollReveal>
+          </Grid>
         </Grid>
       </Container>
+
+      {/* ─── Sessions Preview ─── */}
+      <Container sx={{ pb: { xs: 6, md: 10 } }}>
+        <ScrollReveal>
+          <SectionHeading overline="Sessions" title="Join us on court" sx={{ mb: 5 }} />
+        </ScrollReveal>
+        <StaggerContainer staggerDelay={0.1}>
+          <Grid container spacing={{ xs: 2, md: 3 }}>
+            {[
+              { day: 'Tuesdays', time: '6 – 10pm', note: 'After class games' },
+              { day: 'Saturdays', time: '1 – 4pm', note: 'Afternoon session' },
+              { day: 'Saturdays', time: '4 – 7pm', note: 'Evening session' },
+            ].map((session) => (
+              <Grid item xs={12} md={4} key={`${session.day}-${session.time}`}>
+                <StaggerItem>
+                  <TiltCard>
+                    <CardContent sx={{ p: 3 }}>
+                      <Typography variant="h6" sx={{ fontWeight: 900 }}>
+                        {session.day}
+                      </Typography>
+                      <Typography
+                        sx={{ fontWeight: 800, color: '#1c3c6f', fontSize: '1.1rem', mt: 0.5 }}
+                      >
+                        {session.time}
+                      </Typography>
+                      <Typography sx={{ color: 'text.secondary', mt: 1, lineHeight: 1.7 }}>
+                        {session.note}
+                      </Typography>
+                      <Typography sx={{ mt: 1, fontSize: '0.85rem', color: 'text.secondary' }}>
+                        UNSW Fitness &amp; Aquatic Centre, Level 2
+                      </Typography>
+                    </CardContent>
+                  </TiltCard>
+                </StaggerItem>
+              </Grid>
+            ))}
+          </Grid>
+        </StaggerContainer>
+        <Box sx={{ mt: 3, textAlign: 'center' }}>
+          <MagneticButton
+            variant="contained"
+            component={RouterLink}
+            to="/sessions"
+            sx={{ fontWeight: 800 }}
+          >
+            Full Session Details &rarr;
+          </MagneticButton>
+        </Box>
+      </Container>
+
+      {/* ─── Achievement Showcase ─── */}
+      <Box sx={{ py: { xs: 6, md: 10 }, bgcolor: 'white' }}>
+        <Container>
+          <ScrollReveal>
+            <SectionHeading overline="Achievements" title="National Champions" sx={{ mb: 5 }} />
+          </ScrollReveal>
+          <ScrollReveal>
+            <Card
+              sx={{
+                overflow: 'hidden',
+                borderRadius: 4,
+                position: 'relative',
+                minHeight: { xs: 400, md: 360 },
+              }}
+            >
+              <Box
+                sx={{
+                  position: 'absolute',
+                  inset: 0,
+                  backgroundImage: 'url(/unsw-29.JPG)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
+              <Box
+                sx={{
+                  position: 'absolute',
+                  inset: 0,
+                  background:
+                    'linear-gradient(90deg, rgba(28,60,111,0.96), rgba(28,60,111,0.86) 46%, rgba(2,6,23,0.15) 100%)',
+                }}
+              />
+              <Box
+                sx={{
+                  position: 'relative',
+                  px: { xs: 3, md: 6 },
+                  py: { xs: 4, md: 6 },
+                  color: 'white',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <Box sx={{ maxWidth: 600 }}>
+                  <Typography variant="overline" sx={{ letterSpacing: '0.14em', fontWeight: 900, color: 'rgba(255,255,255,0.82)' }}>
+                    UniSport Nationals
+                  </Typography>
+                  <Typography variant="h4" sx={{ fontWeight: 900, lineHeight: 1.12, mt: 0.5 }}>
+                    Champions in 2024 &amp; 2025
+                  </Typography>
+                  <Typography sx={{ mt: 1.5, color: 'rgba(255,255,255,0.9)', lineHeight: 1.85 }}>
+                    UNSW won the UniSport Nationals badminton title back-to-back. National-level players,
+                    a strong team culture, and a legacy of excellence.
+                  </Typography>
+                  <Grid container spacing={2} sx={{ mt: 2 }}>
+                    <Grid item xs={6}>
+                      <Box sx={{ p: 2, borderRadius: 3, bgcolor: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.10)' }}>
+                        <Typography sx={{ fontWeight: 900, fontSize: '1.5rem', lineHeight: 1.1 }}>
+                          <AnimatedCounter target={2} suffix="×" />
+                        </Typography>
+                        <Typography sx={{ mt: 0.5, color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>
+                          National Titles
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Box sx={{ p: 2, borderRadius: 3, bgcolor: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.10)' }}>
+                        <Typography sx={{ fontWeight: 900, fontSize: '1.5rem', lineHeight: 1.1 }}>
+                          <AnimatedCounter target={150} suffix="+" />
+                        </Typography>
+                        <Typography sx={{ mt: 0.5, color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>
+                          Active Members
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Box>
+            </Card>
+          </ScrollReveal>
+        </Container>
+      </Box>
+
+      {/* ─── Explore Cards ─── */}
+      <Container sx={{ pb: { xs: 7, md: 12 } }}>
+        <ScrollReveal>
+          <SectionHeading overline="Explore" title="Explore the club" sx={{ mb: 5 }} />
+        </ScrollReveal>
+        <StaggerContainer staggerDelay={0.1}>
+          <Grid container spacing={{ xs: 2, md: 3 }}>
+            {cards.map((card) => (
+              <Grid item xs={12} sm={6} md={4} key={card.title}>
+                <StaggerItem>
+                  <TiltCard>
+                    <CardActionArea component={RouterLink} to={card.link} sx={{ height: '100%' }}>
+                      <CardMedia
+                        component="img"
+                        image={card.img}
+                        alt={card.title}
+                        sx={{
+                          height: { xs: 180, md: 220 },
+                          objectFit: 'cover',
+                          transition: 'transform 0.4s ease',
+                          '&:hover': { transform: 'scale(1.04)' },
+                        }}
+                      />
+                      <CardContent
+                        sx={{
+                          p: 3,
+                          minHeight: { xs: 132, md: 140 },
+                          display: 'flex',
+                          flexDirection: 'column',
+                        }}
+                      >
+                        <Typography variant="h6" sx={{ fontWeight: 900, mb: 1 }}>
+                          {card.title}
+                        </Typography>
+                        <Typography sx={{ color: 'text.secondary', lineHeight: 1.75, flexGrow: 1 }}>
+                          {card.description}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </TiltCard>
+                </StaggerItem>
+              </Grid>
+            ))}
+          </Grid>
+        </StaggerContainer>
+      </Container>
+
+      {/* ─── Partners Marquee ─── */}
+      <Box sx={{ py: { xs: 4, md: 6 }, bgcolor: 'white' }}>
+        <Container>
+          <ScrollReveal>
+            <SectionHeading overline="Our partners" title="Affiliated with" sx={{ mb: 3 }} />
+          </ScrollReveal>
+          <LogoMarquee logos={partners} speed={25} />
+        </Container>
+      </Box>
+
+      {/* ─── CTA Banner ─── */}
+      <Box
+        sx={{
+          py: { xs: 8, md: 10 },
+          bgcolor: '#1c3c6f',
+          position: 'relative',
+          overflow: 'hidden',
+          textAlign: 'center',
+        }}
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(135deg, #123456 0%, #1c3c6f 50%, #123456 100%)',
+            backgroundSize: '200% 200%',
+            animation: prefersReducedMotion ? 'none' : `${gradientShift} 12s ease infinite`,
+          }}
+        />
+        <Container sx={{ position: 'relative', zIndex: 1 }}>
+          <ScrollReveal>
+            <Typography
+              variant="h3"
+              sx={{
+                fontWeight: 900,
+                color: 'white',
+                fontSize: { xs: '2rem', md: '3rem' },
+                letterSpacing: '-0.02em',
+                mb: 2,
+              }}
+            >
+              Ready to Play?
+            </Typography>
+            <Typography
+              sx={{
+                color: 'rgba(255,255,255,0.7)',
+                fontSize: { xs: '1rem', md: '1.15rem' },
+                maxWidth: 500,
+                mx: 'auto',
+                mb: 4,
+              }}
+            >
+              Join 150+ members at Sydney&apos;s top university badminton club.
+            </Typography>
+            <MagneticButton
+              variant="contained"
+              component={RouterLink}
+              to="/sessions"
+              sx={{
+                bgcolor: 'white',
+                color: '#1c3c6f',
+                fontWeight: 900,
+                px: 5,
+                py: 1.5,
+                fontSize: '1.05rem',
+                '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' },
+              }}
+            >
+              View Sessions &rarr;
+            </MagneticButton>
+          </ScrollReveal>
+        </Container>
+      </Box>
     </Box>
   );
 }
