@@ -1,6 +1,7 @@
-import React from 'react'
-import { Box, Container, Typography } from '@mui/material'
-import { motion } from 'framer-motion'
+import React from 'react';
+import { Box, Container, Typography } from '@mui/material';
+import { motion, useReducedMotion } from 'framer-motion';
+import LetterAnimation from './LetterAnimation';
 
 export default function PageHero({
   imageSrc,
@@ -11,6 +12,8 @@ export default function PageHero({
   subtitle,
   children,
 }) {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <Box
       component="section"
@@ -29,9 +32,9 @@ export default function PageHero({
         loading="eager"
         decoding="async"
         fetchPriority="high"
-        initial={{ opacity: 0, scale: 1.02 }}
+        initial={prefersReducedMotion ? { opacity: 0.56 } : { opacity: 0, scale: 1.05 }}
         animate={{ opacity: 0.56, scale: 1 }}
-        transition={{ duration: 1.4 }}
+        transition={{ duration: 1.6 }}
         style={{
           width: '100%',
           height: '100%',
@@ -42,7 +45,6 @@ export default function PageHero({
         }}
       />
 
-      {/* Overlay gradient */}
       <Box
         sx={{
           position: 'absolute',
@@ -59,7 +61,7 @@ export default function PageHero({
           minHeight: { xs: '62vh', sm: '68vh', md: '88vh' },
           display: 'flex',
           alignItems: 'center',
-          pt: { xs: 9, sm: 10, md: 12 }, // account for fixed header
+          pt: { xs: 9, sm: 10, md: 12 },
           pb: { xs: 6, sm: 7, md: 10 },
         }}
       >
@@ -67,26 +69,28 @@ export default function PageHero({
           {children || (
             <>
               <Typography
-                component={motion.h1}
-                initial={{ y: 18, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.9 }}
+                component="h1"
                 variant="h2"
                 sx={{
                   color: 'white',
                   fontSize: { xs: '2.15rem', sm: '2.7rem', md: '4rem' },
                   lineHeight: 1.05,
+                  fontWeight: 900,
                 }}
               >
-                {title}{' '}
-                {highlight ? <Box component="span" sx={{ color: '#1c3c6f' }}>{highlight}</Box> : null}
+                <LetterAnimation text={title || ''} delay={0.2} staggerDelay={0.03} />{' '}
+                {highlight ? (
+                  <Box component="span" sx={{ color: '#1c3c6f' }}>
+                    <LetterAnimation text={highlight} delay={0.4} staggerDelay={0.03} />
+                  </Box>
+                ) : null}
               </Typography>
               {subtitle ? (
                 <Typography
                   component={motion.p}
                   initial={{ y: 18, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.9, delay: 0.1 }}
+                  transition={{ duration: 0.9, delay: 0.6 }}
                   sx={{
                     mt: 2,
                     color: 'rgba(255,255,255,0.86)',
@@ -103,7 +107,5 @@ export default function PageHero({
         </Box>
       </Container>
     </Box>
-  )
+  );
 }
-
-
