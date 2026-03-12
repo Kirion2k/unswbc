@@ -43,9 +43,10 @@ Project configuration file at repo root containing:
 
 ### 2. Puppeteer Screenshot Workflow
 - `scripts/take-screenshots.js` — Puppeteer script
+- Expects dev server to be running on `localhost:3000` (documented in CLAUDE.md)
 - Launches headless browser, navigates to each route
 - Captures full-page screenshots at desktop (1440px) and mobile (375px) widths
-- Saves to `screenshots/` directory with timestamped filenames
+- Saves to `screenshots/` directory with timestamped filenames (e.g., `home-desktop-2026-03-12T10-30-00.png`)
 - `npm run screenshots` script in package.json
 - `.gitignore` updated to ignore `screenshots/` directory
 
@@ -104,6 +105,7 @@ Project configuration file at repo root containing:
 **AnimatedCounter** (`src/components/AnimatedCounter.js`):
 - Animates number from 0 to target on viewport entry
 - Configurable duration, prefix, suffix
+- Static values (e.g., "Est. 2018") rendered as plain text, not animated
 
 **TiltCard** (`src/components/TiltCard.js`):
 - 3D perspective tilt on mouse move
@@ -116,6 +118,7 @@ Project configuration file at repo root containing:
 - Wraps MUI Button
 
 **LetterAnimation** (`src/components/LetterAnimation.js`):
+- Replaces usage of `typewriter-effect` package with Framer Motion-based letter animation
 - Splits text into individual letter spans
 - Staggered animation on mount/viewport entry
 - Configurable animation type (fade-up, slide-in, scale)
@@ -123,7 +126,8 @@ Project configuration file at repo root containing:
 **PageTransition** (`src/components/PageTransition.js`):
 - Framer Motion AnimatePresence wrapper for routes
 - Fade + slide transition between pages
-- Applied in App.js around Route outlet
+- Applied in App.js: use `useLocation` as key on `Routes` wrapped in `AnimatePresence`, each route's element wrapped in a `motion.div` for enter/exit animations
+- This approach ensures outgoing routes remain mounted during exit animation
 
 **ParallaxImage** (`src/components/ParallaxImage.js`):
 - Image that moves at different scroll speed
@@ -183,7 +187,7 @@ Project configuration file at repo root containing:
 - Particles limited to ~15 elements
 - Page transitions kept under 300ms
 - `will-change` applied judiciously, removed after animation
-- `prefers-reduced-motion` media query respected — disable animations for users who prefer reduced motion
+- `prefers-reduced-motion` media query respected — elements appear immediately in final state with no animation (not hidden)
 
 ## File Structure (new/modified)
 
@@ -217,6 +221,14 @@ package.json                           (modified — add scripts + puppeteer)
 .gitignore                             (modified — add screenshots/)
 ```
 
+## Framework Notes
+
+- **Bootstrap/React-Bootstrap**: Retained as-is. Some pages use Bootstrap grid. No migration planned — coexists with MUI.
+- **react-slick / carousel packages**: Retained where currently used. New marquee component uses CSS animation instead.
+- **typewriter-effect**: Will be replaced by LetterAnimation component (Framer Motion based).
+- **ViewQueue page** (`/view-queue`): Simple iframe embed — no animation changes needed, left as-is.
+- **TeamPage** (`src/pages/TeamPage.js`, `src/components/TeamPage.js`): Legacy redirect/duplicate files — left as-is, not part of redesign.
+
 ## Out of Scope
 
 - No backend changes
@@ -224,3 +236,4 @@ package.json                           (modified — add scripts + puppeteer)
 - No changes to Instagram integration or Netlify functions
 - No changes to content/copy (beyond minor hero text)
 - No changes to color palette
+- No removal or migration of Bootstrap — coexists with MUI
