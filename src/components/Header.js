@@ -52,6 +52,7 @@ function Header() {
     { label: 'Photo Gallery', to: '/photo-gallery' },
     { label: 'Sessions', to: '/sessions' },
     { label: 'Trainings', to: '/trainings' },
+    { label: 'News', to: '/news' },
     { label: 'FAQs', to: '/faqs' },
     { label: 'View Queue', to: '/view-queue' },
     { label: 'Contact', to: '/contact' },

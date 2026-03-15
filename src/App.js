@@ -16,6 +16,7 @@ import MeetTheTeamPage from './pages/MeetTheTeamPage';
 import ViewQueue from './components/ViewQueue';
 import ContactPage from './pages/ContactPage';
 import TrainingsPage from './pages/TrainingsPage';
+import NewsPage from './pages/NewsPage';
 import TrainingToast from './components/TrainingToast';
 import './App.css';
 
@@ -31,6 +32,7 @@ function AnimatedRoutes() {
         <Route path="/values" element={<PageTransition><ValuesPage /></PageTransition>} />
         <Route path="/sessions" element={<PageTransition><SessionsPage /></PageTransition>} />
         <Route path="/trainings" element={<PageTransition><TrainingsPage /></PageTransition>} />
+        <Route path="/news" element={<PageTransition><NewsPage /></PageTransition>} />
         <Route path="/membership-resources" element={<PageTransition><MembershipResourcesPage /></PageTransition>} />
         <Route path="/photo-gallery" element={<PageTransition><PhotoGalleryPage /></PageTransition>} />
         <Route path="/meet-the-team" element={<PageTransition><MeetTheTeamPage /></PageTransition>} />
