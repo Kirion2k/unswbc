@@ -13,13 +13,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="preload" as="image" href="%PUBLIC_URL%/logo-white.png" fetchpriority="high" />
     <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-64.jpg" fetchpriority="high" />
-    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-14.jpg" fetchpriority="low" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-14.JPG" fetchpriority="low" />
     <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-20.jpg" fetchpriority="low" />
     <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-81.JPG" fetchpriority="low" />
     <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-58.jpg" fetchpriority="low" />
     <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-8.jpg" fetchpriority="low" />
     <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-12.jpg" fetchpriority="low" />
     <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-59.jpg" fetchpriority="low" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-15.JPG" fetchpriority="low" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-21.JPG" fetchpriority="low" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-66.JPG" fetchpriority="low" />
   </head>
   <body>
 
@@ -160,6 +163,29 @@
 
     <script>
       window.__INITIAL_LOADER_START__ = (window.performance && performance.now) ? performance.now() : Date.now();
+
+      // Preload all page hero images while the loader is visible
+      (function() {
+        var imgs = [
+          '/unsw-14.JPG',  // About
+          '/unsw-15.JPG',  // Values
+          '/unsw-21.JPG',  // Membership Resources
+          '/unsw-29.JPG',  // About achievements
+          '/unsw-44.JPG',  // About activities
+          '/unsw-55.JPG',  // About vision
+          '/unsw-66.JPG',  // Trainings
+          '/unsw-8.jpg',   // FAQs
+          '/unsw-81.JPG',  // Sessions (if used)
+          '/unsw-20.jpg',  // Meet the Team or Gallery
+          '/unsw-58.jpg',
+          '/unsw-59.jpg',
+          '/unsw-12.jpg',
+        ];
+        imgs.forEach(function(src) {
+          var img = new Image();
+          img.src = src;
+        });
+      })();
     </script>
 
     <style>

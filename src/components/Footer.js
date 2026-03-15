@@ -4,7 +4,7 @@ import { Facebook, Instagram } from '@mui/icons-material';
 import { Link as RouterLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import logo from './logo full/logo-full-white.png';
-import ScrollReveal, { StaggerContainer, StaggerItem } from './ScrollReveal';
+import { StaggerContainer, StaggerItem } from './ScrollReveal';
 
 function Footer() {
   return (

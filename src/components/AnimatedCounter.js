@@ -21,7 +21,6 @@ export default function AnimatedCounter({
       return;
     }
 
-    let start = 0;
     const startTime = performance.now();
     const durationMs = duration * 1000;
 
