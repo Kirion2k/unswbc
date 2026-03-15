@@ -28,6 +28,7 @@ export default function LogoMarquee({ logos, speed = 30 }) {
           gap: { xs: 4, md: 6 },
           width: 'max-content',
           animation: `${scroll} ${speed}s linear infinite`,
+          animationDelay: `-${speed / 2}s`,
           '&:hover': {
             animationPlayState: 'paused',
           },
