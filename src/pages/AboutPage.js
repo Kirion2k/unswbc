@@ -8,7 +8,7 @@ import TiltCard from '../components/TiltCard';
 import MagneticButton from '../components/MagneticButton';
 
 function AboutPage() {
-  const imageSrc = "/unsw-14.jpg";
+  const imageSrc = "/unsw-14.JPG";
 
   return (
     <Box sx={{ bgcolor: '#f8f9fa' }}>
@@ -72,7 +72,7 @@ function AboutPage() {
               title: 'Our Activities',
               description:
                 'Weekly sessions, training support, socials, and tournaments, built around smooth operations so everyone gets fair court time and a great experience.',
-              image: '/unsw-44.jpg',
+              image: '/unsw-44.JPG',
               points: [
                 'Weekly social sessions with fair rotations',
                 'Training focused on fundamentals and match play',
@@ -357,14 +357,15 @@ function AboutPage() {
                   size="large"
                   fullWidth
                   sx={{
-                    py: 1.6,
+                    py: 2.2,
                     fontWeight: 900,
+                    fontSize: '1.15rem',
                     bgcolor: 'white',
                     color: '#1c3c6f',
                     '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' },
                   }}
                 >
-                  Join us today
+                  Join us today &rarr;
                 </MagneticButton>
               </Box>
             </CardContent>

@@ -10,6 +10,7 @@ export default function LetterAnimation({
   type = 'fade-up',
   inView = false,
   style = {},
+  letterStyle = {},
   ...props
 }) {
   const prefersReducedMotion = useReducedMotion();
@@ -67,7 +68,7 @@ export default function LetterAnimation({
           key={i}
           variants={letterVariants}
           transition={{ duration, ease: [0.25, 0.1, 0.25, 1] }}
-          style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : 'normal' }}
+          style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : 'normal', ...letterStyle }}
         >
           {char}
         </motion.span>

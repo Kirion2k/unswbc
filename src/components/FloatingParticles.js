@@ -45,7 +45,7 @@ export default function FloatingParticles({ count = 12 }) {
       y: 20 + Math.random() * 70,
       duration: 8 + Math.random() * 12,
       delay: Math.random() * 8,
-      opacity: 0.06 + Math.random() * 0.1,
+      opacity: 0.12 + Math.random() * 0.15,
     })),
     [count]
   );

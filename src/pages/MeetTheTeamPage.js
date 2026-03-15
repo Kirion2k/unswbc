@@ -30,7 +30,7 @@ function MeetTheTeamPage() {
   return (
     <Box sx={{ bgcolor: '#f8f9fa' }}>
       <PageHero
-        imageSrc="/unsw-20.jpg"
+        imageSrc="/unsw-20.JPG"
         imageAlt="Meet the Team"
         title="Meet the"
         highlight="Team"
@@ -119,14 +119,17 @@ function MeetTheTeamPage() {
                       to="/contact"
                       variant="contained"
                       fullWidth
+                      size="large"
                       sx={{
                         bgcolor: 'white',
                         color: '#1c3c6f',
                         fontWeight: 900,
+                        py: 2,
+                        fontSize: '1.1rem',
                         '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' },
                       }}
                     >
-                      Go to contact
+                      Go to contact &rarr;
                     </MagneticButton>
                   </Grid>
                 </Grid>

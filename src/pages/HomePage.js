@@ -18,6 +18,7 @@ import AnimatedCounter from '../components/AnimatedCounter';
 import TiltCard from '../components/TiltCard';
 import MagneticButton from '../components/MagneticButton';
 import LetterAnimation from '../components/LetterAnimation';
+import MorphingText from '../components/MorphingText';
 import FloatingParticles from '../components/FloatingParticles';
 import LogoMarquee from '../components/LogoMarquee';
 import ParallaxImage from '../components/ParallaxImage';
@@ -32,9 +33,15 @@ const gradientShift = keyframes`
   100% { background-position: 0% 50%; }
 `;
 
+const glowPulse = keyframes`
+  0%, 100% { opacity: 0.4; transform: scaleX(1); }
+  50% { opacity: 0.8; transform: scaleX(1.1); }
+`;
+
+
 function HomePage() {
   const prefersReducedMotion = useReducedMotion();
-  const heroImage = '/unsw-64.jpg';
+  const heroImage = '/unsw-64.JPG';
 
   const featureSections = [
     {
@@ -55,7 +62,7 @@ function HomePage() {
       title: 'Community & events',
       body: 'Tournaments, socials, and club culture that makes you want to come back every week.',
       body2: 'From club events to team competitions, there is always something to look forward to, and plenty of chances to meet new people.',
-      image: '/unsw-41.jpg',
+      image: '/unsw-41.JPG',
       tone: 'navy',
     },
   ];
@@ -63,7 +70,7 @@ function HomePage() {
   const cards = [
     { img: '/unsw-13.jpg', title: 'Session info', description: 'Times, location, pricing, and how sessions run.', link: '/sessions' },
     { img: '/unsw-9.jpg', title: 'FAQs', description: 'Quick answers before your first session.', link: '/faqs' },
-    { img: '/unsw-49.jpg', title: 'Get in touch', description: 'Questions? Message us or follow our socials.', link: '/contact' },
+    { img: '/unsw-49.JPG', title: 'Get in touch', description: 'Questions? Message us or follow our socials.', link: '/contact' },
   ];
 
   const stats = [
@@ -101,8 +108,8 @@ function HomePage() {
           alt="UNSW Badminton Club"
           loading="eager"
           fetchPriority="high"
-          initial={prefersReducedMotion ? { opacity: 0.35 } : { opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 0.35, scale: 1 }}
+          initial={prefersReducedMotion ? { opacity: 0.55 } : { opacity: 0, scale: 1.08 }}
+          animate={{ opacity: 0.55, scale: 1 }}
           transition={{ duration: 2 }}
           sx={{
             position: 'absolute',
@@ -125,7 +132,26 @@ function HomePage() {
           }}
         />
 
-        <FloatingParticles count={12} />
+        <FloatingParticles count={18} />
+
+        {/* Radial glow behind hero text */}
+        <Box
+          component={motion.div}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 2, delay: 0.5 }}
+          sx={{
+            position: 'absolute',
+            top: '40%',
+            left: '20%',
+            width: 600,
+            height: 600,
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(28,60,111,0.35) 0%, transparent 70%)',
+            filter: 'blur(60px)',
+            pointerEvents: 'none',
+          }}
+        />
 
         <Container sx={{ position: 'relative', zIndex: 1, py: { xs: 14, md: 0 } }}>
           <Box sx={{ maxWidth: 800 }}>
@@ -158,19 +184,14 @@ function HomePage() {
                 color: 'white',
               }}
             >
-              <LetterAnimation text="WHERE" delay={0.3} staggerDelay={0.04} />
+              <LetterAnimation text="YOUR GAME" delay={0.3} staggerDelay={0.04} />
               <br />
-              <LetterAnimation text="CHAMPIONS" delay={0.5} staggerDelay={0.03} />
+              <LetterAnimation text="ELEVATES" delay={0.5} staggerDelay={0.03} />
               <br />
-              <Box
-                component="span"
-                sx={{
-                  WebkitTextStroke: '2px rgba(255,255,255,0.7)',
-                  color: 'transparent',
-                }}
-              >
-                <LetterAnimation text="ARE MADE" delay={0.8} staggerDelay={0.04} />
-              </Box>
+              <MorphingText
+                texts={['HERE', 'NOW', 'TODAY', 'TOGETHER']}
+                sx={{ color: '#5ba3f5' }}
+              />
             </Typography>
 
             <Typography
@@ -201,13 +222,13 @@ function HomePage() {
                 component={RouterLink}
                 to="/sessions"
                 sx={{
-                  bgcolor: '#1c3c6f',
-                  color: 'white',
+                  bgcolor: 'white',
+                  color: '#0a1628',
                   fontWeight: 800,
                   px: 4,
                   py: 1.5,
                   fontSize: '1rem',
-                  '&:hover': { bgcolor: '#123456' },
+                  '&:hover': { bgcolor: 'rgba(255,255,255,0.9)' },
                 }}
               >
                 Join the Club &rarr;
@@ -217,20 +238,34 @@ function HomePage() {
                 component={RouterLink}
                 to="/sessions"
                 sx={{
-                  borderColor: 'rgba(255,255,255,0.25)',
+                  borderColor: 'white',
+                  borderWidth: 2,
                   color: 'white',
                   fontWeight: 700,
                   px: 4,
                   py: 1.5,
                   fontSize: '1rem',
-                  '&:hover': { borderColor: 'rgba(255,255,255,0.5)', bgcolor: 'rgba(255,255,255,0.05)' },
+                  '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.12)' },
                 }}
               >
                 View Sessions
               </MagneticButton>
             </Box>
+
+            {/* Glowing accent line */}
+            <Box
+              sx={{
+                mt: 5,
+                height: 3,
+                width: 120,
+                borderRadius: 2,
+                background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)',
+                animation: prefersReducedMotion ? 'none' : `${glowPulse} 3s ease-in-out infinite`,
+              }}
+            />
           </Box>
         </Container>
+
       </Box>
 
       {/* ─── Stats Counter Bar ─── */}

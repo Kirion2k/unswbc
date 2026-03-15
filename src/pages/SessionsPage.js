@@ -24,7 +24,7 @@ import TiltCard from '../components/TiltCard'
 import MagneticButton from '../components/MagneticButton'
 
 function SessionsPage() {
-  const imageSrc = "/unsw-58.jpg"
+  const imageSrc = "/unsw-58.JPG"
 
   const venueAddress = 'Fitness and Aquatic Centre (B5), Gate 2, High St, UNSW Sydney, Kensington NSW 2033, Australia'
   const mapQuery = encodeURIComponent(`UNSW ${venueAddress}`)
@@ -340,7 +340,8 @@ function SessionsPage() {
                     <CardContent
                       sx={{
                         p: { xs: 3, md: 4 },
-                        minHeight: { md: 240 },
+                        minHeight: { md: 260 },
+                        height: '100%',
                         display: 'flex',
                         flexDirection: 'column',
                       }}
@@ -486,7 +487,7 @@ function SessionsPage() {
                       height: '100%',
                     }}
                   >
-                    <Stack direction="row" spacing={1.5} alignItems="center" justifyContent="space-between" sx={{ mb: 1.25 }}>
+                    <Stack direction="row" spacing={1.5} alignItems="center" justifyContent="space-between" sx={{ mb: 2 }}>
                       <Typography variant="h6" sx={{ fontWeight: 900, lineHeight: 1.2 }}>
                         {s.title}
                       </Typography>
@@ -506,55 +507,57 @@ function SessionsPage() {
 
                     <Typography
                       sx={{
-                        color: 'text.secondary',
+                        color: '#1c3c6f',
                         fontWeight: 800,
+                        fontSize: '1.05rem',
                         letterSpacing: '0.01em',
                         lineHeight: 1.3,
-                        mb: 2,
+                        mb: 2.5,
                       }}
                     >
                       {s.time}
                     </Typography>
 
-                    <Stack direction="row" spacing={1.5} sx={{ width: '100%' }}>
-                      <Box
-                        sx={{
-                          flex: 1,
-                          p: 2,
-                          borderRadius: 999,
-                          bgcolor: '#1c3c6f',
-                          color: 'white',
-                          textAlign: 'center',
-                        }}
-                      >
-                        <Typography variant="body2" sx={{ fontWeight: 900, opacity: 0.95 }}>
-                          Members
-                        </Typography>
-                        <Typography sx={{ mt: 0.5, fontWeight: 900, fontSize: '1.5rem', lineHeight: 1.1 }}>
-                          {s.memberPrice}
-                        </Typography>
-                      </Box>
+                    <Grid container spacing={1.5}>
+                      <Grid item xs={6}>
+                        <Box
+                          sx={{
+                            p: 2,
+                            borderRadius: 3,
+                            bgcolor: '#1c3c6f',
+                            color: 'white',
+                            textAlign: 'center',
+                          }}
+                        >
+                          <Typography variant="body2" sx={{ fontWeight: 800, opacity: 0.9, mb: 0.5 }}>
+                            Members
+                          </Typography>
+                          <Typography sx={{ fontWeight: 900, fontSize: '1.5rem', lineHeight: 1.1 }}>
+                            {s.memberPrice}
+                          </Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Box
+                          sx={{
+                            p: 2,
+                            borderRadius: 3,
+                            bgcolor: 'rgba(28,60,111,0.06)',
+                            border: '1px solid rgba(28,60,111,0.14)',
+                            textAlign: 'center',
+                          }}
+                        >
+                          <Typography variant="body2" sx={{ fontWeight: 800, color: '#1c3c6f', mb: 0.5 }}>
+                            Visitors
+                          </Typography>
+                          <Typography sx={{ fontWeight: 900, fontSize: '1.5rem', color: '#0b1220', lineHeight: 1.1 }}>
+                            {s.visitorPrice}
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    </Grid>
 
-                      <Box
-                        sx={{
-                          flex: 1,
-                          p: 2,
-                          borderRadius: 999,
-                          bgcolor: 'rgba(28,60,111,0.06)',
-                          border: '1px solid rgba(28,60,111,0.14)',
-                          textAlign: 'center',
-                        }}
-                      >
-                        <Typography variant="body2" sx={{ fontWeight: 900, color: '#1c3c6f' }}>
-                          Visitors
-                        </Typography>
-                        <Typography sx={{ mt: 0.5, fontWeight: 900, fontSize: '1.5rem', color: '#0b1220', lineHeight: 1.1 }}>
-                          {s.visitorPrice}
-                        </Typography>
-                      </Box>
-                    </Stack>
-
-                    <Typography sx={{ mt: 2, color: 'text.secondary', lineHeight: 1.75, flexGrow: 1 }}>
+                    <Typography sx={{ mt: 2.5, color: 'text.secondary', lineHeight: 1.75, flexGrow: 1 }}>
                       {s.note}
                     </Typography>
                   </CardContent>
@@ -573,138 +576,71 @@ function SessionsPage() {
         </Typography>
 
         <Card sx={{ overflow: 'hidden' }}>
-          <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
-            <Grid container spacing={{ xs: 2, md: 2 }}>
-              <Grid item xs={12} sx={{ display: { xs: 'none', md: 'block' } }}>
-                <Grid container spacing={1} sx={{ px: { xs: 0, md: 1 } }}>
-                  <Grid item xs={12} md={3}>
-                    <Typography sx={{ fontWeight: 900, color: '#1c3c6f' }}>
-                      Term
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12} md={3}>
-                    <Typography sx={{ fontWeight: 900, color: '#1c3c6f' }}>
-                      Students
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12} md={3}>
-                    <Typography sx={{ fontWeight: 900, color: '#1c3c6f' }}>
-                      Staff and alumni
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12} md={3}>
-                    <Typography sx={{ fontWeight: 900, color: '#1c3c6f' }}>
-                      General public
-                    </Typography>
-                  </Grid>
-                </Grid>
+          <CardContent sx={{ p: { xs: 2.5, md: 4 } }}>
+            {/* Desktop header */}
+            <Grid container spacing={2} sx={{ display: { xs: 'none', md: 'flex' }, mb: 2 }}>
+              <Grid item md={3}>
+                <Typography sx={{ fontWeight: 900, color: '#1c3c6f', pl: 1 }}>Term</Typography>
               </Grid>
+              <Grid item md={3}>
+                <Typography sx={{ fontWeight: 900, color: '#1c3c6f', textAlign: 'center' }}>Students</Typography>
+              </Grid>
+              <Grid item md={3}>
+                <Typography sx={{ fontWeight: 900, color: '#1c3c6f', textAlign: 'center' }}>Staff &amp; alumni</Typography>
+              </Grid>
+              <Grid item md={3}>
+                <Typography sx={{ fontWeight: 900, color: '#1c3c6f', textAlign: 'center' }}>General public</Typography>
+              </Grid>
+            </Grid>
 
-              {membershipTerms.map((t, index) => (
-                <Grid item xs={12} key={t.term}>
-                  {index !== 0 ? <Divider sx={{ my: 2 }} /> : null}
+            <Stack spacing={2}>
+              {membershipTerms.map((t) => (
+                <Box key={t.term}>
+                  {/* Mobile layout */}
                   <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-                    <Typography sx={{ fontWeight: 900 }}>
-                      {t.term}
-                    </Typography>
-                    <Typography sx={{ color: 'text.secondary', mt: 0.25 }}>
-                      {t.from}
-                    </Typography>
-
-                    <Stack spacing={1.25} sx={{ mt: 2 }}>
-                      <Box
-                        sx={{
-                          p: 1.75,
-                          borderRadius: 3,
-                          bgcolor: 'rgba(28,60,111,0.06)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          gap: 2,
-                        }}
-                      >
-                        <Typography variant="body2" sx={{ fontWeight: 900, color: '#1c3c6f' }}>
-                          Students
-                        </Typography>
-                        <Typography sx={{ fontWeight: 900, color: '#0b1220' }}>
-                          {t.student}
-                        </Typography>
-                      </Box>
-
-                      <Box
-                        sx={{
-                          p: 1.75,
-                          borderRadius: 3,
-                          bgcolor: 'rgba(28,60,111,0.06)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          gap: 2,
-                        }}
-                      >
-                        <Typography variant="body2" sx={{ fontWeight: 900, color: '#1c3c6f' }}>
-                          Staff and alumni
-                        </Typography>
-                        <Typography sx={{ fontWeight: 900, color: '#0b1220' }}>
-                          {t.staff}
-                        </Typography>
-                      </Box>
-
-                      <Box
-                        sx={{
-                          p: 1.75,
-                          borderRadius: 3,
-                          bgcolor: 'rgba(28,60,111,0.06)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          gap: 2,
-                        }}
-                      >
-                        <Typography variant="body2" sx={{ fontWeight: 900, color: '#1c3c6f' }}>
-                          General public
-                        </Typography>
-                        <Typography sx={{ fontWeight: 900, color: '#0b1220' }}>
-                          {t.public}
-                        </Typography>
-                      </Box>
-                    </Stack>
+                    <Typography sx={{ fontWeight: 900, mb: 0.5 }}>{t.term}</Typography>
+                    <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>{t.from}</Typography>
+                    <Grid container spacing={1.5}>
+                      {[
+                        { label: 'Students', price: t.student },
+                        { label: 'Staff & alumni', price: t.staff },
+                        { label: 'General public', price: t.public },
+                      ].map((item) => (
+                        <Grid item xs={4} key={item.label}>
+                          <Box sx={{ p: 1.5, borderRadius: 3, bgcolor: 'rgba(28,60,111,0.06)', textAlign: 'center' }}>
+                            <Typography variant="caption" sx={{ fontWeight: 800, color: '#1c3c6f', display: 'block', mb: 0.5 }}>
+                              {item.label}
+                            </Typography>
+                            <Typography sx={{ fontWeight: 900, fontSize: '1.15rem', color: '#0b1220' }}>
+                              {item.price}
+                            </Typography>
+                          </Box>
+                        </Grid>
+                      ))}
+                    </Grid>
                   </Box>
 
-                  <Grid container spacing={1} alignItems="center" sx={{ px: { xs: 0, md: 1 }, display: { xs: 'none', md: 'flex' } }}>
-                    <Grid item xs={12} md={3}>
-                      <Typography sx={{ fontWeight: 900 }}>
-                        {t.term}
-                      </Typography>
-                      <Typography sx={{ color: 'text.secondary', mt: 0.25 }}>
-                        {t.from}
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} md={3}>
-                      <Box sx={{ p: 2, borderRadius: 3, bgcolor: 'rgba(28,60,111,0.06)' }}>
-                        <Typography sx={{ fontWeight: 900, color: '#0b1220' }}>
-                          {t.student}
-                        </Typography>
+                  {/* Desktop layout */}
+                  <Grid container spacing={2} alignItems="center" sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    <Grid item md={3}>
+                      <Box sx={{ pl: 1 }}>
+                        <Typography sx={{ fontWeight: 900 }}>{t.term}</Typography>
+                        <Typography variant="body2" sx={{ color: 'text.secondary', mt: 0.25 }}>{t.from}</Typography>
                       </Box>
                     </Grid>
-                    <Grid item xs={12} md={3}>
-                      <Box sx={{ p: 2, borderRadius: 3, bgcolor: 'rgba(28,60,111,0.06)' }}>
-                        <Typography sx={{ fontWeight: 900, color: '#0b1220' }}>
-                          {t.staff}
-                        </Typography>
-                      </Box>
-                    </Grid>
-                    <Grid item xs={12} md={3}>
-                      <Box sx={{ p: 2, borderRadius: 3, bgcolor: 'rgba(28,60,111,0.06)' }}>
-                        <Typography sx={{ fontWeight: 900, color: '#0b1220' }}>
-                          {t.public}
-                        </Typography>
-                      </Box>
-                    </Grid>
+                    {[t.student, t.staff, t.public].map((price, i) => (
+                      <Grid item md={3} key={i}>
+                        <Box sx={{ p: 2, borderRadius: 3, bgcolor: 'rgba(28,60,111,0.06)', textAlign: 'center' }}>
+                          <Typography sx={{ fontWeight: 900, fontSize: '1.15rem', color: '#0b1220' }}>
+                            {price}
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    ))}
                   </Grid>
-                </Grid>
+                </Box>
               ))}
-            </Grid>
+            </Stack>
           </CardContent>
         </Card>
 
@@ -726,15 +662,17 @@ function SessionsPage() {
                     to="/view-queue"
                     variant="contained"
                     fullWidth
+                    size="large"
                     sx={{
-                      py: 1.4,
+                      py: 2,
+                      fontSize: '1.1rem',
                       fontWeight: 900,
                       bgcolor: 'white',
                       color: '#1c3c6f',
                       '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' },
                     }}
                   >
-                    View queue
+                    View queue &rarr;
                   </MagneticButton>
                 </Grid>
               </Grid>
