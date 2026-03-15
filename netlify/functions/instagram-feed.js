@@ -11,7 +11,7 @@
  * { posts: [{ id, title, caption, date, image, url }] }
  */
 
-const DEFAULT_LIMIT = 12;
+const DEFAULT_LIMIT = 24;
 
 export async function handler() {
   const token = process.env.INSTAGRAM_ACCESS_TOKEN;
@@ -71,6 +71,8 @@ export async function handler() {
           caption,
           date,
           image,
+          videoUrl: p.media_type === 'VIDEO' ? p.media_url : null,
+          mediaType: p.media_type || 'IMAGE',
           url: p.permalink,
         };
       });
