@@ -9,10 +9,14 @@
  *
  * Returns:
  * { profile: { username, profilePic, mediaCount }, posts: [...] }
+ *
+ * Each post:
+ * { id, title, caption, date, image, videoUrl, mediaType, url, slides? }
+ * slides is present for CAROUSEL_ALBUM posts: [{ image, mediaType, videoUrl }]
  */
 
-const PAGE_SIZE   = 50;   // items per API page
-const MAX_POSTS   = Number(process.env.INSTAGRAM_MAX_POSTS || 200);
+const PAGE_SIZE = 50;
+const MAX_POSTS = Number(process.env.INSTAGRAM_MAX_POSTS || 200);
 
 const HEADERS_OK = {
   'content-type': 'application/json; charset=utf-8',
@@ -24,6 +28,15 @@ const HEADERS_ERR = {
   'cache-control': 'no-store',
 };
 
+function mapSlide(c) {
+  if (!c.media_url && !c.thumbnail_url) return null;
+  return {
+    image:     c.media_type === 'VIDEO' ? c.thumbnail_url : c.media_url,
+    videoUrl:  c.media_type === 'VIDEO' ? c.media_url : null,
+    mediaType: c.media_type || 'IMAGE',
+  };
+}
+
 function mapPost(p) {
   const image = p.media_type === 'VIDEO' ? p.thumbnail_url : p.media_url;
   if (!image) return null;
@@ -32,6 +45,14 @@ function mapPost(p) {
   const date    = p.timestamp
     ? new Date(p.timestamp).toLocaleDateString('en-AU', { year: 'numeric', month: 'short', day: 'numeric' })
     : '';
+
+  // Build slides array for carousel albums
+  let slides = null;
+  if (p.media_type === 'CAROUSEL_ALBUM' && p.children?.data?.length) {
+    const mapped = p.children.data.map(mapSlide).filter(Boolean);
+    if (mapped.length > 1) slides = mapped;
+  }
+
   return {
     id:        p.id,
     title,
@@ -41,6 +62,7 @@ function mapPost(p) {
     videoUrl:  p.media_type === 'VIDEO' ? p.media_url : null,
     mediaType: p.media_type || 'IMAGE',
     url:       p.permalink,
+    slides,
   };
 }
 
@@ -56,7 +78,7 @@ export async function handler() {
   }
 
   try {
-    // ── Profile info ────────────────────────────────────────────────────────
+    // ── Profile info ─────────────────────────────────────────────────────────
     const profileRes  = await fetch(
       `https://graph.instagram.com/me?fields=username,profile_picture_url,media_count&access_token=${encodeURIComponent(token)}`
     );
@@ -68,9 +90,11 @@ export async function handler() {
       mediaCount: profileJson.media_count || null,
     };
 
-    // ── Paginated media fetch ────────────────────────────────────────────────
-    const fields = ['id', 'caption', 'media_url', 'permalink', 'timestamp', 'media_type', 'thumbnail_url'].join(',');
-    let   nextUrl = `https://graph.instagram.com/me/media?fields=${encodeURIComponent(fields)}&limit=${PAGE_SIZE}&access_token=${encodeURIComponent(token)}`;
+    // ── Paginated media fetch ─────────────────────────────────────────────────
+    // Note: children sub-fields must NOT be encoded with encodeURIComponent
+    // so we build the fields string and encode only the token/limit values.
+    const fields = 'id,caption,media_url,permalink,timestamp,media_type,thumbnail_url,children{id,media_url,media_type,thumbnail_url}';
+    let nextUrl = `https://graph.instagram.com/me/media?fields=${fields}&limit=${PAGE_SIZE}&access_token=${encodeURIComponent(token)}`;
     const allPosts = [];
 
     while (nextUrl && allPosts.length < MAX_POSTS) {

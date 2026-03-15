@@ -7,6 +7,8 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MagneticButton from './MagneticButton';
 import logo from './logo full/logo-full-white.png';
 
@@ -16,7 +18,8 @@ const FEED_URL =
 
 /* ─── Grid cell ─────────────────────────────────────────────────────────── */
 function GridCell({ post, onClick }) {
-  const isVideo = post.mediaType === 'VIDEO';
+  const isVideo    = post.mediaType === 'VIDEO';
+  const isCarousel = post.mediaType === 'CAROUSEL_ALBUM' || post.slides?.length > 1;
   return (
     <motion.div
       style={{ position: 'relative', cursor: 'pointer', aspectRatio: '1', overflow: 'hidden' }}
@@ -28,11 +31,16 @@ function GridCell({ post, onClick }) {
         loading="lazy"
         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
       />
-      {isVideo && (
-        <Box sx={{ position: 'absolute', top: 6, right: 6 }}>
-          <PlayArrowIcon sx={{ color: 'white', fontSize: 16, filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.7))' }} />
-        </Box>
-      )}
+      <Box sx={{ position: 'absolute', top: 6, right: 6 }}>
+        {isVideo && <PlayArrowIcon sx={{ color: 'white', fontSize: 16, filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.7))' }} />}
+        {isCarousel && !isVideo && (
+          <Box sx={{ display: 'flex', gap: '2px' }}>
+            {[0, 1].map((i) => (
+              <Box key={i} sx={{ width: 6, height: 6, borderRadius: '2px', bgcolor: 'white', border: '1.5px solid rgba(0,0,0,0.25)', filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.5))' }} />
+            ))}
+          </Box>
+        )}
+      </Box>
       <motion.div
         initial={{ opacity: 0 }}
         whileHover={{ opacity: 1 }}
@@ -73,15 +81,37 @@ function SkeletonCells({ count }) {
 function PostModal({ post, onClose }) {
   const videoRef = useRef(null);
   const [muted, setMuted] = useState(true);
-  const isVideo = post?.mediaType === 'VIDEO';
+  const [slideIdx, setSlideIdx] = useState(0);
+
+  const slides = post?.slides?.length > 1
+    ? post.slides
+    : [{ image: post?.image, mediaType: post?.mediaType, videoUrl: post?.videoUrl }];
+  const total   = slides.length;
+  const slide   = slides[slideIdx] || slides[0];
+  const isVideo = slide?.mediaType === 'VIDEO';
+
+  useEffect(() => { setSlideIdx(0); }, [post]);
 
   useEffect(() => {
     if (isVideo && videoRef.current) {
       videoRef.current.play().catch(() => {});
     }
-  }, [isVideo, post]);
+  }, [isVideo, slideIdx]);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft')  setSlideIdx((i) => Math.max(0, i - 1));
+      if (e.key === 'ArrowRight') setSlideIdx((i) => Math.min(total - 1, i + 1));
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose, total]);
 
   if (!post) return null;
+
+  const goPrev = (e) => { e.stopPropagation(); setSlideIdx((i) => Math.max(0, i - 1)); };
+  const goNext = (e) => { e.stopPropagation(); setSlideIdx((i) => Math.min(total - 1, i + 1)); };
 
   return (
     <motion.div
@@ -111,26 +141,57 @@ function PostModal({ post, onClose }) {
       >
         {/* Media */}
         <Box sx={{ flex: '0 0 auto', width: { xs: '100%', md: '56%' }, bgcolor: 'black', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', maxHeight: '90vh' }}>
-          {isVideo && post.videoUrl ? (
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={slideIdx}
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -30 }}
+              transition={{ duration: 0.2 }}
+              style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              {isVideo && slide.videoUrl ? (
+                <video
+                  ref={videoRef}
+                  src={slide.videoUrl}
+                  muted={muted}
+                  loop
+                  playsInline
+                  style={{ width: '100%', maxHeight: '90vh', objectFit: 'contain', display: 'block' }}
+                />
+              ) : (
+                <img src={slide.image} alt="" style={{ width: '100%', maxHeight: '90vh', objectFit: 'contain', display: 'block' }} />
+              )}
+            </motion.div>
+          </AnimatePresence>
+
+          {total > 1 && (
             <>
-              <video
-                ref={videoRef}
-                src={post.videoUrl}
-                muted={muted}
-                loop
-                playsInline
-                style={{ width: '100%', maxHeight: '90vh', objectFit: 'contain', display: 'block' }}
-              />
-              <IconButton
-                onClick={() => setMuted((m) => !m)}
-                sx={{ position: 'absolute', bottom: 12, right: 12, bgcolor: 'rgba(0,0,0,0.55)', color: 'white', '&:hover': { bgcolor: 'rgba(0,0,0,0.75)' } }}
-                size="small"
-              >
-                {muted ? <VolumeOffIcon fontSize="small" /> : <VolumeUpIcon fontSize="small" />}
+              <IconButton onClick={goPrev} disabled={slideIdx === 0} size="small"
+                sx={{ position: 'absolute', left: 8, top: '50%', transform: 'translateY(-50%)', bgcolor: 'rgba(0,0,0,0.55)', color: 'white', '&:hover': { bgcolor: 'rgba(0,0,0,0.75)' }, '&.Mui-disabled': { opacity: 0.3 } }}>
+                <ChevronLeftIcon />
               </IconButton>
+              <IconButton onClick={goNext} disabled={slideIdx === total - 1} size="small"
+                sx={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', bgcolor: 'rgba(0,0,0,0.55)', color: 'white', '&:hover': { bgcolor: 'rgba(0,0,0,0.75)' }, '&.Mui-disabled': { opacity: 0.3 } }}>
+                <ChevronRightIcon />
+              </IconButton>
+              <Box sx={{ position: 'absolute', bottom: 10, left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: '5px' }}>
+                {slides.map((_, i) => (
+                  <Box key={i} onClick={(e) => { e.stopPropagation(); setSlideIdx(i); }}
+                    sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: i === slideIdx ? 'white' : 'rgba(255,255,255,0.45)', cursor: 'pointer', transition: 'background 0.2s' }} />
+                ))}
+              </Box>
             </>
-          ) : (
-            <img src={post.image} alt="" style={{ width: '100%', maxHeight: '90vh', objectFit: 'contain', display: 'block' }} />
+          )}
+
+          {isVideo && slide.videoUrl && (
+            <IconButton
+              onClick={(e) => { e.stopPropagation(); setMuted((m) => !m); }}
+              sx={{ position: 'absolute', bottom: total > 1 ? 34 : 12, right: 12, bgcolor: 'rgba(0,0,0,0.55)', color: 'white', '&:hover': { bgcolor: 'rgba(0,0,0,0.75)' } }}
+              size="small"
+            >
+              {muted ? <VolumeOffIcon fontSize="small" /> : <VolumeUpIcon fontSize="small" />}
+            </IconButton>
           )}
         </Box>
 
@@ -141,6 +202,11 @@ function PostModal({ post, onClose }) {
               <img src={logo} alt="UNSWBC" style={{ height: 18, objectFit: 'contain' }} />
             </Box>
             <Typography sx={{ fontWeight: 800, fontSize: '0.9rem' }}>unswbadminton</Typography>
+            {total > 1 && (
+              <Typography sx={{ ml: 'auto', fontSize: '0.8rem', color: 'text.secondary' }}>
+                {slideIdx + 1} / {total}
+              </Typography>
+            )}
           </Box>
           <Box sx={{ flex: 1, overflowY: 'auto', p: 2.5 }}>
             {post.caption ? (
