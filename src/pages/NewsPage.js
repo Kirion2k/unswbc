@@ -242,6 +242,7 @@ function PostModal({ post, onClose }) {
 /* ─── Main page ─────────────────────────────────────────────────────────── */
 function NewsPage() {
   const [posts, setPosts] = useState([]);
+  const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [tab, setTab] = useState('posts');
@@ -251,7 +252,12 @@ function NewsPage() {
     fetch(FEED_URL)
       .then((r) => r.json())
       .then((data) => {
-        setPosts(Array.isArray(data) ? data : (data?.posts || []));
+        if (Array.isArray(data)) {
+          setPosts(data);
+        } else {
+          setPosts(data?.posts || []);
+          if (data?.profile) setProfile(data.profile);
+        }
         setLoading(false);
       })
       .catch((e) => { setError(e.message); setLoading(false); });
@@ -301,9 +307,14 @@ function NewsPage() {
                   placeItems: 'center',
                   border: '3px solid rgba(28,60,111,0.2)',
                   flex: '0 0 auto',
+                  overflow: 'hidden',
                 }}
               >
-                <img src={logo} alt="UNSWBC" style={{ height: 32, objectFit: 'contain' }} />
+                {profile?.profilePic ? (
+                  <img src={profile.profilePic} alt="UNSWBC" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  <img src={logo} alt="UNSWBC" style={{ height: 32, objectFit: 'contain' }} />
+                )}
               </Box>
               <Box>
                 <Typography sx={{ fontWeight: 900, fontSize: { xs: '1rem', md: '1.15rem' }, color: '#0f172a' }}>

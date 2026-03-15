@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { motion, useReducedMotion } from 'framer-motion';
 import { keyframes } from '@mui/system';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import SectionHeading from '../components/SectionHeading';
 import ScrollReveal, { StaggerContainer, StaggerItem } from '../components/ScrollReveal';
 import AnimatedCounter from '../components/AnimatedCounter';
@@ -22,6 +23,7 @@ import MorphingText from '../components/MorphingText';
 import FloatingParticles from '../components/FloatingParticles';
 import LogoMarquee from '../components/LogoMarquee';
 import ParallaxImage from '../components/ParallaxImage';
+import MiniInstagramGrid from '../components/MiniInstagramGrid';
 import unswLogo from '../unsw-logo.png';
 import arcLogo from '../arc-logo.jpg';
 import badmintonAuLogo from '../badminton-au.png';
@@ -652,52 +654,26 @@ function HomePage() {
         </StaggerContainer>
       </Container>
 
-      {/* ─── Instagram / Updates ─── */}
+      {/* ─── News / Instagram Mini Grid ─── */}
       <Container sx={{ pb: { xs: 8, md: 12 } }}>
         <ScrollReveal>
-          <TiltCard sx={{ bgcolor: '#1c3c6f', color: 'white', overflow: 'hidden' }}>
-            <CardContent sx={{ p: { xs: 3.5, md: 5 } }}>
-              <Grid container spacing={{ xs: 3, md: 4 }} alignItems="center">
-                <Grid item xs={12} md={8}>
-                  <Typography
-                    variant="overline"
-                    sx={{ color: 'rgba(255,255,255,0.6)', letterSpacing: '0.16em', fontWeight: 900 }}
-                  >
-                    Stay in the loop
-                  </Typography>
-                  <Typography variant="h4" sx={{ fontWeight: 900, mt: 0.5, mb: 1.5, lineHeight: 1.15, fontSize: { xs: '1.7rem', md: '2.1rem' } }}>
-                    Follow us on Instagram
-                  </Typography>
-                  <Typography sx={{ color: 'rgba(255,255,255,0.82)', lineHeight: 1.8, maxWidth: 560 }}>
-                    Results, session updates, club shirts, events, and everything in between.
-                    All our latest posts are on the Club Updates page.
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} md={4} sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, alignItems: { xs: 'flex-start', md: 'flex-end' } }}>
-                  <MagneticButton
-                    component="a"
-                    href="https://www.instagram.com/unswbadminton/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="contained"
-                    size="large"
-                    sx={{ bgcolor: 'white', color: '#1c3c6f', fontWeight: 900, px: 3.5, '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' } }}
-                  >
-                    @unswbadminton →
-                  </MagneticButton>
-                  <MagneticButton
-                    component={RouterLink}
-                    to="/news"
-                    variant="outlined"
-                    sx={{ borderColor: 'rgba(255,255,255,0.45)', borderWidth: 2, color: 'white', fontWeight: 700, px: 3.5, '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.1)' } }}
-                  >
-                    Club Updates →
-                  </MagneticButton>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </TiltCard>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1, mb: 3 }}>
+            <SectionHeading overline="News" title="Latest from Instagram" sx={{ mb: 0 }} />
+            <MagneticButton
+              component="a"
+              href="https://www.instagram.com/unswbadminton/"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="outlined"
+              size="small"
+              startIcon={<InstagramIcon />}
+              sx={{ fontWeight: 800, borderColor: '#1c3c6f', color: '#1c3c6f', '&:hover': { borderColor: '#123456', bgcolor: 'rgba(28,60,111,0.06)' } }}
+            >
+              @unswbadminton
+            </MagneticButton>
+          </Box>
         </ScrollReveal>
+        <MiniInstagramGrid maxItems={9} />
       </Container>
 
       {/* ─── Partners Marquee ─── */}

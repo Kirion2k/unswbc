@@ -6,6 +6,7 @@ import SectionHeading from '../components/SectionHeading';
 import ScrollReveal from '../components/ScrollReveal';
 import TiltCard from '../components/TiltCard';
 import MagneticButton from '../components/MagneticButton';
+import MiniInstagramGrid from '../components/MiniInstagramGrid';
 
 function AboutPage() {
   const imageSrc = "/unsw-14.JPG";
@@ -332,6 +333,14 @@ function AboutPage() {
             </Grid>
           ))}
         </Grid>
+      </Container>
+
+      {/* ─── Instagram Mini Grid ─── */}
+      <Container sx={{ pb: { xs: 6, md: 10 } }}>
+        <ScrollReveal>
+          <SectionHeading overline="News" title="Latest from Instagram" sx={{ mb: 3 }} />
+        </ScrollReveal>
+        <MiniInstagramGrid maxItems={6} columns={3} />
       </Container>
 
       <Container sx={{ pb: { xs: 7, md: 12 } }}>
