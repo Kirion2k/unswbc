@@ -275,12 +275,12 @@ function NewsPage() {
   return (
     <Box sx={{ bgcolor: '#f8f9fa' }}>
       <PageHero
-        imageSrc="/unsw-29.JPG"
+        imageSrc="/unsw-8.jpg"
         imageAlt="UNSW Badminton Club Instagram"
         title="Club"
         highlight="Updates"
         subtitle="The latest from @unswbadminton — results, announcements, and more."
-        imagePosition="center 40%"
+        imagePosition="center center"
       />
 
       <Container sx={{ py: { xs: 6, md: 10 } }}>

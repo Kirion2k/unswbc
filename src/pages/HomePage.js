@@ -476,6 +476,28 @@ function HomePage() {
         </Grid>
       </Container>
 
+      {/* ─── News / Instagram Mini Grid ─── */}
+      <Container sx={{ pb: { xs: 8, md: 12 } }}>
+        <ScrollReveal>
+          <Box sx={{ textAlign: 'center', mb: 3 }}>
+            <SectionHeading overline="News" title="Latest from Instagram" sx={{ mb: 2 }} />
+            <MagneticButton
+              component="a"
+              href="https://www.instagram.com/unswbadminton/"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="outlined"
+              size="small"
+              startIcon={<InstagramIcon />}
+              sx={{ fontWeight: 800, borderColor: '#1c3c6f', color: '#1c3c6f', '&:hover': { borderColor: '#123456', bgcolor: 'rgba(28,60,111,0.06)' } }}
+            >
+              @unswbadminton
+            </MagneticButton>
+          </Box>
+        </ScrollReveal>
+        <MiniInstagramGrid maxItems={9} />
+      </Container>
+
       {/* ─── Sessions Preview ─── */}
       <Container sx={{ pb: { xs: 6, md: 10 } }}>
         <ScrollReveal>
@@ -652,28 +674,6 @@ function HomePage() {
             ))}
           </Grid>
         </StaggerContainer>
-      </Container>
-
-      {/* ─── News / Instagram Mini Grid ─── */}
-      <Container sx={{ pb: { xs: 8, md: 12 } }}>
-        <ScrollReveal>
-          <Box sx={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1, mb: 3 }}>
-            <SectionHeading overline="News" title="Latest from Instagram" sx={{ mb: 0 }} />
-            <MagneticButton
-              component="a"
-              href="https://www.instagram.com/unswbadminton/"
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="outlined"
-              size="small"
-              startIcon={<InstagramIcon />}
-              sx={{ fontWeight: 800, borderColor: '#1c3c6f', color: '#1c3c6f', '&:hover': { borderColor: '#123456', bgcolor: 'rgba(28,60,111,0.06)' } }}
-            >
-              @unswbadminton
-            </MagneticButton>
-          </Box>
-        </ScrollReveal>
-        <MiniInstagramGrid maxItems={9} />
       </Container>
 
       {/* ─── Partners Marquee ─── */}
