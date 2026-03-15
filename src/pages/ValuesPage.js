@@ -36,7 +36,7 @@ function ValuesPage() {
           <SectionHeading overline="UNSWBC" title="What we stand for" sx={{ mb: 5 }} />
         </ScrollReveal>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, md: 3 }}>
           {values.map((v, index) => (
             <Grid item xs={12} sm={6} md={3} key={v.title}>
               <ScrollReveal delay={index * 0.08}>

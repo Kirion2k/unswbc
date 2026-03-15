@@ -52,7 +52,7 @@ function MembershipResourcesPage() {
           <SectionHeading overline="Guide" title="Make your first session easy" sx={{ mb: 5 }} />
         </ScrollReveal>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, md: 3 }}>
           {resources.map((r, index) => (
             <Grid item xs={12} md={4} key={r.title}>
               <ScrollReveal delay={index * 0.08}>

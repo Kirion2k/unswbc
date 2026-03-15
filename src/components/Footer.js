@@ -29,7 +29,7 @@ function Footer() {
     >
       <Container sx={{ py: 6 }}>
         <StaggerContainer staggerDelay={0.1}>
-          <Grid container spacing={4} alignItems="flex-start">
+          <Grid container spacing={{ xs: 3, md: 4 }} alignItems="flex-start">
             <Grid item xs={12} md={5}>
               <StaggerItem>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>

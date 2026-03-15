@@ -244,7 +244,7 @@ function AboutPage() {
                             border: '1px solid rgba(255,255,255,0.10)',
                           }}
                         >
-                          <Typography sx={{ fontWeight: 900, fontSize: '1.65rem', lineHeight: 1.1 }}>
+                          <Typography sx={{ fontWeight: 900, fontSize: { xs: '1.35rem', md: '1.65rem' }, lineHeight: 1.1 }}>
                             2024 / 2025
                           </Typography>
                           <Typography sx={{ mt: 0.5, color: 'rgba(255,255,255,0.85)' }}>
@@ -261,7 +261,7 @@ function AboutPage() {
                             border: '1px solid rgba(255,255,255,0.10)',
                           }}
                         >
-                          <Typography sx={{ fontWeight: 900, fontSize: '1.65rem', lineHeight: 1.1 }}>
+                          <Typography sx={{ fontWeight: 900, fontSize: { xs: '1.35rem', md: '1.65rem' }, lineHeight: 1.1 }}>
                             150+
                           </Typography>
                           <Typography sx={{ mt: 0.5, color: 'rgba(255,255,255,0.85)' }}>

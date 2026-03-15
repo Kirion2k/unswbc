@@ -13,6 +13,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
+import { motion, AnimatePresence } from 'framer-motion'
 import PlaceOutlined from '@mui/icons-material/PlaceOutlined'
 import PaymentsOutlined from '@mui/icons-material/PaymentsOutlined'
 import HowToRegOutlined from '@mui/icons-material/HowToRegOutlined'
@@ -32,6 +33,7 @@ function SessionsPage() {
   const mapsOpenLink = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`
 
   const [showFirstTimeMore, setShowFirstTimeMore] = useState(false)
+  const [showBanner, setShowBanner] = useState(true)
 
   const quickSteps = [
     {
@@ -146,6 +148,79 @@ function SessionsPage() {
         highlight="Sessions"
         subtitle="Everything you need to join, where to go, and what sessions cost."
       />
+
+      <AnimatePresence>
+        {showBanner && (
+          <motion.div
+            key="training-banner"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+          >
+            <Box
+              sx={{
+                bgcolor: '#1c3c6f',
+                borderBottom: '1px solid rgba(255,255,255,0.12)',
+                py: { xs: 1.25, md: 1 },
+                px: 2,
+              }}
+            >
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+                spacing={1.5}
+                sx={{ flexWrap: 'wrap', gap: { xs: 0.5, md: 0 } }}
+              >
+                <Typography
+                  sx={{
+                    color: 'white',
+                    fontSize: { xs: '0.82rem', md: '0.88rem' },
+                    fontWeight: 600,
+                    lineHeight: 1.5,
+                    textAlign: 'center',
+                  }}
+                >
+                  🏸 Friday Trainings are on! Coached sessions every Friday 2–4pm at UNSW FAC Level 1 · $25pp
+                </Typography>
+                <Box
+                  component={RouterLink}
+                  to="/trainings"
+                  sx={{
+                    color: 'rgba(255,255,255,0.85)',
+                    fontSize: '0.82rem',
+                    fontWeight: 800,
+                    textDecoration: 'underline',
+                    whiteSpace: 'nowrap',
+                    '&:hover': { color: 'white' },
+                  }}
+                >
+                  Learn more →
+                </Box>
+                <Box
+                  component="button"
+                  onClick={() => setShowBanner(false)}
+                  aria-label="Dismiss banner"
+                  sx={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: 'rgba(255,255,255,0.6)',
+                    fontSize: '1.1rem',
+                    lineHeight: 1,
+                    p: 0.5,
+                    ml: { xs: 0, md: 1 },
+                    '&:hover': { color: 'white' },
+                  }}
+                >
+                  ×
+                </Box>
+              </Stack>
+            </Box>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Container sx={{ py: { xs: 6, md: 10 } }}>
         <SectionHeading overline="New here" title="First time at a session" sx={{ mb: 4 }} />
@@ -339,14 +414,13 @@ function SessionsPage() {
                     >
                     <CardContent
                       sx={{
-                        p: { xs: 3, md: 4 },
-                        minHeight: { md: 260 },
+                        p: { xs: 3, md: 5 },
                         height: '100%',
                         display: 'flex',
                         flexDirection: 'column',
                       }}
                     >
-                      <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 1.5 }}>
+                      <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 2.5 }}>
                         <Box
                           sx={{
                             height: 40,
@@ -370,9 +444,9 @@ function SessionsPage() {
                         {isPayment ? (
                           <>
                             <Typography
-                              variant="body2"
                               sx={{
-                                lineHeight: 1.75,
+                                lineHeight: 1.85,
+                                fontSize: '0.95rem',
                                 color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary',
                               }}
                             >
@@ -381,7 +455,7 @@ function SessionsPage() {
 
                             <Box
                               sx={{
-                                mt: 1.75,
+                                mt: 2.5,
                                 p: 2,
                                 borderRadius: 3,
                                 bgcolor: isNavy ? 'rgba(255,255,255,0.10)' : 'rgba(28,60,111,0.06)',
@@ -393,7 +467,7 @@ function SessionsPage() {
                                   display: 'grid',
                                   gridTemplateColumns: { xs: '96px 1fr', sm: '120px 1fr' },
                                   columnGap: { xs: 2, sm: 3 },
-                                  rowGap: 1.25,
+                                  rowGap: 1.75,
                                   alignItems: 'baseline',
                                 }}
                               >
@@ -441,10 +515,10 @@ function SessionsPage() {
                             </Box>
 
                             <Typography
-                              variant="body2"
                               sx={{
-                                mt: 1.5,
-                                lineHeight: 1.75,
+                                mt: 2,
+                                lineHeight: 1.85,
+                                fontSize: '0.95rem',
                                 color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary',
                               }}
                             >
@@ -452,9 +526,9 @@ function SessionsPage() {
                             </Typography>
                           </>
                         ) : (
-                          <Stack spacing={1} sx={{ color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary' }}>
+                          <Stack spacing={1.5} sx={{ color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary' }}>
                             {section.lines.map((line) => (
-                              <Typography key={line} variant="body2" sx={{ lineHeight: 1.75 }}>
+                              <Typography key={line} sx={{ lineHeight: 1.85, fontSize: '0.95rem' }}>
                                 {line}
                               </Typography>
                             ))}
@@ -567,6 +641,62 @@ function SessionsPage() {
             ))}
           </Grid>
         </StaggerContainer>
+
+        <Divider sx={{ my: { xs: 5, md: 6 } }} />
+
+        {/* ─── Trainings Reference ─── */}
+        <ScrollReveal>
+          <TiltCard
+            sx={{
+              borderLeft: '4px solid #1c3c6f',
+              borderRadius: 3,
+              overflow: 'hidden',
+            }}
+          >
+            <CardContent sx={{ p: { xs: 3, md: 4 } }}>
+              <Grid container spacing={{ xs: 2, md: 3 }} alignItems="center">
+                <Grid item xs={12} md={8}>
+                  <Typography
+                    variant="overline"
+                    sx={{
+                      color: '#1c3c6f',
+                      letterSpacing: '0.14em',
+                      fontWeight: 900,
+                    }}
+                  >
+                    Also available
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 900, mt: 0.5, color: '#0f172a' }}>
+                    Friday Trainings
+                  </Typography>
+                  <Typography sx={{ mt: 1, color: 'text.secondary', lineHeight: 1.85 }}>
+                    Want more court time and structured coaching? Our Friday sessions run every week with experienced coaches.
+                  </Typography>
+                  <Typography
+                    sx={{
+                      mt: 1.5,
+                      fontSize: '0.875rem',
+                      fontWeight: 700,
+                      color: '#1c3c6f',
+                    }}
+                  >
+                    Every Friday · 2:00–4:00 PM · UNSW FAC Level 1 · $25pp
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: { xs: 'flex-start', md: 'flex-end' } }}>
+                  <MagneticButton
+                    variant="contained"
+                    component={RouterLink}
+                    to="/trainings"
+                    sx={{ fontWeight: 900 }}
+                  >
+                    View Trainings &rarr;
+                  </MagneticButton>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </TiltCard>
+        </ScrollReveal>
 
         <Divider sx={{ my: { xs: 5, md: 6 } }} />
 

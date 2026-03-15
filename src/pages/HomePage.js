@@ -77,7 +77,7 @@ function HomePage() {
     { value: 150, suffix: '+', label: 'Active Members' },
     { value: 2, suffix: '×', label: 'National Champions' },
     { value: 4, suffix: '', label: 'Weekly Sessions' },
-    { label: 'Est. 2018', static: true },
+    { label: 'Est. 2009', static: true },
   ];
 
   const partners = [
@@ -103,21 +103,23 @@ function HomePage() {
         }}
       >
         <Box
-          component={motion.img}
-          src={heroImage}
-          alt="UNSW Badminton Club"
-          loading="eager"
-          fetchPriority="high"
-          initial={prefersReducedMotion ? { opacity: 0.55 } : { opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 0.55, scale: 1 }}
-          transition={{ duration: 2 }}
+          component={motion.video}
+          src="/video.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={heroImage}
+          initial={prefersReducedMotion ? { opacity: 0.45 } : { opacity: 0, scale: 1.06 }}
+          animate={{ opacity: 0.45, scale: 1 }}
+          transition={{ duration: 2.5 }}
           sx={{
             position: 'absolute',
             inset: 0,
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            objectPosition: 'center 0%',
+            objectPosition: 'center center',
           }}
         />
 
@@ -126,7 +128,7 @@ function HomePage() {
           sx={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(135deg, rgba(10,22,40,0.9) 0%, rgba(28,60,111,0.4) 50%, rgba(10,22,40,0.85) 100%)',
+            background: 'linear-gradient(135deg, rgba(10,22,40,0.82) 0%, rgba(28,60,111,0.3) 50%, rgba(10,22,40,0.78) 100%)',
             backgroundSize: '200% 200%',
             animation: prefersReducedMotion ? 'none' : `${gradientShift} 15s ease infinite`,
           }}
@@ -143,9 +145,10 @@ function HomePage() {
           sx={{
             position: 'absolute',
             top: '40%',
-            left: '20%',
-            width: 600,
-            height: 600,
+            left: { xs: '50%', md: '20%' },
+            transform: { xs: 'translateX(-50%)', md: 'none' },
+            width: { xs: '90vw', md: 600 },
+            height: { xs: '60vw', md: 600 },
             borderRadius: '50%',
             background: 'radial-gradient(circle, rgba(28,60,111,0.35) 0%, transparent 70%)',
             filter: 'blur(60px)',
@@ -236,7 +239,7 @@ function HomePage() {
               <MagneticButton
                 variant="outlined"
                 component={RouterLink}
-                to="/sessions"
+                to="/about"
                 sx={{
                   borderColor: 'white',
                   borderWidth: 2,
@@ -248,7 +251,7 @@ function HomePage() {
                   '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.12)' },
                 }}
               >
-                View Sessions
+                About Us &rarr;
               </MagneticButton>
             </Box>
 

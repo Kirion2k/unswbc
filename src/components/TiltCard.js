@@ -42,6 +42,7 @@ export default function TiltCard({
         perspective: 800,
         transformStyle: 'preserve-3d',
         height: '100%',
+        width: '100%',
       }}
     >
       <Card

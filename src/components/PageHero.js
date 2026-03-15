@@ -20,7 +20,7 @@ export default function PageHero({
       sx={{
         position: 'relative',
         width: '100%',
-        minHeight: { xs: '62vh', sm: '68vh', md: '88vh' },
+        minHeight: { xs: '100vh', sm: '100vh', md: '100vh' },
         bgcolor: 'black',
         overflow: 'hidden',
       }}
@@ -58,7 +58,7 @@ export default function PageHero({
         sx={{
           position: 'relative',
           zIndex: 1,
-          minHeight: { xs: '62vh', sm: '68vh', md: '88vh' },
+          minHeight: { xs: '100vh', sm: '100vh', md: '100vh' },
           display: 'flex',
           alignItems: 'center',
           pt: { xs: 9, sm: 10, md: 12 },

@@ -21,10 +21,21 @@ import logo from './logo full/logo-full-white.png';
 function Header() {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollDir, setScrollDir] = useState('up');
+  const scrollY = React.useRef(0);
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      setScrolled(currentY > 40);
+      if (currentY > scrollY.current && currentY > 80) {
+        setScrollDir('down');
+      } else {
+        setScrollDir('up');
+      }
+      scrollY.current = currentY;
+    };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -40,6 +51,7 @@ function Header() {
     { label: 'Meet the Team', to: '/meet-the-team' },
     { label: 'Photo Gallery', to: '/photo-gallery' },
     { label: 'Sessions', to: '/sessions' },
+    { label: 'Trainings', to: '/trainings' },
     { label: 'FAQs', to: '/faqs' },
     { label: 'View Queue', to: '/view-queue' },
     { label: 'Contact', to: '/contact' },
@@ -97,7 +109,8 @@ function Header() {
       position="fixed"
       elevation={0}
       sx={{
-        transition: 'all 0.3s ease',
+        transition: 'all 0.35s ease',
+        transform: scrollDir === 'down' ? 'translateY(-100%)' : 'translateY(0)',
         backdropFilter: scrolled ? 'blur(20px)' : 'blur(10px)',
         backgroundColor: scrolled ? 'rgba(2, 6, 23, 0.92)' : 'rgba(2, 6, 23, 0.78)',
         borderBottom: scrolled
