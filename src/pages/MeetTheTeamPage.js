@@ -113,18 +113,18 @@ function MeetTheTeamPage() {
                       Contact us here and we'll get back to you soon.
                     </Typography>
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: { xs: 'flex-start', md: 'flex-end' } }}>
                     <MagneticButton
                       component={RouterLink}
                       to="/contact"
                       variant="contained"
-                      fullWidth
                       size="large"
                       sx={{
                         bgcolor: 'white',
                         color: '#1c3c6f',
                         fontWeight: 900,
                         py: 2,
+                        px: 4,
                         fontSize: '1.1rem',
                         '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' },
                       }}

@@ -786,15 +786,15 @@ function SessionsPage() {
                     Tap here to see the queue system and where you are in the queue.
                   </Typography>
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: { xs: 'flex-start', md: 'flex-end' } }}>
                   <MagneticButton
                     component={RouterLink}
                     to="/view-queue"
                     variant="contained"
-                    fullWidth
                     size="large"
                     sx={{
                       py: 2,
+                      px: 4,
                       fontSize: '1.1rem',
                       fontWeight: 900,
                       bgcolor: 'white',

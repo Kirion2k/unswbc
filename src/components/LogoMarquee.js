@@ -3,8 +3,8 @@ import { Box } from '@mui/material';
 import { keyframes } from '@mui/system';
 
 const scroll = keyframes`
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translateX(-25%); }
+  100% { transform: translateX(-75%); }
 `;
 
 export default function LogoMarquee({ logos, speed = 30 }) {
@@ -28,7 +28,6 @@ export default function LogoMarquee({ logos, speed = 30 }) {
           gap: { xs: 4, md: 6 },
           width: 'max-content',
           animation: `${scroll} ${speed}s linear infinite`,
-          animationDelay: `-${speed / 2}s`,
           '&:hover': {
             animationPlayState: 'paused',
           },

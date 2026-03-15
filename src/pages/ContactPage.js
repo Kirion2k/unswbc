@@ -79,7 +79,7 @@ function ContactPage() {
 
         <Grid container spacing={3} alignItems="stretch">
           <Grid item xs={12} md={7}>
-            <ScrollReveal>
+            <ScrollReveal style={{ height: '100%' }}>
               <Card sx={{ height: '100%' }}>
                 <CardContent sx={{ p: { xs: 3, md: 4 } }}>
                 <form onSubmit={handleSubmit}>
@@ -155,7 +155,7 @@ function ContactPage() {
           </Grid>
 
           <Grid item xs={12} md={5}>
-            <ScrollReveal delay={0.1}>
+            <ScrollReveal delay={0.1} style={{ height: '100%' }}>
               <Card sx={{ height: '100%' }}>
                 <CardContent sx={{ p: { xs: 3, md: 4 } }}>
                 <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: '#1c3c6f' }}>
