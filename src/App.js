@@ -16,6 +16,7 @@ import MeetTheTeamPage from './pages/MeetTheTeamPage';
 import ViewQueue from './components/ViewQueue';
 import ContactPage from './pages/ContactPage';
 import TrainingsPage from './pages/TrainingsPage';
+import TrainingToast from './components/TrainingToast';
 import './App.css';
 
 function AnimatedRoutes() {
@@ -50,6 +51,7 @@ function App() {
           <AnimatedRoutes />
         </main>
         <Footer />
+        <TrainingToast />
       </div>
     </Router>
   );

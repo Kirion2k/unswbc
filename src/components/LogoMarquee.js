@@ -3,8 +3,8 @@ import { Box } from '@mui/material';
 import { keyframes } from '@mui/system';
 
 const scroll = keyframes`
-  0% { transform: translateX(-25%); }
-  100% { transform: translateX(-75%); }
+  0% { transform: translateX(-18%); }
+  100% { transform: translateX(-68%); }
 `;
 
 export default function LogoMarquee({ logos, speed = 30 }) {
