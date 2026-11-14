@@ -19,7 +19,7 @@ function ViewQueue() {
       />
 
       {/* Iframe section */}
-      <Container sx={{ py: { xs: 7, md: 10 } }}>
+      <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
         <SectionHeading overline="Sessions" title="Queueing system" sx={{ mb: 5 }} />
         <Card>
           <CardContent sx={{ p: { xs: 3, md: 4 } }}>

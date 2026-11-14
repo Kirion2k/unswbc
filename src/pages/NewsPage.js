@@ -339,7 +339,7 @@ function NewsPage() {
         imagePosition="center center"
       />
 
-      <Container sx={{ py: { xs: 6, md: 10 } }}>
+      <Container sx={{ py: 'var(--club-section-space)' }}>
         {/* Profile header card */}
         <Box
           sx={{

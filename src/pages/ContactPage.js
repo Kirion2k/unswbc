@@ -75,8 +75,8 @@ function ContactPage() {
       />
 
       {/* Contact Form */}
-      <Container sx={{ py: { xs: 6, md: 10 } }}>
-        <SectionHeading overline="Contact" title="Get in touch" sx={{ mb: 5 }} />
+      <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
+        <SectionHeading overline="Contact" title="Get in touch" sx={{ mb: 'var(--club-heading-gap)' }} />
 
         <Grid container spacing={3} alignItems="stretch">
           <Grid item xs={12} md={7}>

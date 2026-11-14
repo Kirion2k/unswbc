@@ -77,8 +77,8 @@ function PhotoGalleryPage() {
         subtitle="Moments from sessions, events, and competitions. The community on and off court."
       />
 
-      <Container sx={{ py: { xs: 6, md: 10 } }}>
-        <SectionHeading overline="Gallery" title="Our memories" sx={{ mb: 5 }} />
+      <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
+        <SectionHeading overline="Gallery" title="Our memories" sx={{ mb: 'var(--club-heading-gap)' }} />
 
         <Box
           sx={{

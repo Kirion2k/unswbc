@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Typography, Container } from '@mui/material';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import SectionHeading from './SectionHeading';
 
@@ -17,12 +17,13 @@ export const FAQTabs = ({
   return (
     <Box
       component="section"
+      data-page-content
       sx={{
         position: 'relative',
         overflow: 'hidden',
         bgcolor: 'var(--club-canvas)',
         px: 2,
-        py: { xs: 7, md: 10 },
+        py: 'var(--club-section-space)',
         color: 'text.primary',
       }}
     >
@@ -40,7 +41,7 @@ export const FAQTabs = ({
 // ─── Header ───────────────────────────────────────────────────────────────────
 const FAQHeader = ({ title, subtitle }) => (
   <Container maxWidth="md" disableGutters sx={{ maxWidth: { md: 1040, lg: 1080 }, mb: 4 }}>
-    <SectionHeading title={title} />
+    <SectionHeading title={title} sx={{ mb: 0 }} />
     {subtitle && <Typography sx={{ mt: 2, color: 'text.secondary' }}>{subtitle}</Typography>}
   </Container>
 );
@@ -48,6 +49,8 @@ const FAQHeader = ({ title, subtitle }) => (
 // ─── Category tabs ────────────────────────────────────────────────────────────
 const FAQTabButtons = ({ categories, selected, setSelected }) => (
   <Box
+    role="tablist"
+    aria-label="Question categories"
     sx={{
       position: 'relative',
       zIndex: 1,
@@ -56,7 +59,7 @@ const FAQTabButtons = ({ categories, selected, setSelected }) => (
       justifyContent: 'flex-start',
       maxWidth: 1080, mx: 'auto',
       gap: 1.5,
-      mb: 6,
+      mb: 'var(--club-heading-gap)',
     }}
   >
     {Object.entries(categories).map(([key, label]) => {
@@ -65,6 +68,10 @@ const FAQTabButtons = ({ categories, selected, setSelected }) => (
         <motion.button
           className="club-glass-button"
           key={key}
+          role="tab"
+          id={`faq-tab-${key}`}
+          aria-controls={`faq-panel-${key}`}
+          aria-selected={isSelected}
           onClick={() => setSelected(key)}
           whileHover={{ scale: 1.06, y: -2 }}
           whileTap={{ scale: 0.96 }}
@@ -94,7 +101,7 @@ const FAQTabButtons = ({ categories, selected, setSelected }) => (
                 initial={{ y: '100%' }}
                 animate={{ y: '0%' }}
                 exit={{ y: '100%' }}
-                transition={{ duration: 0.45, ease: 'backIn' }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
                 style={{
                   position: 'absolute',
                   inset: 0,
@@ -112,18 +119,24 @@ const FAQTabButtons = ({ categories, selected, setSelected }) => (
 );
 
 // ─── FAQ list ─────────────────────────────────────────────────────────────────
-const FAQList = ({ faqData, selected }) => (
-  <Container maxWidth="md" disableGutters sx={{ maxWidth: { md: 1040, lg: 1080 } }}>
-    <AnimatePresence mode="wait">
+const FAQList = ({ faqData, selected }) => {
+  const reducedMotion = useReducedMotion();
+  return (
+    <Container maxWidth="md" disableGutters data-faq-panels sx={{ maxWidth: { md: 1040, lg: 1080 }, display: 'grid' }}>
       {Object.entries(faqData).map(([category, questions]) => {
-        if (selected !== category) return null;
+        const active = selected === category;
         return (
           <motion.div
             key={category}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.45, ease: 'backIn' }}
+            id={`faq-panel-${category}`}
+            role="tabpanel"
+            aria-labelledby={`faq-tab-${category}`}
+            aria-hidden={!active}
+            inert={active ? undefined : ''}
+            initial={false}
+            animate={{ opacity: active ? 1 : 0, y: reducedMotion || active ? 0 : 8 }}
+            transition={{ duration: reducedMotion ? 0 : 0.2, ease: 'easeOut' }}
+            style={{ gridArea: '1 / 1', alignSelf: 'start', minWidth: 0, visibility: active ? 'visible' : 'hidden', pointerEvents: active ? 'auto' : 'none' }}
           >
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               {questions.map((faq, index) => (
@@ -133,9 +146,9 @@ const FAQList = ({ faqData, selected }) => (
           </motion.div>
         );
       })}
-    </AnimatePresence>
-  </Container>
-);
+    </Container>
+  );
+};
 
 // ─── Individual FAQ item ──────────────────────────────────────────────────────
 const FAQItem = ({ question, answer }) => {
@@ -156,6 +169,7 @@ const FAQItem = ({ question, answer }) => {
       }}
     >
       <button
+        aria-expanded={isOpen}
         className="club-glass-button"
         onClick={() => setIsOpen(!isOpen)}
         style={{

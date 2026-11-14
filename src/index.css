@@ -47,6 +47,9 @@ img { max-width: 100%; display: block; }
   --club-action-ink: #ffffff;
   --club-accent-hover: #123456;
   --club-radius: 1.5rem;
+  --club-section-space: clamp(3rem, 6vw, 5rem);
+  --club-section-gap: calc(var(--club-section-space) / 2);
+  --club-heading-gap: clamp(1.5rem, 3vw, 2rem);
   --club-glass: rgba(255, 255, 255, 0.76);
   --club-glass-edge: rgba(255, 255, 255, 0.88);
   --club-glass-sheen: linear-gradient(145deg, rgba(255,255,255,0.65), rgba(255,255,255,0.06) 48%, rgba(169,202,255,0.1));

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import { motion, useReducedMotion } from 'framer-motion';
 import LetterAnimation from './LetterAnimation';
+import useHeroScroll from './useHeroScroll';
 
 export default function PageHero({
   imageSrc,
@@ -13,14 +14,18 @@ export default function PageHero({
   children,
 }) {
   const prefersReducedMotion = useReducedMotion();
+  const heroRef = useRef(null);
+  useHeroScroll(heroRef);
 
   return (
     <Box
       component="section"
+      ref={heroRef}
+      data-page-hero
       sx={{
         position: 'relative',
         width: '100%',
-        minHeight: { xs: '100vh', sm: '100vh', md: '100vh' },
+        minHeight: '100svh',
         bgcolor: 'black',
         overflow: 'hidden',
       }}
@@ -58,7 +63,7 @@ export default function PageHero({
         sx={{
           position: 'relative',
           zIndex: 1,
-          minHeight: { xs: '100vh', sm: '100vh', md: '100vh' },
+          minHeight: '100svh',
           display: 'flex',
           alignItems: 'center',
           pt: { xs: 9, sm: 10, md: 12 },

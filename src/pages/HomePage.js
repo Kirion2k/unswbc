@@ -19,6 +19,7 @@ import TiltCard from '../components/TiltCard';
 import MagneticButton from '../components/MagneticButton';
 import LetterAnimation from '../components/LetterAnimation';
 import MorphingText from '../components/MorphingText';
+import useHeroScroll from '../components/useHeroScroll';
 import FloatingParticles from '../components/FloatingParticles';
 import LogoMarquee from '../components/LogoMarquee';
 import ParallaxImage from '../components/ParallaxImage';
@@ -36,6 +37,7 @@ const gradientShift = keyframes`
 function HomePage() {
   const prefersReducedMotion = useReducedMotion();
   const heroRef = useRef(null);
+  useHeroScroll(heroRef);
   const videoRef = useRef(null);
   const heroVisible = useInView(heroRef);
   const [documentVisible, setDocumentVisible] = useState(!document.hidden);
@@ -98,6 +100,7 @@ function HomePage() {
       <Box
         component="section"
         ref={heroRef}
+        data-page-hero
         sx={{
           position: 'relative',
           width: '100%',
@@ -279,9 +282,9 @@ function HomePage() {
       </Box>
 
       {/* ─── Feature Sections ─── */}
-      <Container sx={{ py: { xs: 6, md: 10 } }}>
+      <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
         <ScrollReveal>
-          <SectionHeading overline="Welcome" title="A club built for every level" sx={{ mb: 5 }} />
+          <SectionHeading overline="Welcome" title="A club built for every level" sx={{ mb: 'var(--club-heading-gap)' }} />
         </ScrollReveal>
         <Grid container spacing={{ xs: 2, md: 3 }}>
           {featureSections.map((s, index) => {
@@ -377,7 +380,7 @@ function HomePage() {
       </Container>
 
       {/* ─── About Preview ─── */}
-      <Container sx={{ pb: { xs: 6, md: 10 } }}>
+      <Container sx={{ pb: 'var(--club-section-space)' }}>
         <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
           <Grid item xs={12} md={6}>
             <ScrollReveal direction="left">
@@ -431,7 +434,7 @@ function HomePage() {
       {/* ─── News / Instagram Mini Grid ─── */}
       {/* Temporarily hidden until the Instagram feed is available.
 
-      <Container sx={{ pb: { xs: 8, md: 12 } }}>
+      <Container sx={{ pb: 'var(--club-section-space)' }}>
         <ScrollReveal>
           <Box sx={{ textAlign: 'center', mb: 3 }}>
             <SectionHeading overline="News" title="Latest from Instagram" sx={{ mb: 2 }} />
@@ -454,9 +457,9 @@ function HomePage() {
       */}
 
       {/* ─── Sessions Preview ─── */}
-      <Container sx={{ pb: { xs: 6, md: 10 } }}>
+      <Container sx={{ pb: 'var(--club-section-space)' }}>
         <ScrollReveal>
-          <SectionHeading overline="Sessions" title="Join us on court" sx={{ mb: 5 }} />
+          <SectionHeading overline="Sessions" title="Join us on court" sx={{ mb: 'var(--club-heading-gap)' }} />
         </ScrollReveal>
         <StaggerContainer staggerDelay={0.1}>
           <Grid container spacing={{ xs: 2, md: 3 }}>
@@ -503,14 +506,14 @@ function HomePage() {
       </Container>
 
       {/* ─── Achievements ─── */}
-      <Container sx={{ pb: { xs: 6, md: 10 } }}>
+      <Container sx={{ pb: 'var(--club-section-space)' }}>
         <ChampionshipHonours />
       </Container>
 
       {/* ─── Explore Cards ─── */}
-      <Container sx={{ pb: { xs: 7, md: 12 } }}>
+      <Container sx={{ pb: 'var(--club-section-space)' }}>
         <ScrollReveal>
-          <SectionHeading overline="Explore" title="Explore the club" sx={{ mb: 5 }} />
+          <SectionHeading overline="Explore" title="Explore the club" sx={{ mb: 'var(--club-heading-gap)' }} />
         </ScrollReveal>
         <StaggerContainer staggerDelay={0.1}>
           <Grid container spacing={{ xs: 2, md: 3 }}>
