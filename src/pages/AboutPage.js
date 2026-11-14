@@ -2,17 +2,18 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Card, CardContent, CardMedia, Container, Divider, Grid, Typography } from '@mui/material';
 import PageHero from '../components/PageHero';
+import ChampionshipHonours from '../components/ChampionshipHonours';
 import SectionHeading from '../components/SectionHeading';
 import ScrollReveal from '../components/ScrollReveal';
 import TiltCard from '../components/TiltCard';
 import MagneticButton from '../components/MagneticButton';
-import MiniInstagramGrid from '../components/MiniInstagramGrid';
+// import MiniInstagramGrid from '../components/MiniInstagramGrid';
 
 function AboutPage() {
-  const imageSrc = "/unsw-14.JPG";
+  const imageSrc = "/optimized/unsw-14.jpg";
 
   return (
-    <Box sx={{ bgcolor: '#f8f9fa' }}>
+    <Box sx={{ bgcolor: 'var(--club-canvas)' }}>
       <PageHero
         imageSrc={imageSrc}
         imageAlt="UNSW Badminton Club"
@@ -62,7 +63,7 @@ function AboutPage() {
               title: 'Our Vision',
               description:
                 'To be Australia’s leading university badminton club, where every player feels welcome, improves with confidence, and represents the club with pride.',
-              image: '/unsw-55.JPG',
+              image: '/optimized/unsw-55.jpg',
               points: [
                 'A friendly place for beginners and regulars',
                 'A clear pathway for players who want to improve',
@@ -73,7 +74,7 @@ function AboutPage() {
               title: 'Our Activities',
               description:
                 'Weekly sessions, training support, socials, and tournaments, built around smooth operations so everyone gets fair court time and a great experience.',
-              image: '/unsw-44.JPG',
+              image: '/optimized/unsw-44.jpg',
               points: [
                 'Weekly social sessions with fair rotations',
                 'Training focused on fundamentals and match play',
@@ -88,14 +89,16 @@ function AboutPage() {
                     <Grid item xs={12} md={5}>
                       <CardMedia
                         component="img"
+                        loading="lazy"
+                        decoding="async"
                         image={item.image}
                         alt={item.title}
-                        sx={{ height: { xs: 220, sm: 280, md: '100%' }, minHeight: { md: 320 }, objectFit: 'cover' }}
+                        sx={{ height: { xs: 220, sm: 280, md: '100%' }, minHeight: { md: '20rem' }, objectFit: 'cover' }}
                       />
                     </Grid>
                     <Grid item xs={12} md={7}>
                       <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                        <Typography variant="h5" sx={{ fontWeight: 900, mb: 1.25, color: '#1c3c6f' }}>
+                        <Typography variant="h5" sx={{ fontWeight: 900, mb: 1.25, color: 'var(--club-accent)' }}>
                           {item.title}
                         </Typography>
                         <Typography sx={{ color: 'text.secondary', lineHeight: 1.9, fontSize: { xs: '1rem', md: '1.05rem' } }}>
@@ -133,175 +136,7 @@ function AboutPage() {
 
         <Divider sx={{ my: 5 }} />
 
-        <Box sx={{ py: { xs: 4, md: 5 } }}>
-          <Box sx={{ textAlign: 'center', mb: 4 }}>
-            <Typography
-              variant="overline"
-              sx={{
-                color: '#1c3c6f',
-                letterSpacing: '0.14em',
-                fontWeight: 900,
-              }}
-            >
-              Highlights
-            </Typography>
-            <Typography
-              variant="h3"
-              sx={{
-                fontWeight: 900,
-                mt: 0.5,
-                fontSize: { xs: '2rem', sm: '2.3rem', md: '2.6rem' },
-                lineHeight: 1.15,
-              }}
-            >
-              Our achievements
-            </Typography>
-            <Box
-              sx={{
-                mt: 1.5,
-                height: 4,
-                width: 72,
-                borderRadius: 999,
-                bgcolor: '#1c3c6f',
-                mx: 'auto',
-                opacity: 0.9,
-              }}
-            />
-          </Box>
-
-          <ScrollReveal>
-            <Card sx={{ overflow: 'hidden', borderRadius: 4 }}>
-              <Box
-                sx={{
-                  position: 'relative',
-                  minHeight: { xs: 520, md: 460 },
-                  display: 'flex',
-                  alignItems: 'stretch',
-                }}
-              >
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    inset: 0,
-                    backgroundImage: 'url(/unsw-29.JPG)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  }}
-                />
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    inset: 0,
-                    background:
-                      'linear-gradient(90deg, rgba(28,60,111,0.96), rgba(28,60,111,0.86) 46%, rgba(2,6,23,0.15) 100%)',
-                  }}
-                />
-
-                <Box
-                  sx={{
-                    position: 'relative',
-                    width: '100%',
-                    px: { xs: 3, md: 6 },
-                    py: { xs: 4, md: 6 },
-                    color: 'white',
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Box sx={{ width: '100%', maxWidth: 720 }}>
-                  <Typography
-                      variant="overline"
-                    sx={{
-                        letterSpacing: '0.14em',
-                        fontWeight: 900,
-                        color: 'rgba(255,255,255,0.82)',
-                      }}
-                    >
-                      UniSport Nationals
-                  </Typography>
-                  <Typography
-                      variant="h4"
-                      sx={{
-                        fontWeight: 900,
-                        lineHeight: 1.12,
-                        mt: 0.5,
-                        fontSize: { xs: '1.9rem', sm: '2.2rem', md: '2.4rem' },
-                      }}
-                    >
-                      Champions in 2024 and 2025
-                    </Typography>
-                    <Typography sx={{ mt: 1.25, color: 'rgba(255,255,255,0.9)', lineHeight: 1.85 }}>
-                      UNSW won the UniSport Nationals badminton title in 2024 and 2025. We are one of the top badminton universities
-                      in Australia, with national level players and a strong team culture that lifts everyone around them.
-                    </Typography>
-
-                    <Grid container spacing={2} sx={{ mt: 3 }}>
-                      <Grid item xs={12} sm={6}>
-                        <Box
-                          sx={{
-                            p: 2,
-                            borderRadius: 3,
-                            bgcolor: 'rgba(255,255,255,0.10)',
-                            border: '1px solid rgba(255,255,255,0.10)',
-                          }}
-                        >
-                          <Typography sx={{ fontWeight: 900, fontSize: { xs: '1.35rem', md: '1.65rem' }, lineHeight: 1.1 }}>
-                            2024 / 2025
-                          </Typography>
-                          <Typography sx={{ mt: 0.5, color: 'rgba(255,255,255,0.85)' }}>
-                            UniSport Nationals titles
-                          </Typography>
-                        </Box>
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <Box
-                          sx={{
-                            p: 2,
-                            borderRadius: 3,
-                            bgcolor: 'rgba(255,255,255,0.10)',
-                            border: '1px solid rgba(255,255,255,0.10)',
-                          }}
-                        >
-                          <Typography sx={{ fontWeight: 900, fontSize: { xs: '1.35rem', md: '1.65rem' }, lineHeight: 1.1 }}>
-                            150+
-                          </Typography>
-                          <Typography sx={{ mt: 0.5, color: 'rgba(255,255,255,0.85)' }}>
-                            active members
-                          </Typography>
-                        </Box>
-                      </Grid>
-                    </Grid>
-
-                    <Box sx={{ mt: 3 }}>
-                      {[
-                        'National level players who raise the standard of training and matches',
-                        'A wide member base from beginners to competitive athletes',
-                        'A culture built around improvement, respect, and team pride',
-                      ].map((p) => (
-                        <Box key={p} sx={{ display: 'flex', gap: 1.25, alignItems: 'flex-start', mt: 1 }}>
-                          <Box
-                            sx={{
-                              mt: '9px',
-                              height: 8,
-                              width: 8,
-                              borderRadius: 999,
-                              bgcolor: 'rgba(255,255,255,0.9)',
-                              opacity: 0.9,
-                              flex: '0 0 auto',
-                            }}
-                          />
-                          <Typography sx={{ color: 'rgba(255,255,255,0.88)', lineHeight: 1.75 }}>
-                            {p}
-                  </Typography>
-                </Box>
-                      ))}
-                    </Box>
-                  </Box>
-                </Box>
-              </Box>
-            </Card>
-          </ScrollReveal>
-        </Box>
+        <ChampionshipHonours />
 
         <SectionHeading overline="Experience" title="What to expect" sx={{ mb: 4 }} />
         <Grid container spacing={{ xs: 2, md: 3 }}>
@@ -321,7 +156,7 @@ function AboutPage() {
               <ScrollReveal delay={index * 0.05}>
                 <TiltCard sx={{ height: '100%' }}>
                   <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                    <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: '#1c3c6f' }}>
+                    <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: 'var(--club-accent)' }}>
                     {item.title}
                   </Typography>
                     <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
@@ -336,21 +171,24 @@ function AboutPage() {
       </Container>
 
       {/* ─── Instagram Mini Grid ─── */}
+      {/* Temporarily hidden until the Instagram feed is available.
+
       <Container sx={{ pb: { xs: 6, md: 10 } }}>
         <ScrollReveal>
           <SectionHeading overline="News" title="Latest from Instagram" sx={{ mb: 3 }} />
         </ScrollReveal>
         <MiniInstagramGrid maxItems={6} columns={3} />
       </Container>
+      */}
 
       <Container sx={{ pb: { xs: 7, md: 12 } }}>
         <ScrollReveal>
-          <Card sx={{ bgcolor: '#1c3c6f', color: 'white' }}>
+          <Card sx={{ bgcolor: 'var(--club-feature)', color: 'var(--club-text)' }}>
             <CardContent sx={{ p: { xs: 3.5, md: 5 } }}>
               <Typography variant="h5" sx={{ fontWeight: 900, mb: 1 }}>
                 Join us on court
               </Typography>
-              <Typography sx={{ color: 'rgba(255,255,255,0.88)', lineHeight: 1.8, maxWidth: 820 }}>
+              <Typography sx={{ color: 'var(--club-muted)', lineHeight: 1.8, maxWidth: 820 }}>
                 Whether you are here to improve your skills, meet new people, or just enjoy a great game,
                 UNSW Badminton Club is the place for you.
               </Typography>
@@ -369,9 +207,9 @@ function AboutPage() {
                     py: 2.2,
                     fontWeight: 900,
                     fontSize: '1.15rem',
-                    bgcolor: 'white',
-                    color: '#1c3c6f',
-                    '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' },
+                    bgcolor: 'var(--club-accent)',
+                    color: 'var(--club-action-ink)',
+                    '&:hover': { bgcolor: 'var(--club-accent-hover)' },
                   }}
                 >
                   Join us today &rarr;

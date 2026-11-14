@@ -34,7 +34,7 @@ function Particle({ size, x, y, duration, delay, opacity }) {
   );
 }
 
-export default function FloatingParticles({ count = 12 }) {
+export default function FloatingParticles({ count = 12, active = true }) {
   const prefersReducedMotion = useReducedMotion();
 
   const particles = useMemo(() =>
@@ -50,7 +50,7 @@ export default function FloatingParticles({ count = 12 }) {
     [count]
   );
 
-  if (prefersReducedMotion) return null;
+  if (prefersReducedMotion || !active) return null;
 
   return (
     <div

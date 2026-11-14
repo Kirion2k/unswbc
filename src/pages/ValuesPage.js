@@ -21,9 +21,9 @@ function ValuesPage() {
   ];
 
   return (
-    <Box sx={{ bgcolor: '#f8f9fa' }}>
+    <Box sx={{ bgcolor: 'var(--club-canvas)' }}>
       <PageHero
-        imageSrc="/unsw-15.JPG"
+        imageSrc="/optimized/unsw-15.jpg"
         imageAlt="Badminton values"
         title="Our"
         highlight="Values"
@@ -46,11 +46,11 @@ function ValuesPage() {
                       component={motion.div}
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       sx={{
-                        width: 44,
-                        height: 44,
+                        width: '2.75rem',
+                        height: '2.75rem',
                         borderRadius: 999,
-                        bgcolor: 'rgba(28,60,111,0.12)',
-                        color: '#1c3c6f',
+                        bgcolor: 'var(--club-tint)',
+                        color: 'var(--club-accent)',
                         display: 'grid',
                         placeItems: 'center',
                         mb: 2,
@@ -74,12 +74,12 @@ function ValuesPage() {
 
       <Container sx={{ pb: { xs: 8, md: 12 } }}>
         <ScrollReveal>
-          <TiltCard sx={{ bgcolor: '#1c3c6f', color: 'white' }}>
+          <TiltCard sx={{ bgcolor: 'var(--club-feature)', color: 'var(--club-text)' }}>
             <CardContent sx={{ p: { xs: 3.5, md: 5 } }}>
               <Typography variant="h5" sx={{ fontWeight: 900 }}>
                 Ready to jump in?
               </Typography>
-              <Typography sx={{ mt: 1.5, color: 'rgba(255,255,255,0.88)', maxWidth: 760, lineHeight: 1.7 }}>
+              <Typography sx={{ mt: 1.5, color: 'var(--club-muted)', maxWidth: 760, lineHeight: 1.7 }}>
                 Whether you're coming for social games, training, or competition, you'll find a place in the club.
               </Typography>
               <Box sx={{ mt: 3 }}>
@@ -87,7 +87,7 @@ function ValuesPage() {
                   component={RouterLink}
                   to="/sessions"
                   variant="contained"
-                  sx={{ bgcolor: 'white', color: '#1c3c6f', fontWeight: 900, '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' } }}
+                  sx={{ bgcolor: 'var(--club-accent)', color: 'var(--club-action-ink)', fontWeight: 900, '&:hover': { bgcolor: 'var(--club-accent-hover)' } }}
                 >
                   Check Sessions &rarr;
                 </MagneticButton>

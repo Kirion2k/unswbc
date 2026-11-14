@@ -28,9 +28,9 @@ function MeetTheTeamPage() {
   ]
 
   return (
-    <Box sx={{ bgcolor: '#f8f9fa' }}>
+    <Box sx={{ bgcolor: 'var(--club-canvas)' }}>
       <PageHero
-        imageSrc="/unsw-20.JPG"
+        imageSrc="/optimized/unsw-20.jpg"
         imageAlt="Meet the Team"
         title="Meet the"
         highlight="Team"
@@ -47,14 +47,15 @@ function MeetTheTeamPage() {
             <Grid item xs={12} sm={6} md={4} key={index}>
               <ScrollReveal delay={index * 0.05}>
                 <TiltCard>
-                  <CardContent sx={{ p: 3 }}>
+                  <CardContent sx={{ p: { xs: 3, md: 4 } }}>
                     <motion.div whileHover={{ scale: 1.08 }}>
                       <Avatar
+                        variant="rounded"
                         sx={{
-                          width: 56,
-                          height: 56,
-                          bgcolor: 'rgba(28,60,111,0.12)',
-                          color: '#1c3c6f',
+                          width: '4rem',
+                          height: '4rem',
+                          bgcolor: 'var(--club-tint)',
+                          color: 'var(--club-accent)',
                           fontWeight: 900,
                           mb: 2,
                         }}
@@ -80,36 +81,28 @@ function MeetTheTeamPage() {
         <ScrollReveal>
           <SectionHeading overline="Team" title="Committee" sx={{ mb: 5 }} />
         </ScrollReveal>
-        <Grid container spacing={{ xs: 2, md: 3 }}>
-          {committee.map((role, index) => (
-            <Grid item xs={12} sm={6} md={4} key={role}>
-              <ScrollReveal delay={index * 0.04}>
-                <TiltCard>
-                  <CardContent sx={{ p: 3 }}>
-                    <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: '#1c3c6f' }}>
-                      {role}
-                    </Typography>
-                    <Typography sx={{ color: 'text.secondary', lineHeight: 1.75 }}>
-                      The behind the scenes work that makes sessions, events, and competitions run smoothly.
-                    </Typography>
-                  </CardContent>
-                </TiltCard>
-              </ScrollReveal>
-            </Grid>
+        <Box component="ul" sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(2, minmax(0, 1fr))' }, gap: '1px', bgcolor: 'var(--club-line)', listStyle: 'none', m: 0, p: 0, border: '1px solid var(--club-line)', borderRadius: 'var(--club-radius)', overflow: 'hidden' }}>
+          {committee.map((role) => (
+            <Box component="li" key={role} sx={{ bgcolor: 'var(--club-feature)', p: { xs: 3, md: 4 } }}>
+              <Typography variant="h6" sx={{ color: 'var(--club-text)', mb: 1 }}>{role}</Typography>
+              <Typography sx={{ color: 'text.secondary', lineHeight: 1.75 }}>
+                The behind the scenes work that makes sessions, events, and competitions run smoothly.
+              </Typography>
+            </Box>
           ))}
-        </Grid>
+        </Box>
 
         <Box sx={{ mt: { xs: 6, md: 8 } }}>
           <ScrollReveal>
             <SectionHeading overline="Contact" title="Reach out to us" sx={{ mb: 4 }} />
-            <TiltCard sx={{ bgcolor: '#1c3c6f', color: 'white' }}>
+            <TiltCard sx={{ bgcolor: 'var(--club-feature)', color: 'var(--club-text)' }}>
               <CardContent sx={{ p: { xs: 3, md: 4 } }}>
                 <Grid container spacing={{ xs: 2, md: 3 }} alignItems="center">
                   <Grid item xs={12} md={8}>
                     <Typography variant="h5" sx={{ fontWeight: 900 }}>
                       Got questions for the team?
                     </Typography>
-                    <Typography sx={{ mt: 1, color: 'rgba(255,255,255,0.88)', lineHeight: 1.85 }}>
+                    <Typography sx={{ mt: 1, color: 'var(--club-muted)', lineHeight: 1.85 }}>
                       Contact us here and we'll get back to you soon.
                     </Typography>
                   </Grid>
@@ -120,13 +113,13 @@ function MeetTheTeamPage() {
                       variant="contained"
                       size="large"
                       sx={{
-                        bgcolor: 'white',
-                        color: '#1c3c6f',
+                        bgcolor: 'var(--club-accent)',
+                        color: 'var(--club-action-ink)',
                         fontWeight: 900,
                         py: 2,
                         px: 4,
                         fontSize: '1.1rem',
-                        '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' },
+                        '&:hover': { bgcolor: 'var(--club-accent-hover)' },
                       }}
                     >
                       Go to contact &rarr;

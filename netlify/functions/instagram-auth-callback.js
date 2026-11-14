@@ -1,5 +1,5 @@
 /**
- * Netlify Function: Instagram Basic Display OAuth callback.
+ * Netlify Function: Instagram Login OAuth callback.
  *
  * Required env vars:
  * - INSTAGRAM_APP_ID
@@ -84,7 +84,7 @@ export async function handler(event) {
     };
   }
 
-  const shortToken = shortRes.json?.access_token;
+  const shortToken = shortRes.json?.access_token || shortRes.json?.data?.[0]?.access_token;
   if (!shortToken) {
     return {
       statusCode: 500,

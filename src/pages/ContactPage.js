@@ -1,3 +1,4 @@
+import LinktreeIcon from '../components/LinktreeIcon';
 import React, { useState } from 'react';
 import { Box, Card, CardContent, Container, Grid, IconButton, Link, TextField, Typography } from '@mui/material';
 import { Facebook, Instagram } from '@mui/icons-material';
@@ -8,7 +9,7 @@ import ScrollReveal from '../components/ScrollReveal';
 import MagneticButton from '../components/MagneticButton';
 
 function ContactPage() {
-  const imageSrc = "/unsw-59.JPG"; // Background Image
+  const imageSrc = "/optimized/unsw-59.jpg"; // Background Image
   const accessKey = process.env.REACT_APP_WEB3FORMS_ACCESS_KEY || 'd66a945f-4370-4c2f-9c68-11ee13236047';
 
   // State for form submission
@@ -63,7 +64,7 @@ function ContactPage() {
   };
 
   return (
-    <Box sx={{ width: '100%', overflow: 'hidden', bgcolor: '#f8f9fa' }}>
+    <Box sx={{ width: '100%', overflow: 'hidden', bgcolor: 'var(--club-canvas)' }}>
       <PageHero
         imageSrc={imageSrc}
         imageAlt="UNSW Badminton Club"
@@ -158,37 +159,50 @@ function ContactPage() {
             <ScrollReveal delay={0.1} style={{ height: '100%' }}>
               <Card sx={{ height: '100%' }}>
                 <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: '#1c3c6f' }}>
+                <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: 'var(--club-accent)' }}>
                   Follow our updates
                 </Typography>
                 <Typography sx={{ color: 'text.secondary', lineHeight: 1.75 }}>
-                  For announcements, events, and club news, check our socials.
+                  For announcements, events, and club news, check our socials. Find club forms, training bookings, and more on Linktree.
                 </Typography>
 
                 <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
                   <IconButton
                     href="https://www.facebook.com/UNSWBC"
+                    aria-label="UNSW Badminton Club Facebook"
                     target="_blank"
                     rel="noopener noreferrer"
-                    sx={{ bgcolor: 'rgba(28,60,111,0.12)', color: '#1c3c6f', '&:hover': { bgcolor: 'rgba(28,60,111,0.18)' } }}
+                    sx={{ bgcolor: 'var(--club-tint)', color: 'var(--club-accent)', '&:hover': { bgcolor: 'rgba(28,60,111,0.18)' } }}
                   >
                     <Facebook />
                   </IconButton>
                   <IconButton
                     href="https://www.instagram.com/unswbadminton"
+                    aria-label="UNSW Badminton Club Instagram"
                     target="_blank"
                     rel="noopener noreferrer"
-                    sx={{ bgcolor: 'rgba(28,60,111,0.12)', color: '#1c3c6f', '&:hover': { bgcolor: 'rgba(28,60,111,0.18)' } }}
+                    sx={{ bgcolor: 'var(--club-tint)', color: 'var(--club-accent)', '&:hover': { bgcolor: 'rgba(28,60,111,0.18)' } }}
                   >
                     <Instagram />
+                  </IconButton>
+                  <IconButton
+                    href="https://linktr.ee/unswbc"
+                    aria-label="UNSW Badminton Club Linktree"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{ bgcolor: 'var(--club-tint)', color: 'var(--club-accent)', '&:hover': { bgcolor: 'rgba(28,60,111,0.18)' } }}
+                  >
+                    <LinktreeIcon />
                   </IconButton>
                 </Box>
 
                 <Box sx={{ mt: 3 }}>
-                  <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: '#1c3c6f' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: 'var(--club-accent)' }}>
                     Helpful links
                   </Typography>
                   <Typography sx={{ color: 'text.secondary', lineHeight: 1.9 }}>
+                    <Link href="https://linktr.ee/unswbc" target="_blank" rel="noopener noreferrer" underline="hover">All club links on Linktree</Link>
+                    <br />
                     <Link component={RouterLink} to="/sessions" underline="hover">Session info</Link>
                     <br />
                     <Link component={RouterLink} to="/faqs" underline="hover">FAQs</Link>

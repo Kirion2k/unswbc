@@ -1,5 +1,5 @@
 /**
- * Netlify Function: Starts Instagram Basic Display OAuth.
+ * Netlify Function: Starts Instagram Login OAuth.
  *
  * Required env vars:
  * - INSTAGRAM_APP_ID
@@ -33,10 +33,10 @@ export async function handler(event) {
   // state helps prevent CSRF; keep it simple here
   const state = 'unswbc_' + Date.now();
 
-  const authUrl = new URL('https://api.instagram.com/oauth/authorize');
+  const authUrl = new URL('https://www.instagram.com/oauth/authorize');
   authUrl.searchParams.set('client_id', appId);
   authUrl.searchParams.set('redirect_uri', redirectUri);
-  authUrl.searchParams.set('scope', 'user_profile,user_media');
+  authUrl.searchParams.set('scope', 'instagram_business_basic');
   authUrl.searchParams.set('response_type', 'code');
   authUrl.searchParams.set('state', state);
 

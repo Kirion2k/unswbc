@@ -80,7 +80,7 @@ export default function PageHero({
               >
                 <LetterAnimation text={title || ''} delay={0.2} staggerDelay={0.03} />{' '}
                 {highlight ? (
-                  <Box component="span" sx={{ color: '#1c3c6f' }}>
+                  <Box component="span" sx={{ color: '#a9caff' }}>
                     <LetterAnimation text={highlight} delay={0.4} staggerDelay={0.03} />
                   </Box>
                 ) : null}

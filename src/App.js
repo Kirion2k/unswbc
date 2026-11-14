@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
+import ScrollShuttle from './components/ScrollShuttle';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import PageTransition from './components/PageTransition';
@@ -16,7 +17,7 @@ import MeetTheTeamPage from './pages/MeetTheTeamPage';
 import ViewQueue from './components/ViewQueue';
 import ContactPage from './pages/ContactPage';
 import TrainingsPage from './pages/TrainingsPage';
-import NewsPage from './pages/NewsPage';
+// import NewsPage from './pages/NewsPage'; // Restore when the Instagram feed is available.
 import TrainingToast from './components/TrainingToast';
 import './App.css';
 
@@ -32,7 +33,8 @@ function AnimatedRoutes() {
         <Route path="/values" element={<PageTransition><ValuesPage /></PageTransition>} />
         <Route path="/sessions" element={<PageTransition><SessionsPage /></PageTransition>} />
         <Route path="/trainings" element={<PageTransition><TrainingsPage /></PageTransition>} />
-        <Route path="/news" element={<PageTransition><NewsPage /></PageTransition>} />
+        {/* <Route path="/news" element={<PageTransition><NewsPage /></PageTransition>} /> */}
+        <Route path="/news" element={<Navigate to="/" replace />} />
         <Route path="/membership-resources" element={<PageTransition><MembershipResourcesPage /></PageTransition>} />
         <Route path="/photo-gallery" element={<PageTransition><PhotoGalleryPage /></PageTransition>} />
         <Route path="/meet-the-team" element={<PageTransition><MeetTheTeamPage /></PageTransition>} />
@@ -48,11 +50,12 @@ function App() {
     <Router>
       <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Header />
-        <main style={{ flex: 1 }}>
+        <main style={{ flex: 1, overflowX: 'clip' }}>
           <ScrollToTop />
           <AnimatedRoutes />
         </main>
         <Footer />
+        <ScrollShuttle />
         <TrainingToast />
       </div>
     </Router>

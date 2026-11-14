@@ -30,3 +30,38 @@ img { max-width: 100%; display: block; }
   width: 100%;
 }
 
+
+/* Semantic colours also cover controls implemented outside MUI. */
+:root {
+  --club-canvas: #f8f9fa;
+  --club-surface: #ffffff;
+  --club-text: #0f172a;
+  --club-muted: #475569;
+  --club-accent: #1c3c6f;
+  --club-tint: rgba(28, 60, 111, 0.06);
+  --club-line: rgba(28, 60, 111, 0.18);
+  --club-nav: rgba(255, 255, 255, 0.94);
+  --club-nav-scrolled: rgba(255, 255, 255, 0.98);
+  --club-feature: #edf3fb;
+  --club-feature-accent: #dce8f8;
+  --club-action-ink: #ffffff;
+  --club-accent-hover: #123456;
+  --club-radius: 1.5rem;
+}
+:root[data-theme='dark'] {
+  --club-canvas: #0c1422;
+  --club-surface: #162235;
+  --club-text: #edf3fc;
+  --club-muted: #b9c7dc;
+  --club-accent: #a9caff;
+  --club-tint: rgba(169, 202, 255, 0.08);
+  --club-line: rgba(169, 202, 255, 0.22);
+  --club-nav: rgba(12, 20, 34, 0.92);
+  --club-nav-scrolled: rgba(12, 20, 34, 0.98);
+  --club-feature: #0a1628;
+  --club-feature-accent: #142d50;
+  --club-action-ink: #0c182b;
+  --club-accent-hover: #c6dcff;
+}
+html { background: var(--club-canvas); }
+::selection { background: #a9caff; color: #0c182b; }

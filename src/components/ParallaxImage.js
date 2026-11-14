@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { useMediaQuery } from '@mui/material';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-export default function ParallaxImage({
+function MovingImage({
   src,
   alt,
   speed = 0.15,
@@ -9,7 +10,6 @@ export default function ParallaxImage({
   ...props
 }) {
   const ref = useRef(null);
-  const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
@@ -17,22 +17,13 @@ export default function ParallaxImage({
 
   const y = useTransform(scrollYProgress, [0, 1], [`-${speed * 100}%`, `${speed * 100}%`]);
 
-  if (prefersReducedMotion) {
-    return (
-      <img
-        src={src}
-        alt={alt}
-        style={{ width: '100%', height: '100%', objectFit: 'cover', ...style }}
-        {...props}
-      />
-    );
-  }
-
   return (
     <div ref={ref} style={{ overflow: 'hidden', position: 'relative', ...style }}>
       <motion.img
         src={src}
         alt={alt}
+        loading="lazy"
+        decoding="async"
         style={{
           y,
           width: '100%',
@@ -45,4 +36,11 @@ export default function ParallaxImage({
       />
     </div>
   );
+}
+
+export default function ParallaxImage(props) {
+  const moving = useMediaQuery('(min-width: 900px) and (prefers-reduced-motion: no-preference)');
+  if (moving) return <MovingImage {...props} />;
+  const { speed, style, alt, ...image } = props;
+  return <img {...image} alt={alt} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', ...style }} />;
 }

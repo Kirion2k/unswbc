@@ -1,5 +1,5 @@
 /**
- * Netlify Function: Live Instagram feed via Instagram Basic Display / Graph API.
+ * Netlify Function: Live Instagram feed via the Instagram API with Instagram Login.
  *
  * Required env var:
  * - INSTAGRAM_ACCESS_TOKEN
@@ -66,7 +66,7 @@ function mapPost(p) {
   };
 }
 
-export async function handler() {
+exports.handler = async function handler() {
   const token = process.env.INSTAGRAM_ACCESS_TOKEN;
 
   if (!token) {
@@ -83,6 +83,13 @@ export async function handler() {
       `https://graph.instagram.com/me?fields=username,profile_picture_url,media_count&access_token=${encodeURIComponent(token)}`
     );
     const profileJson = await profileRes.json();
+    if (!profileRes.ok) {
+      return {
+        statusCode: profileRes.status,
+        headers: HEADERS_ERR,
+        body: JSON.stringify({ error: 'Instagram account authorization failed. Reconnect the club account.' }),
+      };
+    }
 
     const profile = {
       username:   profileJson.username   || 'unswbadminton',

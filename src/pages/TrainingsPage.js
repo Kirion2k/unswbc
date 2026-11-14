@@ -41,9 +41,9 @@ const expectCards = [
 
 function TrainingsPage() {
   return (
-    <Box sx={{ bgcolor: '#f8f9fa' }}>
+    <Box sx={{ bgcolor: 'var(--club-canvas)' }}>
       <PageHero
-        imageSrc="/unsw-66.JPG"
+        imageSrc="/optimized/unsw-66.jpg"
         imageAlt="UNSW Badminton Club Friday Trainings"
         title="Friday"
         highlight="Trainings"
@@ -51,7 +51,7 @@ function TrainingsPage() {
       />
 
       {/* ─── Key Info Tiles ─── */}
-      <Box sx={{ bgcolor: '#1c3c6f', py: { xs: 6, md: 8 } }}>
+      <Box sx={{ bgcolor: 'var(--club-feature)', py: { xs: 6, md: 8 } }}>
         <Container>
           <ScrollReveal>
             <Typography
@@ -61,7 +61,7 @@ function TrainingsPage() {
                 letterSpacing: '0.18em',
                 fontSize: '0.72rem',
                 fontWeight: 800,
-                color: 'rgba(255,255,255,0.55)',
+                color: 'var(--club-muted)',
                 mb: 4,
               }}
             >
@@ -75,20 +75,20 @@ function TrainingsPage() {
                   <StaggerItem>
                     <TiltCard
                       sx={{
-                        bgcolor: 'rgba(255,255,255,0.07)',
-                        border: '1px solid rgba(255,255,255,0.12)',
+                        bgcolor: 'var(--club-surface)',
+                        border: '1px solid var(--club-line)',
                         borderRadius: 3,
                         height: '100%',
                       }}
                     >
-                      <CardContent sx={{ p: { xs: 2.5, md: 3 }, textAlign: 'center' }}>
+                      <CardContent sx={{ p: { xs: 2, sm: 2.5, md: 3 }, textAlign: 'center' }}>
                         <Typography
                           sx={{
                             fontSize: '0.7rem',
                             fontWeight: 800,
                             textTransform: 'uppercase',
                             letterSpacing: '0.14em',
-                            color: 'rgba(255,255,255,0.55)',
+                            color: 'var(--club-muted)',
                             mb: 1,
                           }}
                         >
@@ -98,7 +98,7 @@ function TrainingsPage() {
                           sx={{
                             fontWeight: 900,
                             fontSize: { xs: '1rem', md: '1.2rem' },
-                            color: 'white',
+                            color: 'var(--club-text)',
                             lineHeight: 1.25,
                           }}
                         >
@@ -128,11 +128,11 @@ function TrainingsPage() {
                     <CardContent sx={{ p: { xs: 3, md: 4 }, height: '100%' }}>
                       <Box
                         sx={{
-                          width: 40,
-                          height: 40,
-                          borderRadius: '50%',
-                          bgcolor: 'rgba(28,60,111,0.10)',
-                          color: '#1c3c6f',
+                          width: '3rem',
+                          height: '3rem',
+                          borderRadius: '0.875rem',
+                          bgcolor: 'var(--club-tint)',
+                          color: 'var(--club-accent)',
                           display: 'grid',
                           placeItems: 'center',
                           fontWeight: 900,
@@ -142,7 +142,7 @@ function TrainingsPage() {
                       >
                         {i + 1}
                       </Box>
-                      <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: '#0f172a' }}>
+                      <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: 'var(--club-text)' }}>
                         {card.title}
                       </Typography>
                       <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
@@ -165,23 +165,13 @@ function TrainingsPage() {
             whileHover={{ scale: 1.005 }}
             transition={{ duration: 0.25 }}
             sx={{
-              bgcolor: '#1c3c6f',
-              color: 'white',
+              bgcolor: 'var(--club-feature)',
+              color: 'var(--club-text)',
               borderRadius: 4,
               overflow: 'hidden',
               position: 'relative',
             }}
           >
-            <Box
-              sx={{
-                position: 'absolute',
-                inset: 0,
-                background:
-                  'linear-gradient(135deg, #123456 0%, #1c3c6f 50%, #123456 100%)',
-                backgroundSize: '200% 200%',
-                opacity: 0.85,
-              }}
-            />
             <CardContent
               sx={{
                 position: 'relative',
@@ -203,7 +193,7 @@ function TrainingsPage() {
               </Typography>
               <Typography
                 sx={{
-                  color: 'rgba(255,255,255,0.75)',
+                  color: 'var(--club-muted)',
                   fontSize: { xs: '1rem', md: '1.1rem' },
                   maxWidth: 520,
                   mx: 'auto',
@@ -227,13 +217,13 @@ function TrainingsPage() {
                   rel="noopener noreferrer"
                   size="large"
                   sx={{
-                    bgcolor: 'white',
-                    color: '#1c3c6f',
+                    bgcolor: 'var(--club-accent)',
+                    color: 'var(--club-action-ink)',
                     fontWeight: 900,
                     px: 5,
                     py: 1.75,
                     fontSize: '1.05rem',
-                    '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' },
+                    '&:hover': { bgcolor: 'var(--club-accent-hover)' },
                   }}
                 >
                   Register on Eventbrite &rarr;
@@ -244,16 +234,16 @@ function TrainingsPage() {
                   to="/sessions"
                   size="large"
                   sx={{
-                    borderColor: 'rgba(255,255,255,0.55)',
+                    borderColor: 'var(--club-line)',
                     borderWidth: 2,
-                    color: 'white',
+                    color: 'var(--club-text)',
                     fontWeight: 700,
                     px: 4,
                     py: 1.75,
                     fontSize: '1rem',
                     '&:hover': {
-                      borderColor: 'white',
-                      bgcolor: 'rgba(255,255,255,0.10)',
+                      borderColor: 'var(--club-accent)',
+                      bgcolor: 'var(--club-tint)',
                     },
                   }}
                 >

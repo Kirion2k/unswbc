@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Box, Container, IconButton, Typography } from '@mui/material';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import CloseIcon from '@mui/icons-material/Close';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -8,20 +8,20 @@ import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 28, scale: 0.95 },
+  hidden: { opacity: 0, y: 16 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      duration: 0.55,
-      delay: Math.min(i * 0.018, 0.35),
+      duration: 0.35,
+      delay: Math.min(i * 0.012, 0.12),
       ease: [0.25, 0.1, 0.25, 1],
     },
   }),
 };
 
 function PhotoGalleryPage() {
+  const reducedMotion = useReducedMotion();
   const galleryImages = [
     '/unsw-1.jpg', '/unsw-2.jpg', '/unsw-3.jpg', '/unsw-4.jpg', '/unsw-5.jpg',
     '/unsw-6.jpg', '/unsw-7.jpg', '/unsw-8.jpg', '/unsw-9.jpg', '/unsw-10.jpg',
@@ -68,9 +68,9 @@ function PhotoGalleryPage() {
   }, [selected]);
 
   return (
-    <Box sx={{ bgcolor: '#f8f9fa' }}>
+    <Box sx={{ bgcolor: 'var(--club-canvas)' }}>
       <PageHero
-        imageSrc="/unsw-81.JPG"
+        imageSrc="/optimized/unsw-81.jpg"
         imageAlt="Photo Gallery"
         title="Photo"
         highlight="Gallery"
@@ -91,19 +91,20 @@ function PhotoGalleryPage() {
               key={index}
               custom={index}
               variants={cardVariants}
-              initial="hidden"
+              initial={reducedMotion ? false : "hidden"}
               whileInView="visible"
-              viewport={{ once: true, amount: 0.08 }}
+              viewport={{ once: true, amount: 0.05, margin: '0px 0px 100px 0px' }}
               style={{ breakInside: 'avoid', marginBottom: '16px', cursor: 'pointer' }}
               onClick={() => setSelected(index)}
             >
               <motion.div
-                whileHover={{ scale: 1.03, y: -5 }}
+                className="gallery-tile"
+                whileHover={reducedMotion ? undefined : { scale: 1.02 }}
                 transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}
                 style={{
-                  borderRadius: 12,
+                  borderRadius: 'var(--club-radius)',
                   overflow: 'hidden',
-                  boxShadow: '0 4px 18px rgba(2,6,23,0.09)',
+                  border: '1px solid var(--club-line)',
                   position: 'relative',
                 }}
               >
@@ -112,13 +113,15 @@ function PhotoGalleryPage() {
                   src={img.thumb}
                   alt={`Gallery ${index + 1}`}
                   loading="lazy"
+                  decoding="async"
                   sx={{
                     display: 'block',
                     width: '100%',
                     height: { xs: 220, sm: getHeight(index) },
                     objectFit: 'cover',
                     transition: 'transform 0.45s ease',
-                    '.MuiBox-root:hover &': { transform: 'scale(1.07)' },
+                    '.gallery-tile:hover &': { transform: 'scale(1.03)' },
+                    '@media (prefers-reduced-motion: reduce)': { transition: 'none', transform: 'none' },
                   }}
                 />
 

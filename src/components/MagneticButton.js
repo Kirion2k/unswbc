@@ -1,36 +1,42 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { Button, Box } from '@mui/material';
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion } from 'framer-motion';
+import { Button, Box, useMediaQuery } from '@mui/material';
 import { keyframes } from '@mui/system';
+import ShuttleIcon from './ShuttleIcon';
 
 const rippleAnimation = keyframes`
   0% { transform: scale(0); opacity: 0.35; }
   100% { transform: scale(2); opacity: 0; }
 `;
 
+const shuttleFlyby = keyframes`
+  0% { transform: translateX(-72%); opacity: 0; }
+  12% { opacity: 0.5; }
+  78% { opacity: 0.5; }
+  100% { transform: translateX(76%); opacity: 0; }
+`;
+
+const shuttleArc = keyframes`
+  0% { transform: translateY(6%) rotate(-5deg); }
+  50% { transform: translateY(-6%) rotate(0deg); }
+  100% { transform: translateY(4%) rotate(6deg); }
+`;
+
+const swooshReveal = keyframes`
+  0%, 8% { opacity: 0; transform: scaleX(0.15); }
+  30% { opacity: 0.2; transform: scaleX(0.8); }
+  65% { opacity: 0.12; transform: scaleX(1); }
+  100% { opacity: 0; transform: scaleX(1.1); }
+`;
+
 export default function MagneticButton({
   children,
-  strength = 0.3,
   rippleColor = 'rgba(255,255,255,0.5)',
   sx = {},
   ...props
 }) {
-  const ref = useRef(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [ripples, setRipples] = useState([]);
-  const prefersReducedMotion = useReducedMotion();
-
-  const handleMouseMove = (e) => {
-    if (prefersReducedMotion) return;
-    const rect = ref.current.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    setPosition({ x: x * strength, y: y * strength });
-  };
-
-  const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
-  };
+  const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
 
   const handleClick = useCallback((e) => {
     if (prefersReducedMotion) return;
@@ -54,26 +60,50 @@ export default function MagneticButton({
   }, [ripples]);
 
   return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      animate={position}
-      transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-      style={{ display: 'inline-block' }}
-    >
+    <Box sx={{ display: 'inline-flex' }}>
       <Button
         component={motion.button}
-        whileHover={{ scale: 1.04 }}
-        whileTap={{ scale: 0.97 }}
+        whileTap={prefersReducedMotion ? undefined : { scale: 0.99 }}
         onClick={handleClick}
         sx={{
           position: 'relative',
           overflow: 'hidden',
+          transition: 'background-color 240ms ease, border-color 240ms ease, box-shadow 240ms ease',
+          '& .button-shuttle': {
+            position: 'absolute', inset: 0, pointerEvents: 'none', opacity: 0,
+          },
+          '& .button-flight': { position: 'absolute', inset: 0 },
+          '& .button-swoosh': {
+            position: 'absolute', left: 'calc(50% - 4.1rem)', top: 'calc(50% - 0.7rem)',
+            width: '3.4rem', height: '1.4rem', opacity: 0, transformOrigin: 'right center',
+          },
+          '@media (hover: hover) and (prefers-reduced-motion: no-preference)': {
+            '&:hover .button-shuttle': { animation: `${shuttleFlyby} 700ms linear` },
+            '&:hover .button-flight': { animation: `${shuttleArc} 700ms ease-in-out` },
+            '&:hover .button-swoosh': { animation: `${swooshReveal} 700ms ease-in-out` },
+          },
+          '&:focus-visible .button-shuttle': prefersReducedMotion ? {} : {
+            animation: `${shuttleFlyby} 700ms linear`,
+          },
+          '&:focus-visible .button-flight': prefersReducedMotion ? {} : {
+            animation: `${shuttleArc} 700ms ease-in-out`,
+          },
+          '&:focus-visible .button-swoosh': prefersReducedMotion ? {} : {
+            animation: `${swooshReveal} 700ms ease-in-out`,
+          },
           ...sx,
         }}
         {...props}
       >
+        <Box component="span" className="button-shuttle" aria-hidden="true">
+          <Box component="span" className="button-flight">
+            <Box component="svg" className="button-swoosh" viewBox="0 0 100 28" fill="none" aria-hidden="true">
+              <path d="M2 25 Q42 3 98 12" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+              <path d="M18 27 Q56 10 94 16" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.6" />
+            </Box>
+            <ShuttleIcon style={{ position: 'absolute', left: '50%', top: '50%', width: '1.5rem', height: '1.2rem', transform: 'translate(-50%, -50%) rotate(-12deg)' }} />
+          </Box>
+        </Box>
         <Box component="span" sx={{ position: 'relative', zIndex: 1 }}>
           {children}
         </Box>
@@ -104,6 +134,6 @@ export default function MagneticButton({
           ))}
         </Box>
       </Button>
-    </motion.div>
+    </Box>
   );
 }
