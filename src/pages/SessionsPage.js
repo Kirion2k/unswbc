@@ -200,11 +200,14 @@ function SessionsPage() {
                 </Box>
                 <Box
                   component="button"
+                  className="club-glass-button"
                   onClick={() => setShowBanner(false)}
                   aria-label="Dismiss banner"
                   sx={{
-                    background: 'none',
-                    border: 'none',
+                    backgroundColor: 'rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    borderRadius: '50%',
+                    width: 36, height: 36, flexShrink: 0,
                     cursor: 'pointer',
                     color: 'rgba(255,255,255,0.6)',
                     fontSize: '1.1rem',

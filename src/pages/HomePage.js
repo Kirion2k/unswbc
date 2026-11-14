@@ -241,7 +241,7 @@ function HomePage() {
                 component={RouterLink}
                 to="/sessions"
                 sx={{
-                  bgcolor: 'white',
+                  bgcolor: 'rgba(255,255,255,0.84)',
                   color: '#0a1628',
                   fontWeight: 800,
                   px: 4,
@@ -257,8 +257,9 @@ function HomePage() {
                 component={RouterLink}
                 to="/about"
                 sx={{
-                  borderColor: 'white',
-                  borderWidth: 2,
+                  borderColor: 'rgba(255,255,255,0.5)',
+                  bgcolor: 'rgba(12,20,34,0.38)',
+                  borderWidth: 1,
                   color: 'white',
                   fontWeight: 700,
                   px: 4,

@@ -13,7 +13,13 @@ export default function MorphingText({ texts, active = true, sx = {} }) {
   }, [active, reducedMotion, texts.length]);
 
   return (
-    <Box component="span" sx={{ display: 'inline-grid', position: 'relative', ...sx }}>
+    <Box
+      component={motion.span}
+      initial={reducedMotion ? false : { opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 0.7, ease: 'easeOut' }}
+      sx={{ display: 'inline-grid', position: 'relative', ...sx }}
+    >
       <span aria-hidden="true" style={{ gridArea: '1 / 1', visibility: 'hidden' }}>
         {texts.reduce((longest, text) => text.length > longest.length ? text : longest, '')}
       </span>

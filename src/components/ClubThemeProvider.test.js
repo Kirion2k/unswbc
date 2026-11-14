@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen, cleanup } from '@testing-library/react';
+import { fireEvent, render, screen, cleanup, act } from '@testing-library/react';
 import ClubThemeProvider, { useClubTheme } from './ClubThemeProvider';
 
 function Control() {
@@ -8,25 +8,43 @@ function Control() {
 }
 
 beforeEach(() => {
+  sessionStorage.clear();
   localStorage.clear();
-  window.matchMedia = jest.fn().mockReturnValue({ matches: false, addEventListener: jest.fn(), removeEventListener: jest.fn() });
+  jest.useFakeTimers();
+  jest.setSystemTime(new Date(2026, 10, 15, 12));
 });
-afterEach(cleanup);
+afterEach(() => { cleanup(); jest.useRealTimers(); });
 
-test('switches themes and remembers the selection after remounting', () => {
+test.each([[6, 59, 'dark'], [7, 0, 'light'], [18, 59, 'light'], [19, 0, 'dark'], [0, 0, 'dark']])(
+  'uses local time %i:%i for %s mode', (hour, minute, mode) => {
+    jest.setSystemTime(new Date(2026, 10, 15, hour, minute));
+    render(<ClubThemeProvider><Control /></ClubThemeProvider>);
+    expect(screen.getByRole('button', { name: mode })).toBeTruthy();
+  }
+);
+
+test('updates the automatic theme while the page is open', () => {
+  jest.setSystemTime(new Date(2026, 10, 15, 18, 59));
+  render(<ClubThemeProvider><Control /></ClubThemeProvider>);
+  act(() => jest.advanceTimersByTime(60000));
+  expect(screen.getByRole('button', { name: 'dark' })).toBeTruthy();
+});
+
+test('keeps a manual choice for the current visit, including remounting', () => {
   const { unmount } = render(<ClubThemeProvider><Control /></ClubThemeProvider>);
   fireEvent.click(screen.getByRole('button', { name: 'light' }));
+  expect(sessionStorage.getItem('unswbc-theme')).toBe('dark');
+  act(() => jest.advanceTimersByTime(60000));
   expect(screen.getByRole('button', { name: 'dark' })).toBeTruthy();
-  expect(localStorage.getItem('unswbc-theme')).toBe('dark');
   unmount();
   render(<ClubThemeProvider><Control /></ClubThemeProvider>);
   expect(screen.getByRole('button', { name: 'dark' })).toBeTruthy();
 });
 
-test('uses system dark preference when there is no saved selection', () => {
-  window.matchMedia.mockReturnValue({ matches: true, addEventListener: jest.fn(), removeEventListener: jest.fn() });
+test('an old permanent preference does not prevent automatic time selection', () => {
+  localStorage.setItem('unswbc-theme', 'dark');
   render(<ClubThemeProvider><Control /></ClubThemeProvider>);
-  expect(screen.getByRole('button', { name: 'dark' })).toBeTruthy();
+  expect(screen.getByRole('button', { name: 'light' })).toBeTruthy();
 });
 
 test('still switches theme when the browser blocks saving preferences', () => {
@@ -35,7 +53,5 @@ test('still switches theme when the browser blocks saving preferences', () => {
     render(<ClubThemeProvider><Control /></ClubThemeProvider>);
     fireEvent.click(screen.getByRole('button', { name: 'light' }));
     expect(screen.getByRole('button', { name: 'dark' })).toBeTruthy();
-  } finally {
-    save.mockRestore();
-  }
+  } finally { save.mockRestore(); }
 });

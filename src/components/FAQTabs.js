@@ -63,6 +63,7 @@ const FAQTabButtons = ({ categories, selected, setSelected }) => (
       const isSelected = selected === key;
       return (
         <motion.button
+          className="club-glass-button"
           key={key}
           onClick={() => setSelected(key)}
           whileHover={{ scale: 1.06, y: -2 }}
@@ -79,7 +80,7 @@ const FAQTabButtons = ({ categories, selected, setSelected }) => (
             fontSize: '0.875rem',
             fontWeight: 600,
             cursor: 'pointer',
-            background: 'transparent',
+            backgroundColor: 'var(--club-tint)',
             color: isSelected ? 'white' : 'var(--club-muted)',
             transition: 'color 0.3s, border-color 0.3s',
             fontFamily: 'inherit',
@@ -98,7 +99,8 @@ const FAQTabButtons = ({ categories, selected, setSelected }) => (
                   position: 'absolute',
                   inset: 0,
                   zIndex: 0,
-                  background: 'linear-gradient(135deg, #1c3c6f, #2d5a9e)',
+                  backgroundColor: '#1c3c6f',
+                  backgroundImage: 'var(--club-button-sheen)',
                 }}
               />
             )}
@@ -146,12 +148,15 @@ const FAQItem = ({ question, answer }) => {
         borderRadius: 'var(--club-radius)',
         border: '1px solid',
         borderColor: 'var(--club-line)',
-        backgroundColor: isOpen ? 'var(--club-feature)' : 'var(--club-surface)',
+        backgroundColor: isOpen ? 'var(--club-feature)' : 'var(--club-glass)',
+        backgroundImage: 'var(--club-glass-sheen)',
+        boxShadow: 'var(--club-glass-shadow)',
         overflow: 'hidden',
         transition: 'border-color 0.25s, background-color 0.25s',
       }}
     >
       <button
+        className="club-glass-button"
         onClick={() => setIsOpen(!isOpen)}
         style={{
           display: 'flex',
@@ -161,7 +166,7 @@ const FAQItem = ({ question, answer }) => {
           gap: 12,
           padding: '1rem 1.25rem',
           textAlign: 'left',
-          background: 'transparent',
+          backgroundColor: 'transparent',
           border: 'none',
           cursor: 'pointer',
           fontFamily: 'inherit',

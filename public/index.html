@@ -6,9 +6,10 @@
     <script>
       (function () {
         var saved;
-        try { saved = localStorage.getItem('unswbc-theme'); } catch (e) {}
+        try { saved = sessionStorage.getItem('unswbc-theme'); } catch (e) {}
+        var hour = new Date().getHours();
         var mode = saved === 'light' || saved === 'dark' ? saved :
-          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          (hour >= 7 && hour < 19 ? 'light' : 'dark');
         document.documentElement.dataset.theme = mode;
         document.documentElement.style.colorScheme = mode;
       })();
@@ -148,13 +149,7 @@
 
       <!-- Text -->
       <div class="il-text">
-        <div class="il-title">UNSW Badminton Club</div>
-        <div class="il-caption">Getting the court ready</div>
-        <div class="il-dots" aria-hidden="true">
-          <span class="il-dot"></span>
-          <span class="il-dot"></span>
-          <span class="il-dot"></span>
-        </div>
+        <div class="il-title">LOADING...</div>
       </div>
 
     </div>
@@ -196,10 +191,12 @@
       }
       #initial-loader.initial-loader--hide { opacity: 0; pointer-events: none; }
       .il-scene {
-        --il-travel: calc(min(88vw, 360px) - 144px);
+        --il-travel: calc(min(76vw, 360px) - 144px);
         position: relative;
-        width: min(88vw, 360px);
+        width: min(76vw, 360px);
         height: 180px;
+        transform: scale(1.18);
+        margin-block: 17px;
       }
       .il-scene::before {
         content: "";
@@ -240,12 +237,11 @@
       .il-shuttle { width: 30px; height: 20px; overflow: visible; animation: il-heading var(--il-cycle) linear infinite; }
       .il-trail { opacity: .35; }
       .il-text { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 0 16px; }
-      .il-title { font-size: clamp(12px, 3.4vw, 14px); font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
-      .il-caption { font-size: 12px; color: var(--il-muted); }
-      .il-dots { display: flex; gap: 7px; margin-top: 8px; }
-      .il-dot { width: 4px; height: 4px; border-radius: 50%; background: currentColor; animation: il-dot-pulse 1.4s ease-in-out infinite; }
-      .il-dot:nth-child(2) { animation-delay: .16s; }
-      .il-dot:nth-child(3) { animation-delay: .32s; }
+      .il-title { font-size: 24px; font-weight: 800; letter-spacing: .13em; }
+      @media (min-width: 600px) {
+        .il-scene { transform: scale(1.5); margin-block: 45px; }
+        .il-title { font-size: 28px; }
+      }
       @keyframes il-cross-court {
         0%, 100% { transform: translateX(0); }
         50% { transform: translateX(var(--il-travel)); }
@@ -275,13 +271,9 @@
         25%, 70% { translate: 0 0; }
         90% { translate: -1px 1px; }
       }
-      @keyframes il-dot-pulse {
-        0%, 80%, 100% { opacity: .25; transform: translateY(0); }
-        40% { opacity: .9; transform: translateY(-3px); }
-      }
       @media (prefers-reduced-motion: reduce) {
         #initial-loader { transition-duration: 100ms; }
-        .il-player, .il-arm, .il-flight, .il-shuttle-wrap, .il-shuttle, .il-dot { animation: none; }
+        .il-player, .il-arm, .il-flight, .il-shuttle-wrap, .il-shuttle { animation: none; }
         .il-flight { transform: translateX(calc(var(--il-travel) / 2)); }
         .il-shuttle-wrap { transform: translateY(-64px); }
       }
