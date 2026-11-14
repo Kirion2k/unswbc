@@ -27,7 +27,7 @@
   <body>
 
     <!-- ─── Initial loader ──────────────────────────────────────────────────── -->
-    <div id="initial-loader" aria-label="Loading" data-min-ms="1800">
+    <div id="initial-loader" role="status" aria-label="Loading UNSW Badminton Club" data-min-ms="1800">
 
       <!-- Rally scene -->
       <div class="il-scene" aria-hidden="true">
@@ -89,9 +89,7 @@
         </svg>
 
         <!-- Net post -->
-        <div class="il-net">
-          <div class="il-net-top"></div>
-        </div>
+        <div class="il-net"></div>
 
         <!-- Right player — identical SVG, CSS mirrors it and uses p2 arm timing -->
         <svg class="il-player il-player--right"
@@ -131,14 +129,16 @@
           <line x1="47" y1="2"  x2="49" y2="-6" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
         </svg>
 
-        <!-- Shuttle: wrapper translates (rally arc), image rotates (spin) -->
-        <div class="il-shuttle-wrap">
-          <img
-            class="il-shuttle"
-            src="/logo-white.png"
-            alt=""
-            onerror="this.onerror=null;this.src='/unswbc-shuttle.svg';"
-          />
+        <!-- A lightweight vector shuttle, with its cork facing the flight direction. -->
+        <div class="il-flight">
+          <div class="il-shuttle-wrap">
+            <svg class="il-shuttle" viewBox="0 0 40 24" fill="none">
+              <path class="il-trail" d="M0 9h9M3 15h6" stroke="currentColor" stroke-linecap="round"/>
+              <path d="M12 3 29 9v6L12 21 9 12Z" fill="currentColor" fill-opacity=".14" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="m12 3 13 9-13 9M9 12h20" stroke="currentColor" stroke-width="1.2"/>
+              <path d="M28 8h4a4 4 0 0 1 0 8h-4Z" fill="currentColor"/>
+            </svg>
+          </div>
         </div>
 
         <!-- Court floor line -->
@@ -149,6 +149,7 @@
       <!-- Text -->
       <div class="il-text">
         <div class="il-title">UNSW Badminton Club</div>
+        <div class="il-caption">Getting the court ready</div>
         <div class="il-dots" aria-hidden="true">
           <span class="il-dot"></span>
           <span class="il-dot"></span>
@@ -163,269 +164,126 @@
 
     <script>
       window.__INITIAL_LOADER_START__ = (window.performance && performance.now) ? performance.now() : Date.now();
-
-      // Preload hero video while the loader is visible
-      (function() {
-        var vid = document.createElement('video');
-        vid.src = '/video-web.mp4';
-        vid.preload = 'auto';
-        vid.muted = true;
-      })();
-
-      // Preload all page hero images while the loader is visible
-      (function() {
-        var imgs = [
-          '/unsw-14.JPG',  // About
-          '/unsw-15.JPG',  // Values
-          '/unsw-21.JPG',  // Membership Resources
-          '/unsw-29.JPG',  // About achievements
-          '/unsw-44.JPG',  // About activities
-          '/unsw-55.JPG',  // About vision
-          '/unsw-66.JPG',  // Trainings
-          '/unsw-8.jpg',   // FAQs
-          '/unsw-81.JPG',  // Sessions (if used)
-          '/unsw-20.jpg',  // Meet the Team or Gallery
-          '/unsw-58.jpg',
-          '/unsw-59.jpg',
-          '/unsw-12.jpg',
-        ];
-        imgs.forEach(function(src) {
-          var img = new Image();
-          img.src = src;
-        });
-      })();
     </script>
 
     <style>
-      /* ── Base ──────────────────────────────────────────────────────────── */
       #initial-loader {
+        --il-bg: #f8f9fc;
+        --il-ink: #1c3c6f;
+        --il-muted: #66758c;
+        --il-line: rgba(28,60,111,.15);
+        --il-court: rgba(28,60,111,.035);
+        --il-cycle: 2.8s;
         position: fixed;
         inset: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 32px;
-        background:
-          radial-gradient(ellipse 860px 480px at 50% 40%, rgba(28,60,111,0.45), transparent),
-          linear-gradient(160deg, #0d1b2e 0%, #020817 60%, #050f1f 100%);
-        color: #fff;
+        gap: 36px;
+        background: var(--il-bg);
+        color: var(--il-ink);
         z-index: 9999;
-        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        transition: opacity 380ms ease, transform 380ms ease;
+        font-family: Inter, system-ui, sans-serif;
+        transition: opacity 320ms ease;
       }
-      #initial-loader.initial-loader--hide {
-        opacity: 0;
-        transform: scale(1.025);
-        pointer-events: none;
+      [data-theme="dark"] #initial-loader {
+        --il-bg: #0c1422;
+        --il-ink: #d8e8ff;
+        --il-muted: #98abc7;
+        --il-line: rgba(169,202,255,.2);
+        --il-court: rgba(169,202,255,.04);
       }
-
-      /* ── Rally scene ───────────────────────────────────────────────────── */
+      #initial-loader.initial-loader--hide { opacity: 0; pointer-events: none; }
       .il-scene {
+        --il-travel: calc(min(88vw, 360px) - 144px);
         position: relative;
-        width: min(88vw, 320px);
-        height: 160px;
-        overflow: visible;
+        width: min(88vw, 360px);
+        height: 180px;
       }
-
-      /* ── Players ───────────────────────────────────────────────────────── */
-      .il-player {
+      .il-scene::before {
+        content: "";
         position: absolute;
-        bottom: 4px;
-        overflow: visible;
+        left: 8px;
+        right: 8px;
+        bottom: -14px;
+        height: 44px;
+        border: 1px solid var(--il-line);
+        border-radius: 50%;
+        background: var(--il-court);
       }
-      .il-player--left  { left: 0; }
-      /* Mirror right player so racket faces left (toward net) */
-      .il-player--right {
-        right: 0;
-        transform: scaleX(-1);
-      }
-
-      /* ── Net ───────────────────────────────────────────────────────────── */
+      .il-player { position: absolute; bottom: 4px; overflow: visible; animation: il-ready var(--il-cycle) ease-in-out infinite; }
+      .il-player--left { left: 0; }
+      .il-player--right { right: 0; transform: scaleX(-1); animation-delay: -1.4s; }
+      .il-player [stroke="white"], .il-player [stroke^="rgba(255,255,255"] { stroke: currentColor; }
+      .il-player [fill="white"] { fill: currentColor; }
+      .il-player [fill="rgba(255,255,255,0.09)"] { fill: var(--il-bg); }
+      .il-player [fill="#0a1628"] { fill: var(--il-bg); }
+      .il-player [fill="rgba(0,0,0,0.22)"] { fill: var(--il-line); }
+      .il-arm { animation: il-swing var(--il-cycle) ease-in-out infinite; }
+      .il-arm--p2 { animation-delay: -1.4s; }
       .il-net {
         position: absolute;
         left: 50%;
-        bottom: 4px;
-        width: 2px;
-        height: 78px;
+        bottom: 5px;
+        height: 62px;
+        width: 16px;
         transform: translateX(-50%);
-        background: linear-gradient(
-          to top,
-          rgba(255,255,255,0.45),
-          rgba(255,255,255,0.1)
-        );
-        border-radius: 1px;
+        border: 1px solid var(--il-line);
+        border-top: 2px solid currentColor;
+        background: repeating-linear-gradient(0deg, transparent 0 7px, var(--il-line) 7px 8px), repeating-linear-gradient(90deg, transparent 0 7px, var(--il-line) 7px 8px);
       }
-      /* Net top crossbar */
-      .il-net-top {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 14px;
-        height: 2px;
-        background: rgba(255,255,255,0.5);
-        border-radius: 1px;
+      .il-net::after { content: ""; position: absolute; left: 50%; top: -4px; bottom: -5px; border-left: 2px solid currentColor; }
+      .il-floor { position: absolute; left: 8px; right: 8px; bottom: 4px; height: 1px; background: var(--il-line); }
+      .il-flight { position: absolute; left: 62px; bottom: 62px; width: 20px; height: 20px; animation: il-cross-court var(--il-cycle) linear infinite; }
+      .il-shuttle-wrap { width: 20px; height: 20px; animation: il-flight-arc 1.4s cubic-bezier(.33,0,.67,1) infinite; }
+      .il-shuttle { width: 30px; height: 20px; overflow: visible; animation: il-heading var(--il-cycle) linear infinite; }
+      .il-trail { opacity: .35; }
+      .il-text { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 0 16px; }
+      .il-title { font-size: clamp(12px, 3.4vw, 14px); font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+      .il-caption { font-size: 12px; color: var(--il-muted); }
+      .il-dots { display: flex; gap: 7px; margin-top: 8px; }
+      .il-dot { width: 4px; height: 4px; border-radius: 50%; background: currentColor; animation: il-dot-pulse 1.4s ease-in-out infinite; }
+      .il-dot:nth-child(2) { animation-delay: .16s; }
+      .il-dot:nth-child(3) { animation-delay: .32s; }
+      @keyframes il-cross-court {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(var(--il-travel)); }
       }
-
-      /* ── Court floor line ──────────────────────────────────────────────── */
-      .il-floor {
-        position: absolute;
-        bottom: 4px;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(
-          to right,
-          transparent,
-          rgba(255,255,255,0.18) 20%,
-          rgba(255,255,255,0.18) 80%,
-          transparent
-        );
+      @keyframes il-flight-arc {
+        0%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(.2,.55,.55,1); }
+        50% { transform: translateY(-64px); animation-timing-function: cubic-bezier(.45,0,.8,.45); }
       }
-
-      /* ── Shuttle wrapper — handles the arc translation ─────────────────── */
-      .il-shuttle-wrap {
-        position: absolute;
-        left: 62px;
-        bottom: 62px;
-        width: 20px;
-        height: 20px;
-        animation: il-rally 2.4s linear infinite;
-        pointer-events: none;
+      @keyframes il-heading {
+        0% { transform: rotate(-38deg); }
+        24% { transform: rotate(0deg); }
+        49.99% { transform: rotate(38deg); }
+        50% { transform: rotate(218deg); }
+        74% { transform: rotate(180deg); }
+        99.99% { transform: rotate(142deg); }
+        100% { transform: rotate(-38deg); }
       }
-
-      /* ── Shuttle image — rotates to face direction of travel ────────────── */
-      .il-shuttle {
-        width: 20px;
-        height: 20px;
-        object-fit: contain;
-        filter:
-          drop-shadow(0 2px 6px rgba(0,0,0,0.55))
-          drop-shadow(0 0 8px rgba(255,255,255,0.22));
-        animation: il-spin-cw 0.4s linear infinite;
-        will-change: transform;
+      @keyframes il-swing {
+        0%, 100% { transform: rotate(0deg); }
+        7% { transform: rotate(22deg); }
+        22%, 72% { transform: rotate(-10deg); }
+        90% { transform: rotate(-28deg); }
       }
-
-      /* ── Racket arm ────────────────────────────────────────────────────── */
-      .il-arm {
-        animation-duration: 2.4s;
-        animation-iteration-count: infinite;
-        animation-timing-function: ease-in-out;
+      @keyframes il-ready {
+        0%, 100% { translate: 0 0; }
+        8% { translate: 2px -3px; }
+        25%, 70% { translate: 0 0; }
+        90% { translate: -1px 1px; }
       }
-      /* Left player: hits at 0 % and 100 % */
-      .il-arm--p1 { animation-name: il-arm-p1; }
-      /* Right player (scaleX-1 parent): hits at 50 % — rotations negated due to mirror */
-      .il-arm--p2 { animation-name: il-arm-p2; }
-
-      /* ── Text block ────────────────────────────────────────────────────── */
-      .il-text {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 14px;
-      }
-      .il-title {
-        font-size: 13px;
-        font-weight: 800;
-        letter-spacing: 0.26em;
-        text-transform: uppercase;
-        color: rgba(255,255,255,0.82);
-      }
-
-      /* ── Loading dots ──────────────────────────────────────────────────── */
-      .il-dots {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-      }
-      .il-dot {
-        display: block;
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: rgba(91,163,245,0.75);
-        animation: il-dot-pulse 1.5s ease-in-out infinite;
-      }
-      .il-dot:nth-child(2) { animation-delay: 0.22s; }
-      .il-dot:nth-child(3) { animation-delay: 0.44s; }
-
-      /* ── Keyframes ─────────────────────────────────────────────────────── */
-
-      /*
-       * Rally arc: shuttle travels 172px right then back, peaking 56px above
-       * baseline at the midpoint of each leg (25% and 75%).
-       * Per-keyframe timing functions give natural parabolic feel:
-       *   ease-in  at the bottom = accelerates downward
-       *   ease-out at the peak   = decelerates into the arc top
-       */
-      @keyframes il-rally {
-        0%   {
-          transform: translate(0px,   0px);
-          animation-timing-function: ease-in;
-        }
-        25%  {
-          transform: translate(86px, -56px);
-          animation-timing-function: ease-out;
-        }
-        50%  {
-          transform: translate(172px,  0px);
-          animation-timing-function: ease-in;
-        }
-        75%  {
-          transform: translate(86px, -56px);
-          animation-timing-function: ease-out;
-        }
-        100% {
-          transform: translate(0px,   0px);
-        }
-      }
-
-      @keyframes il-spin-cw {
-        0%   { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-
-      /*
-       * Left player arm — pivot at shoulder (40px, 34px in SVG).
-       * At 0 %/100 %: follow-through (arm swept forward = +28 deg clockwise).
-       * Around 90 %: backswing prep (−22 deg).
-       * Between: neutral ready stance.
-       */
-      @keyframes il-arm-p1 {
-        0%         { transform: rotate( 28deg); }
-        12%        { transform: rotate(-18deg); }
-        70%        { transform: rotate( -6deg); }
-        88%        { transform: rotate(-22deg); }
-        100%       { transform: rotate( 28deg); }
-      }
-
-      /*
-       * Right player arm — same SVG but parent has scaleX(-1).
-       * Positive rotation appears CCW in screen space after the flip,
-       * so we negate the values to get the correct visual direction.
-       * Hits at 50 %.
-       */
-      @keyframes il-arm-p2 {
-        0%         { transform: rotate(  6deg); }
-        38%        { transform: rotate( 22deg); }
-        50%        { transform: rotate(-28deg); }
-        62%        { transform: rotate( 18deg); }
-        100%       { transform: rotate(  6deg); }
-      }
-
-      /* Loading dots pulse */
       @keyframes il-dot-pulse {
-        0%,  80%, 100% { opacity: 0.28; transform: scale(0.75); }
-        40%            { opacity: 1.00; transform: scale(1.25); }
+        0%, 80%, 100% { opacity: .25; transform: translateY(0); }
+        40% { opacity: .9; transform: translateY(-3px); }
       }
-
-      /* ── Reduced motion ────────────────────────────────────────────────── */
       @media (prefers-reduced-motion: reduce) {
-        .il-shuttle-wrap { animation: none; transform: translate(86px, -56px); }
-        .il-shuttle      { animation: none; transform: none; }
-        .il-arm          { animation: none; }
-        .il-dot          { animation: none; opacity: 0.5; }
+        #initial-loader { transition-duration: 100ms; }
+        .il-player, .il-arm, .il-flight, .il-shuttle-wrap, .il-shuttle, .il-dot { animation: none; }
+        .il-flight { transform: translateX(calc(var(--il-travel) / 2)); }
+        .il-shuttle-wrap { transform: translateY(-64px); }
       }
     </style>
   </body>
