@@ -15,7 +15,7 @@ export default function ChampionshipHonours() {
       aria-labelledby="championship-title"
       data-achievements
       sx={{
-        my: { xs: 5, md: 7 }, overflow: 'hidden', borderRadius: 'var(--club-radius)',
+        overflow: 'hidden', borderRadius: 'var(--club-radius)',
         bgcolor: 'var(--club-feature)', color: 'var(--club-text)',
         backgroundImage: 'var(--club-glass-sheen)', border: '1px solid var(--club-glass-stroke)', boxShadow: 'var(--club-glass-shadow)',
       }}

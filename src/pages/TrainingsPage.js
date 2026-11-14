@@ -51,7 +51,7 @@ function TrainingsPage() {
       />
 
       {/* ─── Key Info Tiles ─── */}
-      <Box sx={{ bgcolor: 'var(--club-feature)', py: { xs: 6, md: 8 } }}>
+      <Box data-page-content sx={{ bgcolor: 'var(--club-feature)', py: 'var(--club-section-space)' }}>
         <Container>
           <ScrollReveal>
             <Typography
@@ -115,9 +115,9 @@ function TrainingsPage() {
       </Box>
 
       {/* ─── What to Expect ─── */}
-      <Container sx={{ py: { xs: 6, md: 10 } }}>
+      <Container sx={{ py: 'var(--club-section-space)' }}>
         <ScrollReveal>
-          <SectionHeading overline="Training" title="What to expect" sx={{ mb: 5 }} />
+          <SectionHeading overline="Training" title="What to expect" sx={{ mb: 'var(--club-heading-gap)' }} />
         </ScrollReveal>
         <StaggerContainer staggerDelay={0.12}>
           <Grid container spacing={{ xs: 2, md: 3 }}>
@@ -156,7 +156,7 @@ function TrainingsPage() {
           </Grid>
         </StaggerContainer>
 
-        <Divider sx={{ my: { xs: 6, md: 8 } }} />
+        <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
         {/* ─── CTA Card ─── */}
         <ScrollReveal>

@@ -225,8 +225,8 @@ function SessionsPage() {
         )}
       </AnimatePresence>
 
-      <Container sx={{ py: { xs: 6, md: 10 } }}>
-        <SectionHeading overline="New here" title="First time at a session" sx={{ mb: 4 }} />
+      <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
+        <SectionHeading overline="New here" title="First time at a session" sx={{ mb: 'var(--club-heading-gap)' }} />
         <Grid container spacing={{ xs: 2, md: 3 }} alignItems="stretch">
           <Grid item xs={12} md={7}>
             <Card sx={{ height: '100%' }}>
@@ -357,9 +357,9 @@ function SessionsPage() {
           </Grid>
         </Grid>
 
-        <Divider sx={{ my: { xs: 5, md: 6 } }} />
+        <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
-        <SectionHeading overline="Start here" title="Your first session in 3 steps" sx={{ mb: 4 }} />
+        <SectionHeading overline="Start here" title="Your first session in 3 steps" sx={{ mb: 'var(--club-heading-gap)' }} />
         <StaggerContainer>
           <Grid container spacing={{ xs: 2, md: 3 }}>
             {quickSteps.map((step, index) => (
@@ -396,9 +396,9 @@ function SessionsPage() {
           </Grid>
         </StaggerContainer>
 
-        <Divider sx={{ my: { xs: 5, md: 6 } }} />
+        <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
-        <SectionHeading overline="Info" title="Important information" sx={{ mb: 4 }} />
+        <SectionHeading overline="Info" title="Important information" sx={{ mb: 'var(--club-heading-gap)' }} />
         <StaggerContainer>
           <Grid container spacing={{ xs: 2, md: 3 }} sx={{ alignItems: 'stretch' }}>
             {infoCards.map((section, index) => {
@@ -547,9 +547,9 @@ function SessionsPage() {
           </Grid>
         </StaggerContainer>
 
-        <Divider sx={{ my: { xs: 5, md: 6 } }} />
+        <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
-        <SectionHeading overline="Times" title="Sessions" sx={{ mb: 4 }} />
+        <SectionHeading overline="Times" title="Sessions" sx={{ mb: 'var(--club-heading-gap)' }} />
         <StaggerContainer>
           <Grid container spacing={{ xs: 2, md: 3 }} sx={{ alignItems: 'stretch' }}>
             {sessionCards.map((s) => (
@@ -645,7 +645,7 @@ function SessionsPage() {
           </Grid>
         </StaggerContainer>
 
-        <Divider sx={{ my: { xs: 5, md: 6 } }} />
+        <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
         {/* ─── Trainings Reference ─── */}
         <ScrollReveal>
@@ -701,7 +701,7 @@ function SessionsPage() {
           </TiltCard>
         </ScrollReveal>
 
-        <Divider sx={{ my: { xs: 5, md: 6 } }} />
+        <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
         <SectionHeading overline="Pricing" title="Memberships" sx={{ mb: 2 }} />
         <Typography sx={{ textAlign: 'center', fontWeight: 700, mb: 4, color: 'text.secondary' }}>

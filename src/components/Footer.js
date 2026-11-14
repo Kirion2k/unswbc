@@ -69,7 +69,7 @@ export default function Footer() {
           <Typography sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.66)' }}>
             &copy; 2027 UNSW Badminton Club
           </Typography>
-          <Typography sx={{ fontSize: '0.625rem', color: 'rgba(255,255,255,0.66)' }}>
+          <Typography sx={{ fontFamily: '"Allura", cursive', fontSize: '0.875rem', lineHeight: 1.4, color: 'rgba(255,255,255,0.66)' }}>
             Website made by{' '}
             <Link href="https://www.linkedin.com/in/leoxu0406/" target="_blank" rel="noopener noreferrer" underline="hover" sx={{ color: 'inherit', textUnderlineOffset: '0.2em', '&:hover': { color: 'white' } }}>
               Leo Xu

@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 
 export default function SectionHeading({ title, align = 'left', sx }) {
   return (
-    <Box sx={{ textAlign: align, ...sx }}>
+    <Box sx={{ textAlign: align, mb: 'var(--club-heading-gap)', ...sx }}>
       <Typography
         component="h2"
         sx={{

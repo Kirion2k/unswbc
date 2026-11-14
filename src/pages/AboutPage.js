@@ -23,8 +23,8 @@ function AboutPage() {
         imagePosition="center 25%"
       />
 
-      <Container sx={{ py: { xs: 6, md: 10 } }}>
-        <SectionHeading overline="UNSWBC" title="Welcome to the club" sx={{ mb: 5 }} />
+      <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
+        <SectionHeading overline="UNSWBC" title="Welcome to the club" sx={{ mb: 'var(--club-heading-gap)' }} />
 
         <ScrollReveal>
           <Card>
@@ -53,9 +53,9 @@ function AboutPage() {
           </Card>
         </ScrollReveal>
 
-        <Divider sx={{ my: 5 }} />
+        <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
-        <SectionHeading overline="What we do" title="Vision and activities" sx={{ mb: 4 }} />
+        <SectionHeading overline="What we do" title="Vision and activities" sx={{ mb: 'var(--club-heading-gap)' }} />
 
         <Grid container spacing={{ xs: 2, md: 3 }}>
           {[
@@ -134,11 +134,11 @@ function AboutPage() {
           ))}
         </Grid>
 
-        <Divider sx={{ my: 5 }} />
+        <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
-        <ChampionshipHonours />
+        <Box sx={{ mb: 'var(--club-section-space)' }}><ChampionshipHonours /></Box>
 
-        <SectionHeading overline="Experience" title="What to expect" sx={{ mb: 4 }} />
+        <SectionHeading overline="Experience" title="What to expect" sx={{ mb: 'var(--club-heading-gap)' }} />
         <Grid container spacing={{ xs: 2, md: 3 }}>
           {[
             {
@@ -173,7 +173,7 @@ function AboutPage() {
       {/* ─── Instagram Mini Grid ─── */}
       {/* Temporarily hidden until the Instagram feed is available.
 
-      <Container sx={{ pb: { xs: 6, md: 10 } }}>
+      <Container sx={{ pb: 'var(--club-section-space)' }}>
         <ScrollReveal>
           <SectionHeading overline="News" title="Latest from Instagram" sx={{ mb: 3 }} />
         </ScrollReveal>
@@ -181,7 +181,7 @@ function AboutPage() {
       </Container>
       */}
 
-      <Container sx={{ pb: { xs: 7, md: 12 } }}>
+      <Container sx={{ pb: 'var(--club-section-space)' }}>
         <ScrollReveal>
           <Card sx={{ bgcolor: 'var(--club-feature)', color: 'var(--club-text)' }}>
             <CardContent sx={{ p: { xs: 3.5, md: 5 } }}>

@@ -47,9 +47,9 @@ function MembershipResourcesPage() {
         imagePosition="center 35%"
       />
 
-      <Container sx={{ py: { xs: 7, md: 10 } }}>
+      <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
         <ScrollReveal>
-          <SectionHeading overline="Guide" title="Make your first session easy" sx={{ mb: 5 }} />
+          <SectionHeading overline="Guide" title="Make your first session easy" sx={{ mb: 'var(--club-heading-gap)' }} />
         </ScrollReveal>
 
         <Grid container spacing={{ xs: 2, md: 3 }}>
@@ -79,7 +79,7 @@ function MembershipResourcesPage() {
         </Grid>
       </Container>
 
-      <Container sx={{ pb: { xs: 8, md: 12 } }}>
+      <Container sx={{ pb: 'var(--club-section-space)' }}>
         <ScrollReveal>
           <TiltCard>
             <CardContent sx={{ p: { xs: 3.5, md: 5 } }}>
