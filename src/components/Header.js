@@ -82,14 +82,14 @@ function Header() {
 
   const drawer = (
     <Box
-      sx={{ width: { xs: 280, sm: 320 }, height: '100%', bgcolor: 'var(--club-surface)' }}
+      sx={{ width: { xs: 280, sm: 320 }, height: '100%', bgcolor: 'transparent' }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
       <Box sx={{ px: 2, py: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <img src={logo} alt="UNSWBC Logo" style={{ height: 32 }} />
-        <IconButton aria-label="Close navigation menu" onClick={toggleDrawer(false)} sx={{ color: 'var(--club-text)' }}>
+        <IconButton aria-label="Close navigation menu" onClick={toggleDrawer(false)} sx={{ color: 'var(--club-text)', '&, &:hover': { border: 'none', backgroundImage: 'none', boxShadow: 'none', bgcolor: 'transparent' } }}>
           <CloseIcon />
         </IconButton>
       </Box>
@@ -134,7 +134,8 @@ function Header() {
       sx={{
         transition: 'transform 220ms ease, background-color 220ms ease, border-color 220ms ease',
         transform: scrollDir === 'down' ? 'translateY(-100%)' : 'translateY(0)',
-        backdropFilter: 'blur(6px)',
+        backdropFilter: { xs: 'blur(8px) saturate(135%)', md: 'blur(10px) saturate(135%)' },
+        WebkitBackdropFilter: { xs: 'blur(8px) saturate(135%)', md: 'blur(10px) saturate(135%)' },
         backgroundColor: scrolled ? 'var(--club-nav-scrolled)' : 'var(--club-nav)',
         borderBottom: '1px solid var(--club-line)',
         color: 'var(--club-text)',
@@ -155,7 +156,7 @@ function Header() {
             anchor="left"
             open={isDrawerOpen}
             onClose={toggleDrawer(false)}
-            PaperProps={{ sx: { bgcolor: 'var(--club-surface)' } }}
+            PaperProps={{ sx: { bgcolor: 'var(--club-nav-scrolled)', backgroundImage: 'var(--club-glass-sheen)', backdropFilter: 'blur(10px) saturate(135%)', WebkitBackdropFilter: 'blur(10px) saturate(135%)', borderRight: '1px solid var(--club-glass-edge)', boxShadow: 'var(--club-glass-shadow)' } }}
           >
             {drawer}
           </Drawer>
@@ -183,6 +184,7 @@ function Header() {
                     component={Link}
                     to={item.to}
                     sx={{
+                      '&, &:hover': { border: 'none', backgroundImage: 'none', boxShadow: 'none' },
                       color: 'var(--club-text)',
                       opacity: isActive ? 1 : 0.85,
                       fontWeight: isActive ? 800 : 600,
@@ -218,7 +220,7 @@ function Header() {
             color="inherit"
             aria-label="open drawer"
             onClick={toggleDrawer(true)}
-            sx={{ display: { lg: 'none' }, mr: 0.5, width: 44, height: 44, flexShrink: 0 }}
+            sx={{ '&, &:hover': { border: 'none', backgroundImage: 'none', boxShadow: 'none', bgcolor: 'transparent' }, display: { lg: 'none' }, mr: 0.5, width: 44, height: 44, flexShrink: 0 }}
           >
             <MenuIcon />
           </IconButton>
@@ -226,7 +228,7 @@ function Header() {
             onClick={toggleTheme}
             aria-label={`Switch to ${mode === 'light' ? 'dark' : 'light'} mode`}
             title={`Switch to ${mode === 'light' ? 'dark' : 'light'} mode`}
-            sx={{ color: 'var(--club-text)', justifySelf: 'end', width: 44, height: 44, flexShrink: 0 }}
+            sx={{ color: 'var(--club-text)', justifySelf: 'end', width: 44, height: 44, flexShrink: 0, bgcolor: 'var(--club-glass)', backgroundImage: 'var(--club-glass-sheen)', border: '1px solid var(--club-glass-edge)', boxShadow: 'inset 0 1px 0 var(--club-glass-edge)', '&:hover': { bgcolor: 'var(--club-tint)', backgroundImage: 'var(--club-glass-sheen)', boxShadow: 'inset 0 1px 0 var(--club-glass-edge)' } }}
           >
             {mode === 'light' ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
           </IconButton>

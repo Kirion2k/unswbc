@@ -17,6 +17,7 @@ export default function ChampionshipHonours() {
       sx={{
         my: { xs: 5, md: 7 }, overflow: 'hidden', borderRadius: 'var(--club-radius)',
         bgcolor: 'var(--club-feature)', color: 'var(--club-text)',
+        backgroundImage: 'var(--club-glass-sheen)', border: '1px solid var(--club-glass-stroke)', boxShadow: 'var(--club-glass-shadow)',
       }}
     >
       <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '0.95fr 1.05fr' } }}>
@@ -49,7 +50,7 @@ export default function ChampionshipHonours() {
             sx={{ width: '100%', height: '100%', position: 'absolute', inset: 0, objectFit: 'cover', objectPosition: 'center' }}
           />
           <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(10,22,40,0.9), transparent 45%)', pointerEvents: 'none' }} />
-          <Typography component="figcaption" sx={{ position: 'absolute', bottom: 0, left: 0, p: { xs: 2.5, md: 3 }, fontSize: '0.75rem', color: 'white' }}>
+          <Typography component="figcaption" sx={{ position: 'absolute', bottom: 0, left: 0, fontSize: '0.75rem', color: 'white', m: { xs: 1.5, md: 2 }, p: { xs: 1.5, md: 2 }, borderRadius: '1rem', bgcolor: 'rgba(12,20,34,0.64)', border: '1px solid rgba(255,255,255,0.24)' }}>
             2024 UniSport Nationals champions
           </Typography>
         </Box>
@@ -70,6 +71,7 @@ export default function ChampionshipHonours() {
             sx={{
               p: { xs: 2.5, md: 3 }, display: 'flex', alignItems: 'center', gap: 2,
               bgcolor: index === 2 ? 'var(--club-feature-accent)' : 'var(--club-feature)',
+              backgroundImage: 'var(--club-glass-sheen)',
             }}
           >
             <EmojiEventsOutlinedIcon aria-hidden="true" sx={{ fontSize: { xs: 32, md: 38 }, color: 'var(--club-accent)', flexShrink: 0 }} />
