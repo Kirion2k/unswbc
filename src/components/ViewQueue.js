@@ -4,11 +4,11 @@ import PageHero from './PageHero';
 import SectionHeading from './SectionHeading';
 
 function ViewQueue() {
-  const imageSrc = "/unsw-12.jpg";
+  const imageSrc = "/optimized/unsw-12.jpg";
   const url = "https://docs.google.com/spreadsheets/d/1a9TLKEM79mzx6ejC3jWNTvI48dwp9oxFfQGGByDrNag/edit?gid=0#gid=0";
 
   return (
-    <Box sx={{ width: '100%', overflow: 'hidden', bgcolor: '#f8f9fa' }}>
+    <Box sx={{ width: '100%', overflow: 'hidden', bgcolor: 'var(--club-canvas)' }}>
       <PageHero
         imageSrc={imageSrc}
         imageAlt="UNSW Badminton Club"
@@ -25,7 +25,7 @@ function ViewQueue() {
           <CardContent sx={{ p: { xs: 3, md: 4 } }}>
             <Typography sx={{ color: 'text.secondary', textAlign: 'center', mb: 2 }}>
               Open in a new tab:{' '}
-              <Link href={url} target="_blank" rel="noopener noreferrer" underline="hover" sx={{ fontWeight: 800, color: '#1c3c6f' }}>
+              <Link href={url} target="_blank" rel="noopener noreferrer" underline="hover" sx={{ fontWeight: 800, color: 'var(--club-accent)' }}>
                 View the queue
               </Link>
             </Typography>

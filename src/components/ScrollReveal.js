@@ -2,19 +2,19 @@ import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 const directionOffsets = {
-  up: { y: 40 },
-  down: { y: -40 },
-  left: { x: 40 },
-  right: { x: -40 },
+  up: { y: 20 },
+  down: { y: -20 },
+  left: { x: 20 },
+  right: { x: -20 },
 };
 
 export default function ScrollReveal({
   children,
   direction = 'up',
   delay = 0,
-  duration = 0.6,
+  duration = 0.4,
   once = true,
-  amount = 0.15,
+  amount = 0.05,
   style,
   ...props
 }) {
@@ -30,8 +30,8 @@ export default function ScrollReveal({
     <motion.div
       initial={{ opacity: 0, ...offset }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once, amount }}
-      transition={{ duration, delay, ease: [0.25, 0.1, 0.25, 1] }}
+      viewport={{ once, amount, margin: '0px 0px 100px 0px' }}
+      transition={{ duration, delay: Math.min(delay, 0.15), ease: [0.25, 0.1, 0.25, 1] }}
       style={style}
       {...props}
     >
@@ -42,9 +42,9 @@ export default function ScrollReveal({
 
 export function StaggerContainer({
   children,
-  staggerDelay = 0.08,
+  staggerDelay = 0.04,
   once = true,
-  amount = 0.15,
+  amount = 0.05,
   style,
   ...props
 }) {
@@ -58,10 +58,10 @@ export function StaggerContainer({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, amount }}
+      viewport={{ once, amount, margin: '0px 0px 100px 0px' }}
       variants={{
         hidden: {},
-        visible: { transition: { staggerChildren: staggerDelay } },
+        visible: { transition: { staggerChildren: Math.min(staggerDelay, 0.05) } },
       }}
       style={style}
       {...props}
@@ -74,10 +74,12 @@ export function StaggerContainer({
 export function StaggerItem({
   children,
   direction = 'up',
-  duration = 0.5,
+  duration = 0.4,
   style,
   ...props
 }) {
+  const reducedMotion = useReducedMotion();
+  if (reducedMotion) return <div style={style} {...props}>{children}</div>;
   const offset = directionOffsets[direction] || directionOffsets.up;
 
   return (

@@ -5,9 +5,9 @@ import SectionHeading from '../components/SectionHeading';
 
 function TeamPage() {
   return (
-    <Box sx={{ bgcolor: '#f8f9fa' }}>
+    <Box sx={{ bgcolor: 'var(--club-canvas)' }}>
       <PageHero
-        imageSrc="/unsw-22.JPG"
+        imageSrc="/optimized/unsw-22.jpg"
         imageAlt="Team"
         title="The"
         highlight="Team"
@@ -17,7 +17,7 @@ function TeamPage() {
       <Container sx={{ py: { xs: 7, md: 10 } }}>
         <SectionHeading overline="Navigation" title="Looking for the committee?" sx={{ mb: 4 }} />
         <Typography sx={{ color: 'text.secondary', textAlign: 'center', lineHeight: 1.8 }}>
-          Go to <Typography component="span" sx={{ fontWeight: 900, color: '#1c3c6f' }}>Meet the Team</Typography> from the top navigation.
+          Go to <Typography component="span" sx={{ fontWeight: 900, color: 'var(--club-accent)' }}>Meet the Team</Typography> from the top navigation.
         </Typography>
       </Container>
     </Box>

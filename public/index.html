@@ -3,6 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        var saved;
+        try { saved = localStorage.getItem('unswbc-theme'); } catch (e) {}
+        var mode = saved === 'light' || saved === 'dark' ? saved :
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = mode;
+        document.documentElement.style.colorScheme = mode;
+      })();
+    </script>
     <title>UNSW Badminton Club</title>
     <meta name="description" content="Welcome to the UNSW Badminton Club official website. Join us for weekly sessions, tournaments, and lots of badminton!" />
     <meta name="author" content="UNSW Badminton Club" />
@@ -11,19 +21,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="preload" as="video" href="%PUBLIC_URL%/video-web.mp4" fetchpriority="high" type="video/mp4" />
     <link rel="preload" as="image" href="%PUBLIC_URL%/logo-white.png" fetchpriority="high" />
-    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-64.jpg" fetchpriority="high" />
-    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-14.JPG" fetchpriority="low" />
-    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-20.jpg" fetchpriority="low" />
-    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-81.JPG" fetchpriority="low" />
-    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-58.jpg" fetchpriority="low" />
-    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-8.jpg" fetchpriority="low" />
-    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-12.jpg" fetchpriority="low" />
-    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-59.jpg" fetchpriority="low" />
-    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-15.JPG" fetchpriority="low" />
-    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-21.JPG" fetchpriority="low" />
-    <link rel="preload" as="image" href="%PUBLIC_URL%/unsw-66.JPG" fetchpriority="low" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/optimized/unsw-64.jpg" fetchpriority="high" />
   </head>
   <body>
 

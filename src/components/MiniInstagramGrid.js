@@ -12,9 +12,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MagneticButton from './MagneticButton';
 import logo from './logo full/logo-full-white.png';
 
-const FEED_URL =
-  process.env.REACT_APP_INSTAGRAM_FEED_URL ||
-  '/.netlify/functions/instagram-feed';
+import { fetchInstagramFeed } from '../utils/instagramFeed';
 
 /* ─── Grid cell ─────────────────────────────────────────────────────────── */
 function GridCell({ post, onClick }) {
@@ -262,8 +260,7 @@ export default function MiniInstagramGrid({ maxItems = 9, columns = 3, gap = '3p
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    fetch(FEED_URL)
-      .then((r) => r.json())
+    fetchInstagramFeed()
       .then((data) => {
         const raw = Array.isArray(data) ? data : (data?.posts || []);
         setPosts(raw);
@@ -292,7 +289,7 @@ export default function MiniInstagramGrid({ maxItems = 9, columns = 3, gap = '3p
       >
         {loading ? (
           <SkeletonCells count={maxItems} />
-        ) : error ? (
+        ) : error || posts.length === 0 ? (
           <Box sx={{ gridColumn: '1 / -1', p: 4, textAlign: 'center' }}>
             <Typography sx={{ color: 'text.secondary', fontSize: '0.9rem' }}>
               Couldn't load posts.{' '}
@@ -301,7 +298,7 @@ export default function MiniInstagramGrid({ maxItems = 9, columns = 3, gap = '3p
               </a>
             </Typography>
           </Box>
-        ) : displayed.length === 0 ? null : (
+        ) : (
           displayed.map((post) => (
             <GridCell key={post.id} post={post} onClick={setSelected} />
           ))

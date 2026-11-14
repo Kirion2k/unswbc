@@ -25,7 +25,7 @@ import TiltCard from '../components/TiltCard'
 import MagneticButton from '../components/MagneticButton'
 
 function SessionsPage() {
-  const imageSrc = "/unsw-58.JPG"
+  const imageSrc = "/optimized/unsw-58.jpg"
 
   const venueAddress = 'Fitness and Aquatic Centre (B5), Gate 2, High St, UNSW Sydney, Kensington NSW 2033, Australia'
   const mapQuery = encodeURIComponent(`UNSW ${venueAddress}`)
@@ -139,7 +139,7 @@ function SessionsPage() {
   ]
 
   return (
-    <Box sx={{ bgcolor: '#f8f9fa' }}>
+    <Box sx={{ bgcolor: 'var(--club-canvas)' }}>
       <PageHero
         imageSrc={imageSrc}
         imageAlt="UNSW Badminton Club"
@@ -246,19 +246,19 @@ function SessionsPage() {
 
                     <Stack spacing={1.25} sx={{ mt: 2 }}>
                       <Stack direction="row" spacing={1.25} alignItems="flex-start">
-                        <Chip label="1" size="small" sx={{ fontWeight: 900, bgcolor: 'rgba(28,60,111,0.12)', color: '#1c3c6f' }} />
+                        <Chip label="1" size="small" sx={{ fontWeight: 900, bgcolor: 'var(--club-tint)', color: 'var(--club-accent)' }} />
                         <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
                           Enter UNSW Fitness and Aquatic Centre
                         </Typography>
                       </Stack>
                       <Stack direction="row" spacing={1.25} alignItems="flex-start">
-                        <Chip label="2" size="small" sx={{ fontWeight: 900, bgcolor: 'rgba(28,60,111,0.12)', color: '#1c3c6f' }} />
+                        <Chip label="2" size="small" sx={{ fontWeight: 900, bgcolor: 'var(--club-tint)', color: 'var(--club-accent)' }} />
                         <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
                           Take the stairs to level 2
                         </Typography>
                       </Stack>
                       <Stack direction="row" spacing={1.25} alignItems="flex-start">
-                        <Chip label="3" size="small" sx={{ fontWeight: 900, bgcolor: 'rgba(28,60,111,0.12)', color: '#1c3c6f' }} />
+                        <Chip label="3" size="small" sx={{ fontWeight: 900, bgcolor: 'var(--club-tint)', color: 'var(--club-accent)' }} />
                         <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
                           Look for the badminton desk and check in! :)
                         </Typography>
@@ -292,8 +292,8 @@ function SessionsPage() {
                           mt: 1.5,
                           p: 2,
                           borderRadius: 3,
-                          bgcolor: 'rgba(28,60,111,0.06)',
-                          border: '1px solid rgba(28,60,111,0.10)',
+                          bgcolor: 'var(--club-tint)',
+                          border: '1px solid var(--club-line)',
                         }}
                       >
                         <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
@@ -331,8 +331,8 @@ function SessionsPage() {
                     width: '100%',
                     borderRadius: 3,
                     overflow: 'hidden',
-                    border: '1px solid rgba(28,60,111,0.12)',
-                    bgcolor: 'rgba(28,60,111,0.04)',
+                    border: '1px solid var(--club-line)',
+                    bgcolor: 'var(--club-tint)',
                     flexGrow: 1,
                     minHeight: { xs: 260, md: 360 },
                   }}
@@ -369,8 +369,8 @@ function SessionsPage() {
                           height: 38,
                           width: 38,
                           borderRadius: 999,
-                          bgcolor: 'rgba(28,60,111,0.12)',
-                          color: '#1c3c6f',
+                          bgcolor: 'var(--club-tint)',
+                          color: 'var(--club-accent)',
                           display: 'grid',
                           placeItems: 'center',
                           fontWeight: 900,
@@ -408,8 +408,8 @@ function SessionsPage() {
                     <TiltCard
                       sx={{
                         flexGrow: 1,
-                        bgcolor: isNavy ? '#1c3c6f' : 'white',
-                        color: isNavy ? 'white' : 'inherit',
+                        bgcolor: isNavy ? 'var(--club-feature)' : 'var(--club-surface)',
+                        color: 'var(--club-text)',
                       }}
                     >
                     <CardContent
@@ -428,8 +428,8 @@ function SessionsPage() {
                             borderRadius: 999,
                             display: 'grid',
                             placeItems: 'center',
-                            bgcolor: isNavy ? 'rgba(255,255,255,0.14)' : 'rgba(28,60,111,0.12)',
-                            color: isNavy ? 'white' : '#1c3c6f',
+                            bgcolor: 'var(--club-tint)',
+                            color: 'var(--club-accent)',
                             flex: '0 0 auto',
                           }}
                         >
@@ -447,7 +447,7 @@ function SessionsPage() {
                               sx={{
                                 lineHeight: 1.85,
                                 fontSize: '0.95rem',
-                                color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary',
+                                color: 'var(--club-muted)',
                               }}
                             >
                               We accept cash or bank transfer on arrival.
@@ -458,8 +458,8 @@ function SessionsPage() {
                                 mt: 2.5,
                                 p: 2,
                                 borderRadius: 3,
-                                bgcolor: isNavy ? 'rgba(255,255,255,0.10)' : 'rgba(28,60,111,0.06)',
-                                border: isNavy ? '1px solid rgba(255,255,255,0.10)' : '1px solid rgba(28,60,111,0.08)',
+                                bgcolor: 'var(--club-tint)',
+                                border: '1px solid var(--club-line)',
                               }}
                             >
                               <Box
@@ -471,26 +471,26 @@ function SessionsPage() {
                                   alignItems: 'baseline',
                                 }}
                               >
-                                <Typography variant="body2" sx={{ fontWeight: 900, color: isNavy ? 'white' : '#1c3c6f' }}>
+                                <Typography variant="body2" sx={{ fontWeight: 900, color: 'var(--club-accent)' }}>
                                   Name
                                 </Typography>
                                 <Typography
                                   variant="body2"
                                   sx={{
-                                    color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary',
+                                    color: 'var(--club-muted)',
                                     lineHeight: 1.7,
                                   }}
                                 >
                                   UNSW Badminton Club
                                 </Typography>
 
-                                <Typography variant="body2" sx={{ fontWeight: 900, color: isNavy ? 'white' : '#1c3c6f' }}>
+                                <Typography variant="body2" sx={{ fontWeight: 900, color: 'var(--club-accent)' }}>
                                   BSB
                                 </Typography>
                                 <Typography
                                   variant="body2"
                                   sx={{
-                                    color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary',
+                                    color: 'var(--club-muted)',
                                     lineHeight: 1.7,
                                     letterSpacing: '0.04em',
                                   }}
@@ -498,13 +498,13 @@ function SessionsPage() {
                                   062 303
                                 </Typography>
 
-                                <Typography variant="body2" sx={{ fontWeight: 900, color: isNavy ? 'white' : '#1c3c6f' }}>
+                                <Typography variant="body2" sx={{ fontWeight: 900, color: 'var(--club-accent)' }}>
                                   Account
                                 </Typography>
                                 <Typography
                                   variant="body2"
                                   sx={{
-                                    color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary',
+                                    color: 'var(--club-muted)',
                                     lineHeight: 1.7,
                                     letterSpacing: '0.04em',
                                   }}
@@ -519,14 +519,14 @@ function SessionsPage() {
                                 mt: 2,
                                 lineHeight: 1.85,
                                 fontSize: '0.95rem',
-                                color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary',
+                                color: 'var(--club-muted)',
                               }}
                             >
                               Use your full name as the reference.
                             </Typography>
                           </>
                         ) : (
-                          <Stack spacing={1.5} sx={{ color: isNavy ? 'rgba(255,255,255,0.88)' : 'text.secondary' }}>
+                          <Stack spacing={1.5} sx={{ color: 'var(--club-muted)' }}>
                             {section.lines.map((line) => (
                               <Typography key={line} sx={{ lineHeight: 1.85, fontSize: '0.95rem' }}>
                                 {line}
@@ -570,8 +570,8 @@ function SessionsPage() {
                           label={s.highlight}
                           size="small"
                           sx={{
-                            bgcolor: 'rgba(28,60,111,0.12)',
-                            color: '#1c3c6f',
+                            bgcolor: 'var(--club-tint)',
+                            color: 'var(--club-accent)',
                             fontWeight: 800,
                             letterSpacing: '0.02em',
                           }}
@@ -581,7 +581,7 @@ function SessionsPage() {
 
                     <Typography
                       sx={{
-                        color: '#1c3c6f',
+                        color: 'var(--club-accent)',
                         fontWeight: 800,
                         fontSize: '1.05rem',
                         letterSpacing: '0.01em',
@@ -616,15 +616,15 @@ function SessionsPage() {
                           sx={{
                             p: 2,
                             borderRadius: 3,
-                            bgcolor: 'rgba(28,60,111,0.06)',
-                            border: '1px solid rgba(28,60,111,0.14)',
+                            bgcolor: 'var(--club-tint)',
+                            border: '1px solid var(--club-line)',
                             textAlign: 'center',
                           }}
                         >
-                          <Typography variant="body2" sx={{ fontWeight: 800, color: '#1c3c6f', mb: 0.5 }}>
+                          <Typography variant="body2" sx={{ fontWeight: 800, color: 'var(--club-accent)', mb: 0.5 }}>
                             Visitors
                           </Typography>
-                          <Typography sx={{ fontWeight: 900, fontSize: '1.5rem', color: '#0b1220', lineHeight: 1.1 }}>
+                          <Typography sx={{ fontWeight: 900, fontSize: '1.5rem', color: 'var(--club-text)', lineHeight: 1.1 }}>
                             {s.visitorPrice}
                           </Typography>
                         </Box>
@@ -659,14 +659,14 @@ function SessionsPage() {
                   <Typography
                     variant="overline"
                     sx={{
-                      color: '#1c3c6f',
+                      color: 'var(--club-accent)',
                       letterSpacing: '0.14em',
                       fontWeight: 900,
                     }}
                   >
                     Also available
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 900, mt: 0.5, color: '#0f172a' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 900, mt: 0.5, color: 'var(--club-text)' }}>
                     Friday Trainings
                   </Typography>
                   <Typography sx={{ mt: 1, color: 'text.secondary', lineHeight: 1.85 }}>
@@ -677,7 +677,7 @@ function SessionsPage() {
                       mt: 1.5,
                       fontSize: '0.875rem',
                       fontWeight: 700,
-                      color: '#1c3c6f',
+                      color: 'var(--club-accent)',
                     }}
                   >
                     Every Friday · 2:00–4:00 PM · UNSW FAC Level 1 · $25pp
@@ -710,16 +710,16 @@ function SessionsPage() {
             {/* Desktop header */}
             <Grid container spacing={2} sx={{ display: { xs: 'none', md: 'flex' }, mb: 2 }}>
               <Grid item md={3}>
-                <Typography sx={{ fontWeight: 900, color: '#1c3c6f', pl: 1 }}>Term</Typography>
+                <Typography sx={{ fontWeight: 900, color: 'var(--club-accent)', pl: 1 }}>Term</Typography>
               </Grid>
               <Grid item md={3}>
-                <Typography sx={{ fontWeight: 900, color: '#1c3c6f', textAlign: 'center' }}>Students</Typography>
+                <Typography sx={{ fontWeight: 900, color: 'var(--club-accent)', textAlign: 'center' }}>Students</Typography>
               </Grid>
               <Grid item md={3}>
-                <Typography sx={{ fontWeight: 900, color: '#1c3c6f', textAlign: 'center' }}>Staff &amp; alumni</Typography>
+                <Typography sx={{ fontWeight: 900, color: 'var(--club-accent)', textAlign: 'center' }}>Staff &amp; alumni</Typography>
               </Grid>
               <Grid item md={3}>
-                <Typography sx={{ fontWeight: 900, color: '#1c3c6f', textAlign: 'center' }}>General public</Typography>
+                <Typography sx={{ fontWeight: 900, color: 'var(--club-accent)', textAlign: 'center' }}>General public</Typography>
               </Grid>
             </Grid>
 
@@ -737,11 +737,11 @@ function SessionsPage() {
                         { label: 'General public', price: t.public },
                       ].map((item) => (
                         <Grid item xs={4} key={item.label}>
-                          <Box sx={{ p: 1.5, borderRadius: 3, bgcolor: 'rgba(28,60,111,0.06)', textAlign: 'center' }}>
-                            <Typography variant="caption" sx={{ fontWeight: 800, color: '#1c3c6f', display: 'block', mb: 0.5 }}>
+                          <Box sx={{ p: 1.5, borderRadius: 3, bgcolor: 'var(--club-tint)', textAlign: 'center' }}>
+                            <Typography variant="caption" sx={{ fontWeight: 800, color: 'var(--club-accent)', display: 'block', mb: 0.5 }}>
                               {item.label}
                             </Typography>
-                            <Typography sx={{ fontWeight: 900, fontSize: '1.15rem', color: '#0b1220' }}>
+                            <Typography sx={{ fontWeight: 900, fontSize: '1.15rem', color: 'var(--club-text)' }}>
                               {item.price}
                             </Typography>
                           </Box>
@@ -760,8 +760,8 @@ function SessionsPage() {
                     </Grid>
                     {[t.student, t.staff, t.public].map((price, i) => (
                       <Grid item md={3} key={i}>
-                        <Box sx={{ p: 2, borderRadius: 3, bgcolor: 'rgba(28,60,111,0.06)', textAlign: 'center' }}>
-                          <Typography sx={{ fontWeight: 900, fontSize: '1.15rem', color: '#0b1220' }}>
+                        <Box sx={{ p: 2, borderRadius: 3, bgcolor: 'var(--club-tint)', textAlign: 'center' }}>
+                          <Typography sx={{ fontWeight: 900, fontSize: '1.15rem', color: 'var(--club-text)' }}>
                             {price}
                           </Typography>
                         </Box>
@@ -775,14 +775,14 @@ function SessionsPage() {
         </Card>
 
         <Box sx={{ mt: { xs: 5, md: 6 } }}>
-          <Card sx={{ bgcolor: '#1c3c6f', color: 'white' }}>
+          <Card sx={{ bgcolor: 'var(--club-feature)', color: 'var(--club-text)' }}>
             <CardContent sx={{ p: { xs: 3, md: 4 } }}>
               <Grid container spacing={{ xs: 2, md: 3 }} alignItems="center">
                 <Grid item xs={12} md={8}>
                   <Typography variant="h5" sx={{ fontWeight: 900 }}>
                     Ready to join a session?
                   </Typography>
-                  <Typography sx={{ mt: 1, color: 'rgba(255,255,255,0.88)', lineHeight: 1.85 }}>
+                  <Typography sx={{ mt: 1, color: 'var(--club-muted)', lineHeight: 1.85 }}>
                     Tap here to see the queue system and where you are in the queue.
                   </Typography>
                 </Grid>
@@ -797,9 +797,9 @@ function SessionsPage() {
                       px: 4,
                       fontSize: '1.1rem',
                       fontWeight: 900,
-                      bgcolor: 'white',
-                      color: '#1c3c6f',
-                      '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' },
+                      bgcolor: 'var(--club-accent)',
+                      color: 'var(--club-action-ink)',
+                      '&:hover': { bgcolor: 'var(--club-accent-hover)' },
                     }}
                   >
                     View queue &rarr;

@@ -37,9 +37,9 @@ function MembershipResourcesPage() {
   ];
 
   return (
-    <Box sx={{ bgcolor: '#f8f9fa' }}>
+    <Box sx={{ bgcolor: 'var(--club-canvas)' }}>
       <PageHero
-        imageSrc="/unsw-21.JPG"
+        imageSrc="/optimized/unsw-21.jpg"
         imageAlt="Membership resources"
         title="Membership"
         highlight="Resources"
@@ -58,12 +58,12 @@ function MembershipResourcesPage() {
               <ScrollReveal delay={index * 0.08}>
                 <TiltCard>
                   <CardContent sx={{ p: 3 }}>
-                    <Typography variant="h6" sx={{ fontWeight: 900, mb: 1.5, color: '#1c3c6f' }}>
+                    <Typography variant="h6" sx={{ fontWeight: 900, mb: 1.5, color: 'var(--club-accent)' }}>
                       {r.title}
                     </Typography>
                     <List dense disablePadding>
                       {r.items.map((t) => (
-                        <ListItem key={t} disableGutters sx={{ py: 0.5 }}>
+                        <ListItem key={t} disableGutters sx={{ py: 1.5, borderBottom: '1px solid var(--club-line)', '&:last-child': { borderBottom: 0 } }}>
                           <ListItemText
                             primary={t}
                             primaryTypographyProps={{ sx: { color: 'text.secondary', lineHeight: 1.7 } }}

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useInView, useReducedMotion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { animate, useInView, useReducedMotion } from 'framer-motion';
 
 export default function AnimatedCounter({
   target,
@@ -12,36 +12,26 @@ export default function AnimatedCounter({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
   const prefersReducedMotion = useReducedMotion();
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (!isInView) return;
     if (prefersReducedMotion) {
-      setCount(target);
+      if (ref.current) ref.current.textContent = `${prefix}${target}${suffix}`;
       return;
     }
 
-    const startTime = performance.now();
-    const durationMs = duration * 1000;
-
-    function step(now) {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / durationMs, 1);
-      // ease-out cubic
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(eased * target);
-      setCount(current);
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      }
-    }
-
-    requestAnimationFrame(step);
-  }, [isInView, target, duration, prefersReducedMotion]);
+    const animation = animate(0, target, {
+      duration, ease: 'easeOut',
+      onUpdate: (value) => {
+        if (ref.current) ref.current.textContent = `${prefix}${Math.round(value)}${suffix}`;
+      },
+    });
+    return () => animation.stop();
+  }, [isInView, target, duration, prefersReducedMotion, prefix, suffix]);
 
   return (
     <span ref={ref} style={style} className={className}>
-      {prefix}{count}{suffix}
+      {prefix}{prefersReducedMotion ? target : 0}{suffix}
     </span>
   );
 }

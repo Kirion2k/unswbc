@@ -12,9 +12,7 @@ import PageHero from '../components/PageHero';
 import MagneticButton from '../components/MagneticButton';
 import logo from '../components/logo full/logo-full-white.png';
 
-const FEED_URL =
-  process.env.REACT_APP_INSTAGRAM_FEED_URL ||
-  '/.netlify/functions/instagram-feed';
+import { fetchInstagramFeed } from '../utils/instagramFeed';
 const PROFILE_URL = 'https://www.instagram.com/unswbadminton/';
 
 /* ─── Grid item ─────────────────────────────────────────────────────────── */
@@ -308,8 +306,7 @@ function NewsPage() {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    fetch(FEED_URL)
-      .then((r) => r.json())
+    fetchInstagramFeed()
       .then((data) => {
         if (Array.isArray(data)) {
           setPosts(data);
@@ -334,7 +331,7 @@ function NewsPage() {
   return (
     <Box sx={{ bgcolor: '#f8f9fa' }}>
       <PageHero
-        imageSrc="/unsw-8.jpg"
+        imageSrc="/optimized/unsw-8.jpg"
         imageAlt="UNSW Badminton Club Instagram"
         title="Club"
         highlight="Updates"

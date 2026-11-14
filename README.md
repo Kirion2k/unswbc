@@ -71,17 +71,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## Live Instagram “News” feed (Netlify)
 
-This site supports a live Instagram feed via Netlify Functions + Instagram Basic Display API.
+This site supports a live Instagram feed via Netlify Functions + Instagram API with Instagram Login.
 
-### 1) Create an Instagram Basic Display app (Meta)
+### 1) Configure Instagram Login (Meta)
 
 - Go to Meta for Developers and create an app.
-- Add the **Instagram Basic Display** product.
-- Add an **Instagram Test User** (or your account as a tester) and accept the invite in Instagram.
+- Add the **Instagram API with Instagram Login** product.
+- Connect the club’s professional (Business or Creator) Instagram account and grant `instagram_business_basic`.
 
 ### 2) Configure redirect URI
 
-In the Instagram Basic Display settings, set **Valid OAuth Redirect URIs** to:
+In the Instagram Login settings, set **Valid OAuth Redirect URIs** to:
 
 - `https://<YOUR-SITE>.netlify.app/.netlify/functions/instagram-auth-callback`
 
@@ -125,3 +125,11 @@ Open:
 - `https://<YOUR-SITE>.netlify.app/.netlify/functions/instagram-feed`
 
 You should see JSON `{ posts: [...] }`.
+
+### Local preview and troubleshooting
+
+`npm start` serves the feed function locally through `src/setupProxy.js`. Restart the dev server after changing server environment variables. Put `INSTAGRAM_ACCESS_TOKEN` in an untracked `.env.local` file; never use a `REACT_APP_` prefix for the token, because those variables are bundled into public JavaScript.
+
+Without a token the feed returns HTTP 501 and the page shows an Instagram link. An authorization error requires reconnecting the club account and replacing its token in Netlify, then redeploying. Long-lived tokens expire (typically after 60 days); refresh them before expiry or reconnect. `REACT_APP_INSTAGRAM_FEED_URL` may point to another JSON feed endpoint, but must not point to an Instagram profile page.
+
+The old `user_profile,user_media` Basic Display login configuration must be replaced with Instagram Login and `instagram_business_basic`. The feed requires the club account credentials; the public website alone cannot retrieve live posts.

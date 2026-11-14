@@ -98,9 +98,9 @@ const faqData = {
 
 function FAQsPage() {
   return (
-    <Box sx={{ bgcolor: '#f8f9fa' }}>
+    <Box sx={{ bgcolor: 'var(--club-canvas)' }}>
       <PageHero
-        imageSrc="/unsw-8.jpg"
+        imageSrc="/optimized/unsw-8.jpg"
         imageAlt="UNSW Badminton Club"
         imagePosition="center 0%"
         title="FAQs"

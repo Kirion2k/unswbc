@@ -2,117 +2,81 @@ import React from 'react';
 import { Box, Container, Divider, Grid, IconButton, Link, Typography } from '@mui/material';
 import { Facebook, Instagram } from '@mui/icons-material';
 import { Link as RouterLink } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import LinktreeIcon from './LinktreeIcon';
 import logo from './logo full/logo-full-white.png';
-import { StaggerContainer, StaggerItem } from './ScrollReveal';
 
-function Footer() {
+const clubLinks = [
+  { label: 'Sessions', to: '/sessions' },
+  { label: 'Training', to: '/trainings' },
+  { label: 'FAQs', to: '/faqs' },
+  { label: 'Contact us', to: '/contact' },
+];
+
+const socials = [
+  { label: 'Facebook', href: 'https://www.facebook.com/UNSWBC', Icon: Facebook },
+  { label: 'Instagram', href: 'https://www.instagram.com/unswbadminton', Icon: Instagram },
+  { label: 'Linktree', href: 'https://linktr.ee/unswbc', Icon: LinktreeIcon },
+];
+
+export default function Footer() {
   return (
-    <Box
-      component="footer"
-      sx={{
-        bgcolor: '#1c3c6f',
-        color: 'white',
-        mt: 10,
-        position: 'relative',
-        overflow: 'hidden',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 3,
-          background: 'linear-gradient(90deg, #123456, #1c3c6f, #123456)',
-        },
-      }}
-    >
-      <Container sx={{ py: 6 }}>
-        <StaggerContainer staggerDelay={0.1}>
-          <Grid container spacing={{ xs: 3, md: 4 }} alignItems="flex-start">
-            <Grid item xs={12} md={5}>
-              <StaggerItem>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                  <img src={logo} alt="UNSWBC Logo" style={{ height: 44 }} />
-                </Box>
-                <Typography sx={{ mt: 2, color: 'rgba(255,255,255,0.85)', maxWidth: 420 }}>
-                  A welcoming badminton community at UNSW, social play, training, and competition.
-                </Typography>
-                <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
-                  <IconButton
-                    component={motion.a}
-                    whileHover={{ scale: 1.15, backgroundColor: 'rgba(255,255,255,0.2)' }}
-                    whileTap={{ scale: 0.95 }}
-                    href="https://www.facebook.com/UNSWBC"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{ color: 'white', bgcolor: 'rgba(255,255,255,0.10)' }}
-                  >
-                    <Facebook />
-                  </IconButton>
-                  <IconButton
-                    component={motion.a}
-                    whileHover={{ scale: 1.15, backgroundColor: 'rgba(255,255,255,0.2)' }}
-                    whileTap={{ scale: 0.95 }}
-                    href="https://www.instagram.com/unswbadminton"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{ color: 'white', bgcolor: 'rgba(255,255,255,0.10)' }}
-                  >
-                    <Instagram />
-                  </IconButton>
-                </Box>
-              </StaggerItem>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={3}>
-              <StaggerItem>
-                <Typography variant="h6" sx={{ fontWeight: 800, mb: 1 }}>Quick links</Typography>
-                <Box sx={{ display: 'grid', gap: 0.75 }}>
-                  {[
-                    { label: 'Home', to: '/' },
-                    { label: 'Sessions', to: '/sessions' },
-                    { label: 'FAQs', to: '/faqs' },
-                    { label: 'Contact', to: '/contact' },
-                  ].map((l) => (
-                    <Link
-                      key={l.to}
-                      component={RouterLink}
-                      to={l.to}
-                      underline="none"
-                      sx={{
-                        color: 'rgba(255,255,255,0.9)',
-                        transition: 'all 0.2s ease',
-                        '&:hover': { color: 'white', pl: 0.5 },
-                        width: 'fit-content',
-                      }}
-                    >
-                      {l.label}
-                    </Link>
-                  ))}
-                </Box>
-              </StaggerItem>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <StaggerItem>
-                <Typography variant="h6" sx={{ fontWeight: 800, mb: 1 }}>Location</Typography>
-                <Typography sx={{ color: 'rgba(255,255,255,0.85)' }}>
-                  Fitness and Aquatic Centre (B5), Gate 2, High St, UNSW Sydney, Kensington NSW 2033, Australia
-                </Typography>
-              </StaggerItem>
-            </Grid>
+    <Box component="footer" sx={{ bgcolor: '#10213b', color: 'white', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+      <Container sx={{ pt: { xs: 5, md: 6 }, pb: 3 }}>
+        <Grid container spacing={{ xs: 4, md: 6 }}>
+          <Grid item xs={12} md={5}>
+            <Link component={RouterLink} to="/" aria-label="UNSW Badminton Club home" sx={{ display: 'inline-block' }}>
+              <img src={logo} alt="UNSWBC" style={{ height: 32, width: 'auto' }} />
+            </Link>
+            <Typography sx={{ mt: 2, maxWidth: '34ch', color: 'rgba(255,255,255,0.74)', lineHeight: 1.7 }}>
+              Social play, training, and competition. A badminton community for every level at UNSW.
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 0.5, mt: 1.5 }}>
+              {socials.map(({ label, href, Icon }) => (
+                <IconButton
+                  key={label} href={href} aria-label={`UNSW Badminton Club ${label}`}
+                  target="_blank" rel="noopener noreferrer"
+                  sx={{ width: 44, height: 44, color: 'rgba(255,255,255,0.8)', transition: 'color 180ms ease, background-color 180ms ease', '&:hover': { color: 'white', bgcolor: 'rgba(255,255,255,0.08)' } }}
+                >
+                  <Icon fontSize="small" />
+                </IconButton>
+              ))}
+            </Box>
           </Grid>
-        </StaggerContainer>
 
-        <Divider sx={{ my: 4, borderColor: 'rgba(255,255,255,0.15)' }} />
+          <Grid item xs={6} sm={5} md={3}>
+            <Typography component="h2" sx={{ fontSize: '0.9rem', fontWeight: 700, mb: 1.5 }}>Club links</Typography>
+            <Box component="nav" aria-label="Footer navigation" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1 }}>
+              {clubLinks.map(({ label, to }) => (
+                <Link key={to} component={RouterLink} to={to} underline="hover" sx={{ color: 'rgba(255,255,255,0.74)', fontSize: '0.9rem', textUnderlineOffset: '0.2em', '&:hover': { color: 'white' } }}>
+                  {label}
+                </Link>
+              ))}
+            </Box>
+          </Grid>
 
-        <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.85)' }}>
-          &copy; 2026 UNSW Badminton Club. All Rights Reserved.
-        </Typography>
+          <Grid item xs={6} sm={7} md={4}>
+            <Typography component="h2" sx={{ fontSize: '0.9rem', fontWeight: 700, mb: 1.5 }}>Find us</Typography>
+            <Typography sx={{ color: 'rgba(255,255,255,0.74)', fontSize: '0.9rem', lineHeight: 1.8 }}>
+              UNSW Fitness and Aquatic Centre<br />
+              B5, Gate 2, High Street<br />
+              Kensington NSW 2033
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Divider sx={{ mt: 4, mb: 2.5, borderColor: 'rgba(255,255,255,0.12)' }} />
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 1 }}>
+          <Typography sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.66)' }}>
+            &copy; 2027 UNSW Badminton Club
+          </Typography>
+          <Typography sx={{ fontSize: '0.625rem', color: 'rgba(255,255,255,0.66)' }}>
+            Website made by{' '}
+            <Link href="https://www.linkedin.com/in/leoxu0406/" target="_blank" rel="noopener noreferrer" underline="hover" sx={{ color: 'inherit', textUnderlineOffset: '0.2em', '&:hover': { color: 'white' } }}>
+              Leo Xu
+            </Link>
+          </Typography>
+        </Box>
       </Container>
     </Box>
   );
 }
-
-export default Footer;
