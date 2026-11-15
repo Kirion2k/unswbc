@@ -1,0 +1,12 @@
+.club-page-transition {
+  opacity: 1;
+  transform: none;
+  animation: club-page-enter 250ms cubic-bezier(.25,.1,.25,1);
+}
+@keyframes club-page-enter {
+  from { opacity: .86; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .club-page-transition { animation: none; }
+}

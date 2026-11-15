@@ -74,7 +74,9 @@ function HomePage() {
       title: 'Training & improvement',
       body: 'Build fundamentals, learn tactics, and sharpen your game with structured sessions and great partners.',
       body2: 'We focus on consistency and confidence on court, so you can level up your skills and enjoy better games week after week.',
-      image: '/optimized/unsw-2.jpg',
+      image: '/optimized/new-11.jpg',
+      imagePosition: 'center 68%',
+      imageScale: 1.08,
       tone: 'light',
     },
     {
@@ -320,6 +322,7 @@ function HomePage() {
                           order: { xs: 0, md: imageFirst ? 0 : 1 },
                           display: 'flex',
                           position: 'relative',
+                          overflow: 'hidden',
                         }}
                       >
                         <CardMedia
@@ -335,6 +338,8 @@ function HomePage() {
                             position: { md: 'absolute' },
                             inset: { md: 0 },
                             objectFit: 'cover',
+                            objectPosition: s.imagePosition || 'center',
+                            transform: s.imageScale ? `scale(${s.imageScale})` : 'none',
                           }}
                         />
                       </Grid>
