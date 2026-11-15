@@ -1,3 +1,4 @@
+import CommitteeShowcase from '../components/CommitteeShowcase';
 import PageContentSurface from '../components/PageContentSurface';
 import React from 'react'
 import { Avatar, Box, CardContent, Container, Grid, Typography } from '@mui/material'
@@ -19,14 +20,7 @@ function MeetTheTeamPage() {
     { name: 'Ray Zhang', position: 'Grievance Officer' },
   ]
 
-  const committee = [
-    'Events & socials',
-    'Competition & tournaments',
-    'Marketing & content',
-    'Training support',
-    'Session operations',
-    'Sponsorships & partnerships',
-  ]
+
 
   return (
     <Box sx={{ bgcolor: 'var(--club-canvas)' }}>
@@ -84,16 +78,7 @@ function MeetTheTeamPage() {
         <ScrollReveal>
           <SectionHeading overline="Team" align="center" title="Committee" sx={{ mb: 'var(--club-heading-gap)' }} />
         </ScrollReveal>
-        <Box component="ul" sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(2, minmax(0, 1fr))' }, gap: '1px', bgcolor: 'var(--club-line)', listStyle: 'none', m: 0, p: 0, border: '1px solid var(--club-line)', borderRadius: 'var(--club-radius)', overflow: 'hidden' }}>
-          {committee.map((role) => (
-            <Box component="li" key={role} sx={{ bgcolor: 'var(--club-feature)', p: { xs: 3, md: 4 } }}>
-              <Typography variant="h6" sx={{ color: 'var(--club-text)', mb: 1 }}>{role}</Typography>
-              <Typography sx={{ color: 'text.secondary', lineHeight: 1.75 }}>
-                The behind the scenes work that makes sessions, events, and competitions run smoothly.
-              </Typography>
-            </Box>
-          ))}
-        </Box>
+        <CommitteeShowcase />
 
         <Box sx={{ mt: 'var(--club-section-space)' }}>
           <ScrollReveal>

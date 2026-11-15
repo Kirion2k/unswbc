@@ -1,3 +1,5 @@
+import SessionRegistration from '../components/SessionRegistration';
+import HowItWorks from '../components/ui/how-it-works';
 import { PricingSection } from '../components/ui/pricing-section';
 import PageContentSurface from '../components/PageContentSurface';
 import React, { useState } from 'react'
@@ -21,7 +23,7 @@ import HowToRegOutlined from '@mui/icons-material/HowToRegOutlined'
 import SportsTennisOutlined from '@mui/icons-material/SportsTennisOutlined'
 import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
-import ScrollReveal, { StaggerContainer, StaggerItem } from '../components/ScrollReveal'
+import ScrollReveal from '../components/ScrollReveal'
 import TiltCard from '../components/TiltCard'
 import MagneticButton from '../components/MagneticButton'
 
@@ -305,153 +307,7 @@ function SessionsPage() {
 
         <Box id="session-registration" />
         <SectionHeading overline="Info" align="center" title="Registration and payment" sx={{ mb: 'var(--club-heading-gap)' }} />
-        <StaggerContainer>
-          <Grid container spacing={{ xs: 2, md: 3 }} sx={{ alignItems: 'stretch' }}>
-            {infoCards.map((section, index) => {
-              const isNavy = section.accent === 'navy'
-              const isPayment = section.title === 'Payment'
-
-              return (
-                <Grid item xs={12} md={6} key={section.title} sx={{ display: 'flex' }}>
-                  <StaggerItem style={{ flexGrow: 1, display: 'flex' }}>
-                    <TiltCard
-                      sx={{
-                        flexGrow: 1,
-                        bgcolor: isNavy ? 'var(--club-feature)' : 'var(--club-surface)',
-                        color: 'var(--club-text)',
-                      }}
-                    >
-                    <CardContent
-                      sx={{
-                        p: { xs: 3, md: 5 },
-                        height: '100%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                      }}
-                    >
-                      <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 2.5 }}>
-                        <Box
-                          sx={{
-                            height: 40,
-                            width: 40,
-                            borderRadius: 999,
-                            display: 'grid',
-                            placeItems: 'center',
-                            bgcolor: 'var(--club-tint)',
-                            color: 'var(--club-accent)',
-                            flex: '0 0 auto',
-                          }}
-                        >
-                          {section.icon}
-                        </Box>
-                        <Typography variant="h6" sx={{ fontWeight: 900 }}>
-                          {section.title}
-                        </Typography>
-                      </Stack>
-
-                      <Box sx={{ flexGrow: 1 }}>
-                        {isPayment ? (
-                          <>
-                            <Typography
-                              sx={{
-                                lineHeight: 1.85,
-                                fontSize: '0.95rem',
-                                color: 'var(--club-muted)',
-                              }}
-                            >
-                              We accept cash or bank transfer on arrival.
-                            </Typography>
-
-                            <Box
-                              sx={{
-                                mt: 2.5,
-                                p: 2,
-                                borderRadius: 3,
-                                bgcolor: 'var(--club-tint)',
-                                border: '1px solid var(--club-line)',
-                              }}
-                            >
-                              <Box
-                                sx={{
-                                  display: 'grid',
-                                  gridTemplateColumns: { xs: '96px 1fr', sm: '120px 1fr' },
-                                  columnGap: { xs: 2, sm: 3 },
-                                  rowGap: 1.75,
-                                  alignItems: 'baseline',
-                                }}
-                              >
-                                <Typography variant="body2" sx={{ fontWeight: 900, color: 'var(--club-accent)' }}>
-                                  Name
-                                </Typography>
-                                <Typography
-                                  variant="body2"
-                                  sx={{
-                                    color: 'var(--club-muted)',
-                                    lineHeight: 1.7,
-                                  }}
-                                >
-                                  UNSW Badminton Club
-                                </Typography>
-
-                                <Typography variant="body2" sx={{ fontWeight: 900, color: 'var(--club-accent)' }}>
-                                  BSB
-                                </Typography>
-                                <Typography
-                                  variant="body2"
-                                  sx={{
-                                    color: 'var(--club-muted)',
-                                    lineHeight: 1.7,
-                                    letterSpacing: '0.04em',
-                                  }}
-                                >
-                                  062 303
-                                </Typography>
-
-                                <Typography variant="body2" sx={{ fontWeight: 900, color: 'var(--club-accent)' }}>
-                                  Account
-                                </Typography>
-                                <Typography
-                                  variant="body2"
-                                  sx={{
-                                    color: 'var(--club-muted)',
-                                    lineHeight: 1.7,
-                                    letterSpacing: '0.04em',
-                                  }}
-                                >
-                                  10885979
-                                </Typography>
-                              </Box>
-                            </Box>
-
-                            <Typography
-                              sx={{
-                                mt: 2,
-                                lineHeight: 1.85,
-                                fontSize: '0.95rem',
-                                color: 'var(--club-muted)',
-                              }}
-                            >
-                              Use your full name as the reference.
-                            </Typography>
-                          </>
-                        ) : (
-                          <Stack spacing={1.5} sx={{ color: 'var(--club-muted)' }}>
-                            {section.lines.map((line) => (
-                              <Typography key={line} sx={{ lineHeight: 1.85, fontSize: '0.95rem' }}>
-                                {line}
-                              </Typography>
-                            ))}
-                          </Stack>
-                        )}
-                      </Box>
-                    </CardContent>
-                    </TiltCard>
-                  </StaggerItem>
-                </Grid>
-              )
-            })}
-          </Grid>
-        </StaggerContainer>
+        <SessionRegistration sections={infoCards} />
 
         <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
@@ -532,41 +388,7 @@ function SessionsPage() {
         <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
         <SectionHeading overline="Start here" align="center" title="Your first session in 3 steps" sx={{ mb: 'var(--club-heading-gap)' }} />
-        <StaggerContainer>
-          <Grid container spacing={{ xs: 2, md: 3 }}>
-            {quickSteps.map((step, index) => (
-              <Grid item xs={12} md={4} key={step.title}>
-                <StaggerItem style={{ height: '100%' }}>
-                  <TiltCard>
-                    <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                      <Box
-                        sx={{
-                          height: 38,
-                          width: 38,
-                          borderRadius: 999,
-                          bgcolor: 'var(--club-tint)',
-                          color: 'var(--club-accent)',
-                          display: 'grid',
-                          placeItems: 'center',
-                          fontWeight: 900,
-                          mb: 2,
-                        }}
-                      >
-                        {index + 1}
-                      </Box>
-                      <Typography variant="h6" sx={{ fontWeight: 900, mb: 1 }}>
-                        {step.title}
-                      </Typography>
-                      <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
-                        {step.body}
-                      </Typography>
-                    </CardContent>
-                  </TiltCard>
-                </StaggerItem>
-              </Grid>
-            ))}
-          </Grid>
-        </StaggerContainer>
+        <HowItWorks features={quickSteps.map(step => ({ title: step.title, description: step.body }))} />
 
         <Box sx={{ mt: { xs: 5, md: 6 } }}>
           <Card sx={{ bgcolor: 'var(--club-feature)', color: 'var(--club-text)' }}>

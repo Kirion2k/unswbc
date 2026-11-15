@@ -123,3 +123,9 @@ html { background: var(--club-canvas); }
   mask-image: linear-gradient(to bottom, transparent, black 6rem);
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 6rem);
 }
+
+/* The shuttle can detach without moving either logo's wordmark. */
+[data-header-logo], [data-footer-logo] {
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,var(--logo-shuttle-opacity,1)) 0%, rgba(0,0,0,var(--logo-shuttle-opacity,1)) 24%, #000 24.1%, #000 100%);
+  mask-image: linear-gradient(to right, rgba(0,0,0,var(--logo-shuttle-opacity,1)) 0%, rgba(0,0,0,var(--logo-shuttle-opacity,1)) 24%, #000 24.1%, #000 100%);
+}

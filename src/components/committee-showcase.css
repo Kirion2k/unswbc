@@ -1,0 +1,35 @@
+.committee-showcase { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(1.5rem, 4vw, 4rem); align-items: stretch; }
+.committee-directory { display: flex; flex-direction: column; border-top: 1px solid var(--club-line); }
+.committee-role { position: relative; isolation: isolate; display: flex; align-items: center; gap: 1.1rem; width: 100%; flex: 1; padding: 1.45rem 1rem; border: 0; border-bottom: 1px solid var(--club-line); border-radius: 0; background: transparent; color: var(--club-text); text-align: left; cursor: pointer; font: inherit; -webkit-tap-highlight-color: transparent; }
+.committee-role-selection { position: absolute; inset: 6px 0; z-index: -1; border-radius: 12px; background: var(--club-tint); }
+.committee-role-icon { display: inline-flex; flex-shrink: 0; color: var(--club-muted); transition: color 200ms ease, transform 250ms ease; }
+.committee-role[aria-pressed='true'] .committee-role-icon { color: var(--club-accent); transform: rotate(-7deg); }
+.committee-role-copy { display: flex; flex: 1; flex-direction: column; gap: .5rem; }
+.committee-role-title { font-size: clamp(1rem, 1.4vw, 1.3rem); font-weight: 750; letter-spacing: -.025em; line-height: 1.3; }
+.committee-role-description { max-width: 38ch; color: var(--club-muted); font-size: .88rem; line-height: 1.65; }
+.committee-role-arrow { flex-shrink: 0; color: var(--club-muted); opacity: .5; transition: transform 250ms ease, opacity 200ms ease; }
+.committee-role[aria-pressed='true'] .committee-role-arrow { transform: translate(2px,-2px); opacity: 1; color: var(--club-accent); }
+.committee-role:focus-visible { outline: 2px solid var(--club-accent); outline-offset: -2px; border-radius: 12px; }
+.committee-feature { position: relative; overflow: hidden; isolation: isolate; min-height: 580px; margin: 0; border-radius: var(--club-radius); background: #10213b; }
+.committee-feature img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.committee-feature-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,15,30,.32), transparent 35%, rgba(5,15,30,.85)); pointer-events: none; }
+.committee-feature figcaption { position: absolute; bottom: 3.5rem; left: 2rem; right: 2rem; color: white; display: flex; flex-direction: column; gap: .75rem; }
+.committee-feature-title { display: block; max-width: 16ch; font-size: clamp(1.8rem, 3vw, 2.75rem); line-height: 1.08; font-weight: 800; letter-spacing: -.035em; }
+.committee-photo-progress { position: absolute; bottom: 2rem; left: 2rem; right: 2rem; display: flex; gap: 6px; }
+.committee-photo-progress span { height: 2px; flex: 1; background: rgba(255,255,255,.3); transition: background-color 200ms ease; }
+.committee-photo-progress [data-active='true'] { background: white; }
+@media (max-width: 999px) {
+  .committee-showcase { grid-template-columns: 1fr; gap: 1.5rem; }
+  .committee-feature { min-height: 0; aspect-ratio: 16 / 10; grid-row: 1; }
+  .committee-role { padding: 1.15rem .75rem; }
+  .committee-role-title { font-size: 1.1rem; }
+}
+@media (max-width: 599px) {
+  .committee-feature { aspect-ratio: 4 / 3; }
+  .committee-feature figcaption { left: 1.25rem; right: 1.25rem; bottom: 2.5rem; gap: .5rem; }
+  .committee-feature-title { font-size: 1.9rem; }
+  .committee-photo-progress { left: 1.25rem; right: 1.25rem; bottom: 1.25rem; }
+  .committee-role { gap: .85rem; }
+  .committee-role-description { font-size: .83rem; }
+}
+@media (prefers-reduced-motion: reduce) { .committee-showcase *, .committee-showcase *::before { transition: none !important; } }

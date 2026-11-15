@@ -1,0 +1,17 @@
+.club-welcome { display: grid; grid-template-columns: .9fr 1.1fr; border: 1px solid var(--club-glass-stroke); border-radius: var(--club-radius); overflow: hidden; background: var(--club-surface); background-image: var(--club-glass-sheen); box-shadow: var(--club-glass-shadow); }
+.club-welcome-intro { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 2rem; padding: clamp(1.75rem, 3.7vw, 3.25rem); background: var(--club-tint); border-right: 1px solid var(--club-line); }
+.club-welcome-intro h3 { margin: 0 0 1.5rem; max-width: 15ch; font-size: clamp(2rem, 3.4vw, 3.1rem); font-weight: 850; line-height: 1.08; letter-spacing: -.035em; color: var(--club-text); }
+.club-welcome-intro h3 span { color: var(--club-accent); }
+.club-welcome p { font-size: .95rem; line-height: 1.85; color: var(--club-muted); margin: 0; }
+.club-welcome-link { display: inline-flex; align-items: center; gap: 1.5rem; min-height: 44px; padding-bottom: .35rem; border-bottom: 1px solid var(--club-accent); color: var(--club-accent); font-size: .9rem; font-weight: 750; text-decoration: none; }
+.club-welcome-link svg { transition: transform 200ms ease; }
+.club-welcome-link:hover svg { transform: translate(2px,-2px); }
+.club-welcome-link:focus-visible { outline: 2px solid var(--club-accent); outline-offset: 5px; border-radius: 3px; }
+.club-welcome-details { padding: .5rem clamp(1.5rem, 3vw, 2.75rem); }
+.club-welcome-detail { display: grid; grid-template-columns: 24px minmax(0, 1fr); align-items: start; gap: 1rem; padding: 1.75rem 0; }
+.club-welcome-detail + .club-welcome-detail { border-top: 1px solid var(--club-line); }
+.club-welcome-detail h4 { color: var(--club-text); font-weight: 800; font-size: 1.1rem; line-height: 1.4; letter-spacing: -.015em; margin: 0 0 .7rem; }
+.club-welcome-detail p { font-size: .9rem; line-height: 1.8; }
+.club-welcome-icon { display: inline-flex; color: var(--club-accent); padding-top: .1rem; }
+@media (max-width: 899px) { .club-welcome { grid-template-columns: 1fr; } .club-welcome-intro { border-right: 0; border-bottom: 1px solid var(--club-line); gap: 1.25rem; } .club-welcome-intro h3 { max-width: 22ch; } .club-welcome-detail { padding: 1.5rem 0; } }
+@media (prefers-reduced-motion: reduce) { .club-welcome-link svg { transition: none; } }

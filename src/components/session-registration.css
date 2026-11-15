@@ -1,0 +1,37 @@
+.session-registration-layout { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); align-items: start; gap: clamp(2rem, 5vw, 5rem); }
+.session-registration-guide { position: sticky; top: 120px; padding: 1.5rem 0; }
+.session-registration-guide h3 { font-size: clamp(1.75rem, 2.8vw, 2.6rem); font-weight: 850; line-height: 1.12; letter-spacing: -.035em; max-width: 13ch; margin: 0 0 1.25rem; color: var(--club-text); }
+.session-registration-guide > p { color: var(--club-muted); font-size: .95rem; line-height: 1.85; max-width: 35ch; margin: 0 0 2rem; }
+.session-registration-guide nav { display: flex; flex-direction: column; gap: .25rem; max-width: 300px; }
+.session-registration-guide a { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 44px; padding: .75rem 0; border-bottom: 1px solid var(--club-line); color: var(--club-accent); text-decoration: none; font-size: .88rem; font-weight: 700; }
+.session-registration-guide a svg { transition: transform 180ms ease; }
+.session-registration-guide a:hover svg { transform: translate(2px,2px); }
+.session-registration-guide a:focus-visible { outline: 2px solid var(--club-accent); outline-offset: 4px; border-radius: 4px; }
+.club-cards-stack { position: relative; display: flex; flex-direction: column; --stack-gap: clamp(3rem, 8vh, 6rem); gap: 0; padding-bottom: 2rem; }
+.session-registration-anchor { display: block; height: 0; scroll-margin-top: 140px; }
+.club-sticky-card { margin-bottom: var(--stack-gap); position: sticky; top: calc(108px + var(--stack-index) * 18px); scroll-margin-top: calc(120px + var(--stack-index) * 18px); }
+.session-registration-card { position: relative; min-height: 280px; padding: clamp(1.5rem, 3vw, 2.75rem); border-radius: var(--club-radius); background: var(--club-surface); background-image: var(--club-glass-sheen); border: 1px solid var(--club-glass-stroke); box-shadow: var(--club-glass-shadow); color: var(--club-text); }
+.club-sticky-card[data-alternate="true"] .session-registration-card { background-color: var(--club-feature); }
+.session-registration-card header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+.session-registration-icon { display: inline-flex; color: var(--club-accent); }
+.session-registration-card h3 { margin: 0; font-size: clamp(1.35rem, 2vw, 1.8rem); font-weight: 850; letter-spacing: -.025em; }
+.session-registration-count { margin-left: auto; font-size: 1.1rem; font-weight: 700; color: var(--club-accent); font-variant-numeric: tabular-nums; }
+.session-registration-card p { color: var(--club-muted); font-size: .95rem; line-height: 1.85; margin: 0; }
+.session-registration-copy { display: flex; flex-direction: column; gap: 1rem; }
+.session-bank-details { display: grid; grid-template-columns: minmax(60px, .45fr) minmax(0, 1fr); gap: .85rem 1rem; margin: 1.5rem 0; padding: 1.25rem; border-radius: 12px; background: var(--club-tint); font-size: .9rem; line-height: 1.6; }
+.session-bank-details dt { color: var(--club-accent); font-weight: 750; }
+.session-bank-details dd { color: var(--club-text); margin: 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.session-registration-card .session-payment-reference { font-weight: 650; color: var(--club-text); }
+@media (max-width: 899px) {
+  .session-registration-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+  .session-registration-guide { position: static; padding: 0; }
+  .session-registration-guide h3 { max-width: none; }
+  .session-registration-guide > p { max-width: 60ch; margin-bottom: 1rem; }
+  .session-registration-guide nav { flex-direction: row; flex-wrap: wrap; gap: .5rem 1.5rem; max-width: none; }
+  .session-registration-guide a { gap: .65rem; }
+  .club-sticky-card { top: calc(88px + var(--stack-index) * 12px); scroll-margin-top: calc(100px + var(--stack-index) * 12px); }
+}
+@media (max-width: 599px) { .session-registration-card { min-height: 250px; } .session-bank-details { padding: 1rem; font-size: .85rem; } }
+@media (max-height: 700px), (prefers-reduced-motion: reduce) { .club-sticky-card, .session-registration-guide { position: static; } .club-cards-stack { --stack-gap: 1.5rem; } .session-registration-guide a svg { transition: none; } }
+
+.club-sticky-card:last-child { margin-bottom: 0; }

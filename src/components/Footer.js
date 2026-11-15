@@ -32,7 +32,7 @@ export default function Footer() {
         <Grid container spacing={{ xs: 4, md: 6 }}>
           <Grid item xs={12} md={5}>
             <Link component={RouterLink} to="/" aria-label="UNSW Badminton Club home" sx={{ display: 'inline-block' }}>
-              <img src={logo} alt="UNSWBC" style={{ height: 32, width: 'auto' }} />
+              <img data-footer-logo src={logo} alt="UNSWBC" style={{ height: 32, width: 'auto' }} />
             </Link>
             <Typography sx={{ mt: 2, maxWidth: '34ch', color: 'var(--club-muted)', lineHeight: 1.7 }}>
               Social play, training, and competition. A badminton community for every level at UNSW.

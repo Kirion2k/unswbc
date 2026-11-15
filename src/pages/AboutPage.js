@@ -1,3 +1,4 @@
+import ClubWelcome from '../components/ClubWelcome';
 import PageContentSurface from '../components/PageContentSurface';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -28,33 +29,7 @@ function AboutPage() {
 
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
         <SectionHeading overline="UNSWBC" align="center" title="Welcome to the club" sx={{ mb: 'var(--club-heading-gap)' }} />
-
-        <ScrollReveal>
-          <Card>
-            <CardContent sx={{ p: { xs: 3.5, md: 5 } }}>
-              <Typography variant="h5" sx={{ fontWeight: 900, mb: 1.5 }}>
-                A badminton club built on community
-              </Typography>
-              <Typography sx={{ color: 'text.secondary', lineHeight: 1.85, fontSize: { xs: '1rem', md: '1.1rem' } }}>
-                UNSW Badminton Club is a welcoming space for anyone who loves badminton, whether you are picking up a racket
-                for the first time, coming along with friends for social games, or training with competitive goals.
-              </Typography>
-              <Typography sx={{ mt: 2, color: 'text.secondary', lineHeight: 1.85, fontSize: { xs: '1rem', md: '1.1rem' } }}>
-                We focus on the things that keep a club strong: fair play, good sportsmanship, and an inclusive culture where
-                new players feel comfortable asking questions. Our sessions run smoothly with a queueing system, quality shuttles,
-                and a committee that cares about everyone getting on court.
-            </Typography>
-              <Typography sx={{ mt: 2, color: 'text.secondary', lineHeight: 1.85, fontSize: { xs: '1rem', md: '1.1rem' } }}>
-                Beyond weekly sessions, we bring the community together through socials, events, and competition, creating a place
-                where you can improve your game and build friendships that last beyond uni.
-          </Typography>
-              <Typography sx={{ mt: 2, color: 'text.secondary', lineHeight: 1.85, fontSize: { xs: '1rem', md: '1.1rem' } }}>
-                If you are new, we will help you settle in quickly. If you are experienced, you will find strong games, good training
-                partners, and chances to represent the club in competitions.
-          </Typography>
-            </CardContent>
-          </Card>
-        </ScrollReveal>
+        <ClubWelcome />
 
         <Divider sx={{ my: 'var(--club-section-gap)' }} />
 

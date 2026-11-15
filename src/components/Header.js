@@ -197,6 +197,8 @@ function Header() {
             >
               <motion.img
                 src={headerLogo}
+                data-header-logo
+                data-logo-tone={mode === 'dark' || overDarkBackground ? 'light' : 'dark'}
                 alt="UNSWBC Logo"
                 style={{ height: scrolled ? 32 : 38, maxWidth: '100%', objectFit: 'contain', objectPosition: 'left', filter: overDarkBackground ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.35))' : 'none', transition: 'height 0.3s ease' }}
                 whileHover={{ scale: 1.05 }}
