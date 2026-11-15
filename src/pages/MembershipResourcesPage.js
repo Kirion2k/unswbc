@@ -1,3 +1,4 @@
+import { DISCORD_INVITE } from '../utils/clubLinks';
 import PageContentSurface from '../components/PageContentSurface';
 import React from 'react';
 import { Box, CardContent, Container, Grid, Link, List, ListItem, ListItemText, Typography } from '@mui/material';
@@ -95,6 +96,8 @@ function MembershipResourcesPage() {
                 - FAQs: <Link component={RouterLink} to="/faqs" underline="hover">/faqs</Link>
                 <br />
                 - Contact: <Link component={RouterLink} to="/contact" underline="hover">/contact</Link>
+                <br />
+                - Community: <Link href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer" underline="hover">Join our Discord</Link>
               </Typography>
             </CardContent>
           </TiltCard>

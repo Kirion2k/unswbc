@@ -32,8 +32,8 @@ function MeetTheTeamPage() {
     <Box sx={{ bgcolor: 'var(--club-canvas)' }}>
       <PageHero
         imageSrc="/optimized/unsw-20.jpg"
-        imageAlt="Meet the Team"
-        title="Meet the"
+        imageAlt="Our Team"
+        title="Our"
         highlight="Team"
         subtitle="A volunteer committee keeping sessions running smoothly and the club thriving."
         imagePosition="center 30%"
@@ -43,7 +43,7 @@ function MeetTheTeamPage() {
 
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
         <ScrollReveal>
-          <SectionHeading overline="Leadership" title="Executives" sx={{ mb: 'var(--club-heading-gap)' }} />
+          <SectionHeading overline="Leadership" align="center" title="Executives" sx={{ mb: 'var(--club-heading-gap)' }} />
         </ScrollReveal>
         <Grid container spacing={{ xs: 2, md: 3 }} justifyContent="center">
           {executives.map((exec, index) => (
@@ -82,7 +82,7 @@ function MeetTheTeamPage() {
 
       <Container sx={{ pb: 'var(--club-section-space)' }}>
         <ScrollReveal>
-          <SectionHeading overline="Team" title="Committee" sx={{ mb: 'var(--club-heading-gap)' }} />
+          <SectionHeading overline="Team" align="center" title="Committee" sx={{ mb: 'var(--club-heading-gap)' }} />
         </ScrollReveal>
         <Box component="ul" sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(2, minmax(0, 1fr))' }, gap: '1px', bgcolor: 'var(--club-line)', listStyle: 'none', m: 0, p: 0, border: '1px solid var(--club-line)', borderRadius: 'var(--club-radius)', overflow: 'hidden' }}>
           {committee.map((role) => (
@@ -97,7 +97,7 @@ function MeetTheTeamPage() {
 
         <Box sx={{ mt: 'var(--club-section-space)' }}>
           <ScrollReveal>
-            <SectionHeading overline="Contact" title="Reach out to us" sx={{ mb: 'var(--club-heading-gap)' }} />
+            <SectionHeading overline="Contact" align="center" title="Reach out to us" sx={{ mb: 'var(--club-heading-gap)' }} />
             <TiltCard sx={{ bgcolor: 'var(--club-feature)', color: 'var(--club-text)' }}>
               <CardContent sx={{ p: { xs: 3, md: 4 } }}>
                 <Grid container spacing={{ xs: 2, md: 3 }} alignItems="center">

@@ -71,7 +71,7 @@ const NIMBUS_CSS = `
 @media(prefers-reduced-motion:reduce){.nv-ico svg,.nv-ico::before,.nv-ico::after,.nv-door{animation:none!important;transition:none}}
 @media(prefers-reduced-transparency:reduce){.nimbus-glass{background:var(--club-surface,#fff);backdrop-filter:none!important;-webkit-backdrop-filter:none!important}.nimbus-nav[data-tone=dark] .nimbus-glass{background:var(--club-surface,#162235)}}
 /* Keep the navigation centered, with room around its first and last items. */
-.nimbus-nav.club-liquid-nav{--n-tint:var(--club-nav-scrolled);padding:6px 16px;gap:2px;font-family:Inter,system-ui,sans-serif}
+.nimbus-nav.club-liquid-nav{--n-tint:var(--club-nav-scrolled);padding:6px 16px;gap:2px;font-family:'Geist',system-ui,sans-serif}
 .club-liquid-nav .nimbus-glass{inset:0;box-shadow:inset 0 0 0 1px var(--n-rim),0 6px 18px -10px rgba(0,40,90,.28)}
 .club-liquid-nav .nimbus-item{--n-item-pad:16px;height:44px;min-height:44px;gap:8px;padding:0 var(--n-item-pad);font-size:14px;line-height:1;font-weight:500;letter-spacing:-.01em;white-space:nowrap}
 .club-liquid-nav .nimbus-item[aria-current=page]{font-weight:700}

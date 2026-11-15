@@ -18,7 +18,8 @@ export default function LogoMarquee({ logos, speed = 30 }) {
       sx={{
         overflow: 'hidden',
         width: '100%',
-        py: 2,
+        '--club-partner-shadow': (theme) => theme.palette.mode === 'dark' ? 'drop-shadow(0 0 1px rgba(255,255,255,0.5)) drop-shadow(0 0 3px rgba(255,255,255,0.1))' : 'none',
+        py: 1,
         maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
         WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
       }}
@@ -52,13 +53,12 @@ export default function LogoMarquee({ logos, speed = 30 }) {
                 key={i}
                 sx={{
                   display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                  height: { xs: 60, md: 76 }, px: { xs: 1, md: 1.5 },
-                  bgcolor: '#ffffff', borderRadius: '0.875rem', flexShrink: 0,
+                  height: { xs: 80, md: 104 }, flexShrink: 0,
                 }}
               >
                 <Box
                   component="img" src={logo.src} alt={i < logos.length ? logo.alt : ''}
-                  sx={{ height: { xs: 36, md: 48 }, width: 'auto', maxWidth: 140 }}
+                  sx={{ height: { xs: 64, md: 88 }, width: 'auto', maxWidth: { xs: 160, md: 210 }, objectFit: 'contain', clipPath: logo.clipPath, filter: 'var(--club-partner-shadow)' }}
                 />
               </Box>
             ))}

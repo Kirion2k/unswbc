@@ -1,3 +1,5 @@
+import DiscordIcon from '../components/DiscordIcon';
+import { DISCORD_INVITE } from '../utils/clubLinks';
 import PageContentSurface from '../components/PageContentSurface';
 import LinktreeIcon from '../components/LinktreeIcon';
 import React, { useState } from 'react';
@@ -79,7 +81,7 @@ function ContactPage() {
 
       {/* Contact Form */}
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
-        <SectionHeading overline="Contact" title="Get in touch" sx={{ mb: 'var(--club-heading-gap)' }} />
+        <SectionHeading overline="Contact" align="center" title="Get in touch" sx={{ mb: 'var(--club-heading-gap)' }} />
 
         <Grid container spacing={3} alignItems="stretch">
           <Grid item xs={12} md={7}>
@@ -166,10 +168,10 @@ function ContactPage() {
                   Follow our updates
                 </Typography>
                 <Typography sx={{ color: 'text.secondary', lineHeight: 1.75 }}>
-                  For announcements, events, and club news, check our socials. Find club forms, training bookings, and more on Linktree.
+                  Join our Discord to chat with other players. Follow our socials for announcements, or visit Linktree for club forms and training bookings.
                 </Typography>
 
-                <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
+                <Box sx={{ mt: 2, display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                   <IconButton
                     href="https://www.facebook.com/UNSWBC"
                     aria-label="UNSW Badminton Club Facebook"
@@ -189,6 +191,15 @@ function ContactPage() {
                     <Instagram />
                   </IconButton>
                   <IconButton
+                    href={DISCORD_INVITE}
+                    aria-label="UNSW Badminton Club Discord"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{ bgcolor: 'var(--club-tint)', color: 'var(--club-accent)', '&:hover': { bgcolor: 'var(--club-tint)' } }}
+                  >
+                    <DiscordIcon />
+                  </IconButton>
+                  <IconButton
                     href="https://linktr.ee/unswbc"
                     aria-label="UNSW Badminton Club Linktree"
                     target="_blank"
@@ -204,6 +215,8 @@ function ContactPage() {
                     Helpful links
                   </Typography>
                   <Typography sx={{ color: 'text.secondary', lineHeight: 1.9 }}>
+                    <Link href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer" underline="hover">Join our Discord community</Link>
+                    <br />
                     <Link href="https://linktr.ee/unswbc" target="_blank" rel="noopener noreferrer" underline="hover">All club links on Linktree</Link>
                     <br />
                     <Link component={RouterLink} to="/sessions" underline="hover">Session info</Link>

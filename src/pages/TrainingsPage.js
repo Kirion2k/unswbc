@@ -120,7 +120,7 @@ function TrainingsPage() {
       {/* ─── What to Expect ─── */}
       <Container sx={{ py: 'var(--club-section-space)' }}>
         <ScrollReveal>
-          <SectionHeading overline="Training" title="What to expect" sx={{ mb: 'var(--club-heading-gap)' }} />
+          <SectionHeading overline="Training" align="center" title="What to expect" sx={{ mb: 'var(--club-heading-gap)' }} />
         </ScrollReveal>
         <StaggerContainer staggerDelay={0.12}>
           <Grid container spacing={{ xs: 2, md: 3 }}>

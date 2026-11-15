@@ -81,7 +81,7 @@ function PhotoGalleryPage() {
       <PageContentSurface>
 
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
-        <SectionHeading overline="Gallery" title="Our memories" sx={{ mb: 'var(--club-heading-gap)' }} />
+        <SectionHeading overline="Gallery" align="center" title="Our memories" sx={{ mb: 'var(--club-heading-gap)' }} />
 
         <Box
           sx={{

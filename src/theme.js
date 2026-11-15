@@ -28,7 +28,7 @@ export const createClubTheme = (mode = 'light') => createTheme({
   },
   typography: {
     fontFamily: [
-      'Inter',
+      'Geist',
       'system-ui',
       '-apple-system',
       'Segoe UI',

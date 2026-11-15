@@ -151,7 +151,7 @@ function SessionsPage() {
       <PageContentSurface>
 
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
-        <SectionHeading overline="Times" title="Session times and prices" sx={{ mb: 'var(--club-heading-gap)' }} />
+        <SectionHeading overline="Times" align="center" title="Session times and prices" sx={{ mb: 'var(--club-heading-gap)' }} />
         <StaggerContainer>
           <Grid container spacing={{ xs: 2, md: 3 }} sx={{ alignItems: 'stretch' }}>
             {sessionCards.map((s) => (
@@ -249,7 +249,7 @@ function SessionsPage() {
 
         <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
-        <SectionHeading overline="New here" title="Where to find us" sx={{ mb: 'var(--club-heading-gap)' }} />
+        <SectionHeading overline="New here" align="center" title="Where to find us" sx={{ mb: 'var(--club-heading-gap)' }} />
         <Grid container spacing={{ xs: 2, md: 3 }} alignItems="stretch">
           <Grid item xs={12} md={7}>
             <Card sx={{ height: '100%' }}>
@@ -382,7 +382,7 @@ function SessionsPage() {
 
         <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
-        <SectionHeading overline="Info" title="Registration and payment" sx={{ mb: 'var(--club-heading-gap)' }} />
+        <SectionHeading overline="Info" align="center" title="Registration and payment" sx={{ mb: 'var(--club-heading-gap)' }} />
         <StaggerContainer>
           <Grid container spacing={{ xs: 2, md: 3 }} sx={{ alignItems: 'stretch' }}>
             {infoCards.map((section, index) => {
@@ -533,8 +533,8 @@ function SessionsPage() {
 
         <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
-        <SectionHeading overline="Pricing" title="Memberships" sx={{ mb: 2 }} />
-        <Typography sx={{ textAlign: 'left', fontWeight: 700, mb: 4, color: 'text.secondary' }}>
+        <SectionHeading overline="Pricing" align="center" title="Memberships" sx={{ mb: 2 }} />
+        <Typography sx={{ textAlign: 'center', fontWeight: 700, mb: 4, color: 'text.secondary' }}>
           Note: memberships reset each year on 1 Feb.
         </Typography>
 
@@ -609,7 +609,7 @@ function SessionsPage() {
 
         <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
-        <SectionHeading overline="Start here" title="Your first session in 3 steps" sx={{ mb: 'var(--club-heading-gap)' }} />
+        <SectionHeading overline="Start here" align="center" title="Your first session in 3 steps" sx={{ mb: 'var(--club-heading-gap)' }} />
         <StaggerContainer>
           <Grid container spacing={{ xs: 2, md: 3 }}>
             {quickSteps.map((step, index) => (

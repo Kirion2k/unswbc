@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+  font-family: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
     'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -102,4 +102,24 @@ html { background: var(--club-canvas); }
 .club-glass-button:focus-visible { outline: 2px solid var(--club-accent); outline-offset: 3px; }
 @media (prefers-reduced-transparency: reduce) {
   :root { --club-button-sheen: none; }
+}
+
+/* Blend photo and video heroes into the current page theme. */
+[data-page-hero] {
+  --hero-fade-height: clamp(7rem, 22svh, 15rem);
+  isolation: isolate;
+  padding-bottom: var(--hero-fade-height);
+}
+[data-page-hero]::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: var(--hero-fade-height);
+  background: linear-gradient(to bottom, transparent, var(--club-canvas));
+  pointer-events: none;
+  z-index: 0;
+}
+[data-court-background] {
+  mask-image: linear-gradient(to bottom, transparent, black 6rem);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 6rem);
 }

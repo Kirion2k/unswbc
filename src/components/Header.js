@@ -51,8 +51,7 @@ function Header() {
       const nextScrolled = currentY > 40;
       const center = window.innerWidth >= 900 ? 36 : 30;
       const hero = document.querySelector('[data-page-hero]')?.getBoundingClientRect();
-      const footer = document.querySelector('footer')?.getBoundingClientRect();
-      const overDark = !!((hero && hero.top <= center && hero.bottom > center) || (footer && footer.top <= center));
+      const overDark = !!(hero && hero.top <= center && hero.bottom > center);
       if (overDark !== current.overDark) {
         current.overDark = overDark;
         setOverDarkBackground(overDark);
@@ -92,7 +91,7 @@ function Header() {
   const navLinks = [
     { label: 'Home', to: '/', icon: <House size={16} strokeWidth={1.7} aria-hidden="true" /> },
     { label: 'About', to: '/about', icon: <Info size={16} strokeWidth={1.7} aria-hidden="true" /> },
-    { label: 'Meet the Team', to: '/meet-the-team', icon: <UsersRound size={16} strokeWidth={1.7} aria-hidden="true" /> },
+    { label: 'Our Team', to: '/meet-the-team', icon: <UsersRound size={16} strokeWidth={1.7} aria-hidden="true" /> },
     { label: 'Photo Gallery', to: '/photo-gallery', icon: <Images size={16} strokeWidth={1.7} aria-hidden="true" /> },
     { label: 'Sessions', to: '/sessions', icon: <CalendarDays size={16} strokeWidth={1.7} aria-hidden="true" /> },
     { label: 'Trainings', to: '/trainings', icon: <Dumbbell size={16} strokeWidth={1.7} aria-hidden="true" /> },

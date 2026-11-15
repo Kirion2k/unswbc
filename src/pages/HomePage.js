@@ -1,3 +1,5 @@
+import DiscordIcon from '../components/DiscordIcon';
+import { DISCORD_INVITE } from '../utils/clubLinks';
 import PageContentSurface from '../components/PageContentSurface';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -25,7 +27,6 @@ import useHeroScroll from '../components/useHeroScroll';
 import useHeroVideo from '../components/useHeroVideo';
 import FloatingParticles from '../components/FloatingParticles';
 import LogoMarquee from '../components/LogoMarquee';
-import ParallaxImage from '../components/ParallaxImage';
 // import MiniInstagramGrid from '../components/MiniInstagramGrid';
 import unswLogo from '../unsw-logo.png';
 import arcLogo from '../arc-logo.jpg';
@@ -66,7 +67,7 @@ function HomePage() {
       title: 'Who we are',
       body: 'A welcoming community of players across every level, from first timers to competitive athletes.',
       body2: 'Whether you are brand new or already competing, you will find friendly games, good people, and a club culture that makes it easy to get involved.',
-      image: '/optimized/unsw-1.jpg',
+      image: '/optimized/unsw-41.jpg',
       tone: 'navy',
     },
     {
@@ -80,7 +81,7 @@ function HomePage() {
       title: 'Community & events',
       body: 'Tournaments, socials, and club culture that makes you want to come back every week.',
       body2: 'From club events to team competitions, there is always something to look forward to, and plenty of chances to meet new people.',
-      image: '/optimized/unsw-41.jpg',
+      image: '/optimized/unsw-1.jpg',
       tone: 'navy',
     },
   ];
@@ -95,7 +96,7 @@ function HomePage() {
     { src: unswLogo, alt: 'UNSW' },
     { src: arcLogo, alt: 'ARC Sport' },
     { src: badmintonAuLogo, alt: 'Badminton Australia' },
-    { src: badmintonNswLogo, alt: 'Badminton NSW' },
+    { src: badmintonNswLogo, alt: 'Badminton NSW', clipPath: 'inset(0 6.8% 0 0)' },
   ];
 
   return (
@@ -142,7 +143,7 @@ function HomePage() {
           <MagneticButton
             onClick={playVideo}
             variant="outlined"
-            sx={{ position: 'absolute', right: 16, bottom: 16, zIndex: 2, color: 'white', bgcolor: 'rgba(12,20,34,0.7)', borderColor: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', px: 1.5, py: 0.75 }}
+            sx={{ position: 'absolute', right: 16, bottom: 'calc(var(--hero-fade-height) + 16px)', zIndex: 2, color: 'white', bgcolor: 'rgba(12,20,34,0.7)', borderColor: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', px: 1.5, py: 0.75 }}
           >
             Play background video
           </MagneticButton>
@@ -300,17 +301,17 @@ function HomePage() {
       <PageContentSurface>
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
         <ScrollReveal>
-          <SectionHeading overline="Welcome" title="A club built for every level" sx={{ mb: 'var(--club-heading-gap)' }} />
+          <SectionHeading overline="Welcome" align="center" title="A club built for every level" sx={{ mb: 'var(--club-heading-gap)' }} />
         </ScrollReveal>
-        <Grid container spacing={{ xs: 2, md: 3 }}>
+        <Box sx={{ display: 'grid', gridAutoRows: '1fr', gap: { xs: 2, md: 3 } }}>
           {featureSections.map((s, index) => {
             const imageFirst = index % 2 === 0;
 
             return (
-              <Grid item xs={12} key={s.title}>
-                <ScrollReveal delay={index * 0.1}>
+              <Box key={s.title}>
+                <ScrollReveal delay={index * 0.1} style={{ height: '100%' }}>
                   <TiltCard>
-                    <Grid container alignItems="stretch">
+                    <Grid container alignItems="stretch" sx={{ height: '100%', minHeight: { md: '26.5rem' } }}>
                       <Grid
                         item
                         xs={12}
@@ -318,6 +319,7 @@ function HomePage() {
                         sx={{
                           order: { xs: 0, md: imageFirst ? 0 : 1 },
                           display: 'flex',
+                          position: 'relative',
                         }}
                       >
                         <CardMedia
@@ -330,7 +332,8 @@ function HomePage() {
                             width: '100%',
                             flexGrow: 1,
                             height: { xs: 240, sm: 300, md: '100%' },
-                            minHeight: { md: '22.5rem' },
+                            position: { md: 'absolute' },
+                            inset: { md: 0 },
                             objectFit: 'cover',
                           }}
                         />
@@ -389,10 +392,10 @@ function HomePage() {
                     </Grid>
                   </TiltCard>
                 </ScrollReveal>
-              </Grid>
+              </Box>
             );
           })}
-        </Grid>
+        </Box>
       </Container>
 
       {/* ─── About Preview ─── */}
@@ -436,10 +439,11 @@ function HomePage() {
           <Grid item xs={12} md={6}>
             <ScrollReveal direction="right">
               <Box sx={{ borderRadius: 4, overflow: 'hidden', height: { xs: 280, md: '23.75rem' } }}>
-                <ParallaxImage
-                  src="/optimized/unsw-14.jpg"
+                <Box component="img"
+                  src="/optimized/unsw-55.jpg"
                   alt="UNSW Badminton Club community"
-                  style={{ width: '100%', height: '100%' }}
+                  loading="lazy" decoding="async"
+                  sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 />
               </Box>
             </ScrollReveal>
@@ -475,7 +479,7 @@ function HomePage() {
       {/* ─── Sessions Preview ─── */}
       <Container sx={{ pb: 'var(--club-section-space)' }}>
         <ScrollReveal>
-          <SectionHeading overline="Sessions" title="Join us on court" sx={{ mb: 'var(--club-heading-gap)' }} />
+          <SectionHeading overline="Sessions" align="center" title="Join us on court" sx={{ mb: 'var(--club-heading-gap)' }} />
         </ScrollReveal>
         <StaggerContainer staggerDelay={0.1}>
           <Grid container spacing={{ xs: 2, md: 3 }}>
@@ -529,7 +533,7 @@ function HomePage() {
       {/* ─── Explore Cards ─── */}
       <Container sx={{ pb: 'var(--club-section-space)' }}>
         <ScrollReveal>
-          <SectionHeading overline="Explore" title="Explore the club" sx={{ mb: 'var(--club-heading-gap)' }} />
+          <SectionHeading overline="Explore" align="center" title="Explore the club" sx={{ mb: 'var(--club-heading-gap)' }} />
         </ScrollReveal>
         <StaggerContainer staggerDelay={0.1}>
           <Grid container spacing={{ xs: 2, md: 3 }}>
@@ -576,10 +580,10 @@ function HomePage() {
       </Container>
 
       {/* ─── Partners Marquee ─── */}
-      <Box sx={{ py: { xs: 4, md: 6 }, bgcolor: 'transparent' }}>
+      <Box sx={{ bgcolor: 'transparent' }}>
         <Container>
           <ScrollReveal>
-            <SectionHeading overline="Our partners" title="Affiliated with" sx={{ mb: 3 }} />
+            <SectionHeading overline="Our partners" align="center" title="Affiliated with" sx={{ mb: 3 }} />
           </ScrollReveal>
           <LogoMarquee logos={partners} speed={25} />
         </Container>
@@ -589,7 +593,7 @@ function HomePage() {
       <Box
         sx={{
           py: { xs: 8, md: 10 },
-          bgcolor: 'var(--club-section-tint)',
+          background: 'linear-gradient(180deg, var(--club-section-tint), var(--club-canvas))',
           position: 'relative',
           overflow: 'hidden',
           textAlign: 'center',
@@ -620,6 +624,7 @@ function HomePage() {
             >
               Join 150+ members at Sydney&apos;s top university badminton club.
             </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: 2 }}>
             <MagneticButton
               variant="contained"
               component={RouterLink}
@@ -636,6 +641,14 @@ function HomePage() {
             >
               View Sessions &rarr;
             </MagneticButton>
+              <MagneticButton
+                component="a" href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer"
+                variant="outlined" startIcon={<DiscordIcon />}
+                sx={{ px: 3, py: 1.5, fontSize: '1rem', color: 'var(--club-accent)' }}
+              >
+                Join our Discord
+              </MagneticButton>
+            </Box>
           </ScrollReveal>
         </Container>
       </Box>

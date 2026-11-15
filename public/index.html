@@ -19,9 +19,16 @@
     <meta name="author" content="UNSW Badminton Club" />
     <meta name="keywords" content="Badminton, UNSW, Sports, Club, UNSWBC, Training" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preload" href="%PUBLIC_URL%/fonts/geist-latin-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <style>
+      @font-face {
+        font-family: 'Geist';
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url('%PUBLIC_URL%/fonts/geist-latin-variable.woff2') format('woff2');
+      }
+    </style>
     <link rel="preload" as="image" href="%PUBLIC_URL%/logo-white.png" fetchpriority="high" />
     <link rel="preload" as="image" href="%PUBLIC_URL%/optimized/unsw-64.jpg" fetchpriority="high" />
   </head>
@@ -179,7 +186,7 @@
         background: var(--il-bg);
         color: var(--il-ink);
         z-index: 9999;
-        font-family: Inter, system-ui, sans-serif;
+        font-family: 'Geist', system-ui, sans-serif;
         transition: opacity 320ms ease;
       }
       [data-theme="dark"] #initial-loader {

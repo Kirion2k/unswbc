@@ -144,6 +144,7 @@ export default function CourtBackground({ surfaceRef }) {
         </Box>
         {interactive && <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0 }} />}
       </Box>
+      <Box sx={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '6rem', background: 'linear-gradient(transparent, var(--club-canvas))' }} />
     </Box>
   );
 }

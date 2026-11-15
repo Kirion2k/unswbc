@@ -11,7 +11,7 @@ import MagneticButton from '../components/MagneticButton';
 // import MiniInstagramGrid from '../components/MiniInstagramGrid';
 
 function AboutPage() {
-  const imageSrc = "/optimized/unsw-14.jpg";
+  const imageSrc = "/optimized/unsw-22.jpg";
 
   return (
     <Box sx={{ bgcolor: 'var(--club-canvas)' }}>
@@ -27,7 +27,7 @@ function AboutPage() {
       <PageContentSurface>
 
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
-        <SectionHeading overline="UNSWBC" title="Welcome to the club" sx={{ mb: 'var(--club-heading-gap)' }} />
+        <SectionHeading overline="UNSWBC" align="center" title="Welcome to the club" sx={{ mb: 'var(--club-heading-gap)' }} />
 
         <ScrollReveal>
           <Card>
@@ -58,7 +58,7 @@ function AboutPage() {
 
         <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
-        <SectionHeading overline="What we do" title="Vision and activities" sx={{ mb: 'var(--club-heading-gap)' }} />
+        <SectionHeading overline="What we do" align="center" title="Vision and activities" sx={{ mb: 'var(--club-heading-gap)' }} />
 
         <Grid container spacing={{ xs: 2, md: 3 }}>
           {[
@@ -141,7 +141,7 @@ function AboutPage() {
 
         <Box sx={{ mb: 'var(--club-section-space)' }}><ChampionshipHonours /></Box>
 
-        <SectionHeading overline="Experience" title="What to expect" sx={{ mb: 'var(--club-heading-gap)' }} />
+        <SectionHeading overline="Experience" align="center" title="What to expect" sx={{ mb: 'var(--club-heading-gap)' }} />
         <Grid container spacing={{ xs: 2, md: 3 }}>
           {[
             {

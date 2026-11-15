@@ -12,7 +12,7 @@ function TeamPage() {
         imageAlt="Team"
         title="The"
         highlight="Team"
-        subtitle="This page isn’t currently used — please visit Meet the Team for committee information."
+        subtitle="This page isn’t currently used — please visit Our Team for committee information."
         imagePosition="center 40%"
       />
 
@@ -20,7 +20,7 @@ function TeamPage() {
       <Container sx={{ py: 'var(--club-section-space)' }}>
         <SectionHeading overline="Navigation" title="Looking for the committee?" sx={{ mb: 'var(--club-heading-gap)' }} />
         <Typography sx={{ color: 'text.secondary', textAlign: 'center', lineHeight: 1.8 }}>
-          Go to <Typography component="span" sx={{ fontWeight: 900, color: 'var(--club-accent)' }}>Meet the Team</Typography> from the top navigation.
+          Go to <Typography component="span" sx={{ fontWeight: 900, color: 'var(--club-accent)' }}>Our Team</Typography> from the top navigation.
         </Typography>
       </Container>
       </PageContentSurface>
