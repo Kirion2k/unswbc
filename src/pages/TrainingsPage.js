@@ -12,30 +12,30 @@ import {
   Typography,
 } from '@mui/material';
 import { motion } from 'framer-motion';
+import TrainingSessionDetails from '../components/TrainingSessionDetails';
+import TrainingMotif from '../components/TrainingMotif';
 import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
 import ScrollReveal, { StaggerContainer, StaggerItem } from '../components/ScrollReveal';
 import TiltCard from '../components/TiltCard';
 import MagneticButton from '../components/MagneticButton';
 
-const infoTiles = [
-  { label: 'Every Friday', value: '2:00 – 4:00 PM' },
-  { label: 'Location', value: 'UNSW FAC, Level 1' },
-  { label: 'Price', value: '$25 per person' },
-  { label: 'Level', value: 'Beginner & Intermediate' },
-];
+const trainingBookingUrl = 'https://www.eventbrite.com/e/unsw-badminton-club-trainings-2026-tickets-1983248371266?aff=ebdsoporgprofile';
 
 const expectCards = [
   {
     title: 'Coached sessions',
+    motif: 'rally',
     body: 'Be coached by UNSW\'s most experienced players. Get personalised feedback and drills tailored to your level.',
   },
   {
     title: 'All skill levels',
+    motif: 'pathway',
     body: 'Whether you\'re working on cleaner drops, stronger smashes, or just want more court time — Friday trainings are for you.',
   },
   {
     title: 'Level up your game',
+    motif: 'lift',
     body: 'Focused training every week builds consistency and confidence. This is your chance to improve faster than social sessions alone.',
   },
 ];
@@ -53,69 +53,11 @@ function TrainingsPage() {
 
       <PageContentSurface>
 
-      {/* ─── Key Info Tiles ─── */}
-      <Box data-page-content sx={{ bgcolor: 'var(--club-section-tint)', py: 'var(--club-section-space)' }}>
-        <Container>
-          <ScrollReveal>
-            <Typography
-              sx={{
-                textAlign: 'center',
-                textTransform: 'uppercase',
-                letterSpacing: '0.18em',
-                fontSize: '0.72rem',
-                fontWeight: 800,
-                color: 'var(--club-muted)',
-                mb: 4,
-              }}
-            >
-              Session Details
-            </Typography>
-          </ScrollReveal>
-          <StaggerContainer staggerDelay={0.1}>
-            <Grid container spacing={{ xs: 2, md: 3 }}>
-              {infoTiles.map((tile) => (
-                <Grid item xs={6} md={3} key={tile.label}>
-                  <StaggerItem>
-                    <TiltCard
-                      sx={{
-                        bgcolor: 'var(--club-surface)',
-                        border: '1px solid var(--club-line)',
-                        borderRadius: 3,
-                        height: '100%',
-                      }}
-                    >
-                      <CardContent sx={{ p: { xs: 2, sm: 2.5, md: 3 }, textAlign: 'center' }}>
-                        <Typography
-                          sx={{
-                            fontSize: '0.7rem',
-                            fontWeight: 800,
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.14em',
-                            color: 'var(--club-muted)',
-                            mb: 1,
-                          }}
-                        >
-                          {tile.label}
-                        </Typography>
-                        <Typography
-                          sx={{
-                            fontWeight: 900,
-                            fontSize: { xs: '1rem', md: '1.2rem' },
-                            color: 'var(--club-text)',
-                            lineHeight: 1.25,
-                          }}
-                        >
-                          {tile.value}
-                        </Typography>
-                      </CardContent>
-                    </TiltCard>
-                  </StaggerItem>
-                </Grid>
-              ))}
-            </Grid>
-          </StaggerContainer>
-        </Container>
-      </Box>
+      {/* ─── Session details ─── */}
+      <Container data-page-content sx={{ pt: 'var(--club-section-space)' }}>
+        <SectionHeading align="center" title="Session details" />
+        <TrainingSessionDetails bookingUrl={trainingBookingUrl} />
+      </Container>
 
       {/* ─── What to Expect ─── */}
       <Container sx={{ py: 'var(--club-section-space)' }}>
@@ -124,27 +66,12 @@ function TrainingsPage() {
         </ScrollReveal>
         <StaggerContainer staggerDelay={0.12}>
           <Grid container spacing={{ xs: 2, md: 3 }}>
-            {expectCards.map((card, i) => (
+            {expectCards.map((card) => (
               <Grid item xs={12} md={4} key={card.title}>
                 <StaggerItem style={{ height: '100%' }}>
                   <TiltCard sx={{ height: '100%' }}>
                     <CardContent sx={{ p: { xs: 3, md: 4 }, height: '100%' }}>
-                      <Box
-                        sx={{
-                          width: '3rem',
-                          height: '3rem',
-                          borderRadius: '0.875rem',
-                          bgcolor: 'var(--club-tint)',
-                          color: 'var(--club-accent)',
-                          display: 'grid',
-                          placeItems: 'center',
-                          fontWeight: 900,
-                          fontSize: '1rem',
-                          mb: 2,
-                        }}
-                      >
-                        {i + 1}
-                      </Box>
+                      <TrainingMotif kind={card.motif} />
                       <Typography variant="h6" sx={{ fontWeight: 900, mb: 1, color: 'var(--club-text)' }}>
                         {card.title}
                       </Typography>
@@ -215,7 +142,7 @@ function TrainingsPage() {
                 <MagneticButton
                   variant="contained"
                   component="a"
-                  href="https://www.eventbrite.com/e/unsw-badminton-club-trainings-2026-tickets-1983248371266?aff=ebdsoporgprofile"
+                  href={trainingBookingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   size="large"

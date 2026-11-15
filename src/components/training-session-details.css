@@ -1,0 +1,33 @@
+.training-session-pass { position: relative; display: grid; grid-template-columns: 1.1fr 1fr; max-width: 1120px; margin: 0 auto; border: 1px solid var(--club-glass-stroke); border-radius: var(--club-radius); overflow: hidden; background: var(--club-surface); background-image: var(--club-glass-sheen); box-shadow: var(--club-glass-shadow); color: var(--club-text); }
+.training-pass-schedule { padding: clamp(1.75rem, 4vw, 3.25rem); background: var(--club-tint); }
+.training-pass-label { display: flex; align-items: center; gap: .65rem; color: var(--club-muted); font-size: .8rem; font-weight: 650; }
+.training-pass-label svg { color: var(--club-accent); }
+.training-pass-schedule h3 { font-size: clamp(2.75rem, 5vw, 4.4rem); font-weight: 850; letter-spacing: -.04em; line-height: 1.02; margin: 1.5rem 0; }
+.training-pass-schedule h3 span { display: block; color: var(--club-accent); }
+.training-pass-time { display: flex; align-items: center; gap: .8rem; margin: 0; font-size: clamp(1.15rem, 2.2vw, 1.6rem); font-weight: 750; letter-spacing: -.015em; font-variant-numeric: tabular-nums; }
+.training-pass-time svg { color: var(--club-accent); flex-shrink: 0; }
+.training-pass-practical { position: relative; display: flex; align-items: center; padding: clamp(1.75rem, 4vw, 3.25rem); border-left: 1px dashed var(--club-line); }
+.training-pass-practical::before, .training-pass-practical::after { content: ''; position: absolute; width: 12px; height: 12px; left: -6px; border-radius: 50%; background: var(--club-canvas); border: 1px solid var(--club-line); }
+.training-pass-practical::before { top: -6px; }
+.training-pass-practical::after { bottom: -6px; }
+.training-pass-practical dl { display: flex; flex-direction: column; gap: 2rem; margin: 0; width: 100%; }
+.training-pass-detail { display: flex; align-items: flex-start; gap: 1rem; }
+.training-pass-detail > svg { color: var(--club-accent); flex-shrink: 0; margin-top: 2px; }
+.training-pass-detail dt { color: var(--club-muted); font-size: .8rem; font-weight: 550; line-height: 1.5; margin-bottom: .5rem; }
+.training-pass-detail dd { color: var(--club-text); font-size: clamp(1rem, 1.5vw, 1.3rem); line-height: 1.5; font-weight: 750; margin: 0; letter-spacing: -.015em; }
+.training-pass-footer { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.5rem clamp(1.75rem, 4vw, 3.25rem); border-top: 1px solid var(--club-line); }
+.training-pass-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: .65rem; margin: 0; }
+.training-pass-price > span:first-child { font-size: 2.25rem; font-weight: 850; letter-spacing: -.04em; line-height: 1.2; }
+.training-pass-price > span:last-child { color: var(--club-muted); font-size: .85rem; }
+.training-pass-footer a { text-decoration: none; }
+@media (max-width: 699px) {
+  .training-session-pass { grid-template-columns: 1fr; }
+  .training-pass-schedule h3 { margin: 1.25rem 0; }
+  .training-pass-schedule h3 span { display: inline; }
+  .training-pass-practical { border-left: 0; border-top: 1px dashed var(--club-line); }
+  .training-pass-practical::before { left: -6px; top: -6px; }
+  .training-pass-practical::after { right: -6px; left: auto; top: -6px; bottom: auto; }
+  .training-pass-practical dl { gap: 1.5rem; }
+  .training-pass-footer { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+}
+@media (max-width: 399px) { .training-pass-footer { align-items: flex-start; flex-direction: column; gap: 1rem; } .training-pass-footer > a { width: 100%; } }
