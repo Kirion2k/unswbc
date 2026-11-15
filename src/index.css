@@ -43,6 +43,7 @@ img { max-width: 100%; display: block; }
   --club-nav: rgba(255, 255, 255, 0.78);
   --club-nav-scrolled: rgba(255, 255, 255, 0.86);
   --club-feature: #edf3fb;
+  --club-section-tint: rgba(237,243,251,0.65);
   --club-feature-accent: #dce8f8;
   --club-action-ink: #ffffff;
   --club-accent-hover: #123456;
@@ -69,6 +70,7 @@ img { max-width: 100%; display: block; }
   --club-nav: rgba(12, 20, 34, 0.76);
   --club-nav-scrolled: rgba(12, 20, 34, 0.86);
   --club-feature: #0a1628;
+  --club-section-tint: rgba(10,22,40,0.65);
   --club-feature-accent: #142d50;
   --club-action-ink: #0c182b;
   --club-accent-hover: #c6dcff;

@@ -1,3 +1,4 @@
+import PageContentSurface from './PageContentSurface';
 import React from 'react';
 import { Box, Card, CardContent, Container, Link, Typography } from '@mui/material';
 import PageHero from './PageHero';
@@ -17,6 +18,8 @@ function ViewQueue() {
         highlight="Queue"
         subtitle="See the live queue during sessions. You can also open it in a new tab."
       />
+
+      <PageContentSurface>
 
       {/* Iframe section */}
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
@@ -52,6 +55,7 @@ function ViewQueue() {
           </CardContent>
         </Card>
       </Container>
+      </PageContentSurface>
     </Box>
   );
 }

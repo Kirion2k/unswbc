@@ -1,3 +1,4 @@
+import PageContentSurface from '../components/PageContentSurface';
 import React, { useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import {
@@ -13,7 +14,6 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
-import { motion, AnimatePresence } from 'framer-motion'
 import PlaceOutlined from '@mui/icons-material/PlaceOutlined'
 import PaymentsOutlined from '@mui/icons-material/PaymentsOutlined'
 import HowToRegOutlined from '@mui/icons-material/HowToRegOutlined'
@@ -33,7 +33,6 @@ function SessionsPage() {
   const mapsOpenLink = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`
 
   const [showFirstTimeMore, setShowFirstTimeMore] = useState(false)
-  const [showBanner, setShowBanner] = useState(true)
 
   const quickSteps = [
     {
@@ -149,84 +148,108 @@ function SessionsPage() {
         subtitle="Everything you need to join, where to go, and what sessions cost."
       />
 
-      <AnimatePresence>
-        {showBanner && (
-          <motion.div
-            key="training-banner"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-          >
-            <Box
-              sx={{
-                bgcolor: '#1c3c6f',
-                borderBottom: '1px solid rgba(255,255,255,0.12)',
-                py: { xs: 1.25, md: 1 },
-                px: 2,
-              }}
-            >
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="center"
-                spacing={1.5}
-                sx={{ flexWrap: 'wrap', gap: { xs: 0.5, md: 0 } }}
-              >
-                <Typography
-                  sx={{
-                    color: 'white',
-                    fontSize: { xs: '0.82rem', md: '0.88rem' },
-                    fontWeight: 600,
-                    lineHeight: 1.5,
-                    textAlign: 'center',
-                  }}
-                >
-                  🏸 Friday Trainings are on! Coached sessions every Friday 2–4pm at UNSW FAC Level 1 · $25pp
-                </Typography>
-                <Box
-                  component={RouterLink}
-                  to="/trainings"
-                  sx={{
-                    color: 'rgba(255,255,255,0.85)',
-                    fontSize: '0.82rem',
-                    fontWeight: 800,
-                    textDecoration: 'underline',
-                    whiteSpace: 'nowrap',
-                    '&:hover': { color: 'white' },
-                  }}
-                >
-                  Learn more →
-                </Box>
-                <Box
-                  component="button"
-                  className="club-glass-button"
-                  onClick={() => setShowBanner(false)}
-                  aria-label="Dismiss banner"
-                  sx={{
-                    backgroundColor: 'rgba(255,255,255,0.08)',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    borderRadius: '50%',
-                    width: 36, height: 36, flexShrink: 0,
-                    cursor: 'pointer',
-                    color: 'rgba(255,255,255,0.6)',
-                    fontSize: '1.1rem',
-                    lineHeight: 1,
-                    p: 0.5,
-                    ml: { xs: 0, md: 1 },
-                    '&:hover': { color: 'white' },
-                  }}
-                >
-                  ×
-                </Box>
-              </Stack>
-            </Box>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <PageContentSurface>
 
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
-        <SectionHeading overline="New here" title="First time at a session" sx={{ mb: 'var(--club-heading-gap)' }} />
+        <SectionHeading overline="Times" title="Session times and prices" sx={{ mb: 'var(--club-heading-gap)' }} />
+        <StaggerContainer>
+          <Grid container spacing={{ xs: 2, md: 3 }} sx={{ alignItems: 'stretch' }}>
+            {sessionCards.map((s) => (
+              <Grid item xs={12} md={4} key={`${s.title} ${s.time}`} sx={{ display: 'flex' }}>
+                <StaggerItem style={{ flexGrow: 1, display: 'flex' }}>
+                  <TiltCard sx={{ flexGrow: 1, overflow: 'hidden' }}>
+                  <CardContent
+                    sx={{
+                      p: { xs: 3, md: 4 },
+                      display: 'flex',
+                      flexDirection: 'column',
+                      height: '100%',
+                    }}
+                  >
+                    <Stack direction="row" spacing={1.5} alignItems="center" justifyContent="space-between" sx={{ mb: 2 }}>
+                      <Typography variant="h6" sx={{ fontWeight: 900, lineHeight: 1.2 }}>
+                        {s.title}
+                      </Typography>
+                      {s.highlight ? (
+                        <Chip
+                          label={s.highlight}
+                          size="small"
+                          sx={{
+                            bgcolor: 'var(--club-tint)',
+                            color: 'var(--club-accent)',
+                            fontWeight: 800,
+                            letterSpacing: '0.02em',
+                          }}
+                        />
+                      ) : null}
+                    </Stack>
+
+                    <Typography
+                      sx={{
+                        color: 'var(--club-accent)',
+                        fontWeight: 800,
+                        fontSize: '1.05rem',
+                        letterSpacing: '0.01em',
+                        lineHeight: 1.3,
+                        mb: 2.5,
+                      }}
+                    >
+                      {s.time}
+                    </Typography>
+
+                    <Grid container spacing={1.5}>
+                      <Grid item xs={6}>
+                        <Box
+                          sx={{
+                            p: 2,
+                            borderRadius: 3,
+                            bgcolor: '#1c3c6f',
+                            color: 'white',
+                            textAlign: 'center',
+                          }}
+                        >
+                          <Typography variant="body2" sx={{ fontWeight: 800, opacity: 0.9, mb: 0.5 }}>
+                            Members
+                          </Typography>
+                          <Typography sx={{ fontWeight: 900, fontSize: '1.5rem', lineHeight: 1.1 }}>
+                            {s.memberPrice}
+                          </Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Box
+                          sx={{
+                            p: 2,
+                            borderRadius: 3,
+                            bgcolor: 'var(--club-tint)',
+                            border: '1px solid var(--club-line)',
+                            textAlign: 'center',
+                          }}
+                        >
+                          <Typography variant="body2" sx={{ fontWeight: 800, color: 'var(--club-accent)', mb: 0.5 }}>
+                            Visitors
+                          </Typography>
+                          <Typography sx={{ fontWeight: 900, fontSize: '1.5rem', color: 'var(--club-text)', lineHeight: 1.1 }}>
+                            {s.visitorPrice}
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    </Grid>
+
+                    <Typography sx={{ mt: 2.5, color: 'text.secondary', lineHeight: 1.75, flexGrow: 1 }}>
+                      {s.note}
+                    </Typography>
+                  </CardContent>
+                  </TiltCard>
+                </StaggerItem>
+              </Grid>
+            ))}
+          </Grid>
+        </StaggerContainer>
+
+        <Divider sx={{ my: 'var(--club-section-gap)' }} />
+
+        <SectionHeading overline="New here" title="Where to find us" sx={{ mb: 'var(--club-heading-gap)' }} />
         <Grid container spacing={{ xs: 2, md: 3 }} alignItems="stretch">
           <Grid item xs={12} md={7}>
             <Card sx={{ height: '100%' }}>
@@ -359,46 +382,7 @@ function SessionsPage() {
 
         <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
-        <SectionHeading overline="Start here" title="Your first session in 3 steps" sx={{ mb: 'var(--club-heading-gap)' }} />
-        <StaggerContainer>
-          <Grid container spacing={{ xs: 2, md: 3 }}>
-            {quickSteps.map((step, index) => (
-              <Grid item xs={12} md={4} key={step.title}>
-                <StaggerItem style={{ height: '100%' }}>
-                  <TiltCard>
-                    <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                      <Box
-                        sx={{
-                          height: 38,
-                          width: 38,
-                          borderRadius: 999,
-                          bgcolor: 'var(--club-tint)',
-                          color: 'var(--club-accent)',
-                          display: 'grid',
-                          placeItems: 'center',
-                          fontWeight: 900,
-                          mb: 2,
-                        }}
-                      >
-                        {index + 1}
-                      </Box>
-                      <Typography variant="h6" sx={{ fontWeight: 900, mb: 1 }}>
-                        {step.title}
-                      </Typography>
-                      <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
-                        {step.body}
-                      </Typography>
-                    </CardContent>
-                  </TiltCard>
-                </StaggerItem>
-              </Grid>
-            ))}
-          </Grid>
-        </StaggerContainer>
-
-        <Divider sx={{ my: 'var(--club-section-gap)' }} />
-
-        <SectionHeading overline="Info" title="Important information" sx={{ mb: 'var(--club-heading-gap)' }} />
+        <SectionHeading overline="Info" title="Registration and payment" sx={{ mb: 'var(--club-heading-gap)' }} />
         <StaggerContainer>
           <Grid container spacing={{ xs: 2, md: 3 }} sx={{ alignItems: 'stretch' }}>
             {infoCards.map((section, index) => {
@@ -549,162 +533,8 @@ function SessionsPage() {
 
         <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
-        <SectionHeading overline="Times" title="Sessions" sx={{ mb: 'var(--club-heading-gap)' }} />
-        <StaggerContainer>
-          <Grid container spacing={{ xs: 2, md: 3 }} sx={{ alignItems: 'stretch' }}>
-            {sessionCards.map((s) => (
-              <Grid item xs={12} md={4} key={`${s.title} ${s.time}`} sx={{ display: 'flex' }}>
-                <StaggerItem style={{ flexGrow: 1, display: 'flex' }}>
-                  <TiltCard sx={{ flexGrow: 1, overflow: 'hidden' }}>
-                  <CardContent
-                    sx={{
-                      p: { xs: 3, md: 4 },
-                      display: 'flex',
-                      flexDirection: 'column',
-                      height: '100%',
-                    }}
-                  >
-                    <Stack direction="row" spacing={1.5} alignItems="center" justifyContent="space-between" sx={{ mb: 2 }}>
-                      <Typography variant="h6" sx={{ fontWeight: 900, lineHeight: 1.2 }}>
-                        {s.title}
-                      </Typography>
-                      {s.highlight ? (
-                        <Chip
-                          label={s.highlight}
-                          size="small"
-                          sx={{
-                            bgcolor: 'var(--club-tint)',
-                            color: 'var(--club-accent)',
-                            fontWeight: 800,
-                            letterSpacing: '0.02em',
-                          }}
-                        />
-                      ) : null}
-                    </Stack>
-
-                    <Typography
-                      sx={{
-                        color: 'var(--club-accent)',
-                        fontWeight: 800,
-                        fontSize: '1.05rem',
-                        letterSpacing: '0.01em',
-                        lineHeight: 1.3,
-                        mb: 2.5,
-                      }}
-                    >
-                      {s.time}
-                    </Typography>
-
-                    <Grid container spacing={1.5}>
-                      <Grid item xs={6}>
-                        <Box
-                          sx={{
-                            p: 2,
-                            borderRadius: 3,
-                            bgcolor: '#1c3c6f',
-                            color: 'white',
-                            textAlign: 'center',
-                          }}
-                        >
-                          <Typography variant="body2" sx={{ fontWeight: 800, opacity: 0.9, mb: 0.5 }}>
-                            Members
-                          </Typography>
-                          <Typography sx={{ fontWeight: 900, fontSize: '1.5rem', lineHeight: 1.1 }}>
-                            {s.memberPrice}
-                          </Typography>
-                        </Box>
-                      </Grid>
-                      <Grid item xs={6}>
-                        <Box
-                          sx={{
-                            p: 2,
-                            borderRadius: 3,
-                            bgcolor: 'var(--club-tint)',
-                            border: '1px solid var(--club-line)',
-                            textAlign: 'center',
-                          }}
-                        >
-                          <Typography variant="body2" sx={{ fontWeight: 800, color: 'var(--club-accent)', mb: 0.5 }}>
-                            Visitors
-                          </Typography>
-                          <Typography sx={{ fontWeight: 900, fontSize: '1.5rem', color: 'var(--club-text)', lineHeight: 1.1 }}>
-                            {s.visitorPrice}
-                          </Typography>
-                        </Box>
-                      </Grid>
-                    </Grid>
-
-                    <Typography sx={{ mt: 2.5, color: 'text.secondary', lineHeight: 1.75, flexGrow: 1 }}>
-                      {s.note}
-                    </Typography>
-                  </CardContent>
-                  </TiltCard>
-                </StaggerItem>
-              </Grid>
-            ))}
-          </Grid>
-        </StaggerContainer>
-
-        <Divider sx={{ my: 'var(--club-section-gap)' }} />
-
-        {/* ─── Trainings Reference ─── */}
-        <ScrollReveal>
-          <TiltCard
-            sx={{
-              borderLeft: '4px solid #1c3c6f',
-              borderRadius: 3,
-              overflow: 'hidden',
-            }}
-          >
-            <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-              <Grid container spacing={{ xs: 2, md: 3 }} alignItems="center">
-                <Grid item xs={12} md={8}>
-                  <Typography
-                    variant="overline"
-                    sx={{
-                      color: 'var(--club-accent)',
-                      letterSpacing: '0.14em',
-                      fontWeight: 900,
-                    }}
-                  >
-                    Also available
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 900, mt: 0.5, color: 'var(--club-text)' }}>
-                    Friday Trainings
-                  </Typography>
-                  <Typography sx={{ mt: 1, color: 'text.secondary', lineHeight: 1.85 }}>
-                    Want more court time and structured coaching? Our Friday sessions run every week with experienced coaches.
-                  </Typography>
-                  <Typography
-                    sx={{
-                      mt: 1.5,
-                      fontSize: '0.875rem',
-                      fontWeight: 700,
-                      color: 'var(--club-accent)',
-                    }}
-                  >
-                    Every Friday · 2:00–4:00 PM · UNSW FAC Level 1 · $25pp
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: { xs: 'flex-start', md: 'flex-end' } }}>
-                  <MagneticButton
-                    variant="contained"
-                    component={RouterLink}
-                    to="/trainings"
-                    sx={{ fontWeight: 900 }}
-                  >
-                    View Trainings &rarr;
-                  </MagneticButton>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </TiltCard>
-        </ScrollReveal>
-
-        <Divider sx={{ my: 'var(--club-section-gap)' }} />
-
         <SectionHeading overline="Pricing" title="Memberships" sx={{ mb: 2 }} />
-        <Typography sx={{ textAlign: 'center', fontWeight: 700, mb: 4, color: 'text.secondary' }}>
+        <Typography sx={{ textAlign: 'left', fontWeight: 700, mb: 4, color: 'text.secondary' }}>
           Note: memberships reset each year on 1 Feb.
         </Typography>
 
@@ -777,6 +607,45 @@ function SessionsPage() {
           </CardContent>
         </Card>
 
+        <Divider sx={{ my: 'var(--club-section-gap)' }} />
+
+        <SectionHeading overline="Start here" title="Your first session in 3 steps" sx={{ mb: 'var(--club-heading-gap)' }} />
+        <StaggerContainer>
+          <Grid container spacing={{ xs: 2, md: 3 }}>
+            {quickSteps.map((step, index) => (
+              <Grid item xs={12} md={4} key={step.title}>
+                <StaggerItem style={{ height: '100%' }}>
+                  <TiltCard>
+                    <CardContent sx={{ p: { xs: 3, md: 4 } }}>
+                      <Box
+                        sx={{
+                          height: 38,
+                          width: 38,
+                          borderRadius: 999,
+                          bgcolor: 'var(--club-tint)',
+                          color: 'var(--club-accent)',
+                          display: 'grid',
+                          placeItems: 'center',
+                          fontWeight: 900,
+                          mb: 2,
+                        }}
+                      >
+                        {index + 1}
+                      </Box>
+                      <Typography variant="h6" sx={{ fontWeight: 900, mb: 1 }}>
+                        {step.title}
+                      </Typography>
+                      <Typography sx={{ color: 'text.secondary', lineHeight: 1.85 }}>
+                        {step.body}
+                      </Typography>
+                    </CardContent>
+                  </TiltCard>
+                </StaggerItem>
+              </Grid>
+            ))}
+          </Grid>
+        </StaggerContainer>
+
         <Box sx={{ mt: { xs: 5, md: 6 } }}>
           <Card sx={{ bgcolor: 'var(--club-feature)', color: 'var(--club-text)' }}>
             <CardContent sx={{ p: { xs: 3, md: 4 } }}>
@@ -812,8 +681,65 @@ function SessionsPage() {
             </CardContent>
           </Card>
         </Box>
+
+        <Divider sx={{ my: 'var(--club-section-gap)' }} />
+
+        {/* ─── Trainings Reference ─── */}
+        <ScrollReveal>
+          <TiltCard
+            sx={{
+              borderLeft: '4px solid #1c3c6f',
+              borderRadius: 3,
+              overflow: 'hidden',
+            }}
+          >
+            <CardContent sx={{ p: { xs: 3, md: 4 } }}>
+              <Grid container spacing={{ xs: 2, md: 3 }} alignItems="center">
+                <Grid item xs={12} md={8}>
+                  <Typography
+                    variant="overline"
+                    sx={{
+                      color: 'var(--club-accent)',
+                      letterSpacing: '0.14em',
+                      fontWeight: 900,
+                    }}
+                  >
+                    Also available
+                  </Typography>
+                  <Typography component="h2" variant="h5" sx={{ fontWeight: 900, mt: 0.5, color: 'var(--club-text)' }}>
+                    Friday Trainings
+                  </Typography>
+                  <Typography sx={{ mt: 1, color: 'text.secondary', lineHeight: 1.85 }}>
+                    Want more court time and structured coaching? Our Friday sessions run every week with experienced coaches.
+                  </Typography>
+                  <Typography
+                    sx={{
+                      mt: 1.5,
+                      fontSize: '0.875rem',
+                      fontWeight: 700,
+                      color: 'var(--club-accent)',
+                    }}
+                  >
+                    Every Friday · 2:00–4:00 PM · UNSW FAC Level 1 · $25pp
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: { xs: 'flex-start', md: 'flex-end' } }}>
+                  <MagneticButton
+                    variant="contained"
+                    component={RouterLink}
+                    to="/trainings"
+                    sx={{ fontWeight: 900 }}
+                  >
+                    View Trainings &rarr;
+                  </MagneticButton>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </TiltCard>
+        </ScrollReveal>
       </Container>
 
+      </PageContentSurface>
     </Box>
   );
 }

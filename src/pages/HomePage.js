@@ -1,3 +1,4 @@
+import PageContentSurface from '../components/PageContentSurface';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
@@ -8,6 +9,7 @@ import {
   Container,
   Grid,
   Typography,
+  useMediaQuery,
 } from '@mui/material';
 import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { keyframes } from '@mui/system';
@@ -20,6 +22,7 @@ import MagneticButton from '../components/MagneticButton';
 import LetterAnimation from '../components/LetterAnimation';
 import MorphingText from '../components/MorphingText';
 import useHeroScroll from '../components/useHeroScroll';
+import useHeroVideo from '../components/useHeroVideo';
 import FloatingParticles from '../components/FloatingParticles';
 import LogoMarquee from '../components/LogoMarquee';
 import ParallaxImage from '../components/ParallaxImage';
@@ -49,12 +52,13 @@ function HomePage() {
     return () => document.removeEventListener('visibilitychange', update);
   }, []);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (heroActive) video.play().catch(() => {});
-    else video.pause();
-  }, [heroActive]);
+  const mobile = useMediaQuery('(max-width: 767px)', { noSsr: true });
+  const videoSource = mobile ? '/video-mobile.mp4' : '/video-web.mp4';
+  const { needsPlayButton, play: playVideo } = useHeroVideo(videoRef, {
+    visible: heroVisible && documentVisible,
+    reducedMotion: prefersReducedMotion,
+    source: videoSource,
+  });
   const heroImage = '/optimized/unsw-64.jpg';
 
   const featureSections = [
@@ -114,11 +118,12 @@ function HomePage() {
         <Box
           component={motion.video}
           ref={videoRef}
-          src="/video-web.mp4"
-          autoPlay
+          src={videoSource}
+          autoPlay={!prefersReducedMotion}
           muted
           loop
           playsInline
+          preload="auto"
           poster={heroImage}
           initial={prefersReducedMotion ? { opacity: 0.45 } : { opacity: 0, scale: 1.06 }}
           animate={{ opacity: 0.45, scale: 1 }}
@@ -132,6 +137,16 @@ function HomePage() {
             objectPosition: 'center center',
           }}
         />
+
+        {needsPlayButton && (
+          <MagneticButton
+            onClick={playVideo}
+            variant="outlined"
+            sx={{ position: 'absolute', right: 16, bottom: 16, zIndex: 2, color: 'white', bgcolor: 'rgba(12,20,34,0.7)', borderColor: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', px: 1.5, py: 0.75 }}
+          >
+            Play background video
+          </MagneticButton>
+        )}
 
         {/* Gradient overlay */}
         <Box
@@ -282,6 +297,7 @@ function HomePage() {
       </Box>
 
       {/* ─── Feature Sections ─── */}
+      <PageContentSurface>
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
         <ScrollReveal>
           <SectionHeading overline="Welcome" title="A club built for every level" sx={{ mb: 'var(--club-heading-gap)' }} />
@@ -560,7 +576,7 @@ function HomePage() {
       </Container>
 
       {/* ─── Partners Marquee ─── */}
-      <Box sx={{ py: { xs: 4, md: 6 }, bgcolor: 'var(--club-surface)' }}>
+      <Box sx={{ py: { xs: 4, md: 6 }, bgcolor: 'transparent' }}>
         <Container>
           <ScrollReveal>
             <SectionHeading overline="Our partners" title="Affiliated with" sx={{ mb: 3 }} />
@@ -573,7 +589,7 @@ function HomePage() {
       <Box
         sx={{
           py: { xs: 8, md: 10 },
-          bgcolor: 'var(--club-feature)',
+          bgcolor: 'var(--club-section-tint)',
           position: 'relative',
           overflow: 'hidden',
           textAlign: 'center',
@@ -623,6 +639,7 @@ function HomePage() {
           </ScrollReveal>
         </Container>
       </Box>
+      </PageContentSurface>
     </Box>
   );
 }

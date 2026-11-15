@@ -1,3 +1,4 @@
+import PageContentSurface from '../components/PageContentSurface';
 import LinktreeIcon from '../components/LinktreeIcon';
 import React, { useState } from 'react';
 import { Box, Card, CardContent, Container, Grid, IconButton, Link, TextField, Typography } from '@mui/material';
@@ -73,6 +74,8 @@ function ContactPage() {
         highlight="Us"
         subtitle="Questions about sessions, membership, or events? Send us a message and we’ll get back to you."
       />
+
+      <PageContentSurface>
 
       {/* Contact Form */}
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
@@ -216,6 +219,7 @@ function ContactPage() {
           </Grid>
         </Grid>
       </Container>
+      </PageContentSurface>
     </Box>
   );
 }

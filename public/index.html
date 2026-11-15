@@ -271,8 +271,13 @@
         25%, 70% { translate: 0 0; }
         90% { translate: -1px 1px; }
       }
+      @keyframes il-breathe {
+        0%, 100% { opacity: .65; }
+        50% { opacity: 1; }
+      }
       @media (prefers-reduced-motion: reduce) {
         #initial-loader { transition-duration: 100ms; }
+        .il-scene { animation: il-breathe 1.4s ease-in-out infinite; }
         .il-player, .il-arm, .il-flight, .il-shuttle-wrap, .il-shuttle { animation: none; }
         .il-flight { transform: translateX(calc(var(--il-travel) / 2)); }
         .il-shuttle-wrap { transform: translateY(-64px); }

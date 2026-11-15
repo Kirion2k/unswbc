@@ -1,3 +1,4 @@
+import PageContentSurface from '../components/PageContentSurface';
 import React from 'react';
 import { Box } from '@mui/material';
 import PageHero from '../components/PageHero';
@@ -107,12 +108,15 @@ function FAQsPage() {
         subtitle="Everything you need to know before your first session — what to bring, how the queue works, and what to expect."
       />
 
+      <PageContentSurface>
+
       <FAQTabs
         title="Frequently Asked Questions"
         subtitle="Let us answer some questions"
         categories={categories}
         faqData={faqData}
       />
+      </PageContentSurface>
     </Box>
   );
 }

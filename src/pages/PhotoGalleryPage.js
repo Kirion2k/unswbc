@@ -1,3 +1,4 @@
+import PageContentSurface from '../components/PageContentSurface';
 import React, { useState, useEffect, useCallback } from 'react';
 import { Box, Container, IconButton, Typography } from '@mui/material';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
@@ -76,6 +77,8 @@ function PhotoGalleryPage() {
         highlight="Gallery"
         subtitle="Moments from sessions, events, and competitions. The community on and off court."
       />
+
+      <PageContentSurface>
 
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
         <SectionHeading overline="Gallery" title="Our memories" sx={{ mb: 'var(--club-heading-gap)' }} />
@@ -178,6 +181,8 @@ function PhotoGalleryPage() {
           ))}
         </Box>
       </Container>
+
+      </PageContentSurface>
 
       {/* ─── Lightbox ─── */}
       <AnimatePresence>

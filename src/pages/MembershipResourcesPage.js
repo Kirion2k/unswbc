@@ -1,3 +1,4 @@
+import PageContentSurface from '../components/PageContentSurface';
 import React from 'react';
 import { Box, CardContent, Container, Grid, Link, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
@@ -46,6 +47,8 @@ function MembershipResourcesPage() {
         subtitle="Everything you need to get started — gear, session tips, and helpful links."
         imagePosition="center 35%"
       />
+
+      <PageContentSurface>
 
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
         <ScrollReveal>
@@ -97,6 +100,7 @@ function MembershipResourcesPage() {
           </TiltCard>
         </ScrollReveal>
       </Container>
+      </PageContentSurface>
     </Box>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import ClubThemeProvider from './components/ClubThemeProvider';
+import './styles/tailwind.css';
 import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';

@@ -1,3 +1,4 @@
+import PageContentSurface from '../components/PageContentSurface';
 import React from 'react'
 import { Avatar, Box, CardContent, Container, Grid, Typography } from '@mui/material'
 import { motion } from 'framer-motion'
@@ -37,6 +38,8 @@ function MeetTheTeamPage() {
         subtitle="A volunteer committee keeping sessions running smoothly and the club thriving."
         imagePosition="center 30%"
       />
+
+      <PageContentSurface>
 
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
         <ScrollReveal>
@@ -131,6 +134,7 @@ function MeetTheTeamPage() {
           </ScrollReveal>
         </Box>
       </Container>
+      </PageContentSurface>
     </Box>
   )
 }

@@ -1,3 +1,4 @@
+import PageContentSurface from '../components/PageContentSurface';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
@@ -50,8 +51,10 @@ function TrainingsPage() {
         subtitle="Sore today, stronger tomorrow. Coached sessions with UNSW's most experienced players."
       />
 
+      <PageContentSurface>
+
       {/* ─── Key Info Tiles ─── */}
-      <Box data-page-content sx={{ bgcolor: 'var(--club-feature)', py: 'var(--club-section-space)' }}>
+      <Box data-page-content sx={{ bgcolor: 'var(--club-section-tint)', py: 'var(--club-section-space)' }}>
         <Container>
           <ScrollReveal>
             <Typography
@@ -254,6 +257,7 @@ function TrainingsPage() {
           </Card>
         </ScrollReveal>
       </Container>
+      </PageContentSurface>
     </Box>
   );
 }

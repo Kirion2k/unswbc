@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -8,17 +8,20 @@ import {
   List,
   ListItemButton,
   ListItemText,
+  ListItemIcon,
   Box,
-  Button,
   Container,
   Divider,
+  useMediaQuery,
 } from '@mui/material';
+import { House, Info, UsersRound, Images, CalendarDays, Dumbbell, CircleHelp, ListOrdered, Mail } from 'lucide-react';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import { useClubTheme } from './ClubThemeProvider';
 import { motion } from 'framer-motion';
+import { LiquidNavbar } from './ui/liquid-glass-navbar';
 import lightLogo from './logo full/logo-full-blue.png';
 import darkLogo from './logo full/logo-full-white.png';
 
@@ -27,17 +30,33 @@ function Header() {
   const logo = mode === 'dark' ? darkLogo : lightLogo;
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [overDarkBackground, setOverDarkBackground] = useState(true);
+  const headerLogo = mode === 'dark' || overDarkBackground ? darkLogo : lightLogo;
   const [scrollDir, setScrollDir] = useState('up');
   const scrollY = React.useRef(0);
   const location = useLocation();
+  const navigate = useNavigate();
+  const desktop = useMediaQuery('(min-width: 1200px)', { noSsr: true });
 
   useEffect(() => {
     let frame = 0;
-    let current = { scrolled: false, direction: 'up' };
+    let current = { scrolled: window.scrollY > 40, direction: 'up', overDark: true };
+    setScrolled(current.scrolled);
+    setScrollDir('up');
+    setOverDarkBackground(true);
+    scrollY.current = window.scrollY;
     const update = () => {
       frame = 0;
       const currentY = window.scrollY;
       const nextScrolled = currentY > 40;
+      const center = window.innerWidth >= 900 ? 36 : 30;
+      const hero = document.querySelector('[data-page-hero]')?.getBoundingClientRect();
+      const footer = document.querySelector('footer')?.getBoundingClientRect();
+      const overDark = !!((hero && hero.top <= center && hero.bottom > center) || (footer && footer.top <= center));
+      if (overDark !== current.overDark) {
+        current.overDark = overDark;
+        setOverDarkBackground(overDark);
+      }
       if (nextScrolled !== current.scrolled) {
         current.scrolled = nextScrolled;
         setScrolled(nextScrolled);
@@ -56,11 +75,14 @@ function Header() {
       if (!frame) frame = requestAnimationFrame(update);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    update();
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
       cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [location.pathname]);
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) return;
@@ -68,16 +90,16 @@ function Header() {
   };
 
   const navLinks = [
-    { label: 'Home', to: '/' },
-    { label: 'About', to: '/about' },
-    { label: 'Meet the Team', to: '/meet-the-team' },
-    { label: 'Photo Gallery', to: '/photo-gallery' },
-    { label: 'Sessions', to: '/sessions' },
-    { label: 'Trainings', to: '/trainings' },
+    { label: 'Home', to: '/', icon: <House size={16} strokeWidth={1.7} aria-hidden="true" /> },
+    { label: 'About', to: '/about', icon: <Info size={16} strokeWidth={1.7} aria-hidden="true" /> },
+    { label: 'Meet the Team', to: '/meet-the-team', icon: <UsersRound size={16} strokeWidth={1.7} aria-hidden="true" /> },
+    { label: 'Photo Gallery', to: '/photo-gallery', icon: <Images size={16} strokeWidth={1.7} aria-hidden="true" /> },
+    { label: 'Sessions', to: '/sessions', icon: <CalendarDays size={16} strokeWidth={1.7} aria-hidden="true" /> },
+    { label: 'Trainings', to: '/trainings', icon: <Dumbbell size={16} strokeWidth={1.7} aria-hidden="true" /> },
     // { label: 'News', to: '/news' }, // Restore with the Instagram feed.
-    { label: 'FAQs', to: '/faqs' },
-    { label: 'View Queue', to: '/view-queue' },
-    { label: 'Contact', to: '/contact' },
+    { label: 'FAQs', to: '/faqs', icon: <CircleHelp size={16} strokeWidth={1.7} aria-hidden="true" /> },
+    { label: 'View Queue', to: '/view-queue', icon: <ListOrdered size={16} strokeWidth={1.7} aria-hidden="true" /> },
+    { label: 'Contact', to: '/contact', icon: <Mail size={16} strokeWidth={1.7} aria-hidden="true" /> },
   ];
 
   const drawer = (
@@ -118,6 +140,7 @@ function Header() {
                   '&:hover': { bgcolor: 'var(--club-tint)' },
                 }}
               >
+                <ListItemIcon sx={{ minWidth: 32, color: 'inherit', '& svg': { width: 18, height: 18 } }}>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.label} />
               </ListItemButton>
             </motion.div>
@@ -132,12 +155,14 @@ function Header() {
       position="fixed"
       elevation={0}
       sx={{
-        transition: 'transform 220ms ease, background-color 220ms ease, border-color 220ms ease',
+        transition: 'transform 220ms ease',
         transform: scrollDir === 'down' ? 'translateY(-100%)' : 'translateY(0)',
-        backdropFilter: { xs: 'blur(8px) saturate(135%)', md: 'blur(10px) saturate(135%)' },
-        WebkitBackdropFilter: { xs: 'blur(8px) saturate(135%)', md: 'blur(10px) saturate(135%)' },
-        backgroundColor: scrolled ? 'var(--club-nav-scrolled)' : 'var(--club-nav)',
-        borderBottom: '1px solid var(--club-line)',
+        backdropFilter: 'none',
+        WebkitBackdropFilter: 'none',
+        backgroundColor: 'transparent',
+        backgroundImage: 'none',
+        borderBottom: 'none',
+        boxShadow: 'none',
         color: 'var(--club-text)',
       }}
     >
@@ -162,65 +187,42 @@ function Header() {
           </Drawer>
 
           <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: { xs: 1, lg: 0 }, minWidth: 0 }}>
-            <Link to="/" style={{ display: 'flex', alignItems: 'center', minWidth: 0, textDecoration: 'none' }}>
+            <Box
+              component={Link}
+              to="/"
+              aria-label="UNSW Badminton Club home"
+              sx={{
+                display: 'flex', alignItems: 'center', minWidth: 0, textDecoration: 'none',
+
+              }}
+            >
               <motion.img
-                src={logo}
+                src={headerLogo}
                 alt="UNSWBC Logo"
-                style={{ height: scrolled ? 32 : 38, objectFit: 'contain', objectPosition: 'left', transition: 'height 0.3s ease' }}
+                style={{ height: scrolled ? 32 : 38, objectFit: 'contain', objectPosition: 'left', filter: overDarkBackground ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.35))' : 'none', transition: 'height 0.3s ease' }}
                 whileHover={{ scale: 1.05 }}
               />
-            </Link>
+            </Box>
           </Box>
 
-          <Box component="nav" aria-label="Main navigation" sx={{ display: { xs: 'none', lg: 'flex' }, gap: 0.5, position: 'relative', justifySelf: 'center' }}>
-            {navLinks.map((item) => {
-              const isActive = item.to === '/'
-                ? location.pathname === '/'
-                : location.pathname.startsWith(item.to);
-
-              return (
-                <Box key={item.to} sx={{ position: 'relative' }}>
-                  <Button
-                    component={Link}
-                    to={item.to}
-                    sx={{
-                      '&, &:hover': { border: 'none', backgroundImage: 'none', boxShadow: 'none' },
-                      color: 'var(--club-text)',
-                      opacity: isActive ? 1 : 0.85,
-                      fontWeight: isActive ? 800 : 600,
-                      px: 1,
-                      minWidth: 0,
-                      whiteSpace: 'nowrap',
-                      transition: 'opacity 220ms ease, background-color 220ms ease',
-                      '&:hover': { opacity: 1, bgcolor: 'transparent' },
-                    }}
-                  >
-                    {item.label}
-                  </Button>
-                  {isActive && (
-                    <motion.div
-                      layoutId="nav-underline"
-                      style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        left: '15%',
-                        right: '15%',
-                        height: 2,
-                        borderRadius: 999,
-                        backgroundColor: 'var(--club-accent)',
-                      }}
-                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                    />
-                  )}
-                </Box>
-              );
-            })}
+          <Box sx={{ display: { xs: 'none', lg: 'flex' }, position: 'relative', justifySelf: 'center' }}>
+            {desktop && (
+              <LiquidNavbar
+                className="club-liquid-nav"
+                tone={mode}
+                compact={false}
+                sound={false}
+                active={navLinks.findIndex(item => item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to))}
+                items={navLinks.map(item => ({ label: item.label, href: item.to, icon: item.icon, fx: 'none' }))}
+                onNavigate={navigate}
+              />
+            )}
           </Box>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={toggleDrawer(true)}
-            sx={{ '&, &:hover': { border: 'none', backgroundImage: 'none', boxShadow: 'none', bgcolor: 'transparent' }, display: { lg: 'none' }, mr: 0.5, width: 44, height: 44, flexShrink: 0 }}
+            sx={{ display: { lg: 'none' }, mr: 0.5, width: 44, height: 44, flexShrink: 0, bgcolor: 'var(--club-nav-scrolled)', backgroundImage: 'var(--club-glass-sheen)', border: '1px solid var(--club-glass-edge)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', '&:hover': { bgcolor: 'var(--club-nav-scrolled)' } }}
           >
             <MenuIcon />
           </IconButton>

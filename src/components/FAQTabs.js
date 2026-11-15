@@ -21,7 +21,7 @@ export const FAQTabs = ({
       sx={{
         position: 'relative',
         overflow: 'hidden',
-        bgcolor: 'var(--club-canvas)',
+        bgcolor: 'transparent',
         px: 2,
         py: 'var(--club-section-space)',
         color: 'text.primary',
@@ -153,6 +153,7 @@ const FAQList = ({ faqData, selected }) => {
 // ─── Individual FAQ item ──────────────────────────────────────────────────────
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   return (
     <motion.div
@@ -217,20 +218,18 @@ const FAQItem = ({ question, answer }) => {
         initial={false}
         animate={{
           height: isOpen ? 'auto' : 0,
-          marginBottom: isOpen ? 20 : 0,
+          opacity: isOpen ? 1 : 0,
         }}
-        transition={{ duration: 0.3, ease: 'easeInOut' }}
-        style={{ overflow: 'hidden', paddingLeft: '1.25rem', paddingRight: '1.25rem' }}
+        transition={{ duration: reducedMotion ? 0 : 0.25, ease: 'easeOut' }}
+        style={{ overflow: 'hidden' }}
+        inert={isOpen ? undefined : ''}
+        aria-hidden={!isOpen}
       >
-        <Typography
-          sx={{
-            color: 'text.secondary',
-            lineHeight: 1.85,
-            fontSize: '1rem',
-          }}
-        >
-          {answer}
-        </Typography>
+        <Box data-faq-answer sx={{ px: '1.25rem', py: '1rem', borderTop: '1px solid var(--club-line)' }}>
+          <Typography sx={{ m: 0, color: 'text.secondary', lineHeight: 1.75, fontSize: '1rem' }}>
+            {answer}
+          </Typography>
+        </Box>
       </motion.div>
     </motion.div>
   );

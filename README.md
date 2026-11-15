@@ -133,3 +133,8 @@ You should see JSON `{ posts: [...] }`.
 Without a token the feed returns HTTP 501 and the page shows an Instagram link. An authorization error requires reconnecting the club account and replacing its token in Netlify, then redeploying. Long-lived tokens expire (typically after 60 days); refresh them before expiry or reconnect. `REACT_APP_INSTAGRAM_FEED_URL` may point to another JSON feed endpoint, but must not point to an Instagram profile page.
 
 The old `user_profile,user_media` Basic Display login configuration must be replaced with Instagram Login and `instagram_business_basic`. The feed requires the club account credentials; the public website alone cannot retrieve live posts.
+
+
+### UI components
+
+The liquid navbar lives in `src/components/ui/liquid-glass-navbar.tsx`. TypeScript and prefixed Tailwind 3 utilities are enabled alongside MUI. Run `npm run typecheck` to check typed components. See [the integration and setup guide](docs/development/liquid-navbar.md) for component paths, CLI commands, styling, and router/theme integration.

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Typography, useMediaQuery } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
@@ -7,12 +7,13 @@ import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 
 export default function TrainingToast() {
   const [visible, setVisible] = useState(false);
+  const mobile = useMediaQuery('(max-width: 767px), (hover: none) and (pointer: coarse)', { noSsr: true });
 
   useEffect(() => {
-    if (sessionStorage.getItem('trainingToastDismissed')) return;
+    if (mobile || sessionStorage.getItem('trainingToastDismissed')) return;
     const timer = setTimeout(() => setVisible(true), 3500);
     return () => clearTimeout(timer);
-  }, []);
+  }, [mobile]);
 
   const dismiss = () => {
     setVisible(false);
@@ -21,7 +22,7 @@ export default function TrainingToast() {
 
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && !mobile && (
         <motion.div
           initial={{ opacity: 0, y: 80, scale: 0.92 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}

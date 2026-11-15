@@ -1,3 +1,4 @@
+import PageContentSurface from '../components/PageContentSurface';
 import React from 'react';
 import { Box, CardContent, Container, Grid, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -30,6 +31,8 @@ function ValuesPage() {
         subtitle="The culture we build is as important as the results we chase."
         imagePosition="center 35%"
       />
+
+      <PageContentSurface>
 
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
         <ScrollReveal>
@@ -96,6 +99,7 @@ function ValuesPage() {
           </TiltCard>
         </ScrollReveal>
       </Container>
+      </PageContentSurface>
     </Box>
   );
 }

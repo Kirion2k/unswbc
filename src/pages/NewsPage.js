@@ -1,3 +1,4 @@
+import PageContentSurface from '../components/PageContentSurface';
 import React, { useState, useEffect, useRef } from 'react';
 import { Box, Container, IconButton, Skeleton, Typography } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -339,6 +340,8 @@ function NewsPage() {
         imagePosition="center center"
       />
 
+      <PageContentSurface>
+
       <Container sx={{ py: 'var(--club-section-space)' }}>
         {/* Profile header card */}
         <Box
@@ -498,6 +501,7 @@ function NewsPage() {
       <AnimatePresence>
         {selected && <PostModal post={selected} onClose={() => setSelected(null)} />}
       </AnimatePresence>
+      </PageContentSurface>
     </Box>
   );
 }

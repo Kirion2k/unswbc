@@ -1,3 +1,4 @@
+import PageContentSurface from '../components/PageContentSurface';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Card, CardContent, CardMedia, Container, Divider, Grid, Typography } from '@mui/material';
@@ -22,6 +23,8 @@ function AboutPage() {
         subtitle="UNSWBC is a friendly badminton community that supports social play, training, and competitive opportunities."
         imagePosition="center 25%"
       />
+
+      <PageContentSurface>
 
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
         <SectionHeading overline="UNSWBC" title="Welcome to the club" sx={{ mb: 'var(--club-heading-gap)' }} />
@@ -219,6 +222,7 @@ function AboutPage() {
           </Card>
         </ScrollReveal>
         </Container>
+      </PageContentSurface>
     </Box>
   );
 }

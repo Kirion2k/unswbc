@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tokens for shadcn components; site components retain their existing MUI theme. */
+@layer base {
+  :root {
+    --background: 210 17% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 217 60% 27%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 214 64% 94%;
+    --secondary-foreground: 217 60% 27%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 35%;
+    --accent: 214 64% 94%;
+    --accent-foreground: 217 60% 27%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 30% 85%;
+    --input: 214 30% 85%;
+    --ring: 217 60% 27%;
+  }
+  :root[data-theme='dark'] {
+    --background: 218 48% 9%;
+    --foreground: 216 71% 96%;
+    --card: 217 41% 15%;
+    --card-foreground: 216 71% 96%;
+    --popover: 217 41% 15%;
+    --popover-foreground: 216 71% 96%;
+    --primary: 217 100% 83%;
+    --primary-foreground: 218 56% 11%;
+    --secondary: 215 60% 20%;
+    --secondary-foreground: 216 71% 96%;
+    --muted: 217 41% 15%;
+    --muted-foreground: 217 31% 79%;
+    --accent: 215 60% 20%;
+    --accent-foreground: 216 71% 96%;
+    --border: 216 30% 28%;
+    --input: 216 30% 28%;
+    --ring: 217 100% 83%;
+  }
+}
