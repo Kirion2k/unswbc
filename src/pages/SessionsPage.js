@@ -1,3 +1,4 @@
+import { PricingSection } from '../components/ui/pricing-section';
 import PageContentSurface from '../components/PageContentSurface';
 import React, { useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
@@ -151,101 +152,21 @@ function SessionsPage() {
       <PageContentSurface>
 
       <Container data-page-content sx={{ py: 'var(--club-section-space)' }}>
-        <SectionHeading overline="Times" align="center" title="Session times and prices" sx={{ mb: 'var(--club-heading-gap)' }} />
-        <StaggerContainer>
-          <Grid container spacing={{ xs: 2, md: 3 }} sx={{ alignItems: 'stretch' }}>
-            {sessionCards.map((s) => (
-              <Grid item xs={12} md={4} key={`${s.title} ${s.time}`} sx={{ display: 'flex' }}>
-                <StaggerItem style={{ flexGrow: 1, display: 'flex' }}>
-                  <TiltCard sx={{ flexGrow: 1, overflow: 'hidden' }}>
-                  <CardContent
-                    sx={{
-                      p: { xs: 3, md: 4 },
-                      display: 'flex',
-                      flexDirection: 'column',
-                      height: '100%',
-                    }}
-                  >
-                    <Stack direction="row" spacing={1.5} alignItems="center" justifyContent="space-between" sx={{ mb: 2 }}>
-                      <Typography variant="h6" sx={{ fontWeight: 900, lineHeight: 1.2 }}>
-                        {s.title}
-                      </Typography>
-                      {s.highlight ? (
-                        <Chip
-                          label={s.highlight}
-                          size="small"
-                          sx={{
-                            bgcolor: 'var(--club-tint)',
-                            color: 'var(--club-accent)',
-                            fontWeight: 800,
-                            letterSpacing: '0.02em',
-                          }}
-                        />
-                      ) : null}
-                    </Stack>
-
-                    <Typography
-                      sx={{
-                        color: 'var(--club-accent)',
-                        fontWeight: 800,
-                        fontSize: '1.05rem',
-                        letterSpacing: '0.01em',
-                        lineHeight: 1.3,
-                        mb: 2.5,
-                      }}
-                    >
-                      {s.time}
-                    </Typography>
-
-                    <Grid container spacing={1.5}>
-                      <Grid item xs={6}>
-                        <Box
-                          sx={{
-                            p: 2,
-                            borderRadius: 3,
-                            bgcolor: '#1c3c6f',
-                            color: 'white',
-                            textAlign: 'center',
-                          }}
-                        >
-                          <Typography variant="body2" sx={{ fontWeight: 800, opacity: 0.9, mb: 0.5 }}>
-                            Members
-                          </Typography>
-                          <Typography sx={{ fontWeight: 900, fontSize: '1.5rem', lineHeight: 1.1 }}>
-                            {s.memberPrice}
-                          </Typography>
-                        </Box>
-                      </Grid>
-                      <Grid item xs={6}>
-                        <Box
-                          sx={{
-                            p: 2,
-                            borderRadius: 3,
-                            bgcolor: 'var(--club-tint)',
-                            border: '1px solid var(--club-line)',
-                            textAlign: 'center',
-                          }}
-                        >
-                          <Typography variant="body2" sx={{ fontWeight: 800, color: 'var(--club-accent)', mb: 0.5 }}>
-                            Visitors
-                          </Typography>
-                          <Typography sx={{ fontWeight: 900, fontSize: '1.5rem', color: 'var(--club-text)', lineHeight: 1.1 }}>
-                            {s.visitorPrice}
-                          </Typography>
-                        </Box>
-                      </Grid>
-                    </Grid>
-
-                    <Typography sx={{ mt: 2.5, color: 'text.secondary', lineHeight: 1.75, flexGrow: 1 }}>
-                      {s.note}
-                    </Typography>
-                  </CardContent>
-                  </TiltCard>
-                </StaggerItem>
-              </Grid>
-            ))}
-          </Grid>
-        </StaggerContainer>
+        <PricingSection
+          title="Session times and prices"
+          subtitle="Choose your session. Pay at the badminton desk on arrival."
+          frequencies={['Members', 'Visitors']}
+          tiers={sessionCards.map((session) => ({
+            name: session.title,
+            time: session.time,
+            price: { Members: Number(session.memberPrice.slice(1)), Visitors: Number(session.visitorPrice.slice(1)) },
+            description: session.note,
+            features: ['UNSW Fitness & Aquatic Centre, level 2', 'Register at the desk on the day', 'Pay with cash or bank transfer'],
+            cta: 'How to join',
+            href: '#session-registration',
+            popular: Boolean(session.highlight),
+          }))}
+        />
 
         <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
@@ -382,6 +303,7 @@ function SessionsPage() {
 
         <Divider sx={{ my: 'var(--club-section-gap)' }} />
 
+        <Box id="session-registration" />
         <SectionHeading overline="Info" align="center" title="Registration and payment" sx={{ mb: 'var(--club-heading-gap)' }} />
         <StaggerContainer>
           <Grid container spacing={{ xs: 2, md: 3 }} sx={{ alignItems: 'stretch' }}>

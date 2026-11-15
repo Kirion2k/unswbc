@@ -17,8 +17,7 @@ import {
 import { House, Info, UsersRound, Images, CalendarDays, Dumbbell, CircleHelp, ListOrdered, Mail } from 'lucide-react';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import ThemeToggle from './ThemeToggle';
 import { useClubTheme } from './ClubThemeProvider';
 import { motion } from 'framer-motion';
 import { LiquidNavbar } from './ui/liquid-glass-navbar';
@@ -26,7 +25,7 @@ import lightLogo from './logo full/logo-full-blue.png';
 import darkLogo from './logo full/logo-full-white.png';
 
 function Header() {
-  const { mode, toggleTheme } = useClubTheme();
+  const { mode } = useClubTheme();
   const logo = mode === 'dark' ? darkLogo : lightLogo;
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -49,7 +48,7 @@ function Header() {
       frame = 0;
       const currentY = window.scrollY;
       const nextScrolled = currentY > 40;
-      const center = window.innerWidth >= 900 ? 36 : 30;
+      const center = window.innerWidth >= 900 ? 48 : 38;
       const hero = document.querySelector('[data-page-hero]')?.getBoundingClientRect();
       const overDark = !!(hero && hero.top <= center && hero.bottom > center);
       if (overDark !== current.overDark) {
@@ -154,8 +153,9 @@ function Header() {
       position="fixed"
       elevation={0}
       sx={{
+        top: { xs: 'calc(env(safe-area-inset-top, 0px) + 8px)', md: 'calc(env(safe-area-inset-top, 0px) + 12px)' },
         transition: 'transform 220ms ease',
-        transform: scrollDir === 'down' ? 'translateY(-100%)' : 'translateY(0)',
+        transform: scrollDir === 'down' ? 'translateY(calc(-100% - env(safe-area-inset-top, 0px) - 12px))' : 'translateY(0)',
         backdropFilter: 'none',
         WebkitBackdropFilter: 'none',
         backgroundColor: 'transparent',
@@ -185,7 +185,7 @@ function Header() {
             {drawer}
           </Drawer>
 
-          <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: { xs: 1, lg: 0 }, minWidth: 0 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: { xs: 1, lg: 0 }, minWidth: 0, pr: { xs: 1, lg: 0 } }}>
             <Box
               component={Link}
               to="/"
@@ -198,7 +198,7 @@ function Header() {
               <motion.img
                 src={headerLogo}
                 alt="UNSWBC Logo"
-                style={{ height: scrolled ? 32 : 38, objectFit: 'contain', objectPosition: 'left', filter: overDarkBackground ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.35))' : 'none', transition: 'height 0.3s ease' }}
+                style={{ height: scrolled ? 32 : 38, maxWidth: '100%', objectFit: 'contain', objectPosition: 'left', filter: overDarkBackground ? 'drop-shadow(0 1px 2px rgba(0,0,0,0.35))' : 'none', transition: 'height 0.3s ease' }}
                 whileHover={{ scale: 1.05 }}
               />
             </Box>
@@ -225,14 +225,7 @@ function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <IconButton
-            onClick={toggleTheme}
-            aria-label={`Switch to ${mode === 'light' ? 'dark' : 'light'} mode`}
-            title={`Switch to ${mode === 'light' ? 'dark' : 'light'} mode`}
-            sx={{ color: 'var(--club-text)', justifySelf: 'end', width: 44, height: 44, flexShrink: 0, bgcolor: 'var(--club-glass)', backgroundImage: 'var(--club-glass-sheen)', border: '1px solid var(--club-glass-edge)', boxShadow: 'inset 0 1px 0 var(--club-glass-edge)', '&:hover': { bgcolor: 'var(--club-tint)', backgroundImage: 'var(--club-glass-sheen)', boxShadow: 'inset 0 1px 0 var(--club-glass-edge)' } }}
-          >
-            {mode === 'light' ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
-          </IconButton>
+          <ThemeToggle />
         </Toolbar>
       </Container>
     </AppBar>

@@ -1,0 +1,20 @@
+.club-framer-carousel { position: relative; overflow: hidden; min-height: 440px; background: #10213b; touch-action: pan-y; }
+.club-framer-track { display: flex; position: absolute; inset: 0; }
+.club-framer-slide { flex: 0 0 100%; height: 100%; min-width: 0; }
+.club-framer-slide img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; pointer-events: none; }
+.club-framer-shade { position: absolute; inset: 45% 0 0; background: linear-gradient(transparent, rgba(10,22,40,.8)); pointer-events: none; }
+.club-framer-caption { position: absolute; bottom: 58px; left: 20px; right: 20px; margin: 0; color: white; font-size: .75rem; font-weight: 600; line-height: 1.5; text-shadow: 0 1px 5px rgba(0,0,0,.5); }
+.club-framer-arrow, .club-framer-pause { position: absolute; display: flex; align-items: center; justify-content: center; padding: 0; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,.32); color: white; background: rgba(16,33,59,.35); backdrop-filter: blur(6px); cursor: pointer; transition: background-color 180ms ease, transform 180ms ease; }
+.club-framer-arrow { top: 50%; margin-top: -20px; }
+.club-framer-arrow.is-previous { left: 16px; }
+.club-framer-arrow.is-next { right: 16px; }
+.club-framer-arrow:hover, .club-framer-pause:hover { background: rgba(16,33,59,.65); }
+.club-framer-pause { top: 12px; right: 12px; width: 32px; height: 32px; }
+.club-framer-dots { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 0; padding: 0 4px; border-radius: 999px; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.15); backdrop-filter: blur(6px); }
+.club-framer-dots button { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; background: transparent; border: 0; border-radius: 999px; cursor: pointer; }
+.club-framer-dots span { display: block; height: 6px; width: 6px; border-radius: 999px; background: rgba(255,255,255,.5); transition: width 250ms ease, background-color 250ms ease; }
+.club-framer-dots [aria-current='true'] span { width: 24px; background: white; }
+.club-framer-carousel button:focus-visible { outline: 2px solid #a9caff; outline-offset: 3px; }
+@media (max-width: 899px) { .club-framer-carousel { min-height: 380px; } }
+@media (max-width: 599px) { .club-framer-carousel { min-height: 300px; } }
+@media (prefers-reduced-motion: reduce) { .club-framer-carousel button, .club-framer-dots span { transition: none; } }

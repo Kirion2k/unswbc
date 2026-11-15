@@ -1,4 +1,6 @@
 import React from 'react';
+import ChampionshipCarousel from './ChampionshipCarousel';
+import ChampionshipConfetti from './ChampionshipConfetti';
 import { Box, Typography } from '@mui/material';
 import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined';
 
@@ -15,11 +17,12 @@ export default function ChampionshipHonours() {
       aria-labelledby="championship-title"
       data-achievements
       sx={{
-        overflow: 'hidden', borderRadius: 'var(--club-radius)',
+        position: 'relative', overflow: 'hidden', borderRadius: 'var(--club-radius)',
         bgcolor: 'var(--club-feature)', color: 'var(--club-text)',
         backgroundImage: 'var(--club-glass-sheen)', border: '1px solid var(--club-glass-stroke)', boxShadow: 'var(--club-glass-shadow)',
       }}
     >
+      <ChampionshipConfetti />
       <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '0.95fr 1.05fr' } }}>
         <Box sx={{ p: { xs: 3, sm: 4, md: 5 }, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <Typography
@@ -41,19 +44,7 @@ export default function ChampionshipHonours() {
           </Typography>
         </Box>
 
-        <Box component="figure" sx={{ m: 0, position: 'relative', minHeight: { xs: 240, sm: 320, md: 440 }, bgcolor: '#10213b' }}>
-          <Box
-            component="img"
-            src="/optimized/unsw-14.jpg"
-            alt="UNSW’s 2024 champions with their gold medals, trophy and UniSport Nationals banner"
-            loading="lazy" decoding="async"
-            sx={{ width: '100%', height: '100%', position: 'absolute', inset: 0, objectFit: 'cover', objectPosition: 'center' }}
-          />
-          <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(10,22,40,0.9), transparent 45%)', pointerEvents: 'none' }} />
-          <Typography component="figcaption" sx={{ position: 'absolute', bottom: 0, left: 0, fontSize: '0.75rem', color: 'white', m: { xs: 1.5, md: 2 }, p: { xs: 1.5, md: 2 }, borderRadius: '1rem', bgcolor: 'rgba(12,20,34,0.64)', border: '1px solid rgba(255,255,255,0.24)' }}>
-            2024 UniSport Nationals champions
-          </Typography>
-        </Box>
+        <ChampionshipCarousel />
       </Box>
 
       <Box

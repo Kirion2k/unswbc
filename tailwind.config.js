@@ -11,6 +11,7 @@ module.exports = {
           ? `hsl(var(--${name}) / <alpha-value>)`
           : { DEFAULT: `hsl(var(--${name}) / <alpha-value>)`, foreground: `hsl(var(--${name}-foreground) / <alpha-value>)` }
       ])),
+      maskImage: { 'radial-gradient': 'radial-gradient(var(--tw-gradient-stops))' },
       borderRadius: { lg: 'var(--club-radius)', md: '0.875rem', sm: '0.5rem' },
     },
   },

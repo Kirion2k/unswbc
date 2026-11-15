@@ -1,0 +1,10 @@
+.championship-confetti { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 2; }
+.championship-confetti i { position: absolute; top: 12%; left: 50%; width: 5px; height: 9px; border-radius: 1px; background: var(--confetti-colour); opacity: 0; animation: championship-celebration 2.1s cubic-bezier(.18,.65,.35,1) var(--confetti-delay) both; }
+.championship-confetti i:nth-child(3n) { width: 5px; height: 5px; border-radius: 50%; }
+@keyframes championship-celebration {
+  0% { opacity: 0; transform: translate3d(0, -16px, 0) rotate(0); }
+  12% { opacity: .65; }
+  65% { opacity: .45; }
+  100% { opacity: 0; transform: translate3d(var(--confetti-x), var(--confetti-y), 0) rotate(var(--confetti-turn)); }
+}
+@media (prefers-reduced-motion: reduce) { .championship-confetti i { display: none; animation: none; } }
